@@ -12,17 +12,3 @@ body:
       placeholder: ex. Button Click시 Tab Bar가 사라짐
     validations:
       required: true
-
-  - type: dropdown
-    id: priority
-    attributes:
-      label: 우선순위
-      description: Backlog에서의 중요도
-      options:
-        - ★★★★★
-        - ★★★★
-        - ★★★
-        - ★★
-        - ★
-    validations:
-      required: true
