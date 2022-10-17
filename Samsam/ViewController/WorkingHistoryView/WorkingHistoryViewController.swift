@@ -9,15 +9,16 @@ import UIKit
 
 class WorkingHistoryViewController: UIViewController {
 
-    // MARK: - View (추후 반영 예정)
+    // MARK: - View
     
     private let writingBtn: UIButton = {
+        $0.backgroundColor = .yellow
+        $0.setTitle("시공상황 작성하기", for: .normal)
+        $0.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
+        $0.setTitleColor(.black, for: .normal)
+        $0.layer.cornerRadius = 16
         return $0
     }(UIButton())
-    
-    private let workDate: UILabel = {
-        return $0
-    }(UILabel())
     
     private let workingHistoryView: UICollectionView = {
         return $0
@@ -50,30 +51,42 @@ class WorkingHistoryViewController: UIViewController {
     
     private func layout() {
         view.addSubview(workingHistoryView)
+        view.addSubview(writingBtn)
+        
         workingHistoryView.anchor(
-            top: view.topAnchor,
-            left: view.leftAnchor,
+            top: view.safeAreaLayoutGuide.topAnchor,
+            left: view.safeAreaLayoutGuide.leftAnchor,
             bottom: view.bottomAnchor,
-            right: view.rightAnchor
+            right: view.safeAreaLayoutGuide.rightAnchor
+        )
+        
+        writingBtn.anchor(
+            left: view.safeAreaLayoutGuide.leftAnchor,
+            bottom: view.safeAreaLayoutGuide.bottomAnchor,
+            right: view.safeAreaLayoutGuide.rightAnchor,
+            paddingLeft: 16,
+            paddingRight: 16,
+            height: 50
         )
     }
 }
 
-extension WorkingHistoryViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+extension WorkingHistoryViewController: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 3
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        return CGSize(width: UIScreen.main.bounds.width, height: 30)
+        return CGSize(width: UIScreen.main.bounds.width, height: 70)
     }
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         
         let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: WorkingHistoryViewHeader.identifier, for: indexPath) as! WorkingHistoryViewHeader
+        header.uploadDate.text = "▼  10월 12일  ▼"
+        header.uploadDate.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
         
-        header.uploadDate.text = "10월 12일"
         return header
     }
     
@@ -83,6 +96,9 @@ extension WorkingHistoryViewController: UICollectionViewDelegate, UICollectionVi
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: WorkingHistoryViewCell.identifier, for: indexPath) as! WorkingHistoryViewCell
+        cell.imageDescription.text = "애플, 동아시아 최초 '디벨로퍼 아카데미' 한국서 운영"
+        cell.imageDescription.textAlignment = .center
+        cell.imageDescription.font = UIFont.systemFont(ofSize: 16, weight: .regular)
         
         return cell
     }
@@ -92,9 +108,5 @@ extension WorkingHistoryViewController: UICollectionViewDelegate, UICollectionVi
         let cellHeight = width / 4 * 3 + 30
         
         return CGSize(width: Int(width), height: Int(cellHeight))
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return 20
     }
 }

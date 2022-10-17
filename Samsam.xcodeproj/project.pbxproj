@@ -149,8 +149,8 @@
 		98C0D06E28FCF47800E0E439 /* UIComponent */ = {
 			isa = PBXGroup;
 			children = (
-				98C0D07128FD02E400E0E439 /* WorkingHistoryViewCell.swift */,
 				98C2448A28FD3EDA0006A01B /* WorkingHistoryViewHeader.swift */,
+				98C0D07128FD02E400E0E439 /* WorkingHistoryViewCell.swift */,
 			);
 			path = UIComponent;
 			sourceTree = "<group>";
