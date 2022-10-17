@@ -23,7 +23,7 @@ class WorkingHistoryViewCell: UICollectionViewCell {
         return $0
     }(UIImageView())
     
-    private let imageDescription: UILabel = {
+    let imageDescription: UILabel = {
         $0.text = "애플, 동아시아 최초 '디벨로퍼 아카데미' 한국서 운영"
         $0.textAlignment = .center
         return $0
