@@ -33,6 +33,12 @@ class CategoryCell: UICollectionViewCell {
     
     var categoryImage: UIImageView = {
         $0.image = UIImage(named: ImageLiteral.noCheck)
+        
+    static let identifier = "categoryCell"
+    
+    // MARK: - View
+    let categoryImage: UIImageView = {
+        $0.image = UIImage(named: "")
         $0.contentMode = .scaleAspectFit
         return $0
     }(UIImageView())
@@ -80,7 +86,9 @@ class CategoryCell: UICollectionViewCell {
             top: vStackView.topAnchor,
             left: vStackView.leftAnchor,
             bottom: categoryTitle.topAnchor,
-            right: vStackView.leftAnchor
+            right: vStackView.leftAnchor,
+            width: 100,
+            height: 100
         )
         
         categoryTitle.anchor(
