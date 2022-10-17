@@ -1,0 +1,14 @@
+name: Work Template
+description: 태스크 대분류
+title: "[Work] Title"
+labels: ["work"]
+
+body:
+  - type: textarea
+    id: chore-description
+    attributes:
+      label: 설명
+      description: 태스크 대분류에 대한 설명을 적어주세요.
+      placeholder: ex. 시공상황 뷰 제작
+    validations:
+      required: true
