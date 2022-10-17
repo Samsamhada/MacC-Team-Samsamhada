@@ -20,10 +20,3 @@ body:
       placeholder: ~ MM/DD(E) ex. ~ 08/14(일)
     validations:
       required: true
-  - type: input
-    id: real-period
-    attributes:
-      label: 실제 작업 기간(Close 시점에 수정)
-      placeholder: ~ MM/DD(E) ex. ~ 08/14(일)
-    validations:
-      required: false
