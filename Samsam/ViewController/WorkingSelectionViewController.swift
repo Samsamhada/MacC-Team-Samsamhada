@@ -11,6 +11,7 @@ class WorkingSelectionViewController: UIViewController {
     
     // MARK: - View
     let categoryView: UICollectionView = {
+        $0.backgroundColor = .black
         return $0
     }(UICollectionView(
         frame: .zero, collectionViewLayout: UICollectionViewFlowLayout()))
@@ -39,6 +40,7 @@ class WorkingSelectionViewController: UIViewController {
             right: view.rightAnchor
         )
     }
+
     
     private func setNavigationTitle() {
         let appearance = UINavigationBarAppearance()
@@ -63,7 +65,6 @@ extension WorkingSelectionViewController:  UICollectionViewDelegate, UICollectio
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CategoryCell.identifier, for: indexPath) as! CategoryCell
-        
         cell.categoryImage.image = UIImage(named:"category")
         cell.categoryTitle.text = "카테고리 텍스트"
         return cell
