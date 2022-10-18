@@ -18,8 +18,22 @@ class WorkingHistoryViewHeader: UICollectionReusableView {
     let uploadDate: UILabel = {
         $0.text = "0월 0일"
         $0.textAlignment = .center
+        $0.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
+        $0.textColor = .gray
         return $0
     }(UILabel())
+
+    let leftLine: UIView = {
+        $0.backgroundColor = .gray
+        $0.setHeight(height: 1)
+        return $0
+    }(UIView())
+    
+    let rightLine: UIView = {
+        $0.backgroundColor = .gray
+        $0.setHeight(height: 1)
+        return $0
+    }(UIView())
     
     // MARK: - LifeCycle
     
@@ -33,13 +47,34 @@ class WorkingHistoryViewHeader: UICollectionReusableView {
     }
     
     private func layout() {
-        addSubview(uploadDate)
+        self.addSubview(leftLine)
+        self.addSubview(uploadDate)
+        self.addSubview(rightLine)
         
-        uploadDate.anchor(
+        leftLine.anchor(
             top: topAnchor,
             left: leftAnchor,
             bottom: bottomAnchor,
-            right: rightAnchor
+            right: uploadDate.leftAnchor,
+            paddingTop: 34.5,
+            paddingBottom: 34.5,
+            width: UIScreen.main.bounds.width/3
+        )
+        
+        uploadDate.anchor(
+            top: topAnchor,
+            bottom: bottomAnchor,
+            width: UIScreen.main.bounds.width/3
+        )
+        
+        rightLine.anchor(
+            top: topAnchor,
+            left: uploadDate.rightAnchor,
+            bottom: bottomAnchor,
+            right: rightAnchor,
+            paddingTop: 34.5,
+            paddingBottom: 34.5,
+            width: UIScreen.main.bounds.width/3
         )
     }
 }

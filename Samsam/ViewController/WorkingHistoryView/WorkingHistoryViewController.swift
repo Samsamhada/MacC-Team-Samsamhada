@@ -59,7 +59,7 @@ class WorkingHistoryViewController: UIViewController {
             bottom: view.bottomAnchor,
             right: view.safeAreaLayoutGuide.rightAnchor
         )
-        
+
         writingBtn.anchor(
             left: view.safeAreaLayoutGuide.leftAnchor,
             bottom: view.safeAreaLayoutGuide.bottomAnchor,
@@ -73,6 +73,8 @@ class WorkingHistoryViewController: UIViewController {
 
 extension WorkingHistoryViewController: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
+    // MARK: - Header
+    
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 3
     }
@@ -84,11 +86,12 @@ extension WorkingHistoryViewController: UICollectionViewDataSource, UICollection
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         
         let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: WorkingHistoryViewHeader.identifier, for: indexPath) as! WorkingHistoryViewHeader
-        header.uploadDate.text = "▼  10월 12일  ▼"
-        header.uploadDate.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
+        header.uploadDate.text = "10월 12일"
         
         return header
     }
+    
+    // MARK: - Cell
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 3
