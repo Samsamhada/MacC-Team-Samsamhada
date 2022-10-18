@@ -66,7 +66,7 @@ class RoomListViewController: UIViewController {
         
         collectionView.anchor(
             left: view.safeAreaLayoutGuide.leftAnchor,
-            bottom: view.safeAreaLayoutGuide.bottomAnchor,
+            bottom: view.bottomAnchor,
             right: view.safeAreaLayoutGuide.rightAnchor
         )
     }
