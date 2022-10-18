@@ -27,7 +27,7 @@ class PostingCategoryViewController: UIViewController {
     }(UIButton())
     
     // MARK: - LifeCycle
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         attribute()
@@ -61,12 +61,11 @@ class PostingCategoryViewController: UIViewController {
         self.view.backgroundColor = .white
         
         setNavigationTitle()
-
+        
         categoryView.delegate = self
         categoryView.dataSource = self
         categoryView.allowsMultipleSelection = true
         categoryView.register(CategoryCell.self, forCellWithReuseIdentifier: CategoryCell.identifier)
-        
     }
     
     private func setNavigationTitle() {
@@ -85,7 +84,6 @@ class PostingCategoryViewController: UIViewController {
         let vc = PostingImageViewController()
         navigationController?.pushViewController(vc, animated: true)
     }
-    
 }
 
 // MARK: - UICollectionViewDelegate, DataSourse, DelegateFlowLayout
@@ -97,6 +95,7 @@ extension PostingCategoryViewController:  UICollectionViewDelegate, UICollection
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CategoryCell.identifier, for: indexPath) as! CategoryCell
         cell.categoryImage.image = UIImage(named: CategoryCell.ImageLiteral.noCheck)
         cell.categoryTitle.text = "\(indexPath.item+1) 카테고리"
@@ -129,4 +128,3 @@ extension PostingCategoryViewController:  UICollectionViewDelegate, UICollection
          return UIEdgeInsets(top: 8, left: 8, bottom: 16, right: 8)
     }
 }
-
