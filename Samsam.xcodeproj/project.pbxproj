@@ -14,6 +14,7 @@
 		26E3748B28FCDC0100997DA7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 26E3748A28FCDC0100997DA7 /* Assets.xcassets */; };
 		26E3748E28FCDC0100997DA7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 26E3748C28FCDC0100997DA7 /* LaunchScreen.storyboard */; };
 		26E3749628FCF56400997DA7 /* RoomListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E3749528FCF56400997DA7 /* RoomListViewController.swift */; };
+		26E3749C28FE8E6F00997DA7 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E3749B28FE8E6F00997DA7 /* LoginViewController.swift */; };
 		98C0D06028FCE8EB00E0E439 /* AutoLayout+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98C0D05F28FCE8EB00E0E439 /* AutoLayout+.swift */; };
 		98C0D06428FCE99300E0E439 /* JSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98C0D06328FCE99300E0E439 /* JSON.swift */; };
 		98C0D06728FCE9DC00E0E439 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98C0D06628FCE9DC00E0E439 /* Model.swift */; };
@@ -33,6 +34,8 @@
 		26E3748D28FCDC0100997DA7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		26E3748F28FCDC0100997DA7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		26E3749528FCF56400997DA7 /* RoomListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomListViewController.swift; sourceTree = "<group>"; };
+		26E3749B28FE8E6F00997DA7 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		26E3749D28FE95D100997DA7 /* Samsam.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Samsam.entitlements; sourceTree = "<group>"; };
 		98C0D05F28FCE8EB00E0E439 /* AutoLayout+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AutoLayout+.swift"; sourceTree = "<group>"; };
 		98C0D06328FCE99300E0E439 /* JSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSON.swift; sourceTree = "<group>"; };
 		98C0D06628FCE9DC00E0E439 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
@@ -72,6 +75,7 @@
 		26E3748028FCDC0000997DA7 /* Samsam */ = {
 			isa = PBXGroup;
 			children = (
+				26E3749D28FE95D100997DA7 /* Samsam.entitlements */,
 				98C0D05D28FCE8C300E0E439 /* Global */,
 				98C0D06128FCE8FA00E0E439 /* ViewController */,
 				98C0D06528FCE9C700E0E439 /* Model */,
@@ -109,6 +113,7 @@
 				26E3748528FCDC0000997DA7 /* ViewController.swift */,
 				26E3749528FCF56400997DA7 /* RoomListViewController.swift */,
 				98C0D06D28FCF46A00E0E439 /* WorkingHistoryView */,
+				26E3749B28FE8E6F00997DA7 /* LoginViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -192,11 +197,12 @@
 			};
 			buildConfigurationList = 26E3747928FCDC0000997DA7 /* Build configuration list for PBXProject "Samsam" */;
 			compatibilityVersion = "Xcode 14.0";
-			developmentRegion = en;
+			developmentRegion = ko;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
 				Base,
+				ko,
 			);
 			mainGroup = 26E3747528FCDC0000997DA7;
 			productRefGroup = 26E3747F28FCDC0000997DA7 /* Products */;
@@ -226,6 +232,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				26E3749C28FE8E6F00997DA7 /* LoginViewController.swift in Sources */,
 				26E3748628FCDC0000997DA7 /* ViewController.swift in Sources */,
 				98C0D06C28FCF46500E0E439 /* WorkingHistoryViewController.swift in Sources */,
 				98C0D06728FCE9DC00E0E439 /* Model.swift in Sources */,
@@ -381,6 +388,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Samsam/Samsam.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = F2SSSA5NRF;
@@ -398,9 +406,12 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.immeenu.Samsam;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -409,6 +420,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Samsam/Samsam.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = F2SSSA5NRF;
@@ -426,9 +438,12 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.immeenu.Samsam;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
