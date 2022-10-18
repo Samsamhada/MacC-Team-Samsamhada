@@ -77,7 +77,6 @@ class RoomListCell: UICollectionViewCell {
         $0.axis = .vertical
         $0.distribution = .fillEqually
         $0.alignment = .trailing
-        $0.alignment = .bottom
         return $0
     }(UIStackView())
     
