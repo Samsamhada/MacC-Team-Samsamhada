@@ -47,40 +47,40 @@ class RoomListCell: UICollectionViewCell {
         return $0
     }(UILabel())
     
-    private let detailStack: UIStackView = {
+    private let dateStack: UIStackView = {
         $0.axis = .vertical
         return $0
     }(UIStackView())
     
-    private let detailTopSpacer: UIView = {
+    private let dateTopSpacer: UIView = {
         $0.setHeight(height: 20)
         return $0
     }(UIView())
     
-    private let detailBottomSpacer: UIView = {
+    private let dateBottomSpacer: UIView = {
         $0.setHeight(height: 20)
         return $0
     }(UIView())
     
-    private let detailCenterSpacer: UIView = {
+    private let dateCenterSpacer: UIView = {
         $0.setWidth(width: 10)
         return $0
     }(UIView())
     
-    private let detailInfoStack: UIStackView = {
+    private let dateInfoStack: UIStackView = {
         $0.axis = .horizontal
         $0.setHeight(height: 50)
         return $0
     }(UIStackView())
     
-    private let detailTitleStack: UIStackView = {
+    private let dateTitleStack: UIStackView = {
         $0.axis = .vertical
         $0.distribution = .fillEqually
         $0.alignment = .trailing
         return $0
     }(UIStackView())
     
-    private let detailContentStack: UIStackView = {
+    private let dateContentStack: UIStackView = {
         $0.axis = .vertical
         $0.distribution = .fillEqually
         $0.alignment = .trailing
@@ -131,22 +131,22 @@ class RoomListCell: UICollectionViewCell {
         
         roomStack.addArrangedSubview(leftSpacer)
         roomStack.addArrangedSubview(roomTitle)
-        roomStack.addArrangedSubview(detailStack)
+        roomStack.addArrangedSubview(dateStack)
         roomStack.addArrangedSubview(rightSpacer)
         
-        detailStack.addArrangedSubview(detailTopSpacer)
-        detailStack.addArrangedSubview(detailInfoStack)
-        detailStack.addArrangedSubview(detailBottomSpacer)
+        dateStack.addArrangedSubview(dateTopSpacer)
+        dateStack.addArrangedSubview(dateInfoStack)
+        dateStack.addArrangedSubview(dateBottomSpacer)
         
-        detailInfoStack.addArrangedSubview(detailTitleStack)
-        detailInfoStack.addArrangedSubview(detailCenterSpacer)
-        detailInfoStack.addArrangedSubview(detailContentStack)
+        dateInfoStack.addArrangedSubview(dateTitleStack)
+        dateInfoStack.addArrangedSubview(dateCenterSpacer)
+        dateInfoStack.addArrangedSubview(dateContentStack)
         
-        detailTitleStack.addArrangedSubview(endDateTitle)
-        detailTitleStack.addArrangedSubview(warrantyTimeTitle)
+        dateTitleStack.addArrangedSubview(endDateTitle)
+        dateTitleStack.addArrangedSubview(warrantyTimeTitle)
         
-        detailContentStack.addArrangedSubview(endDate)
-        detailContentStack.addArrangedSubview(warrantyTime)
+        dateContentStack.addArrangedSubview(endDate)
+        dateContentStack.addArrangedSubview(warrantyTime)
         
         cellStack.anchor(
             top: topAnchor,
@@ -172,10 +172,10 @@ class RoomListCell: UICollectionViewCell {
         roomTitle.anchor(
             top: roomStack.topAnchor,
             bottom: roomStack.bottomAnchor,
-            right: detailStack.leftAnchor
+            right: dateStack.leftAnchor
         )
 
-        detailStack.anchor(
+        dateStack.anchor(
             top: roomStack.topAnchor,
             bottom: roomStack.bottomAnchor,
             right: rightSpacer.leftAnchor
@@ -187,42 +187,42 @@ class RoomListCell: UICollectionViewCell {
             right: roomStack.rightAnchor
         )
         
-        detailTopSpacer.anchor(
-            top: detailStack.topAnchor,
-            left: detailStack.leftAnchor,
-            bottom: detailInfoStack.topAnchor,
-            right: detailStack.rightAnchor
+        dateTopSpacer.anchor(
+            top: dateStack.topAnchor,
+            left: dateStack.leftAnchor,
+            bottom: dateInfoStack.topAnchor,
+            right: dateStack.rightAnchor
         )
         
-        detailInfoStack.anchor(
-            left: detailStack.leftAnchor,
-            bottom: detailBottomSpacer.topAnchor,
-            right: detailStack.rightAnchor
+        dateInfoStack.anchor(
+            left: dateStack.leftAnchor,
+            bottom: dateBottomSpacer.topAnchor,
+            right: dateStack.rightAnchor
         )
         
-        detailBottomSpacer.anchor(
-            left: detailStack.leftAnchor,
-            bottom: detailStack.bottomAnchor,
-            right: detailStack.rightAnchor
+        dateBottomSpacer.anchor(
+            left: dateStack.leftAnchor,
+            bottom: dateStack.bottomAnchor,
+            right: dateStack.rightAnchor
         )
         
-        detailTitleStack.anchor(
-            top: detailInfoStack.topAnchor,
-            left: detailInfoStack.leftAnchor,
-            bottom: detailInfoStack.bottomAnchor,
-            right: detailCenterSpacer.leftAnchor
+        dateTitleStack.anchor(
+            top: dateInfoStack.topAnchor,
+            left: dateInfoStack.leftAnchor,
+            bottom: dateInfoStack.bottomAnchor,
+            right: dateCenterSpacer.leftAnchor
         )
         
-        detailCenterSpacer.anchor(
-            top: detailInfoStack.topAnchor,
-            bottom: detailInfoStack.bottomAnchor,
-            right: detailContentStack.leftAnchor
+        dateCenterSpacer.anchor(
+            top: dateInfoStack.topAnchor,
+            bottom: dateInfoStack.bottomAnchor,
+            right: dateContentStack.leftAnchor
         )
         
-        detailContentStack.anchor(
-            top: detailInfoStack.topAnchor,
-            bottom: detailInfoStack.bottomAnchor,
-            right: detailInfoStack.rightAnchor
+        dateContentStack.anchor(
+            top: dateInfoStack.topAnchor,
+            bottom: dateInfoStack.bottomAnchor,
+            right: dateInfoStack.rightAnchor
         )
     }
 }
