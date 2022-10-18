@@ -11,7 +11,6 @@ class WorkingSelectionViewController: UIViewController {
     
     // MARK: - View
     let categoryView: UICollectionView = {
-        $0.backgroundColor = .black
         return $0
     }(UICollectionView(
         frame: .zero, collectionViewLayout: UICollectionViewFlowLayout()))
@@ -31,7 +30,7 @@ class WorkingSelectionViewController: UIViewController {
     // MARK: - Method
 
     private func attribute() {
-        self.view.backgroundColor = .blue
+        self.view.backgroundColor = .white
         view.addSubview(categoryView)
         categoryView.anchor(
             top: view.topAnchor,
@@ -48,7 +47,6 @@ class WorkingSelectionViewController: UIViewController {
         navigationController?.navigationBar.standardAppearance = appearance
         navigationController?.navigationBar.scrollEdgeAppearance = appearance
         
-        navigationController?.navigationBar.backgroundColor = .white
         navigationController?.navigationBar.topItem?.title = "시공 상황 작성"
         navigationController?.navigationBar.prefersLargeTitles = false
         navigationController?.setNavigationBarHidden(false, animated: false)
@@ -66,7 +64,6 @@ extension WorkingSelectionViewController:  UICollectionViewDelegate, UICollectio
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CategoryCell.identifier, for: indexPath) as! CategoryCell
         
-        cell.backgroundColor = .purple
         cell.categoryImage.image = UIImage(named:"category")
         cell.categoryTitle.text = "카테고리 텍스트"
         return cell
