@@ -1,5 +1,5 @@
 //
-//  WorkingSelectionView.swift
+//  PostingCategoryViewController.swift
 //  Samsam
 //
 //  Created by creohwan on 2022/10/17.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class WorkingSelectionViewController: UIViewController {
+class PostingCategoryViewController: UIViewController {
     
     // MARK: - View
     let categoryView: UICollectionView = {
@@ -15,22 +15,28 @@ class WorkingSelectionViewController: UIViewController {
     }(UICollectionView(
         frame: .zero, collectionViewLayout: UICollectionViewFlowLayout()))
     
+    private let nextBtn: UIButton = {
+        $0.backgroundColor = .blue
+        $0.setTitle("다음", for: .normal)
+        $0.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
+        $0.setTitleColor(.black, for: .normal)
+        $0.layer.cornerRadius = 16
+        $0.addTarget(self, action: #selector(tapNextBtn(_sender:)), for: .touchUpInside)
+        return $0
+    }(UIButton())
+    
+    // MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        setNavigationTitle()
         attribute()
-
-        categoryView.delegate = self
-        categoryView.dataSource = self
-        
-        categoryView.register(CategoryCell.self, forCellWithReuseIdentifier: CategoryCell.identifier)
+        layout()
     }
     
-    // MARK: - Method
 
-    private func attribute() {
-        self.view.backgroundColor = .white
+    
+    // MARK: - Method
+    
+    private func layout() {
         view.addSubview(categoryView)
         categoryView.anchor(
             top: view.topAnchor,
@@ -38,6 +44,26 @@ class WorkingSelectionViewController: UIViewController {
             bottom: view.bottomAnchor,
             right: view.rightAnchor
         )
+        
+        view.addSubview(nextBtn)
+        nextBtn.anchor(
+            left: view.safeAreaLayoutGuide.leftAnchor,
+            bottom: view.safeAreaLayoutGuide.bottomAnchor,
+            right: view.safeAreaLayoutGuide.rightAnchor,
+            paddingLeft: 16,
+            paddingRight: 16,
+            height: 50
+        )
+    }
+
+    private func attribute() {
+        self.view.backgroundColor = .white
+        
+        setNavigationTitle()
+        
+        categoryView.delegate = self
+        categoryView.dataSource = self
+        categoryView.register(CategoryCell.self, forCellWithReuseIdentifier: CategoryCell.identifier)
     }
     
     private func setNavigationTitle() {
@@ -51,10 +77,15 @@ class WorkingSelectionViewController: UIViewController {
         navigationController?.navigationBar.prefersLargeTitles = false
         navigationController?.setNavigationBarHidden(false, animated: false)
     }
+    
+    @objc func tapNextBtn(_sender: UIButton) {
+        let vc = PostingImageViewController()
+        navigationController?.pushViewController(vc, animated: true)
+    }
 }
 
 // MARK: - UICollectionViewDelegate, DataSourse, DelegateFlowLayout
-extension WorkingSelectionViewController:  UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+extension PostingCategoryViewController:  UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 24
