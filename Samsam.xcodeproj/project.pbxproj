@@ -197,11 +197,12 @@
 			};
 			buildConfigurationList = 26E3747928FCDC0000997DA7 /* Build configuration list for PBXProject "Samsam" */;
 			compatibilityVersion = "Xcode 14.0";
-			developmentRegion = en;
+			developmentRegion = ko;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
 				Base,
+				ko,
 			);
 			mainGroup = 26E3747528FCDC0000997DA7;
 			productRefGroup = 26E3747F28FCDC0000997DA7 /* Products */;
