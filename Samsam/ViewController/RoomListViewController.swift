@@ -74,7 +74,7 @@ class RoomListViewController: UIViewController {
     private func setupNavigationTitle() {
         navigationController?.navigationBar.topItem?.title = "앱 이름"
         navigationController?.navigationBar.prefersLargeTitles = false
-        navigationController?.setNavigationBarHidden(false, animated: false)
+        navigationController?.setNavigationBarHidden(false, animated: true)
     }
     
     private func setupCollectionView() {
