@@ -65,7 +65,7 @@ extension WorkingSelectionViewController:  UICollectionViewDelegate, UICollectio
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CategoryCell.identifier, for: indexPath) as! CategoryCell
 
         cell.categoryImage.image = UIImage(named:"category")
-        cell.categoryTitle.text = "카테고리 텍스트"
+        cell.categoryTitle.text = "카테고리"
         return cell
     }
     
