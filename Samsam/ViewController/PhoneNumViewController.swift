@@ -50,7 +50,7 @@ class PhoneNumViewController: UIViewController {
         $0.setTitleColor(.white, for: .normal)
         $0.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
         $0.backgroundColor = .blue
-        $0.setHeight(height: 60)
+        $0.setHeight(height: 50)
         $0.layer.cornerRadius = 16
         return $0
     }(UIButton())
