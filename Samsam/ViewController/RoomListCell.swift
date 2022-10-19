@@ -43,9 +43,26 @@ class RoomListCell: UICollectionViewCell {
         return $0
     }(UIView())
     
+    private let titleView: UIView = {
+        return $0
+    }(UIView())
+    
     private lazy var roomTitle: UILabel = {
         $0.text = "방 이름"
         $0.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
+        return $0
+    }(UILabel())
+    
+    private let chipShape: UIView = {
+        $0.layer.cornerRadius = 8
+        $0.backgroundColor = .blue
+        return $0
+    }(UIView())
+    
+    private lazy var chipText: UILabel = {
+        $0.text = "AS기간"
+        $0.textColor = .white
+        $0.font = UIFont.systemFont(ofSize: 14)
         return $0
     }(UILabel())
     
@@ -132,9 +149,14 @@ class RoomListCell: UICollectionViewCell {
         cellStack.addArrangedSubview(roomStack)
         
         roomStack.addArrangedSubview(leftSpacer)
-        roomStack.addArrangedSubview(roomTitle)
+        roomStack.addArrangedSubview(titleView)
         roomStack.addArrangedSubview(dateStack)
         roomStack.addArrangedSubview(rightSpacer)
+        
+        titleView.addSubview(roomTitle)
+        titleView.addSubview(chipShape)
+        
+        chipShape.addSubview(chipText)
         
         dateStack.addArrangedSubview(dateTopSpacer)
         dateStack.addArrangedSubview(dateInfoStack)
@@ -168,13 +190,36 @@ class RoomListCell: UICollectionViewCell {
             top: roomStack.topAnchor,
             left: roomStack.leftAnchor,
             bottom: roomStack.bottomAnchor,
-            right: roomTitle.leftAnchor
+            right: titleView.leftAnchor
         )
-
-        roomTitle.anchor(
+        
+        titleView.anchor(
             top: roomStack.topAnchor,
             bottom: roomStack.bottomAnchor,
             right: dateStack.leftAnchor
+        )
+
+        roomTitle.anchor(
+            left: titleView.leftAnchor,
+            bottom: chipShape.topAnchor,
+            right: titleView.rightAnchor,
+            paddingBottom: 10
+        )
+        
+        chipShape.anchor(
+            left: titleView.leftAnchor,
+            bottom: titleView.bottomAnchor,
+            right: titleView.rightAnchor,
+            paddingBottom: 10
+        )
+        
+        chipText.anchor(
+            top: chipShape.topAnchor,
+            left: chipShape.leftAnchor,
+            bottom: chipShape.bottomAnchor,
+            right: chipShape.rightAnchor,
+            paddingLeft: 10,
+            paddingRight: 10
         )
 
         dateStack.anchor(
