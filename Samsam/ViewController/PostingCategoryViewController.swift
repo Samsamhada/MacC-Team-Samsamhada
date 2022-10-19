@@ -62,7 +62,7 @@ class PostingCategoryViewController: UIViewController {
         self.view.backgroundColor = .white
         
         setNavigationTitle()
-        
+
         categoryView.delegate = self
         categoryView.dataSource = self
         categoryView.allowsMultipleSelection = true
