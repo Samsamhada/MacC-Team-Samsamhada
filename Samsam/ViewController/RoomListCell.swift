@@ -25,9 +25,9 @@ class RoomListCell: UICollectionViewCell {
         $0.backgroundColor = .white
         $0.layer.cornerRadius = 16
         $0.layer.shadowColor = UIColor.black.cgColor
-        $0.layer.shadowOpacity = 0.2
-        $0.layer.shadowOffset = CGSize(width: 4, height: 4)
-        $0.layer.shadowRadius = 10
+        $0.layer.shadowOpacity = 0.25
+        $0.layer.shadowOffset = CGSize(width: 2, height: 2)
+        $0.layer.shadowRadius = 15
         return $0
     }(UIStackView())
     
