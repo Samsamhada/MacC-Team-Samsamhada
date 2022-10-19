@@ -49,9 +49,9 @@ class PostingCategoryViewController: UIViewController {
         )
         
         nextBtn.anchor(
-            left: view.safeAreaLayoutGuide.leftAnchor,
+            left: view.leftAnchor,
             bottom: view.safeAreaLayoutGuide.bottomAnchor,
-            right: view.safeAreaLayoutGuide.rightAnchor,
+            right: view.rightAnchor,
             paddingLeft: 16,
             paddingRight: 16,
             height: 50
