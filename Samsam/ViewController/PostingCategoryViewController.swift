@@ -9,7 +9,9 @@ import UIKit
 
 class PostingCategoryViewController: UIViewController {
     
+    
     // MARK: - View
+    
     let categoryView: UICollectionView = {
         return $0
     }(UICollectionView(
@@ -63,7 +65,9 @@ class PostingCategoryViewController: UIViewController {
         
         categoryView.delegate = self
         categoryView.dataSource = self
+        categoryView.allowsMultipleSelection = true
         categoryView.register(CategoryCell.self, forCellWithReuseIdentifier: CategoryCell.identifier)
+        
     }
     
     private func setNavigationTitle() {
@@ -82,6 +86,7 @@ class PostingCategoryViewController: UIViewController {
         let vc = PostingImageViewController()
         navigationController?.pushViewController(vc, animated: true)
     }
+    
 }
 
 // MARK: - UICollectionViewDelegate, DataSourse, DelegateFlowLayout
@@ -94,12 +99,37 @@ extension PostingCategoryViewController:  UICollectionViewDelegate, UICollection
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CategoryCell.identifier, for: indexPath) as! CategoryCell
+<<<<<<< Updated upstream
 
         cell.categoryImage.image = UIImage(named:"category")
+=======
+        
+        cell.backgroundColor = .blue
+        cell.categoryImage.image = UIImage(named:"category1")
+>>>>>>> Stashed changes
         cell.categoryTitle.text = "카테고리"
         return cell
     }
     
+    func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
+
+        let cell = collectionView.cellForItem(at: indexPath)
+        if cell?.isSelected == false {
+            cell?.isSelected = true
+            return true
+        }
+        return true
+    }
+
+    func collectionView(_ collectionView: UICollectionView, shouldDeselectItemAt indexPath: IndexPath) -> Bool {
+        let cell = collectionView.cellForItem(at: indexPath)
+        if cell?.isSelected == true {
+            cell?.isSelected = false
+            return true
+        }
+        return true
+    }
+
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let cellWidth =  (view.frame.width - 48)/3
         let cellHeight = 120
@@ -107,8 +137,9 @@ extension PostingCategoryViewController:  UICollectionViewDelegate, UICollection
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-         return UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
+         return UIEdgeInsets(top: 8, left: 8, bottom: 16, right: 8)
     }
     
 
 }
+
