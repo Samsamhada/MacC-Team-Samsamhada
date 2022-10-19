@@ -46,6 +46,18 @@ class PostingWritingView: UIViewController {
         return $0
     }(UITextView())
     
+    private let finalBtn: UIButton = {
+            $0.backgroundColor = .blue
+            $0.setTitle("작성 완료", for: .normal)
+            $0.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
+            $0.setTitleColor(.black, for: .normal)
+            $0.layer.cornerRadius = 16
+            $0.addTarget(self, action: #selector(tapNextBtn(_sender:)), for: .touchUpInside)
+            return $0
+        }(UIButton())
+    
+    // MARK: - Lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         attribute()
@@ -63,6 +75,7 @@ class PostingWritingView: UIViewController {
     private func layout() {
         self.view.addSubview(textTitle)
         self.view.addSubview(textContent)
+        self.view.addSubview(finalBtn)
         
         textTitle.anchor(
             top: view.safeAreaLayoutGuide.topAnchor,
@@ -81,6 +94,17 @@ class PostingWritingView: UIViewController {
             paddingRight: 16,
             height: 310
         )
+        
+        finalBtn.anchor(
+            left: view.leftAnchor,
+            bottom: view.safeAreaLayoutGuide.bottomAnchor,
+            right: view.rightAnchor,
+            paddingLeft: 16,
+            paddingRight: 16,
+            height: 50
+        )
+        
+        
     }
     
     func hidekeyboardWhenTappedAround() {
@@ -91,5 +115,9 @@ class PostingWritingView: UIViewController {
     
     @objc func endEditingView() {
         view.endEditing(true)
+    }
+    
+    @objc func tapNextBtn(_sender: UIButton) {
+            navigationController?.popToRootViewController(animated: true)
     }
 }
