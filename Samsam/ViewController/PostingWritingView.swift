@@ -21,30 +21,31 @@ class PostingWritingView: UIViewController {
 
     lazy var textContent: UITextView = {
         let linestyle = NSMutableParagraphStyle()
-        
         linestyle.lineSpacing = 6.0
         
         $0.backgroundColor = .white
         $0.text = "시공 사진에 관하여 설명을 써봐주세요 시공 사진에 관하여 설명을 써봐주세요 시공 사진에 관하여 설명을 써봐주세요"
-        
         $0.textColor = .black
         $0.font = UIFont.systemFont(ofSize: 18, weight: .regular)
         $0.textAlignment = .natural
         $0.typingAttributes = [.paragraphStyle: linestyle]
         $0.textContainerInset = UIEdgeInsets(top: 17, left: 12, bottom: 17, right: 12)
-        $0.layer.masksToBounds = false
+        $0.layer.masksToBounds = true
         $0.layer.cornerRadius = 10
-        
         $0.autocorrectionType = .no
         $0.autocapitalizationType = .none
-        
+        return $0
+    }(UITextView())
+    
+    private var shadowView: UIView = {
+        $0.backgroundColor = .blue
+        $0.layer.cornerRadius = 10
         $0.layer.shadowColor = UIColor.black.cgColor
         $0.layer.shadowOpacity = 0.2
         $0.layer.shadowOffset = CGSize(width: 1, height: 1)
         $0.layer.shadowRadius = 10
-  
         return $0
-    }(UITextView())
+    }(UIView())
     
     private let finalBtn: UIButton = {
             $0.backgroundColor = .blue
@@ -70,12 +71,12 @@ class PostingWritingView: UIViewController {
     private func attribute() {
         view.backgroundColor = .white
         setupNavigationTitle()
-        
     }
     
     private func layout() {
         self.view.addSubview(textTitle)
-        self.view.addSubview(textContent)
+        self.view.addSubview(shadowView)
+        self.shadowView.addSubview(textContent)
         self.view.addSubview(finalBtn)
         
         textTitle.anchor(
@@ -87,14 +88,9 @@ class PostingWritingView: UIViewController {
         )
     
         textContent.anchor(
-            top: textTitle.bottomAnchor,
-            left: textTitle.leftAnchor,
-            right: textTitle.rightAnchor,
-            paddingTop: 20,
-            paddingLeft: 16,
-            paddingBottom: 15,
-            paddingRight: 16,
-            height: 310
+            left: shadowView.leftAnchor,
+            right: shadowView.rightAnchor,
+            height: 330
         )
         
         finalBtn.anchor(
@@ -106,7 +102,15 @@ class PostingWritingView: UIViewController {
             height: 50
         )
         
-        
+        shadowView.anchor(
+            top: textTitle.bottomAnchor,
+            left: view.leftAnchor,
+            right: view.rightAnchor,
+            paddingTop: 20,
+            paddingLeft: 16,
+            paddingRight: 16,
+            height: 330
+        )
     }
     
     private func setupNavigationTitle() {
