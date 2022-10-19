@@ -61,7 +61,7 @@ class RoomListViewController: UIViewController {
             paddingLeft: 16,
             paddingBottom: 16,
             paddingRight: 16,
-            height: 90
+            height: 50
         )
         
         collectionView.anchor(
