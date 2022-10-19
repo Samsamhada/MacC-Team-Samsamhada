@@ -36,8 +36,20 @@ class CategoryCell: UICollectionViewCell {
         
     static let identifier = "categoryCell"
     
+    override var isSelected: Bool{
+            didSet {
+                    if isSelected {
+                        self.categoryImage.image = UIImage(named:"category2")
+                        
+                    } else {
+                        self.categoryImage.image = UIImage(named:"category1")
+                    }
+                }
+        }
+    
     // MARK: - View
-    let categoryImage: UIImageView = {
+    
+    var categoryImage: UIImageView = {
         $0.image = UIImage(named: "")
         $0.contentMode = .scaleAspectFit
         return $0
@@ -86,9 +98,7 @@ class CategoryCell: UICollectionViewCell {
             top: vStackView.topAnchor,
             left: vStackView.leftAnchor,
             bottom: categoryTitle.topAnchor,
-            right: vStackView.leftAnchor,
-            width: 100,
-            height: 100
+            right: vStackView.leftAnchor
         )
         
         categoryTitle.anchor(

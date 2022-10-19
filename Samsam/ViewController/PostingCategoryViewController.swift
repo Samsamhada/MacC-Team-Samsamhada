@@ -9,6 +9,7 @@ import UIKit
 
 class PostingCategoryViewController: UIViewController {
     
+    
     // MARK: - View
     
     let categoryView: UICollectionView = {
@@ -66,6 +67,7 @@ class PostingCategoryViewController: UIViewController {
         categoryView.dataSource = self
         categoryView.allowsMultipleSelection = true
         categoryView.register(CategoryCell.self, forCellWithReuseIdentifier: CategoryCell.identifier)
+        
     }
     
     private func setNavigationTitle() {
@@ -84,6 +86,7 @@ class PostingCategoryViewController: UIViewController {
         let vc = PostingImageViewController()
         navigationController?.pushViewController(vc, animated: true)
     }
+    
 }
 
 // MARK: - UICollectionViewDelegate, DataSourse, DelegateFlowLayout
@@ -99,6 +102,8 @@ extension PostingCategoryViewController:  UICollectionViewDelegate, UICollection
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CategoryCell.identifier, for: indexPath) as! CategoryCell
         cell.categoryImage.image = UIImage(named: CategoryCell.ImageLiteral.noCheck)
         cell.categoryTitle.text = "\(indexPath.item+1) 카테고리"
+
+        cell.categoryImage.image = UIImage(named:"category")
         return cell
     }
     
@@ -128,3 +133,4 @@ extension PostingCategoryViewController:  UICollectionViewDelegate, UICollection
          return UIEdgeInsets(top: 8, left: 8, bottom: 16, right: 8)
     }
 }
+
