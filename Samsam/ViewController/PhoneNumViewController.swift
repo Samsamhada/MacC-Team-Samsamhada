@@ -11,10 +11,9 @@ class PhoneNumViewController: UIViewController {
     
     // MARK: - View
     
-    private let vStack: UIStackView = {
-        $0.axis = .vertical
+    private let uiView: UIView = {
         return $0
-    }(UIStackView())
+    }(UIView())
     
     private let numberLabel: UILabel = {
         $0.text = "담당자 연락처를 입력해주세요."
@@ -71,16 +70,16 @@ class PhoneNumViewController: UIViewController {
     }
     
     private func layout() {
-        view.addSubview(vStack)
+        view.addSubview(uiView)
         
-        vStack.addArrangedSubview(numberLabel)
-        vStack.addArrangedSubview(hStack)
+        uiView.addSubview(numberLabel)
+        uiView.addSubview(hStack)
         hStack.addArrangedSubview(startNumber)
         hStack.addArrangedSubview(numberInput)
-        vStack.addArrangedSubview(inputUnderLine)
-        vStack.addArrangedSubview(submitButton)
+        uiView.addSubview(inputUnderLine)
+        uiView.addSubview(submitButton)
         
-        vStack.anchor(
+        uiView.anchor(
             top: view.safeAreaLayoutGuide.topAnchor,
             left: view.safeAreaLayoutGuide.leftAnchor,
             bottom: view.safeAreaLayoutGuide.bottomAnchor,
@@ -91,15 +90,16 @@ class PhoneNumViewController: UIViewController {
         )
         
         numberLabel.anchor(
-            left: vStack.leftAnchor,
+            left: uiView.leftAnchor,
             bottom: hStack.topAnchor,
-            right: vStack.rightAnchor
+            right: uiView.rightAnchor,
+            paddingBottom: 20
         )
         
         hStack.anchor(
-            left: vStack.leftAnchor,
+            left: uiView.leftAnchor,
             bottom: inputUnderLine.topAnchor,
-            right: vStack.rightAnchor
+            right: uiView.rightAnchor
         )
         
         startNumber.anchor(
@@ -116,16 +116,16 @@ class PhoneNumViewController: UIViewController {
         )
         
         inputUnderLine.anchor(
-            left: vStack.leftAnchor,
+            left: uiView.leftAnchor,
             bottom: submitButton.topAnchor,
-            right: vStack.rightAnchor,
+            right: uiView.rightAnchor,
             paddingBottom: 30
         )
         
         submitButton.anchor(
-            left: vStack.leftAnchor,
-            bottom: vStack.bottomAnchor,
-            right: vStack.rightAnchor
+            left: uiView.leftAnchor,
+            bottom: uiView.bottomAnchor,
+            right: uiView.rightAnchor
         )
     }
 }
