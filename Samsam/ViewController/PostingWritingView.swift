@@ -69,6 +69,7 @@ class PostingWritingView: UIViewController {
     
     private func attribute() {
         view.backgroundColor = .white
+        setupNavigationTitle()
         
     }
     
@@ -81,6 +82,7 @@ class PostingWritingView: UIViewController {
             top: view.safeAreaLayoutGuide.topAnchor,
             left: view.safeAreaLayoutGuide.leftAnchor,
             right: view.safeAreaLayoutGuide.rightAnchor,
+            paddingTop: 20,
             height: 20
         )
     
@@ -106,6 +108,18 @@ class PostingWritingView: UIViewController {
         
         
     }
+    
+    private func setupNavigationTitle() {
+            let appearance = UINavigationBarAppearance()
+            
+            appearance.backgroundColor = .white
+            navigationController?.navigationBar.standardAppearance = appearance
+            navigationController?.navigationBar.scrollEdgeAppearance = appearance
+            navigationController?.navigationBar.backgroundColor = .white
+            navigationController?.navigationBar.topItem?.title = "시공 상황 작성"
+            navigationController?.navigationBar.prefersLargeTitles = false
+            navigationController?.setNavigationBarHidden(false, animated: false)
+        }
     
     func hidekeyboardWhenTappedAround() {
         let tap = UITapGestureRecognizer(target: self, action: #selector(endEditingView))
