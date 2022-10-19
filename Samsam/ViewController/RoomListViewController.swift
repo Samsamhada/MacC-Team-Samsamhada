@@ -86,4 +86,8 @@ extension RoomListViewController: UICollectionViewDataSource, UICollectionViewDe
         }
         return CGSize(width: UIScreen.main.bounds.width - 32, height: 90)
     }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 0)
+    }
 }
