@@ -10,6 +10,7 @@ import UIKit
 class CategoryCell: UICollectionViewCell {
     
     // MARK: - Property
+    
     static let identifier = "categoryCell"
     
     override var isSelected: Bool{
@@ -59,14 +60,6 @@ class CategoryCell: UICollectionViewCell {
     }
     
     // MARK: - Method
-    
-    private func setSelectedStyle() {
-        
-    }
-    
-    private func setDeselectedStyle() {
-        
-    }
     
     private func layout() {
         addSubview(vStackView)

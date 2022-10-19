@@ -28,6 +28,7 @@ class PostingCategoryViewController: UIViewController {
     }(UIButton())
     
     // MARK: - LifeCycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         attribute()
@@ -62,7 +63,7 @@ class PostingCategoryViewController: UIViewController {
         self.view.backgroundColor = .white
         
         setNavigationTitle()
-        
+
         categoryView.delegate = self
         categoryView.dataSource = self
         categoryView.allowsMultipleSelection = true
@@ -90,6 +91,7 @@ class PostingCategoryViewController: UIViewController {
 }
 
 // MARK: - UICollectionViewDelegate, DataSourse, DelegateFlowLayout
+
 extension PostingCategoryViewController:  UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -97,22 +99,13 @@ extension PostingCategoryViewController:  UICollectionViewDelegate, UICollection
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CategoryCell.identifier, for: indexPath) as! CategoryCell
-<<<<<<< Updated upstream
-
-        cell.categoryImage.image = UIImage(named:"category")
-=======
-        
-        cell.backgroundColor = .blue
         cell.categoryImage.image = UIImage(named:"category1")
->>>>>>> Stashed changes
-        cell.categoryTitle.text = "카테고리"
+        cell.categoryTitle.text = "\(indexPath.item+1) 카테고리"
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
-
         let cell = collectionView.cellForItem(at: indexPath)
         if cell?.isSelected == false {
             cell?.isSelected = true
@@ -139,7 +132,5 @@ extension PostingCategoryViewController:  UICollectionViewDelegate, UICollection
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
          return UIEdgeInsets(top: 8, left: 8, bottom: 16, right: 8)
     }
-    
-
 }
 
