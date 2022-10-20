@@ -26,7 +26,7 @@ class PostingWritingView: UIViewController {
         linestyle.lineSpacing = 6.0
         $0.backgroundColor = .clear
         $0.text = textViewPlaceHolder
-        $0.textColor = .gray
+        $0.textColor = .lightGray
         $0.font = UIFont.systemFont(ofSize: 18, weight: .regular)
         $0.textAlignment = .natural
         $0.typingAttributes = [.paragraphStyle: linestyle]
