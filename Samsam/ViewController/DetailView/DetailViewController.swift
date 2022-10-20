@@ -36,10 +36,8 @@ class DetailViewController: UIViewController, UIScrollViewDelegate {
             height: Int(components.screenWidth) / 4 * 3
         )
         $0.isScrollEnabled = true
-        $0.bounces = true
         $0.showsHorizontalScrollIndicator = false
         $0.isPagingEnabled = true
-        $0.alwaysBounceHorizontal = true
         $0.layer.cornerRadius = 16
         
         return $0
@@ -53,7 +51,6 @@ class DetailViewController: UIViewController, UIScrollViewDelegate {
         $0.currentPage = 0
         $0.pageIndicatorTintColor = UIColor.lightGray
         $0.currentPageIndicatorTintColor = UIColor.black
-        $0.isUserInteractionEnabled = true
         $0.backgroundStyle = .prominent
         return $0
     }(UIPageControl())
@@ -63,7 +60,6 @@ class DetailViewController: UIViewController, UIScrollViewDelegate {
             width: components.screenWidth,
             height: components.screenWidth / 5 * 2
         )
-//        $0.isScrollEnabled = true
         $0.layer.cornerRadius = 16
         $0.backgroundColor = .lightGray
         return $0
