@@ -50,6 +50,7 @@ class RoomListCell: UICollectionViewCell {
     private lazy var roomTitle: UILabel = {
         $0.text = "방 이름"
         $0.font = UIFont.systemFont(ofSize: 20, weight: .bold)
+        $0.textAlignment = .center
         return $0
     }(UILabel())
     
@@ -209,9 +210,10 @@ class RoomListCell: UICollectionViewCell {
         chipShape.anchor(
             left: titleView.leftAnchor,
             bottom: titleView.bottomAnchor,
-            right: titleView.rightAnchor,
             paddingBottom: 10
         )
+        
+        chipShape.rightAnchor.constraint(lessThanOrEqualTo: titleView.rightAnchor, constant: 0).isActive = true
         
         chipText.anchor(
             top: chipShape.topAnchor,
