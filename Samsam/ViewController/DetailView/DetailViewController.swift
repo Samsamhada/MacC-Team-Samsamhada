@@ -13,12 +13,12 @@ class DetailViewController: UIViewController, UIScrollViewDelegate {
     
     let screenWidth = UIScreen.main.bounds.width - 32
     
-    var naviTitle = "화장실"
+    private var naviTitle = "화장실"
     var images = ["Test01","Test02","Test03","Test04"]
     
     // MARK: - View
     
-    lazy var scrollView: UIScrollView = {
+    private lazy var scrollView: UIScrollView = {
         
         // TODO: - 이미지 갯수만큼 스크롤 가능. 데이터 반영 시 Images를 수정하여 데이터 갯수만큼 지정.
         
@@ -34,7 +34,7 @@ class DetailViewController: UIViewController, UIScrollViewDelegate {
         return $0
     }(UIScrollView())
     
-    lazy var pageControl: UIPageControl = {
+    private lazy var pageControl: UIPageControl = {
        
         // TODO: - 서버연결 시 images를 데이터로 변경해야함.
         
@@ -46,7 +46,7 @@ class DetailViewController: UIViewController, UIScrollViewDelegate {
         return $0
     }(UIPageControl())
     
-    lazy var descriptionView: UIScrollView = {
+    private lazy var descriptionView: UIScrollView = {
         $0.contentSize = CGSize(
             width: screenWidth,
             height: screenWidth / 5 * 2
@@ -148,7 +148,7 @@ class DetailViewController: UIViewController, UIScrollViewDelegate {
         pageControl.currentPage = Int(scrollView.contentOffset.x / screenWidth)
     }
     
-    @objc func pageDidChange(sender: UIPageControl){
+    @objc private func pageDidChange(sender: UIPageControl){
         let offsetX = screenWidth * CGFloat(pageControl.currentPage)
         scrollView.setContentOffset(CGPoint(x: offsetX, y: 0), animated: true)
     }
@@ -164,7 +164,7 @@ class DetailViewController: UIViewController, UIScrollViewDelegate {
 // MARK: - configuratingScrollView
 
 extension DetailViewController {
-    func configuratingScrollView() {
+    private func configuratingScrollView() {
         view.addSubview(scrollView)
         view.addSubview(pageControl)
 
@@ -191,7 +191,7 @@ extension DetailViewController {
         }
     }
     
-    func addImageView(img: String, position: CGFloat) {
+    private func addImageView(img: String, position: CGFloat) {
         let constructionImage = UIImageView()
         constructionImage.image = UIImage(named: img)
         
