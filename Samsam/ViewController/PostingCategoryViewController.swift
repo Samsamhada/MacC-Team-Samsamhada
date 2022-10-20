@@ -9,7 +9,6 @@ import UIKit
 
 class PostingCategoryViewController: UIViewController {
     
-    
     // MARK: - View
     
     let categoryView: UICollectionView = {
