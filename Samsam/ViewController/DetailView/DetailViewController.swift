@@ -149,7 +149,7 @@ class DetailViewController: UIViewController, UIScrollViewDelegate {
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "수정",
                                                             style: .plain,
                                                             target: self,
-                                                            action: nil
+                                                            action: #selector(tapEditButton) 
         )
     }
     
@@ -160,6 +160,13 @@ class DetailViewController: UIViewController, UIScrollViewDelegate {
     @objc func pageDidChange(sender: UIPageControl){
         let offsetX = components.screenWidth * CGFloat(pageControl.currentPage)
         scrollView.setContentOffset(CGPoint(x: offsetX, y: 0), animated: true)
+    }
+    
+    // TODO: - 수정화면 생성되면 수정예정.
+    
+    @objc func tapEditButton() {
+        let editViewController = ViewController()
+        navigationController?.pushViewController(editViewController, animated: true)
     }
 }
 
