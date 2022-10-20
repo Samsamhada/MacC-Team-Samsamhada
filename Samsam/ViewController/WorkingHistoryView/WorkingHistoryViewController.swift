@@ -11,7 +11,7 @@ class WorkingHistoryViewController: UIViewController {
 
     // MARK: - View
     
-    private let writingBtn: UIButton = {
+    private let writingButton: UIButton = {
         $0.backgroundColor = .yellow
         $0.setTitle("시공상황 작성하기", for: .normal)
         $0.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
@@ -47,11 +47,13 @@ class WorkingHistoryViewController: UIViewController {
         
         workingHistoryView.register(WorkingHistoryViewHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: WorkingHistoryViewHeader.identifier)
         workingHistoryView.register(WorkingHistoryViewCell.self, forCellWithReuseIdentifier: WorkingHistoryViewCell.identifier)
+        
+        writingButton.addTarget(self, action: #selector(tapWritingButton), for: .touchDown)
     }
     
     private func layout() {
         view.addSubview(workingHistoryView)
-        view.addSubview(writingBtn)
+        view.addSubview(writingButton)
         
         workingHistoryView.anchor(
             top: view.safeAreaLayoutGuide.topAnchor,
@@ -60,7 +62,7 @@ class WorkingHistoryViewController: UIViewController {
             right: view.safeAreaLayoutGuide.rightAnchor
         )
 
-        writingBtn.anchor(
+        writingButton.anchor(
             left: view.safeAreaLayoutGuide.leftAnchor,
             bottom: view.safeAreaLayoutGuide.bottomAnchor,
             right: view.safeAreaLayoutGuide.rightAnchor,
@@ -68,6 +70,14 @@ class WorkingHistoryViewController: UIViewController {
             paddingRight: 16,
             height: 50
         )
+    }
+    
+    // TODO: - postingCategoryView를 FullScreen모달로 띄우는 기능. 추후 수정
+    
+    @objc func tapWritingButton() {
+        let postingCategoryView = ViewController()
+        postingCategoryView.modalPresentationStyle = .fullScreen
+        present(postingCategoryView, animated:  true, completion: nil)
     }
 }
 
