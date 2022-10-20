@@ -49,7 +49,7 @@ class RoomListCell: UICollectionViewCell {
     
     private lazy var roomTitle: UILabel = {
         $0.text = "방 이름"
-        $0.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
+        $0.font = UIFont.systemFont(ofSize: 20, weight: .bold)
         return $0
     }(UILabel())
     
@@ -62,7 +62,7 @@ class RoomListCell: UICollectionViewCell {
     private lazy var chipText: UILabel = {
         $0.text = "AS기간"
         $0.textColor = .white
-        $0.font = UIFont.systemFont(ofSize: 14)
+        $0.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
         return $0
     }(UILabel())
     
