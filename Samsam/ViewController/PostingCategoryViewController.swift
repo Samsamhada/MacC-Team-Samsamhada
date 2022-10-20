@@ -9,7 +9,6 @@ import UIKit
 
 class PostingCategoryViewController: UIViewController {
     
-    
     // MARK: - View
     
     let categoryView: UICollectionView = {
@@ -34,8 +33,6 @@ class PostingCategoryViewController: UIViewController {
         attribute()
         layout()
     }
-    
-
     
     // MARK: - Method
     
