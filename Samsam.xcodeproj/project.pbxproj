@@ -18,6 +18,7 @@
 		26E3749C28FE8E6F00997DA7 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E3749B28FE8E6F00997DA7 /* LoginViewController.swift */; };
 		26E3749F28FE9DA300997DA7 /* PhoneNumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E3749E28FE9DA300997DA7 /* PhoneNumViewController.swift */; };
 		26FEC1B628FFF52D006C410B /* RoomCreationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26FEC1B528FFF52D006C410B /* RoomCreationCell.swift */; };
+		980D900E28FE671B003CC2DA /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980D900D28FE671B003CC2DA /* DetailViewController.swift */; };
 		98C0D06028FCE8EB00E0E439 /* AutoLayout+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98C0D05F28FCE8EB00E0E439 /* AutoLayout+.swift */; };
 		98C0D06428FCE99300E0E439 /* JSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98C0D06328FCE99300E0E439 /* JSON.swift */; };
 		98C0D06728FCE9DC00E0E439 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98C0D06628FCE9DC00E0E439 /* Model.swift */; };
@@ -42,6 +43,7 @@
 		26E3749D28FE95D100997DA7 /* Samsam.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Samsam.entitlements; sourceTree = "<group>"; };
 		26E3749E28FE9DA300997DA7 /* PhoneNumViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneNumViewController.swift; sourceTree = "<group>"; };
 		26FEC1B528FFF52D006C410B /* RoomCreationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomCreationCell.swift; sourceTree = "<group>"; };
+		980D900D28FE671B003CC2DA /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		98C0D05F28FCE8EB00E0E439 /* AutoLayout+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AutoLayout+.swift"; sourceTree = "<group>"; };
 		98C0D06328FCE99300E0E439 /* JSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSON.swift; sourceTree = "<group>"; };
 		98C0D06628FCE9DC00E0E439 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
@@ -95,6 +97,14 @@
 			path = Samsam;
 			sourceTree = "<group>";
 		};
+		980D900C28FE6705003CC2DA /* DetailView */ = {
+			isa = PBXGroup;
+			children = (
+				980D900D28FE671B003CC2DA /* DetailViewController.swift */,
+			);
+			path = DetailView;
+			sourceTree = "<group>";
+		};
 		98C0D05D28FCE8C300E0E439 /* Global */ = {
 			isa = PBXGroup;
 			children = (
@@ -123,6 +133,7 @@
 				98C0D06D28FCF46A00E0E439 /* WorkingHistoryView */,
 				26E3749B28FE8E6F00997DA7 /* LoginViewController.swift */,
 				26E3749E28FE9DA300997DA7 /* PhoneNumViewController.swift */,
+				980D900C28FE6705003CC2DA /* DetailView */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -242,6 +253,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				26E3749C28FE8E6F00997DA7 /* LoginViewController.swift in Sources */,
+				980D900E28FE671B003CC2DA /* DetailViewController.swift in Sources */,
 				26E3748628FCDC0000997DA7 /* ViewController.swift in Sources */,
 				98C0D06C28FCF46500E0E439 /* WorkingHistoryViewController.swift in Sources */,
 				98C0D06728FCE9DC00E0E439 /* Model.swift in Sources */,
