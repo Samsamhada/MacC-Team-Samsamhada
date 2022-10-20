@@ -22,7 +22,6 @@ class PostingWritingView: UIViewController {
     lazy var textContent: UITextView = {
         let linestyle = NSMutableParagraphStyle()
         linestyle.lineSpacing = 6.0
-        
         $0.backgroundColor = .white
         $0.text = "시공 사진에 관하여 설명을 써봐주세요 시공 사진에 관하여 설명을 써봐주세요 시공 사진에 관하여 설명을 써봐주세요"
         $0.textColor = .black
@@ -64,6 +63,7 @@ class PostingWritingView: UIViewController {
         attribute()
         layout()
         hidekeyboardWhenTappedAround()
+        setupNotificationCenter()
     }
     
     // MARK: - Method
@@ -90,7 +90,7 @@ class PostingWritingView: UIViewController {
         textContent.anchor(
             left: shadowView.leftAnchor,
             right: shadowView.rightAnchor,
-            height: 330
+            height: 280
         )
         
         finalBtn.anchor(
@@ -109,7 +109,7 @@ class PostingWritingView: UIViewController {
             paddingTop: 20,
             paddingLeft: 16,
             paddingRight: 16,
-            height: 330
+            height: 280
         )
     }
     
@@ -135,7 +135,27 @@ class PostingWritingView: UIViewController {
         view.endEditing(true)
     }
     
+    private func setupNotificationCenter() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
     @objc func tapNextBtn(_sender: UIButton) {
             navigationController?.popToRootViewController(animated: true)
     }
+    
+    @objc private func keyboardWillShow(notification: NSNotification) {
+            if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+                UIView.animate(withDuration: 0.2, animations: {
+                    self.finalBtn.transform = CGAffineTransform(translationX: 0, y: -keyboardSize.height + 25)
+                })
+            }
+    }
+        
+    @objc private func keyboardWillHide(notification:NSNotification) {
+            UIView.animate(withDuration: 0.2, animations: {
+                self.finalBtn.transform = .identity
+            })
+    }
+    
 }
