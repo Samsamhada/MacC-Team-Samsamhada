@@ -127,5 +127,3 @@ fastlane/test_output
 iOSInjectionProject/
 
 # End of https://www.toptal.com/developers/gitignore/api/macos,swift,cocoapods
-Samsam/Base.lproj/Main.storyboard
-Samsam/Global/SceneDelegate.swift
