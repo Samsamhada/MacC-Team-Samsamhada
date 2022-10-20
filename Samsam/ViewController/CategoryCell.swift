@@ -27,7 +27,7 @@ class CategoryCell: UICollectionViewCell {
     // MARK: - View
     
     var categoryImage: UIImageView = {
-        $0.image = UIImage(named: "")
+        $0.image = UIImage(named: "category1")
         $0.contentMode = .scaleAspectFit
         return $0
     }(UIImageView())
