@@ -11,21 +11,6 @@ class RoomListViewController: UIViewController {
     
     // MARK: - View
     
-    private let creationButton: UIButton = {
-        $0.setImage(UIImage(systemName: "plus"), for: .normal)
-        $0.tintColor = .black
-        $0.setTitle("고객 추가하기", for: .normal)
-        $0.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
-        $0.setTitleColor(.black, for: .normal)
-        $0.backgroundColor = .white
-        $0.layer.cornerRadius = 16
-        $0.layer.shadowColor = UIColor.black.cgColor
-        $0.layer.shadowOpacity = 0.2
-        $0.layer.shadowOffset = CGSize(width: 4, height: 4)
-        $0.layer.shadowRadius = 10
-        return $0
-    }(UIButton())
-    
     private let collectionView: UICollectionView = {
         return $0
     }(UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout()))
@@ -49,22 +34,10 @@ class RoomListViewController: UIViewController {
     }
     
     private func layout() {
-        view.addSubview(creationButton)
         view.addSubview(collectionView)
         
-        creationButton.anchor(
-            top: view.safeAreaLayoutGuide.topAnchor,
-            left: view.safeAreaLayoutGuide.leftAnchor,
-            bottom: collectionView.topAnchor,
-            right: view.safeAreaLayoutGuide.rightAnchor,
-            paddingTop: 16,
-            paddingLeft: 16,
-            paddingBottom: 16,
-            paddingRight: 16,
-            height: 90
-        )
-        
         collectionView.anchor(
+            top: view.safeAreaLayoutGuide.topAnchor,
             left: view.safeAreaLayoutGuide.leftAnchor,
             bottom: view.bottomAnchor,
             right: view.safeAreaLayoutGuide.rightAnchor
@@ -78,6 +51,7 @@ class RoomListViewController: UIViewController {
     }
     
     private func setupCollectionView() {
+        collectionView.register(RoomCreationCell.self, forCellWithReuseIdentifier: RoomCreationCell.identifier)
         collectionView.register(RoomListCell.self, forCellWithReuseIdentifier: RoomListCell.identifier)
         collectionView.delegate = self
         collectionView.dataSource = self
@@ -86,16 +60,34 @@ class RoomListViewController: UIViewController {
 
 extension RoomListViewController: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 2
+    }
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        if section == 0 {
+            return 1
+        }
         return 15
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        if indexPath.section == 0 {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RoomCreationCell.identifier, for: indexPath) as! RoomCreationCell
+            return cell
+        }
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RoomListCell.identifier, for: indexPath) as! RoomListCell
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        if indexPath.section == 0 {
+            return CGSize(width: UIScreen.main.bounds.width - 32, height: 50)
+        }
         return CGSize(width: UIScreen.main.bounds.width - 32, height: 90)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 0)
     }
 }

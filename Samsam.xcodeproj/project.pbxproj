@@ -14,9 +14,10 @@
 		26E3748B28FCDC0100997DA7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 26E3748A28FCDC0100997DA7 /* Assets.xcassets */; };
 		26E3748E28FCDC0100997DA7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 26E3748C28FCDC0100997DA7 /* LaunchScreen.storyboard */; };
 		26E3749628FCF56400997DA7 /* RoomListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E3749528FCF56400997DA7 /* RoomListViewController.swift */; };
-		26E3749C28FE8E6F00997DA7 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E3749B28FE8E6F00997DA7 /* LoginViewController.swift */; };
 		26E3749828FD2D0700997DA7 /* RoomListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E3749728FD2D0700997DA7 /* RoomListCell.swift */; };
+		26E3749C28FE8E6F00997DA7 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E3749B28FE8E6F00997DA7 /* LoginViewController.swift */; };
 		26E3749F28FE9DA300997DA7 /* PhoneNumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E3749E28FE9DA300997DA7 /* PhoneNumViewController.swift */; };
+		26FEC1B628FFF52D006C410B /* RoomCreationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26FEC1B528FFF52D006C410B /* RoomCreationCell.swift */; };
 		98C0D06028FCE8EB00E0E439 /* AutoLayout+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98C0D05F28FCE8EB00E0E439 /* AutoLayout+.swift */; };
 		98C0D06428FCE99300E0E439 /* JSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98C0D06328FCE99300E0E439 /* JSON.swift */; };
 		98C0D06728FCE9DC00E0E439 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98C0D06628FCE9DC00E0E439 /* Model.swift */; };
@@ -36,10 +37,11 @@
 		26E3748D28FCDC0100997DA7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		26E3748F28FCDC0100997DA7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		26E3749528FCF56400997DA7 /* RoomListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomListViewController.swift; sourceTree = "<group>"; };
+		26E3749728FD2D0700997DA7 /* RoomListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomListCell.swift; sourceTree = "<group>"; };
 		26E3749B28FE8E6F00997DA7 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		26E3749D28FE95D100997DA7 /* Samsam.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Samsam.entitlements; sourceTree = "<group>"; };
-		26E3749728FD2D0700997DA7 /* RoomListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomListCell.swift; sourceTree = "<group>"; };
 		26E3749E28FE9DA300997DA7 /* PhoneNumViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneNumViewController.swift; sourceTree = "<group>"; };
+		26FEC1B528FFF52D006C410B /* RoomCreationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomCreationCell.swift; sourceTree = "<group>"; };
 		98C0D05F28FCE8EB00E0E439 /* AutoLayout+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AutoLayout+.swift"; sourceTree = "<group>"; };
 		98C0D06328FCE99300E0E439 /* JSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSON.swift; sourceTree = "<group>"; };
 		98C0D06628FCE9DC00E0E439 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
@@ -116,9 +118,10 @@
 			children = (
 				26E3748528FCDC0000997DA7 /* ViewController.swift */,
 				26E3749528FCF56400997DA7 /* RoomListViewController.swift */,
+				26E3749728FD2D0700997DA7 /* RoomListCell.swift */,
+				26FEC1B528FFF52D006C410B /* RoomCreationCell.swift */,
 				98C0D06D28FCF46A00E0E439 /* WorkingHistoryView */,
 				26E3749B28FE8E6F00997DA7 /* LoginViewController.swift */,
-				26E3749728FD2D0700997DA7 /* RoomListCell.swift */,
 				26E3749E28FE9DA300997DA7 /* PhoneNumViewController.swift */,
 			);
 			path = ViewController;
@@ -252,6 +255,7 @@
 				26E3749F28FE9DA300997DA7 /* PhoneNumViewController.swift in Sources */,
 				98C0D06028FCE8EB00E0E439 /* AutoLayout+.swift in Sources */,
 				26E3749628FCF56400997DA7 /* RoomListViewController.swift in Sources */,
+				26FEC1B628FFF52D006C410B /* RoomCreationCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
