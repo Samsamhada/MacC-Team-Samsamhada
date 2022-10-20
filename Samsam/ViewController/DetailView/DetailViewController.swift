@@ -40,6 +40,7 @@ class DetailViewController: UIViewController, UIScrollViewDelegate {
         $0.showsHorizontalScrollIndicator = false
         $0.isPagingEnabled = true
         $0.alwaysBounceHorizontal = true
+        $0.layer.cornerRadius = 16
         
         return $0
     }(UIScrollView())
