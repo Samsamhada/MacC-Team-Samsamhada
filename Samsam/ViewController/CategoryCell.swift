@@ -87,6 +87,7 @@ class CategoryCell: UICollectionViewCell {
 
     private func layout() {
         addSubview(vStackView)
+
         vStackView.addArrangedSubview(categoryImage)
         vStackView.addArrangedSubview(categoryTitle)
         
