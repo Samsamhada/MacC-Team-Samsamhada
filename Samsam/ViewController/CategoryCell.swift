@@ -63,11 +63,12 @@ class CategoryCell: UICollectionViewCell {
     
     private func layout() {
         addSubview(vStackView)
-        vStackView.addArrangedSubview(categoryImage)
-        vStackView.addArrangedSubview(categoryTitle)
     }
     
     private func setupCell() {
+        vStackView.addArrangedSubview(categoryImage)
+        vStackView.addArrangedSubview(categoryTitle)
+        
         vStackView.anchor(
             top: topAnchor,
             left: leftAnchor,
