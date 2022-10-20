@@ -13,13 +13,18 @@ class CategoryCell: UICollectionViewCell {
     
     static let identifier = "categoryCell"
     
+    enum ImageLiteral {
+        static var noCheck = "category1"
+        static var Check = "category2"
+    }
+    
     override var isSelected: Bool{
             didSet {
                     if isSelected {
-                        self.categoryImage.image = UIImage(named:"category2")
+                        self.categoryImage.image = UIImage(named: ImageLiteral.Check)
                         
                     } else {
-                        self.categoryImage.image = UIImage(named:"category1")
+                        self.categoryImage.image = UIImage(named: ImageLiteral.noCheck)
                     }
                 }
         }
@@ -27,7 +32,7 @@ class CategoryCell: UICollectionViewCell {
     // MARK: - View
     
     var categoryImage: UIImageView = {
-        $0.image = UIImage(named: "category1")
+        $0.image = UIImage(named: ImageLiteral.noCheck)
         $0.contentMode = .scaleAspectFit
         return $0
     }(UIImageView())
