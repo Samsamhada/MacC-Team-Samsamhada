@@ -7,33 +7,24 @@
 
 import UIKit
 
-struct Components {
-    
-    // TODO: - 서버연결 시 TestImage 삭제
-    
-    var images = ["Test01","Test02","Test03","Test04"]
-    let screenWidth = UIScreen.main.bounds.width - 32
-}
-
-// TODO: - 전역변수 추후 삭제. RxSwift 사용 시 수정
-
-let components = Components()
-
 class DetailViewController: UIViewController, UIScrollViewDelegate {
 
     // MARK: - Property
     
-    var naviTitle = "화장실"
+    let screenWidth = UIScreen.main.bounds.width - 32
+    
+    private var naviTitle = "화장실"
+    var images = ["Test01","Test02","Test03","Test04"]
     
     // MARK: - View
     
-    private let scrollView: UIScrollView = {
+    private lazy var scrollView: UIScrollView = {
         
         // TODO: - 이미지 갯수만큼 스크롤 가능. 데이터 반영 시 Images를 수정하여 데이터 갯수만큼 지정.
         
         $0.contentSize = CGSize(
-            width: Int(components.screenWidth) * components.images.count,
-            height: Int(components.screenWidth) / 4 * 3
+            width: Int(screenWidth) * images.count,
+            height: Int(screenWidth) / 4 * 3
         )
         $0.isScrollEnabled = true
         $0.showsHorizontalScrollIndicator = false
@@ -43,11 +34,11 @@ class DetailViewController: UIViewController, UIScrollViewDelegate {
         return $0
     }(UIScrollView())
     
-    private let pageControl: UIPageControl = {
+    private lazy var pageControl: UIPageControl = {
        
         // TODO: - 서버연결 시 images를 데이터로 변경해야함.
         
-        $0.numberOfPages = components.images.count
+        $0.numberOfPages = images.count
         $0.currentPage = 0
         $0.pageIndicatorTintColor = UIColor.lightGray
         $0.currentPageIndicatorTintColor = UIColor.black
@@ -55,10 +46,10 @@ class DetailViewController: UIViewController, UIScrollViewDelegate {
         return $0
     }(UIPageControl())
     
-    private let descriptionView: UIScrollView = {
+    private lazy var descriptionView: UIScrollView = {
         $0.contentSize = CGSize(
-            width: components.screenWidth,
-            height: components.screenWidth / 5 * 2
+            width: screenWidth,
+            height: screenWidth / 5 * 2
         )
         $0.layer.cornerRadius = 16
         $0.backgroundColor = .lightGray
@@ -119,7 +110,7 @@ class DetailViewController: UIViewController, UIScrollViewDelegate {
             paddingTop: 20,
             paddingLeft: 16,
             paddingRight: 16,
-            height: components.screenWidth / 5 * 2
+            height: screenWidth / 5 * 2
         )
         
         descriptionLBL.anchor(
@@ -154,11 +145,11 @@ class DetailViewController: UIViewController, UIScrollViewDelegate {
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        pageControl.currentPage = Int(scrollView.contentOffset.x / components.screenWidth)
+        pageControl.currentPage = Int(scrollView.contentOffset.x / screenWidth)
     }
     
-    @objc func pageDidChange(sender: UIPageControl){
-        let offsetX = components.screenWidth * CGFloat(pageControl.currentPage)
+    @objc private func pageDidChange(sender: UIPageControl){
+        let offsetX = screenWidth * CGFloat(pageControl.currentPage)
         scrollView.setContentOffset(CGPoint(x: offsetX, y: 0), animated: true)
     }
     
@@ -173,7 +164,7 @@ class DetailViewController: UIViewController, UIScrollViewDelegate {
 // MARK: - configuratingScrollView
 
 extension DetailViewController {
-    func configuratingScrollView() {
+    private func configuratingScrollView() {
         view.addSubview(scrollView)
         view.addSubview(pageControl)
 
@@ -183,7 +174,7 @@ extension DetailViewController {
             right: view.safeAreaLayoutGuide.rightAnchor,
             paddingLeft: 16,
             paddingRight: 16,
-            height: components.screenWidth / 4 * 3
+            height: screenWidth / 4 * 3
         )
         
         pageControl.anchor(
@@ -195,22 +186,22 @@ extension DetailViewController {
             paddingRight: 16
         )
         
-        for num in 0..<components.images.count {
-            addImageView(img: components.images[num], position: CGFloat(num))
+        for num in 0..<images.count {
+            addImageView(img: images[num], position: CGFloat(num))
         }
     }
     
-    func addImageView(img: String, position: CGFloat) {
+    private func addImageView(img: String, position: CGFloat) {
         let constructionImage = UIImageView()
         constructionImage.image = UIImage(named: img)
         
         scrollView.addSubview(constructionImage)
         
         constructionImage.frame = CGRect(
-            x: components.screenWidth * position,
+            x: screenWidth * position,
             y: 0,
-            width: components.screenWidth,
-            height: components.screenWidth / 4 * 3
+            width: screenWidth,
+            height: screenWidth / 4 * 3
         )
     }
 }
