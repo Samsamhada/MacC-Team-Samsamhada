@@ -19,12 +19,14 @@ class PostingWritingView: UIViewController {
         return $0
     }(UILabel())
 
+    let textViewPlaceHolder = "텍스트를 입력하세요"
+    
     lazy var textContent: UITextView = {
         let linestyle = NSMutableParagraphStyle()
         linestyle.lineSpacing = 6.0
-        $0.backgroundColor = .white
-        $0.text = "시공 사진에 관하여 설명을 써봐주세요 시공 사진에 관하여 설명을 써봐주세요 시공 사진에 관하여 설명을 써봐주세요"
-        $0.textColor = .black
+        $0.backgroundColor = .clear
+        $0.text = textViewPlaceHolder
+        $0.textColor = .gray
         $0.font = UIFont.systemFont(ofSize: 18, weight: .regular)
         $0.textAlignment = .natural
         $0.typingAttributes = [.paragraphStyle: linestyle]
@@ -33,15 +35,16 @@ class PostingWritingView: UIViewController {
         $0.layer.cornerRadius = 10
         $0.autocorrectionType = .no
         $0.autocapitalizationType = .none
+        $0.delegate = self
         return $0
     }(UITextView())
     
     private var shadowView: UIView = {
-        $0.backgroundColor = .blue
+        $0.backgroundColor = .gray
         $0.layer.cornerRadius = 10
         $0.layer.shadowColor = UIColor.black.cgColor
         $0.layer.shadowOpacity = 0.2
-        $0.layer.shadowOffset = CGSize(width: 1, height: 1)
+        $0.layer.shadowOffset = CGSize(width: 2, height: 2)
         $0.layer.shadowRadius = 10
         return $0
     }(UIView())
@@ -157,5 +160,20 @@ class PostingWritingView: UIViewController {
                 self.finalBtn.transform = .identity
             })
     }
+}
+
+extension PostingWritingView: UITextViewDelegate {
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        if textView.text == textViewPlaceHolder {
+            textView.text = nil
+            textView.textColor = .black
+        }
+    }
     
+    func textViewDidEndEditing(_ textView: UITextView) {
+            if textView.text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+                textView.text = textViewPlaceHolder
+                textView.textColor = .lightGray
+        }
+    }
 }
