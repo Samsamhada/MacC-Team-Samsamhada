@@ -56,7 +56,6 @@ class CategoryCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        layout()
         setupCell()
     }
 
@@ -65,12 +64,9 @@ class CategoryCell: UICollectionViewCell {
     }
     
     // MARK: - Method
-    
-    private func layout() {
-        addSubview(vStackView)
-    }
-    
+
     private func setupCell() {
+        self.addSubview(vStackView)
         vStackView.addArrangedSubview(categoryImage)
         vStackView.addArrangedSubview(categoryTitle)
         
