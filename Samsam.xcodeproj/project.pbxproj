@@ -415,7 +415,7 @@
 				CODE_SIGN_ENTITLEMENTS = Samsam/Samsam.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = F2SSSA5NRF;
+				DEVELOPMENT_TEAM = N6LML762WM;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Samsam/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -428,7 +428,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.immeenu.Samsam;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Eddy.Samsam;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -447,7 +447,7 @@
 				CODE_SIGN_ENTITLEMENTS = Samsam/Samsam.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = F2SSSA5NRF;
+				DEVELOPMENT_TEAM = N6LML762WM;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Samsam/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -460,7 +460,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.immeenu.Samsam;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Eddy.Samsam;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
