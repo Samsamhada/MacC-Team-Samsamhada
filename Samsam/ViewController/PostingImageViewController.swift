@@ -11,6 +11,15 @@ class PostingImageViewController: UIViewController {
     
     // MARK: - View
     
+    private var titleText: UILabel = {
+        $0.text = "시공한 사진을 추가해주세요. \n (최대 4장까지 가능합니다)."
+        $0.textAlignment = .center
+        $0.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
+        $0.textColor = .lightGray
+        $0.numberOfLines = 0
+        return $0
+    }(UILabel())
+    
     private let nextBTN: UIButton = {
         $0.backgroundColor = .blue
         $0.setTitle("다음", for: .normal)
@@ -38,6 +47,7 @@ class PostingImageViewController: UIViewController {
     
     private func layout() {
         self.view.addSubview(nextBTN)
+        self.view.addSubview(titleText)
         
         nextBTN.anchor(
             left: view.safeAreaLayoutGuide.leftAnchor,
@@ -45,6 +55,16 @@ class PostingImageViewController: UIViewController {
             right: view.safeAreaLayoutGuide.rightAnchor,
             paddingLeft: 16,
             paddingRight: 16,
+            height: 50
+        )
+        
+        titleText.anchor(
+            top: view.safeAreaLayoutGuide.topAnchor,
+            left: view.safeAreaLayoutGuide.leftAnchor,
+            right: view.safeAreaLayoutGuide.rightAnchor,
+            paddingTop: 12,
+            paddingLeft: 50,
+            paddingRight: 50,
             height: 50
         )
     }
