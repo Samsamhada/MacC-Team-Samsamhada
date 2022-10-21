@@ -11,7 +11,7 @@ class RoomCategoryViewController: UIViewController {
     
     // MARK: - View
 
-    private lazy var textTitle: UILabel = {
+    private var textTitle: UILabel = {
         $0.text = ""
         $0.textAlignment = .center
         $0.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
@@ -88,7 +88,6 @@ class RoomCategoryViewController: UIViewController {
     
     private func setNavigationTitle() {
         let appearance = UINavigationBarAppearance()
-        
         navigationController?.navigationBar.standardAppearance = appearance
         navigationController?.navigationBar.scrollEdgeAppearance = appearance
         navigationController?.navigationBar.backgroundColor = .white
