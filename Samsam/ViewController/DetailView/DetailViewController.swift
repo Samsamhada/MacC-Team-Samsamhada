@@ -15,6 +15,7 @@ class DetailViewController: UIViewController, UIScrollViewDelegate {
     
     private var naviTitle = "화장실"
     var images = ["Test01","Test02","Test03","Test04"]
+    private var imageArray: [UIImage] = []
     
     // MARK: - View
     
@@ -93,6 +94,7 @@ class DetailViewController: UIViewController, UIScrollViewDelegate {
         
         scrollView.delegate = self
         pageControl.addTarget(self, action: #selector(pageDidChange(sender: )), for: .valueChanged)
+        sharingButton.addTarget(self, action: #selector(tapShareButton), for: .touchUpInside)
     }
     
     private func layout() {
@@ -140,7 +142,7 @@ class DetailViewController: UIViewController, UIScrollViewDelegate {
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "수정",
                                                             style: .plain,
                                                             target: self,
-                                                            action: #selector(tapEditButton) 
+                                                            action: #selector(tapEditButton)
         )
     }
     
@@ -154,10 +156,23 @@ class DetailViewController: UIViewController, UIScrollViewDelegate {
     }
     
     // TODO: - 수정화면 생성되면 수정예정.
-    
-    @objc func tapEditButton() {
+
+    @objc private func tapEditButton() {
         let editViewController = ViewController()
         navigationController?.pushViewController(editViewController, animated: true)
+    }
+
+    @objc private func tapShareButton() {
+
+        for imgName in images {
+            guard let img = UIImage(named: imgName) else { return }
+
+            imageArray.append(img)
+        }
+        let vc = UIActivityViewController(activityItems: imageArray, applicationActivities: [])
+        if !imageArray.isEmpty {
+            present(vc, animated: true)
+        }
     }
 }
 
