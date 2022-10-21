@@ -24,6 +24,7 @@
 		43C2111128FCFB3800E8F6DD /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43C2111028FCFB3800E8F6DD /* CategoryCell.swift */; };
 		98366F8D29019A5300E81E27 /* RoomCreationViewContoller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98366F8C29019A5300E81E27 /* RoomCreationViewContoller.swift */; };
 		43956D2C28FF9F0100DD996F /* PostingWritingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43956D2B28FF9F0100DD996F /* PostingWritingView.swift */; };
+		980D900E28FE671B003CC2DA /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980D900D28FE671B003CC2DA /* DetailViewController.swift */; };
 		98C0D06028FCE8EB00E0E439 /* AutoLayout+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98C0D05F28FCE8EB00E0E439 /* AutoLayout+.swift */; };
 		98C0D06428FCE99300E0E439 /* JSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98C0D06328FCE99300E0E439 /* JSON.swift */; };
 		98C0D06728FCE9DC00E0E439 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98C0D06628FCE9DC00E0E439 /* Model.swift */; };
@@ -54,6 +55,7 @@
 		43C2111028FCFB3800E8F6DD /* CategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
 		98366F8C29019A5300E81E27 /* RoomCreationViewContoller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomCreationViewContoller.swift; sourceTree = "<group>"; };
 		43956D2B28FF9F0100DD996F /* PostingWritingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostingWritingView.swift; sourceTree = "<group>"; };
+		980D900D28FE671B003CC2DA /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		98C0D05F28FCE8EB00E0E439 /* AutoLayout+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AutoLayout+.swift"; sourceTree = "<group>"; };
 		98C0D06328FCE99300E0E439 /* JSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSON.swift; sourceTree = "<group>"; };
 		98C0D06628FCE9DC00E0E439 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
