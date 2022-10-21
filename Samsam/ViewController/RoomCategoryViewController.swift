@@ -11,7 +11,7 @@ class RoomCategoryViewController: UIViewController {
     
     // MARK: - View
 
-    private var textTitle: UILabel = {
+    private var titleText: UILabel = {
         $0.text = ""
         $0.textAlignment = .center
         $0.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
@@ -56,11 +56,11 @@ class RoomCategoryViewController: UIViewController {
     }
     
     private func layout() {
-        view.addSubview(textTitle)
+        view.addSubview(titleText)
         view.addSubview(nextBTN)
         view.addSubview(categoryView)
         
-        textTitle.anchor(
+        titleText.anchor(
             top: view.safeAreaLayoutGuide.topAnchor,
             left: view.safeAreaLayoutGuide.leftAnchor,
             right: view.safeAreaLayoutGuide.rightAnchor,
@@ -78,7 +78,7 @@ class RoomCategoryViewController: UIViewController {
         )
         
         categoryView.anchor(
-            top: textTitle.bottomAnchor,
+            top: titleText.bottomAnchor,
             left: view.safeAreaLayoutGuide.leftAnchor,
             bottom: nextBTN.topAnchor,
             right: view.safeAreaLayoutGuide.rightAnchor,
@@ -98,8 +98,8 @@ class RoomCategoryViewController: UIViewController {
     
     private func setTitleText() {
         let statement = "시공 과정을 모두 선택해주세요".getColoredText("모두", .red)
-        textTitle.text = ""
-        textTitle.attributedText = statement
+        titleText.text = ""
+        titleText.attributedText = statement
     }
     
     @objc func tapNextBTN(_sender: UIButton) {
