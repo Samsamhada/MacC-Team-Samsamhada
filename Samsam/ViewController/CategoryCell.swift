@@ -38,7 +38,6 @@ class CategoryCell: UICollectionViewCell {
     }(UIImageView())
     
     let categoryTitle: UILabel = {
-        $0.translatesAutoresizingMaskIntoConstraints = false
         $0.text = ""
         $0.textAlignment = .center
         $0.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
