@@ -45,7 +45,7 @@ class PostingWritingView: UIViewController {
         $0.backgroundColor = .gray
         $0.layer.cornerRadius = 10
         $0.layer.shadowColor = UIColor.black.cgColor
-        $0.layer.shadowOpacity = 0.2
+        $0.layer.shadowOpacity = 0.25
         $0.layer.shadowOffset = CGSize(width: 2, height: 2)
         $0.layer.shadowRadius = 10
         return $0
