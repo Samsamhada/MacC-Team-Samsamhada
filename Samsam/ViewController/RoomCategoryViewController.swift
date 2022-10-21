@@ -28,6 +28,11 @@ class RoomCategoryViewController: UIViewController {
         $0.addTarget(self, action: #selector(tapNextBTN(_sender:)), for: .touchUpInside)
         return $0
     }(UIButton())
+    
+    private let categoryView: UICollectionView = {
+        return $0
+    }(UICollectionView(
+        frame: .zero, collectionViewLayout: UICollectionViewFlowLayout()))
 
     // MARK: - LifeCycle
     
@@ -40,14 +45,20 @@ class RoomCategoryViewController: UIViewController {
     // MARK: - Method
     
     private func attribute() {
-        view.backgroundColor = .white
+        self.view.backgroundColor = .white
         setNavigationTitle()
         setTitleText()
+        
+        categoryView.delegate = self
+        categoryView.dataSource = self
+        categoryView.allowsMultipleSelection = true
+        categoryView.register(CategoryCell.self, forCellWithReuseIdentifier: CategoryCell.identifier)
     }
     
     private func layout() {
         view.addSubview(textTitle)
         view.addSubview(nextBTN)
+        view.addSubview(categoryView)
         
         textTitle.anchor(
             top: view.safeAreaLayoutGuide.topAnchor,
@@ -64,6 +75,14 @@ class RoomCategoryViewController: UIViewController {
             paddingLeft: 16,
             paddingRight: 16,
             height: 50
+        )
+        
+        categoryView.anchor(
+            top: textTitle.bottomAnchor,
+            left: view.safeAreaLayoutGuide.leftAnchor,
+            bottom: nextBTN.topAnchor,
+            right: view.safeAreaLayoutGuide.rightAnchor,
+            paddingTop: 20
         )
     }
     
@@ -106,4 +125,48 @@ extension String {
         return nsString
     }
 }
+
+// MARK: - UICollectionViewDelegate, DataSourse, DelegateFlowLayout
+
+extension RoomCategoryViewController:  UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 24
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CategoryCell.identifier, for: indexPath) as! CategoryCell
+        cell.categoryImage.image = UIImage(named: CategoryCell.ImageLiteral.noCheck)
+        cell.categoryTitle.text = "\(indexPath.item+1) 카테고리"
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
+        let cell = collectionView.cellForItem(at: indexPath)
+        if cell?.isSelected == false {
+            cell?.isSelected = true
+        }
+        return true
+    }
+
+    func collectionView(_ collectionView: UICollectionView, shouldDeselectItemAt indexPath: IndexPath) -> Bool {
+        let cell = collectionView.cellForItem(at: indexPath)
+        if cell?.isSelected == true {
+            cell?.isSelected = false
+        }
+        return true
+    }
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let cellWidth =  (view.frame.width - 48)/3
+        let cellHeight = 120
+        return CGSize(width: Int(cellWidth), height: Int(cellHeight))
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+         return UIEdgeInsets(top: 8, left: 8, bottom: 16, right: 8)
+    }
+}
+
 
