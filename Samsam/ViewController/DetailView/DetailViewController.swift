@@ -13,9 +13,9 @@ class DetailViewController: UIViewController, UIScrollViewDelegate {
     
     let screenWidth = UIScreen.main.bounds.width - 32
     
-    var num = 0
     private var naviTitle = "화장실"
     var images = ["Test01","Test02","Test03","Test04"]
+    private var imageArray: [UIImage] = []
     
     // MARK: - View
     
@@ -142,7 +142,7 @@ class DetailViewController: UIViewController, UIScrollViewDelegate {
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "수정",
                                                             style: .plain,
                                                             target: self,
-                                                            action: #selector(tapEditButton) 
+                                                            action: #selector(tapEditButton)
         )
     }
     
@@ -156,63 +156,21 @@ class DetailViewController: UIViewController, UIScrollViewDelegate {
     }
     
     // TODO: - 수정화면 생성되면 수정예정.
-    
+
     @objc private func tapEditButton() {
         let editViewController = ViewController()
         navigationController?.pushViewController(editViewController, animated: true)
     }
-    
+
     @objc private func tapShareButton() {
 
-        if images.count == 4 {
-            guard let img3 = UIImage(named: images[3]) else {
-                return
-            }
-            guard let img2 = UIImage(named: images[2]) else {
-                return
-            }
-            guard let img1 = UIImage(named: images[1]) else {
-                return
-            }
-            guard let img0 = UIImage(named: images[0]) else {
-                return
-            }
-            
-            let vc = UIActivityViewController(activityItems: [img0,img1,img2,img3],
-                                              applicationActivities: [])
-            present(vc, animated: true)
-        } else if images.count == 3 {
-            guard let img2 = UIImage(named: images[2]) else {
-                return
-            }
-            guard let img1 = UIImage(named: images[1]) else {
-                return
-            }
-            guard let img0 = UIImage(named: images[0]) else {
-                return
-            }
-            
-            let vc = UIActivityViewController(activityItems: [img0,img1,img2],
-                                              applicationActivities: [])
-            present(vc, animated: true)
-        } else if images.count == 2 {
-            guard let img1 = UIImage(named: images[1]) else {
-                return
-            }
-            guard let img0 = UIImage(named: images[0]) else {
-                return
-            }
-            
-            let vc = UIActivityViewController(activityItems: [img0,img1],
-                                              applicationActivities: [])
-            present(vc, animated: true)
-        } else if images.count == 1 {
-            guard let img0 = UIImage(named: images[0]) else {
-                return
-            }
-            
-            let vc = UIActivityViewController(activityItems: [img0],
-                                              applicationActivities: [])
+        for imgName in images {
+            guard let img = UIImage(named: imgName) else { return }
+
+            imageArray.append(img)
+        }
+        let vc = UIActivityViewController(activityItems: imageArray, applicationActivities: [])
+        if !imageArray.isEmpty {
             present(vc, animated: true)
         }
     }
@@ -262,3 +220,5 @@ extension DetailViewController {
         )
     }
 }
+
+
