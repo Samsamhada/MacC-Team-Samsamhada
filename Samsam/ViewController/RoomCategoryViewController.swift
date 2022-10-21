@@ -106,7 +106,6 @@ class RoomCategoryViewController: UIViewController {
         let vc = RoomCodeViewController()
         navigationController?.pushViewController(vc, animated: true)
     }
-    
 }
 
 extension NSMutableAttributedString {
