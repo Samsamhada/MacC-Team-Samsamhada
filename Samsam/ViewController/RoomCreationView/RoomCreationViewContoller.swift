@@ -8,7 +8,9 @@
 import UIKit
 
 class RoomCreationViewController: UIViewController {
-
+    
+    private var warrantyCount = 0
+    
     // MARK: - View
     
     private let customerTitle: UILabel = {
@@ -42,10 +44,13 @@ class RoomCreationViewController: UIViewController {
         return $0
     }(UILabel())
     
-    private var startDate: UITextView = {
-        $0.textColor = .black
+    private var startDate: UIDatePicker = {
+        $0.datePickerMode = .date
+        $0.locale = Locale(identifier: "ko-KR")
+        $0.timeZone = .autoupdatingCurrent
+        $0.preferredDatePickerStyle = .compact
         return $0
-    }(UITextView())
+    }(UIDatePicker())
     
     private let endDateHstack: UIStackView = {
         return $0
@@ -59,10 +64,13 @@ class RoomCreationViewController: UIViewController {
         return $0
     }(UILabel())
     
-    private var endDate: UITextView = {
-        $0.textColor = .black
+    private var endDate: UIDatePicker = {
+        $0.datePickerMode = .date
+        $0.locale = Locale(identifier: "ko-KR")
+        $0.timeZone = .autoupdatingCurrent
+        $0.preferredDatePickerStyle = .compact
         return $0
-    }(UITextView())
+    }(UIDatePicker())
     
     private let warrantyHstack: UIStackView = {
         return $0
@@ -75,21 +83,21 @@ class RoomCreationViewController: UIViewController {
         $0.textColor = .black
         return $0
     }(UILabel())
-    
+//
     private var warrantyText: UILabel = {
+        $0.text = "0개월"
         $0.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
-        $0.backgroundColor = .black
         return $0
     }(UILabel())
     
     private let warrantyStepper: UIStepper = {
-        $0.maximumValue = 60
+        $0.maximumValue = 24
         $0.minimumValue = 0
-        $0.wraps = true // 무슨 기능일까?
+        $0.wraps = true
         $0.autorepeat = true
+//        $0.addTarget(self, action: #selector(tapStepper), for: .touchUpInside)
         return $0
     }(UIStepper())
-    
     
     private let nextButton: UIButton = {
         $0.setTitle("다음", for: .normal)
@@ -103,7 +111,14 @@ class RoomCreationViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+        
+        attribute()
         layout()
+    }
+    
+    private func attribute() {
+        setNavigationbar()
+        warrantyStepper.addTarget(self, action: #selector(tapStepper), for: .touchUpInside)
     }
     
     private func layout() {
@@ -177,6 +192,11 @@ class RoomCreationViewController: UIViewController {
             paddingRight: 16
         )
         
+        warrantyText.anchor(
+            right: warrantyStepper.leftAnchor,
+            paddingRight: 10
+        )
+
         nextButton.anchor(
             left: view.safeAreaLayoutGuide.leftAnchor,
             bottom: view.safeAreaLayoutGuide.bottomAnchor,
@@ -186,6 +206,20 @@ class RoomCreationViewController: UIViewController {
             paddingRight: 16,
             height: 50
         )
+    }
+    
+    private func setNavigationbar() {
+        let appearance = UINavigationBarAppearance()
+        navigationController?.navigationBar.standardAppearance = appearance
+        navigationController?.navigationBar.scrollEdgeAppearance = appearance
+        navigationController?.navigationBar.topItem?.title = "방 생성"
+        navigationController?.navigationBar.prefersLargeTitles = false
+        navigationController?.setNavigationBarHidden(false, animated: true)
+    }
+    
+    @objc private func tapStepper() {
+        warrantyCount = Int(warrantyStepper.value)
+        warrantyText.text = "\(warrantyCount)개월"
     }
 }
 
