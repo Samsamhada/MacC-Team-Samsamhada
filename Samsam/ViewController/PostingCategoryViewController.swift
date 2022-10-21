@@ -101,8 +101,6 @@ extension PostingCategoryViewController:  UICollectionViewDelegate, UICollection
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CategoryCell.identifier, for: indexPath) as! CategoryCell
         cell.categoryImage.image = UIImage(named: CategoryCell.ImageLiteral.noCheck)
         cell.categoryTitle.text = "\(indexPath.item+1) 카테고리"
-
-        cell.categoryImage.image = UIImage(named:"category")
         return cell
     }
     

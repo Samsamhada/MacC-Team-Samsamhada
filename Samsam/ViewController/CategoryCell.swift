@@ -33,24 +33,6 @@ class CategoryCell: UICollectionViewCell {
     
     var categoryImage: UIImageView = {
         $0.image = UIImage(named: ImageLiteral.noCheck)
-        
-    static let identifier = "categoryCell"
-
-    override var isSelected: Bool{
-            didSet {
-                    if isSelected {
-                        self.categoryImage.image = UIImage(named: ImageLiteral.Check)
-                        
-                    } else {
-                        self.categoryImage.image = UIImage(named: ImageLiteral.noCheck)
-                    }
-                }
-        }
-    
-    // MARK: - View
-    
-    var categoryImage: UIImageView = {
-        $0.image = UIImage(named: ImageLiteral.noCheck)
         $0.contentMode = .scaleAspectFit
         return $0
     }(UIImageView())
@@ -84,8 +66,6 @@ class CategoryCell: UICollectionViewCell {
         
     private func setupCell() {
         self.addSubview(vStackView)
-
-    private func layout() {
         addSubview(vStackView)
 
         vStackView.addArrangedSubview(categoryImage)
