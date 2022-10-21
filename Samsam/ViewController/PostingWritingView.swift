@@ -51,13 +51,13 @@ class PostingWritingView: UIViewController {
         return $0
     }(UIView())
     
-    private let finalBtn: UIButton = {
+    private let finalbtn: UIButton = {
             $0.backgroundColor = .blue
             $0.setTitle("작성 완료", for: .normal)
             $0.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
             $0.setTitleColor(.black, for: .normal)
             $0.layer.cornerRadius = 16
-            $0.addTarget(self, action: #selector(tapNextBtn(_sender:)), for: .touchUpInside)
+            $0.addTarget(self, action: #selector(tapNextbtn(_sender:)), for: .touchUpInside)
             return $0
         }(UIButton())
     
@@ -82,7 +82,7 @@ class PostingWritingView: UIViewController {
         self.view.addSubview(textTitle)
         self.view.addSubview(shadowView)
         self.shadowView.addSubview(textContent)
-        self.view.addSubview(finalBtn)
+        self.view.addSubview(finalbtn)
         
         textTitle.anchor(
             top: view.safeAreaLayoutGuide.topAnchor,
@@ -98,8 +98,6 @@ class PostingWritingView: UIViewController {
             height: 280
         )
         
-        finalBtn.anchor(
-            left: view.leftAnchor,
             bottom: view.safeAreaLayoutGuide.bottomAnchor,
             right: view.rightAnchor,
             paddingLeft: 16,
