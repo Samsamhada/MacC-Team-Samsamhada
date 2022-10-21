@@ -98,8 +98,10 @@ class PostingWritingView: UIViewController {
             height: 280
         )
         
+        finalbtn.anchor(
+            left: view.safeAreaLayoutGuide.leftAnchor,
             bottom: view.safeAreaLayoutGuide.bottomAnchor,
-            right: view.rightAnchor,
+            right: view.safeAreaLayoutGuide.rightAnchor,
             paddingLeft: 16,
             paddingRight: 16,
             height: 50
@@ -107,8 +109,8 @@ class PostingWritingView: UIViewController {
         
         shadowView.anchor(
             top: textTitle.bottomAnchor,
-            left: view.leftAnchor,
-            right: view.rightAnchor,
+            left: view.safeAreaLayoutGuide.leftAnchor,
+            right: view.safeAreaLayoutGuide.rightAnchor,
             paddingTop: 20,
             paddingLeft: 16,
             paddingRight: 16,
