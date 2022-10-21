@@ -145,8 +145,8 @@ class PostingWritingView: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
-    @objc func tapNextBtn(_sender: UIButton) {
-            navigationController?.popToRootViewController(animated: true)
+    @objc func tapNextbtn(_sender: UIButton) {
+        navigationController?.popToRootViewController(animated: true)
     }
     
     @objc private func keyboardWillShow(notification: NSNotification) {
