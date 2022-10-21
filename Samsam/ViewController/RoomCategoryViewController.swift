@@ -18,6 +18,16 @@ class RoomCategoryViewController: UIViewController {
         $0.textColor = .black
         return $0
     }(UILabel())
+    
+    private let nextBTN: UIButton = {
+        $0.backgroundColor = .blue
+        $0.setTitle("방 생성하기", for: .normal)
+        $0.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
+        $0.setTitleColor(.black, for: .normal)
+        $0.layer.cornerRadius = 16
+        $0.addTarget(self, action: #selector(tapNextBTN(_sender:)), for: .touchUpInside)
+        return $0
+    }(UIButton())
 
     // MARK: - LifeCycle
     
@@ -37,6 +47,7 @@ class RoomCategoryViewController: UIViewController {
     
     private func layout() {
         view.addSubview(textTitle)
+        view.addSubview(nextBTN)
         
         textTitle.anchor(
             top: view.safeAreaLayoutGuide.topAnchor,
@@ -44,6 +55,15 @@ class RoomCategoryViewController: UIViewController {
             right: view.safeAreaLayoutGuide.rightAnchor,
             paddingTop: 30,
             height: 20
+        )
+        
+        nextBTN.anchor(
+            left: view.safeAreaLayoutGuide.leftAnchor,
+            bottom: view.safeAreaLayoutGuide.bottomAnchor,
+            right: view.safeAreaLayoutGuide.rightAnchor,
+            paddingLeft: 16,
+            paddingRight: 16,
+            height: 50
         )
     }
     
@@ -62,6 +82,11 @@ class RoomCategoryViewController: UIViewController {
         let statement = "시공 과정을 모두 선택해주세요".getColoredText("모두", .red)
         textTitle.text = ""
         textTitle.attributedText = statement
+    }
+    
+    @objc func tapNextBTN(_sender: UIButton) {
+        let vc = RoomCodeViewController()
+        navigationController?.pushViewController(vc, animated: true)
     }
     
 }
