@@ -8,6 +8,10 @@
 import UIKit
 
 class PostingWritingView: UIViewController {
+    
+    // MARK: - Property
+    
+    private let textViewPlaceHolder = "텍스트를 입력하세요"
 
     // MARK: - View
     
@@ -18,8 +22,6 @@ class PostingWritingView: UIViewController {
         $0.textColor = .black
         return $0
     }(UILabel())
-
-    let textViewPlaceHolder = "텍스트를 입력하세요"
     
     lazy var textContent: UITextView = {
         let linestyle = NSMutableParagraphStyle()
