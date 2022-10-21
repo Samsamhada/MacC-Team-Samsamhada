@@ -11,8 +11,8 @@ class RoomCategoryViewController: UIViewController {
     
     // MARK: - View
 
-    private var textTitle: UILabel = {
-        $0.text = "시공 항목을 모두 선택해주세요"
+    private lazy var textTitle: UILabel = {
+        $0.text = ""
         $0.textAlignment = .center
         $0.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
         $0.textColor = .black
@@ -32,6 +32,7 @@ class RoomCategoryViewController: UIViewController {
     private func attribute() {
         view.backgroundColor = .white
         setNavigationTitle()
+        setTitleText()
     }
     
     private func layout() {
@@ -56,6 +57,28 @@ class RoomCategoryViewController: UIViewController {
         navigationController?.navigationBar.prefersLargeTitles = false
         navigationController?.setNavigationBarHidden(false, animated: false)
     }
+    
+    private func setTitleText() {
+        let statement = "시공 과정을 모두 선택해주세요".getColoredText("모두", .red)
+        textTitle.text = ""
+        textTitle.attributedText = statement
+    }
+    
 }
 
+extension NSMutableAttributedString {
+    func setColorForText(textToFind: String, withColor color: UIColor) {
+        let range = self.mutableString.range(of: textToFind, options: .caseInsensitive)
+        self.addAttribute(NSAttributedString.Key.foregroundColor, value: color, range: range)
+    }
+}
+
+extension String {
+    func getColoredText(_ text: String, _ color: UIColor) -> NSMutableAttributedString {
+        let nsString = NSMutableAttributedString(string: self)
+        nsString.setColorForText(textToFind: self, withColor: UIColor.black)
+        nsString.setColorForText(textToFind: text, withColor: color)
+        return nsString
+    }
+}
 
