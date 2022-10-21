@@ -41,14 +41,13 @@ class CategoryCell: UICollectionViewCell {
         $0.translatesAutoresizingMaskIntoConstraints = false
         $0.text = ""
         $0.textAlignment = .center
-        $0.font = UIFont.systemFont(ofSize: 16, weight: .bold)
+        $0.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
         $0.numberOfLines = 0
         return $0
     }(UILabel())
     
     let vStackView: UIStackView = {
         $0.axis = .vertical
-        $0.backgroundColor = .white
         return $0
     }(UIStackView())
     
