@@ -121,7 +121,6 @@ class PostingWritingView: UIViewController {
     private func setupNavigationTitle() {
         let appearance = UINavigationBarAppearance()
         
-        appearance.backgroundColor = .white
         navigationController?.navigationBar.standardAppearance = appearance
         navigationController?.navigationBar.scrollEdgeAppearance = appearance
         navigationController?.navigationBar.backgroundColor = .white
