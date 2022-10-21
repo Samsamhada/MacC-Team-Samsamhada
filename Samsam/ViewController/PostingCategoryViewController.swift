@@ -107,7 +107,6 @@ extension PostingCategoryViewController:  UICollectionViewDelegate, UICollection
         let cell = collectionView.cellForItem(at: indexPath)
         if cell?.isSelected == false {
             cell?.isSelected = true
-            return true
         }
         return true
     }
@@ -116,7 +115,6 @@ extension PostingCategoryViewController:  UICollectionViewDelegate, UICollection
         let cell = collectionView.cellForItem(at: indexPath)
         if cell?.isSelected == true {
             cell?.isSelected = false
-            return true
         }
         return true
     }
