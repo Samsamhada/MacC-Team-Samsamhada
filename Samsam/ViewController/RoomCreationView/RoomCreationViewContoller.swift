@@ -95,7 +95,7 @@ class RoomCreationViewController: UIViewController {
         $0.minimumValue = 0
         $0.wraps = true
         $0.autorepeat = true
-//        $0.addTarget(self, action: #selector(tapStepper), for: .touchUpInside)
+        $0.addTarget(self, action: #selector(tapStepper), for: .touchUpInside)
         return $0
     }(UIStepper())
     
@@ -118,7 +118,7 @@ class RoomCreationViewController: UIViewController {
     
     private func attribute() {
         setNavigationbar()
-        warrantyStepper.addTarget(self, action: #selector(tapStepper), for: .touchUpInside)
+        nextButton.addTarget(self, action: #selector(tapNextButton), for: .touchUpInside)
     }
     
     private func layout() {
@@ -220,6 +220,13 @@ class RoomCreationViewController: UIViewController {
     @objc private func tapStepper() {
         warrantyCount = Int(warrantyStepper.value)
         warrantyText.text = "\(warrantyCount)개월"
+    }
+    
+    // TODO: - 방생성카테고리 뷰로 수정 예정.
+    
+    @objc private func tapNextButton() {
+        let VC = ViewController()
+        navigationController?.pushViewController(VC, animated: true)
     }
 }
 
