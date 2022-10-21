@@ -9,6 +9,8 @@ import UIKit
 
 class RoomCreationViewController: UIViewController {
     
+    // MARK: - Property
+    
     private var warrantyCount = 0
     
     // MARK: - View
@@ -83,7 +85,7 @@ class RoomCreationViewController: UIViewController {
         $0.textColor = .black
         return $0
     }(UILabel())
-//
+
     private var warrantyText: UILabel = {
         $0.text = "0개월"
         $0.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
@@ -110,13 +112,15 @@ class RoomCreationViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
         
         attribute()
         layout()
     }
     
+    // MARK: - Method
+    
     private func attribute() {
+        view.backgroundColor = .white
         setNavigationbar()
         nextButton.addTarget(self, action: #selector(tapNextButton), for: .touchUpInside)
     }
@@ -136,7 +140,6 @@ class RoomCreationViewController: UIViewController {
         warrantyHstack.addArrangedSubview(warrantyText)
         warrantyHstack.addArrangedSubview(warrantyStepper)
         view.addSubview(nextButton)
-        
         
         customerTitle.anchor(
             top: view.safeAreaLayoutGuide.topAnchor,
