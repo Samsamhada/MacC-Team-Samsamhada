@@ -91,7 +91,7 @@ class PostingWritingView: UIViewController {
             paddingTop: 20,
             height: 20
         )
-    
+        
         textContent.anchor(
             left: shadowView.leftAnchor,
             right: shadowView.rightAnchor,
@@ -119,16 +119,16 @@ class PostingWritingView: UIViewController {
     }
     
     private func setupNavigationTitle() {
-            let appearance = UINavigationBarAppearance()
-            
-            appearance.backgroundColor = .white
-            navigationController?.navigationBar.standardAppearance = appearance
-            navigationController?.navigationBar.scrollEdgeAppearance = appearance
-            navigationController?.navigationBar.backgroundColor = .white
-            navigationController?.navigationBar.topItem?.title = "시공 상황 작성"
-            navigationController?.navigationBar.prefersLargeTitles = false
-            navigationController?.setNavigationBarHidden(false, animated: false)
-        }
+        let appearance = UINavigationBarAppearance()
+        
+        appearance.backgroundColor = .white
+        navigationController?.navigationBar.standardAppearance = appearance
+        navigationController?.navigationBar.scrollEdgeAppearance = appearance
+        navigationController?.navigationBar.backgroundColor = .white
+        navigationController?.navigationBar.topItem?.title = "시공 상황 작성"
+        navigationController?.navigationBar.prefersLargeTitles = false
+        navigationController?.setNavigationBarHidden(false, animated: false)
+    }
     
     func hidekeyboardWhenTappedAround() {
         let tap = UITapGestureRecognizer(target: self, action: #selector(endEditingView))
@@ -150,17 +150,17 @@ class PostingWritingView: UIViewController {
     }
     
     @objc private func keyboardWillShow(notification: NSNotification) {
-            if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
-                UIView.animate(withDuration: 0.2, animations: {
-                    self.finalBtn.transform = CGAffineTransform(translationX: 0, y: -keyboardSize.height + 25)
-                })
-            }
-    }
-        
-    @objc private func keyboardWillHide(notification:NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
             UIView.animate(withDuration: 0.2, animations: {
-                self.finalBtn.transform = .identity
+                self.finalbtn.transform = CGAffineTransform(translationX: 0, y: -keyboardSize.height + 25)
             })
+        }
+    }
+    
+    @objc private func keyboardWillHide(notification:NSNotification) {
+        UIView.animate(withDuration: 0.2, animations: {
+            self.finalbtn.transform = .identity
+        })
     }
 }
 
@@ -173,9 +173,9 @@ extension PostingWritingView: UITextViewDelegate {
     }
     
     func textViewDidEndEditing(_ textView: UITextView) {
-            if textView.text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
-                textView.text = textViewPlaceHolder
-                textView.textColor = .lightGray
+        if textView.text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+            textView.text = textViewPlaceHolder
+            textView.textColor = .lightGray
         }
     }
 }
