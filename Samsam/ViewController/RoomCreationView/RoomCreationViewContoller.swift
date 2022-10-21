@@ -129,16 +129,20 @@ class RoomCreationViewController: UIViewController {
         view.addSubview(customerTitle)
         view.addSubview(customerTextField)
         view.addSubview(textUnderLine)
+        
         view.addSubview(startDateHstack)
         startDateHstack.addArrangedSubview(startDateLabel)
         startDateHstack.addArrangedSubview(startDate)
+        
         view.addSubview(endDateHstack)
         endDateHstack.addArrangedSubview(endDateLabel)
         endDateHstack.addArrangedSubview(endDate)
+        
         view.addSubview(warrantyHstack)
         warrantyHstack.addArrangedSubview(warrantyLabel)
         warrantyHstack.addArrangedSubview(warrantyText)
         warrantyHstack.addArrangedSubview(warrantyStepper)
+        
         view.addSubview(nextButton)
         
         customerTitle.anchor(
