@@ -39,6 +39,7 @@ class RoomCreationViewController: UIViewController {
     }(UITextField())
     
     private let startDateHstack: UIStackView = {
+        $0.axis = .horizontal
         return $0
     }(UIStackView())
     
@@ -59,6 +60,7 @@ class RoomCreationViewController: UIViewController {
     }(UIDatePicker())
     
     private let endDateHstack: UIStackView = {
+        $0.axis = .horizontal
         return $0
     }(UIStackView())
     
@@ -79,6 +81,7 @@ class RoomCreationViewController: UIViewController {
     }(UIDatePicker())
     
     private let warrantyHstack: UIStackView = {
+        $0.axis = .horizontal
         return $0
     }(UIStackView())
     
