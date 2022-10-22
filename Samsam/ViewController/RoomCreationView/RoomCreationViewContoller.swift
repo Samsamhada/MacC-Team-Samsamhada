@@ -96,7 +96,7 @@ class RoomCreationViewController: UIViewController {
 
     private var warrantyText: UILabel = {
         $0.text = "0개월"
-        $0.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
+        $0.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
         return $0
     }(UILabel())
     
