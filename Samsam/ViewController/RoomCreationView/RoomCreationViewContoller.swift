@@ -11,7 +11,7 @@ class RoomCreationViewController: UIViewController {
     
     // MARK: - Property
     
-    private lazy var warrantyCount = 0
+    private lazy var warrantyCount = 12
     
     // MARK: - View
     
@@ -95,12 +95,13 @@ class RoomCreationViewController: UIViewController {
     }(UILabel())
 
     private var warrantyText: UILabel = {
-        $0.text = "0개월"
+        $0.text = "12개월"
         $0.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
         return $0
     }(UILabel())
     
     private let warrantyStepper: UIStepper = {
+        $0.value = 12
         $0.maximumValue = 24
         $0.minimumValue = 0
         $0.wraps = true
