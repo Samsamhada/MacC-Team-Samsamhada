@@ -51,7 +51,7 @@ class PostingWritingView: UIViewController {
         return $0
     }(UIView())
     
-    private let finalbtn: UIButton = {
+    private let finalBTN: UIButton = {
             $0.backgroundColor = .blue
             $0.setTitle("작성 완료", for: .normal)
             $0.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
@@ -82,7 +82,7 @@ class PostingWritingView: UIViewController {
         self.view.addSubview(textTitle)
         self.view.addSubview(shadowView)
         self.shadowView.addSubview(textContent)
-        self.view.addSubview(finalbtn)
+        self.view.addSubview(finalBTN)
         
         textTitle.anchor(
             top: view.safeAreaLayoutGuide.topAnchor,
@@ -98,7 +98,7 @@ class PostingWritingView: UIViewController {
             height: 280
         )
         
-        finalbtn.anchor(
+        finalBTN.anchor(
             left: view.safeAreaLayoutGuide.leftAnchor,
             bottom: view.safeAreaLayoutGuide.bottomAnchor,
             right: view.safeAreaLayoutGuide.rightAnchor,
@@ -151,14 +151,14 @@ class PostingWritingView: UIViewController {
     @objc private func keyboardWillShow(notification: NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
             UIView.animate(withDuration: 0.2, animations: {
-                self.finalbtn.transform = CGAffineTransform(translationX: 0, y: -keyboardSize.height + 25)
+                self.finalBTN.transform = CGAffineTransform(translationX: 0, y: -keyboardSize.height + 25)
             })
         }
     }
     
     @objc private func keyboardWillHide(notification:NSNotification) {
         UIView.animate(withDuration: 0.2, animations: {
-            self.finalbtn.transform = .identity
+            self.finalBTN.transform = .identity
         })
     }
 }
