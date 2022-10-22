@@ -30,10 +30,10 @@ class WorkingHistoryViewCell: UICollectionViewCell {
     }(UILabel())
     
     private let workTypeView: UIView = {
-        $0.backgroundColor = .purple
-        $0.layer.cornerRadius = 16
-        return $0
-    }(UIView())
+          $0.backgroundColor = .purple
+          $0.layer.cornerRadius = 16
+          return $0
+      }(UIView())
     
     let workType: UILabel = {
         $0.text = "철거"
@@ -66,12 +66,12 @@ class WorkingHistoryViewCell: UICollectionViewCell {
     
     private func layout() {
         addSubview(vStack)
-        vStack.addArrangedSubview(uiImageView)
-        uiImageView.addSubview(workTypeView)
-        workTypeView.addSubview(workType)
-        vStack.addArrangedSubview(imageDescription)
-        
-        vStack.anchor(
+         vStack.addArrangedSubview(uiImageView)
+         uiImageView.addSubview(workTypeView)
+         workTypeView.addSubview(workType)
+         vStack.addArrangedSubview(imageDescription)
+
+         vStack.anchor(
             top: topAnchor,
             left: leftAnchor,
             bottom: bottomAnchor,
@@ -81,30 +81,30 @@ class WorkingHistoryViewCell: UICollectionViewCell {
         uiImageView.anchor(
             top: vStack.topAnchor,
             left: vStack.leftAnchor,
-            bottom: imageDescription.topAnchor,
-            right: vStack.rightAnchor
-        )
+             bottom: imageDescription.topAnchor,
+             right: vStack.rightAnchor
+         )
 
-        workTypeView.anchor(
-            top: uiImageView.topAnchor,
-            left: uiImageView.leftAnchor,
-            paddingTop: 8,
-            paddingLeft: 8
-        )
+         workTypeView.anchor(
+             top: uiImageView.topAnchor,
+             left: uiImageView.leftAnchor,
+             paddingTop: 8,
+             paddingLeft: 8
+         )
 
-        workType.anchor(
-            top: workTypeView.topAnchor,
-            left: workTypeView.leftAnchor,
-            bottom: workTypeView.bottomAnchor,
-            right: workTypeView.rightAnchor,
-            paddingTop: 8,
-            paddingLeft: 12,
-            paddingBottom: 8,
-            paddingRight: 12
-        )
-        
-        imageDescription.anchor(
-            left: vStack.leftAnchor,
+         workType.anchor(
+             top: workTypeView.topAnchor,
+             left: workTypeView.leftAnchor,
+             bottom: workTypeView.bottomAnchor,
+             right: workTypeView.rightAnchor,
+             paddingTop: 8,
+             paddingLeft: 12,
+             paddingBottom: 8,
+             paddingRight: 12
+         )
+
+         imageDescription.anchor(
+             left: vStack.leftAnchor,
             bottom: vStack.bottomAnchor,
             right: vStack.rightAnchor
         )
