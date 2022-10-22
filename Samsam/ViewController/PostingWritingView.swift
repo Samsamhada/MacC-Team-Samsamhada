@@ -23,7 +23,7 @@ class PostingWritingView: UIViewController {
         return $0
     }(UILabel())
     
-    lazy var textContent: UITextView = {
+    private lazy var textContent: UITextView = {
         let linestyle = NSMutableParagraphStyle()
         linestyle.lineSpacing = 6.0
         $0.backgroundColor = .clear
