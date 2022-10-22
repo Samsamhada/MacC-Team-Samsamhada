@@ -25,7 +25,7 @@ class RoomCategoryViewController: UIViewController {
         $0.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
         $0.setTitleColor(.black, for: .normal)
         $0.layer.cornerRadius = 16
-        $0.addTarget(self, action: #selector(tapNextBTN(_sender:)), for: .touchUpInside)
+        $0.addTarget(self, action: #selector(tapNextBTN), for: .touchUpInside)
         return $0
     }(UIButton())
     
