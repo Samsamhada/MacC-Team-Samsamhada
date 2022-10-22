@@ -35,7 +35,7 @@ class WorkingHistoryViewCell: UICollectionViewCell {
         return $0
     }(UIView())
     
-    private let workType: UILabel = {
+    let workType: UILabel = {
         $0.text = "철거"
         $0.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
         $0.textAlignment = .center
