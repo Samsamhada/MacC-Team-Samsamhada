@@ -22,13 +22,14 @@ class RoomCreationViewController: UIViewController {
     private let customerTitle: UILabel = {
         $0.text = "고객명/주소"
         $0.textAlignment = .left
-        $0.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
+        $0.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
         $0.textColor = .black
         return $0
     }(UILabel())
     
     private let customerTextField: UITextField = {
         $0.placeholder = "고객의 별칭을 작성해주세요."
+        $0.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
         return $0
     }(UITextField())
     
@@ -46,7 +47,7 @@ class RoomCreationViewController: UIViewController {
     private let startDateLabel: UILabel = {
         $0.text = "시공일"
         $0.textAlignment = .left
-        $0.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
+        $0.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
         $0.textColor = .black
         return $0
     }(UILabel())
@@ -67,7 +68,7 @@ class RoomCreationViewController: UIViewController {
     private let endDateLabel: UILabel = {
         $0.text = "준공일"
         $0.textAlignment = .left
-        $0.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
+        $0.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
         $0.textColor = .black
         return $0
     }(UILabel())
@@ -88,14 +89,14 @@ class RoomCreationViewController: UIViewController {
     private let warrantyLabel: UILabel = {
         $0.text = "AS기간"
         $0.textAlignment = .left
-        $0.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
+        $0.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
         $0.textColor = .black
         return $0
     }(UILabel())
 
     private var warrantyText: UILabel = {
         $0.text = "0개월"
-        $0.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
+        $0.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
         return $0
     }(UILabel())
     
@@ -176,7 +177,7 @@ class RoomCreationViewController: UIViewController {
             left: uiView.leftAnchor,
             bottom: textUnderLine.topAnchor,
             right: uiView.rightAnchor,
-            paddingLeft: 2,
+            paddingLeft: 4,
             paddingBottom: 4
         )
         
