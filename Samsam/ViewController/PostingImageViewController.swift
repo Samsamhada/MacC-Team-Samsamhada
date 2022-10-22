@@ -70,7 +70,6 @@ class PostingImageViewController: UIViewController {
     }
     
     private func setNavigationTitle() {
-        let appearance = UINavigationBarAppearance()
         navigationController?.navigationBar.topItem?.title = "시공 상황 작성"
         navigationController?.navigationBar.prefersLargeTitles = false
         navigationController?.setNavigationBarHidden(false, animated: false)
