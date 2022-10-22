@@ -93,7 +93,7 @@ class RoomCategoryViewController: UIViewController {
         navigationController?.navigationBar.backgroundColor = .white
         navigationController?.navigationBar.topItem?.title = "방 생성"
         navigationController?.navigationBar.prefersLargeTitles = false
-        navigationController?.setNavigationBarHidden(false, animated: false)
+        navigationController?.setNavigationBarHidden(false, animated: true)
     }
     
     private func setTitleText() {
