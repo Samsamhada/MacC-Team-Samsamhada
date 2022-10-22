@@ -102,7 +102,7 @@ class RoomCategoryViewController: UIViewController {
         titleText.attributedText = statement
     }
     
-    @objc func tapNextBTN(_sender: UIButton) {
+    @objc func tapNextBTN() {
         let vc = RoomCodeViewController()
         navigationController?.pushViewController(vc, animated: true)
     }
