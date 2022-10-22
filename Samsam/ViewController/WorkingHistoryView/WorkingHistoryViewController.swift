@@ -112,6 +112,7 @@ extension WorkingHistoryViewController: UICollectionViewDataSource, UICollection
         cell.imageDescription.text = "애플, 동아시아 최초 '디벨로퍼 아카데미' 한국서 운영"
         cell.imageDescription.textAlignment = .center
         cell.imageDescription.font = UIFont.systemFont(ofSize: 16, weight: .regular)
+        cell.workType.text = "철거"
         
         let tapContents = UITapGestureRecognizer(target: self, action: #selector(tapContents))
         cell.vStack.addGestureRecognizer(tapContents)
