@@ -68,6 +68,14 @@ class RoomCategoryViewController: UIViewController {
             height: 20
         )
         
+        categoryView.anchor(
+            top: titleText.bottomAnchor,
+            left: view.safeAreaLayoutGuide.leftAnchor,
+            bottom: nextBTN.topAnchor,
+            right: view.safeAreaLayoutGuide.rightAnchor,
+            paddingTop: 20
+        )
+        
         nextBTN.anchor(
             left: view.safeAreaLayoutGuide.leftAnchor,
             bottom: view.safeAreaLayoutGuide.bottomAnchor,
@@ -75,14 +83,6 @@ class RoomCategoryViewController: UIViewController {
             paddingLeft: 16,
             paddingRight: 16,
             height: 50
-        )
-        
-        categoryView.anchor(
-            top: titleText.bottomAnchor,
-            left: view.safeAreaLayoutGuide.leftAnchor,
-            bottom: nextBTN.topAnchor,
-            right: view.safeAreaLayoutGuide.rightAnchor,
-            paddingTop: 20
         )
     }
     
