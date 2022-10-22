@@ -159,7 +159,7 @@ extension RoomCategoryViewController:  UICollectionViewDelegate, UICollectionVie
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let cellWidth =  (view.frame.width - 48)/3
         let cellHeight = 120
-        return CGSize(width: Int(cellWidth), height: Int(cellHeight))
+        return CGSize(width: Int(cellWidth), height: cellHeight)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
