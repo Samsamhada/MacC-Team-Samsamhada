@@ -20,6 +20,18 @@ class PostingImageViewController: UIViewController {
         return $0
     }(UILabel())
     
+    private var photoBTN: UIButton = {
+        $0.clipsToBounds = true
+        $0.layer.cornerRadius = 16
+        $0.setImage(UIImage(named: "CameraBTN"), for: .normal)
+        $0.imageView?.contentMode = .scaleAspectFill
+        $0.setPreferredSymbolConfiguration(.init(pointSize: 100), forImageIn: .normal)
+        $0.tintColor = .white
+        $0.backgroundColor = .lightGray
+        $0.addTarget(self, action: #selector(uploadPhoto), for: .touchUpInside)
+        return $0
+    }(UIButton())
+    
     private let nextBTN: UIButton = {
         $0.backgroundColor = .blue
         $0.setTitle("다음", for: .normal)
@@ -46,17 +58,9 @@ class PostingImageViewController: UIViewController {
     }
     
     private func layout() {
-        self.view.addSubview(nextBTN)
         self.view.addSubview(titleText)
-        
-        nextBTN.anchor(
-            left: view.safeAreaLayoutGuide.leftAnchor,
-            bottom: view.safeAreaLayoutGuide.bottomAnchor,
-            right: view.safeAreaLayoutGuide.rightAnchor,
-            paddingLeft: 16,
-            paddingRight: 16,
-            height: 50
-        )
+        self.view.addSubview(photoBTN)
+        self.view.addSubview(nextBTN)
         
         titleText.anchor(
             top: view.safeAreaLayoutGuide.topAnchor,
@@ -65,6 +69,25 @@ class PostingImageViewController: UIViewController {
             paddingTop: 12,
             paddingLeft: 50,
             paddingRight: 50,
+            height: 50
+        )
+        
+        photoBTN.anchor(
+            top: titleText.bottomAnchor,
+            left: view.safeAreaLayoutGuide.leftAnchor,
+            right: view.safeAreaLayoutGuide.rightAnchor,
+            paddingTop: 16,
+            paddingLeft: 40,
+            paddingRight: 40,
+            height: 235
+        )
+        
+        nextBTN.anchor(
+            left: view.safeAreaLayoutGuide.leftAnchor,
+            bottom: view.safeAreaLayoutGuide.bottomAnchor,
+            right: view.safeAreaLayoutGuide.rightAnchor,
+            paddingLeft: 16,
+            paddingRight: 16,
             height: 50
         )
     }
@@ -79,4 +102,22 @@ class PostingImageViewController: UIViewController {
         let vc = ViewController()
         navigationController?.pushViewController(vc, animated: true)
     }
+    
+    @objc func uploadPhoto() {
+            let imagePicker = UIImagePickerController()
+            imagePicker.sourceType = .photoLibrary
+            imagePicker.delegate = self
+            present(imagePicker, animated: true)
+            print(photoBTN.imageView?.preferredSymbolConfiguration)
+        }
+}
+
+extension PostingImageViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        if let pickedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
+                photoBTN.setImage(pickedImage, for: .normal)
+        }
+        dismiss(animated: true, completion: nil)
+    }
+    
 }
