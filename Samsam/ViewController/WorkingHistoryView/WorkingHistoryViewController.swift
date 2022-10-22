@@ -118,6 +118,9 @@ extension WorkingHistoryViewController: UICollectionViewDataSource, UICollection
         cell.imageDescription.textAlignment = .center
         cell.imageDescription.font = UIFont.systemFont(ofSize: 16, weight: .regular)
         
+        let tapContents = UITapGestureRecognizer(target: self, action: #selector(tapContents))
+        cell.vStack.addGestureRecognizer(tapContents)
+        
         return cell
     }
     
@@ -126,5 +129,10 @@ extension WorkingHistoryViewController: UICollectionViewDataSource, UICollection
         let cellHeight = width / 4 * 3 + 30
         
         return CGSize(width: Int(width), height: Int(cellHeight))
+    }
+    
+    @objc func tapContents() {
+        let detailViewController = DetailViewController()
+        navigationController?.pushViewController(detailViewController, animated: true)
     }
 }

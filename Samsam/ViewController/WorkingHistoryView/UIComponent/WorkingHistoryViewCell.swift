@@ -33,7 +33,7 @@ class WorkingHistoryViewCell: UICollectionViewCell {
         return $0
     }(UIView())
     
-    private let vStack: UIStackView = {
+    let vStack: UIStackView = {
         $0.backgroundColor = .white
         $0.axis = .vertical
         $0.layer.masksToBounds = false
