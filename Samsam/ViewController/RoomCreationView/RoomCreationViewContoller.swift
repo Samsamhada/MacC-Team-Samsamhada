@@ -15,6 +15,10 @@ class RoomCreationViewController: UIViewController {
     
     // MARK: - View
     
+    private let uiView: UIView = {
+        return $0
+    }(UIView())
+    
     private let customerTitle: UILabel = {
         $0.text = "고객명/주소"
         $0.textAlignment = .left
@@ -126,29 +130,30 @@ class RoomCreationViewController: UIViewController {
     }
     
     private func layout() {
-        view.addSubview(customerTitle)
-        view.addSubview(customerTextField)
-        view.addSubview(textUnderLine)
+        view.addSubview(uiView)
+        uiView.addSubview(customerTitle)
+        uiView.addSubview(customerTextField)
+        uiView.addSubview(textUnderLine)
         
-        view.addSubview(startDateHstack)
+        uiView.addSubview(startDateHstack)
         startDateHstack.addArrangedSubview(startDateLabel)
         startDateHstack.addArrangedSubview(startDate)
         
-        view.addSubview(endDateHstack)
+        uiView.addSubview(endDateHstack)
         endDateHstack.addArrangedSubview(endDateLabel)
         endDateHstack.addArrangedSubview(endDate)
         
-        view.addSubview(warrantyHstack)
+        uiView.addSubview(warrantyHstack)
         warrantyHstack.addArrangedSubview(warrantyLabel)
         warrantyHstack.addArrangedSubview(warrantyText)
         warrantyHstack.addArrangedSubview(warrantyStepper)
         
-        view.addSubview(nextButton)
+        uiView.addSubview(nextButton)
         
-        customerTitle.anchor(
+        uiView.anchor(
             top: view.safeAreaLayoutGuide.topAnchor,
             left: view.safeAreaLayoutGuide.leftAnchor,
-            bottom: customerTextField.topAnchor,
+            bottom: view.safeAreaLayoutGuide.bottomAnchor,
             right: view.safeAreaLayoutGuide.rightAnchor,
             paddingTop: 40,
             paddingLeft: 16,
@@ -156,47 +161,46 @@ class RoomCreationViewController: UIViewController {
             paddingRight: 16
         )
         
+        customerTitle.anchor(
+            top: uiView.topAnchor,
+            left: uiView.leftAnchor,
+            bottom: customerTextField.topAnchor,
+            right: uiView.rightAnchor,
+            paddingBottom: 16
+        )
+        
         customerTextField.anchor(
-            left: view.safeAreaLayoutGuide.leftAnchor,
-            bottom: startDateHstack.topAnchor,
-            right: view.safeAreaLayoutGuide.rightAnchor,
-            paddingLeft: 18,
-            paddingBottom: 20,
-            paddingRight: 16
+            left: uiView.leftAnchor,
+            bottom: textUnderLine.topAnchor,
+            right: uiView.rightAnchor,
+            paddingLeft: 2,
+            paddingBottom: 4
         )
         
         textUnderLine.anchor(
-            left: view.safeAreaLayoutGuide.leftAnchor,
+            left: uiView.leftAnchor,
             bottom: startDateHstack.topAnchor,
-            right: view.safeAreaLayoutGuide.rightAnchor,
-            paddingLeft: 16,
-            paddingBottom: 20,
-            paddingRight: 16
+            right: uiView.rightAnchor,
+            paddingBottom: 20
         )
         
         startDateHstack.anchor(
-            left: view.safeAreaLayoutGuide.leftAnchor,
+            left: uiView.leftAnchor,
             bottom: endDateHstack.topAnchor,
-            right: view.safeAreaLayoutGuide.rightAnchor,
-            paddingLeft: 16,
-            paddingBottom: 20,
-            paddingRight: 16
+            right: uiView.rightAnchor,
+            paddingBottom: 20
         )
 
         endDateHstack.anchor(
-            left: view.safeAreaLayoutGuide.leftAnchor,
+            left: uiView.leftAnchor,
             bottom: warrantyHstack.topAnchor,
-            right: view.safeAreaLayoutGuide.rightAnchor,
-            paddingLeft: 16,
-            paddingBottom: 20,
-            paddingRight: 16
+            right: uiView.rightAnchor,
+            paddingBottom: 20
         )
         
         warrantyHstack.anchor(
-            left: view.safeAreaLayoutGuide.leftAnchor,
-            right: view.safeAreaLayoutGuide.rightAnchor,
-            paddingLeft: 16,
-            paddingRight: 16
+            left: uiView.leftAnchor,
+            right: uiView.rightAnchor
         )
         
         warrantyText.anchor(
@@ -205,12 +209,9 @@ class RoomCreationViewController: UIViewController {
         )
 
         nextButton.anchor(
-            left: view.safeAreaLayoutGuide.leftAnchor,
-            bottom: view.safeAreaLayoutGuide.bottomAnchor,
-            right: view.safeAreaLayoutGuide.rightAnchor,
-            paddingLeft: 16,
-            paddingBottom: 16,
-            paddingRight: 16,
+            left: uiView.leftAnchor,
+            bottom: uiView.bottomAnchor,
+            right: uiView.rightAnchor,
             height: 50
         )
     }
@@ -236,4 +237,3 @@ class RoomCreationViewController: UIViewController {
         navigationController?.pushViewController(VC, animated: true)
     }
 }
-
