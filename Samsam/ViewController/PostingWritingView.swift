@@ -57,7 +57,7 @@ class PostingWritingView: UIViewController {
             $0.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
             $0.setTitleColor(.black, for: .normal)
             $0.layer.cornerRadius = 16
-            $0.addTarget(self, action: #selector(tapNextBTN), for: .touchUpInside)
+            $0.addTarget(self, action: #selector(tapNextbtn(_sender:)), for: .touchUpInside)
             return $0
         }(UIButton())
     
@@ -144,7 +144,7 @@ class PostingWritingView: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
-    @objc func tapNextBTN() {
+    @objc func tapNextbtn(_sender: UIButton) {
         navigationController?.popToRootViewController(animated: true)
     }
     
