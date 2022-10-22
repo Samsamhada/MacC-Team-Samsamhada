@@ -26,7 +26,7 @@ class PostingImageViewController: UIViewController {
         $0.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
         $0.setTitleColor(.black, for: .normal)
         $0.layer.cornerRadius = 16
-        $0.addTarget(self, action: #selector(tapNextBTN(_sender:)), for: .touchUpInside)
+        $0.addTarget(self, action: #selector(tapNextBTN), for: .touchUpInside)
         return $0
     }(UIButton())
     
@@ -71,16 +71,12 @@ class PostingImageViewController: UIViewController {
     
     private func setNavigationTitle() {
         let appearance = UINavigationBarAppearance()
-        appearance.backgroundColor = .white
-        navigationController?.navigationBar.standardAppearance = appearance
-        navigationController?.navigationBar.scrollEdgeAppearance = appearance
-        navigationController?.navigationBar.backgroundColor = .white
         navigationController?.navigationBar.topItem?.title = "시공 상황 작성"
         navigationController?.navigationBar.prefersLargeTitles = false
         navigationController?.setNavigationBarHidden(false, animated: false)
     }
     
-    @objc func tapNextBTN(_sender: UIButton) {
+    @objc func tapNextBTN() {
         let vc = ViewController()
         navigationController?.pushViewController(vc, animated: true)
     }
