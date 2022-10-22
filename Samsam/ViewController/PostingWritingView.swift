@@ -25,13 +25,13 @@ class PostingWritingView: UIViewController {
     
     private lazy var textContent: UITextView = {
         let linestyle = NSMutableParagraphStyle()
-        linestyle.lineSpacing = 6.0
+        linestyle.lineSpacing = 4.0
+        $0.typingAttributes = [.paragraphStyle: linestyle]
         $0.backgroundColor = .clear
         $0.text = textViewPlaceHolder
         $0.textColor = .lightGray
         $0.font = UIFont.systemFont(ofSize: 18, weight: .regular)
         $0.textAlignment = .natural
-        $0.typingAttributes = [.paragraphStyle: linestyle]
         $0.textContainerInset = UIEdgeInsets(top: 17, left: 12, bottom: 17, right: 12)
         $0.layer.masksToBounds = true
         $0.layer.cornerRadius = 10
