@@ -74,6 +74,8 @@ extension RoomListViewController: UICollectionViewDataSource, UICollectionViewDe
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if indexPath.section == 0 {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RoomCreationCell.identifier, for: indexPath) as! RoomCreationCell
+
+            cell.creationButton.addTarget(self, action: #selector(tapRoomCreationButton), for: .touchUpInside)
             return cell
         }
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RoomListCell.identifier, for: indexPath) as! RoomListCell
@@ -89,5 +91,11 @@ extension RoomListViewController: UICollectionViewDataSource, UICollectionViewDe
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 0)
+    }
+    
+    @objc func tapRoomCreationButton() {
+        let roomCreationViewController = RoomCreationViewController()
+        roomCreationViewController.modalPresentationStyle = .fullScreen
+        present(roomCreationViewController, animated:  true, completion: nil)
     }
 }
