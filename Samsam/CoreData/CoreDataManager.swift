@@ -123,6 +123,28 @@ class CoreDataManager {
         }
     }
     
+    func createPostingData(roomID: Int, categoryID: Int, explanation: String) {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let context = appDelegate.persistentContainer.viewContext
+        
+        let postingEntity = NSEntityDescription.entity(forEntityName: "PostingEntity", in: context)
+        
+        if let postingEntity = postingEntity {
+            let posting = NSManagedObject(entity: postingEntity, insertInto: context)
+            posting.setValue(coreDataManager.countData(dataType: "posting"), forKey: "postingID")
+            posting.setValue(roomID, forKey: "roomID")
+            posting.setValue(categoryID, forKey: "categoryID")
+            posting.setValue(explanation, forKey: "explanation")
+            posting.setValue(Date(), forKey: "createDate")
+            
+            do {
+                try context.save()
+            } catch {
+                print(error.localizedDescription)
+            }
+        }
+    }
+    
     
     // MARK: - Update Method
     
