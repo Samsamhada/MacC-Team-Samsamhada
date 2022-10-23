@@ -283,6 +283,24 @@ class CoreDataManager {
         }
     }
     
+    func loadPhotoData(postingID: Int) {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let context = appDelegate.persistentContainer.viewContext
+        
+        photos = [PhotoEntity]()
+        
+        do {
+            let photo = try context.fetch(PhotoEntity.fetchRequest()) as! [PhotoEntity]
+            
+            photo.forEach {
+                if $0.postingID == postingID {
+                    photos.append($0)
+                }
+            }
+        } catch {
+            print(error.localizedDescription)
+        }
+    }
     
     // MARK: - Count Method
     
