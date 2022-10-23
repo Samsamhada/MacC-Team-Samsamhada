@@ -304,4 +304,26 @@ class CoreDataManager {
     
     // MARK: - Count Method
     
+    func countData(dataType: String) -> Int {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let context = appDelegate.persistentContainer.viewContext
+        
+        do {
+            switch(dataType) {
+            case "room":
+                return try context.fetch(RoomEntity.fetchRequest()).count
+            case "workingStatus":
+                return try context.fetch(WorkingStatusEntity.fetchRequest()).count
+            case "posting":
+                return try context.fetch(PostingEntity.fetchRequest()).count
+            case "photo":
+                return try context.fetch(PhotoEntity.fetchRequest()).count
+            default:
+                return 0
+            }
+        } catch {
+            print(error.localizedDescription)
+            return 0
+        }
+    }
 }
