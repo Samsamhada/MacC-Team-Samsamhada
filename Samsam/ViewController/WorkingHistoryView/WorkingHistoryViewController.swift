@@ -38,9 +38,7 @@ class WorkingHistoryViewController: UIViewController {
     
     private func attribute() {
         view.backgroundColor = .white
-        
-        navigationController?.navigationBar.topItem?.title = "포항공대 포스빌"
-        navigationController?.navigationBar.prefersLargeTitles = false
+        setNavigationBar()
         
         workingHistoryView.delegate = self
         workingHistoryView.dataSource = self
@@ -72,8 +70,15 @@ class WorkingHistoryViewController: UIViewController {
         )
     }
     
-    // TODO: - postingCategoryView를 FullScreen모달로 띄우는 기능. 추후 수정
+    // MARK: - Method
     
+    private func setNavigationBar() {
+        navigationItem.title = "포항공대 포스빌"
+        navigationController?.navigationBar.prefersLargeTitles = false
+    }
+    
+    // TODO: - postingCategoryView를 FullScreen모달로 띄우는 기능. 추후 수정
+
     @objc func tapWritingButton() {
         let postingCategoryView = ViewController()
         postingCategoryView.modalPresentationStyle = .fullScreen
