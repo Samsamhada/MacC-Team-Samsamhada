@@ -29,6 +29,7 @@
 		26FEC1E02902E6F2006C410B /* PhotoEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26FEC1D62902E6F2006C410B /* PhotoEntity+CoreDataProperties.swift */; };
 		26FEC1E12902E6F2006C410B /* RoomEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26FEC1D72902E6F2006C410B /* RoomEntity+CoreDataClass.swift */; };
 		26FEC1E22902E6F2006C410B /* RoomEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26FEC1D82902E6F2006C410B /* RoomEntity+CoreDataProperties.swift */; };
+		26FEC1E4290466F2006C410B /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26FEC1E3290466F2006C410B /* CoreDataManager.swift */; };
 		4369690C28FE422100DEA89F /* PostingImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4369690B28FE422100DEA89F /* PostingImageViewController.swift */; };
 		4386FB022901353B00314936 /* RoomCategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4386FB012901353B00314936 /* RoomCategoryViewController.swift */; };
 		43BD591A29028BD70063EB4F /* RoomCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43BD591929028BD70063EB4F /* RoomCodeViewController.swift */; };
@@ -73,6 +74,7 @@
 		26FEC1D62902E6F2006C410B /* PhotoEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotoEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		26FEC1D72902E6F2006C410B /* RoomEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RoomEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
 		26FEC1D82902E6F2006C410B /* RoomEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RoomEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		26FEC1E3290466F2006C410B /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		4369690B28FE422100DEA89F /* PostingImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostingImageViewController.swift; sourceTree = "<group>"; };
 		4386FB012901353B00314936 /* RoomCategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomCategoryViewController.swift; sourceTree = "<group>"; };
 		43BD591929028BD70063EB4F /* RoomCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomCodeViewController.swift; sourceTree = "<group>"; };
@@ -150,6 +152,7 @@
 				26FEC1D72902E6F2006C410B /* RoomEntity+CoreDataClass.swift */,
 				26FEC1D82902E6F2006C410B /* RoomEntity+CoreDataProperties.swift */,
 				26FEC1B72902D85A006C410B /* DataTable.xcdatamodeld */,
+				26FEC1E3290466F2006C410B /* CoreDataManager.swift */,
 			);
 			path = CoreData;
 			sourceTree = "<group>";
@@ -335,6 +338,7 @@
 				98C0D07228FD02E400E0E439 /* WorkingHistoryViewCell.swift in Sources */,
 				26E3749828FD2D0700997DA7 /* RoomListCell.swift in Sources */,
 				26FEC1B92902D85A006C410B /* DataTable.xcdatamodeld in Sources */,
+				26FEC1E4290466F2006C410B /* CoreDataManager.swift in Sources */,
 				98C0D06428FCE99300E0E439 /* JSON.swift in Sources */,
 				26FEC1DA2902E6F2006C410B /* CategoryEntity+CoreDataProperties.swift in Sources */,
 				26FEC1E12902E6F2006C410B /* RoomEntity+CoreDataClass.swift in Sources */,
