@@ -18,7 +18,6 @@ extension RoomEntity {
 
     @NSManaged public var clientName: String?
     @NSManaged public var endDate: Date?
-    @NSManaged public var inviteCode: String?
     @NSManaged public var roomID: Int32
     @NSManaged public var startDate: Date?
     @NSManaged public var warrantyTime: Int32
