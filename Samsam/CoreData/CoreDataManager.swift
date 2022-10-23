@@ -264,6 +264,25 @@ class CoreDataManager {
         }
     }
     
+    func loadPostingData(roomID: Int) {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let context = appDelegate.persistentContainer.viewContext
+        
+        postings = [PostingEntity]()
+        
+        do {
+            let posting = try context.fetch(PostingEntity.fetchRequest()) as! [PostingEntity]
+            
+            posting.forEach {
+                if $0.roomID == roomID {
+                    postings.append($0)
+                }
+            }
+        } catch {
+            print(error.localizedDescription)
+        }
+    }
+    
     
     // MARK: - Count Method
     
