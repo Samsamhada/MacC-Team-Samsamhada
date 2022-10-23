@@ -69,6 +69,13 @@ class CoreDataManager {
     
     // MARK: - Property
     
+    @Published var rooms = [RoomEntity]()
+    @Published var workingStatuses = [WorkingStatusEntity]()
+    @Published var postings = [PostingEntity]()
+    @Published var photos = [PhotoEntity]()
+    
+    @Published var oneRoom: RoomEntity?
+    
     // MARK: - Save Method
     
     
