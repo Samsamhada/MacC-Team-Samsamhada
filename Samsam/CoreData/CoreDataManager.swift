@@ -228,6 +228,23 @@ class CoreDataManager {
         }
     }
     
+    func loadOneRoomData(roomID: Int) {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let context = appDelegate.persistentContainer.viewContext
+        
+        do {
+            let room = try context.fetch(RoomEntity.fetchRequest()) as! [RoomEntity]
+            
+            room.forEach {
+                if $0.roomID == roomID {
+                    oneRoom = $0
+                }
+            }
+        } catch {
+            print(error.localizedDescription)
+        }
+    }
+    
     
     // MARK: - Count Method
     
