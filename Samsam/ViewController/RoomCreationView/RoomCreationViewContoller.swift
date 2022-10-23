@@ -24,16 +24,13 @@ class RoomCreationViewController: UIViewController {
         return $0
     }(UIStackView())
     
-    private let closeButton: UILabel = {
-        let attributedString = NSMutableAttributedString(string: "")
-        let imageTransition = NSTextAttachment()
-        imageTransition.image = UIImage(systemName: "xmark")
-        attributedString.append(NSMutableAttributedString(attachment: imageTransition))
-        $0.attributedText = attributedString
+    private let closeButton: UIButton = {
+        $0.setImage(UIImage(systemName: "xmark"), for: .normal)
+        $0.contentHorizontalAlignment = .left
         $0.tintColor = .black
         $0.setWidth(width: (UIScreen.main.bounds.width - 32) / 3)
         return $0
-    }(UILabel())
+    }(UIButton())
     
     private let viewTitle: UILabel = {
         $0.text = "방 생성"
@@ -160,7 +157,7 @@ class RoomCreationViewController: UIViewController {
     
     private func attribute() {
         view.backgroundColor = .white
-        setCloseButton()
+        closeButton.addTarget(self, action: #selector(tapCloseButton), for: .touchUpInside)
         nextButton.addTarget(self, action: #selector(tapNextButton), for: .touchUpInside)
     }
     
@@ -262,12 +259,6 @@ class RoomCreationViewController: UIViewController {
             right: uiView.rightAnchor,
             height: 50
         )
-    }
-    
-    private func setCloseButton() {
-        let tapCloseButton = UITapGestureRecognizer(target: self, action: #selector(tapCloseButton))
-        self.closeButton.isUserInteractionEnabled = true
-        self.closeButton.addGestureRecognizer(tapCloseButton)
     }
     
     @objc private func tapStepper() {
