@@ -19,6 +19,33 @@ class RoomCreationViewController: UIViewController {
         return $0
     }(UIView())
     
+    private let titleHstack: UIStackView = {
+        $0.axis = .horizontal
+        return $0
+    }(UIStackView())
+    
+    private let closeButton: UIButton = {
+        $0.setImage(UIImage(systemName: "xmark"), for: .normal)
+        $0.contentHorizontalAlignment = .left
+        $0.tintColor = .black
+        $0.setWidth(width: (UIScreen.main.bounds.width - 32) / 3)
+        return $0
+    }(UIButton())
+    
+    private let viewTitle: UILabel = {
+        $0.text = "방 생성"
+        $0.textColor = .black
+        $0.textAlignment = .center
+        $0.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
+        $0.setWidth(width: (UIScreen.main.bounds.width - 32) / 3)
+        return $0
+    }(UILabel())
+    
+    private let spacer: UIView = {
+        $0.setWidth(width: (UIScreen.main.bounds.width - 32) / 3)
+        return $0
+    }(UIView())
+    
     private let customerTitle: UILabel = {
         $0.text = "고객명/주소"
         $0.textAlignment = .left
@@ -130,12 +157,18 @@ class RoomCreationViewController: UIViewController {
     
     private func attribute() {
         view.backgroundColor = .white
-        setNavigationbar()
+        closeButton.addTarget(self, action: #selector(tapCloseButton), for: .touchUpInside)
         nextButton.addTarget(self, action: #selector(tapNextButton), for: .touchUpInside)
     }
     
     private func layout() {
         view.addSubview(uiView)
+        
+        uiView.addSubview(titleHstack)
+        titleHstack.addArrangedSubview(closeButton)
+        titleHstack.addArrangedSubview(viewTitle)
+        titleHstack.addArrangedSubview(spacer)
+        
         uiView.addSubview(customerTitle)
         uiView.addSubview(customerTextField)
         uiView.addSubview(textUnderLine)
@@ -160,14 +193,21 @@ class RoomCreationViewController: UIViewController {
             left: view.safeAreaLayoutGuide.leftAnchor,
             bottom: view.safeAreaLayoutGuide.bottomAnchor,
             right: view.safeAreaLayoutGuide.rightAnchor,
-            paddingTop: 40,
+            paddingTop: 10,
             paddingLeft: 16,
             paddingBottom: 16,
             paddingRight: 16
         )
         
-        customerTitle.anchor(
+        titleHstack.anchor(
             top: uiView.topAnchor,
+            left: uiView.leftAnchor,
+            bottom: customerTitle.topAnchor,
+            right: uiView.rightAnchor,
+            paddingBottom: 40
+        )
+        
+        customerTitle.anchor(
             left: uiView.leftAnchor,
             bottom: customerTextField.topAnchor,
             right: uiView.rightAnchor,
@@ -221,15 +261,6 @@ class RoomCreationViewController: UIViewController {
         )
     }
     
-    private func setNavigationbar() {
-        let appearance = UINavigationBarAppearance()
-        navigationController?.navigationBar.standardAppearance = appearance
-        navigationController?.navigationBar.scrollEdgeAppearance = appearance
-        navigationController?.navigationBar.topItem?.title = "방 생성"
-        navigationController?.navigationBar.prefersLargeTitles = false
-        navigationController?.setNavigationBarHidden(false, animated: true)
-    }
-    
     @objc private func tapStepper() {
         warrantyCount = Int(warrantyStepper.value)
         warrantyText.text = "\(warrantyCount)개월"
@@ -240,5 +271,9 @@ class RoomCreationViewController: UIViewController {
     @objc private func tapNextButton() {
         let VC = ViewController()
         navigationController?.pushViewController(VC, animated: true)
+    }
+    
+    @objc private func tapCloseButton() {
+        self.dismiss(animated: true)
     }
 }

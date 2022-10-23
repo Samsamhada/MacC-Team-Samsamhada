@@ -15,7 +15,7 @@ class RoomCreationCell: UICollectionViewCell {
     
     // MARK: - View
     
-    private let creationButton: UIButton = {
+    let creationButton: UIButton = {
         $0.setImage(UIImage(systemName: "plus"), for: .normal)
         $0.tintColor = .black
         $0.setTitle("고객 추가하기", for: .normal)
