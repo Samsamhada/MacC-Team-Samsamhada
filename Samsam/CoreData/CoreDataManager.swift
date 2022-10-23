@@ -167,6 +167,22 @@ class CoreDataManager {
     
     // MARK: - Update Method
     
+    func updateRoomData(room: RoomEntity, clientName: String, startDate: Date, endDate: Date, warrantyTime: Int) {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let context = appDelegate.persistentContainer.viewContext
+        
+        room.clientName = clientName
+        room.startDate = startDate
+        room.endDate = endDate
+        room.warrantyTime = Int32(warrantyTime)
+        
+        do {
+            try context.save()
+        } catch {
+            print(error.localizedDescription)
+        }
+    }
+    
     
     // MARK: - Load Method
     
