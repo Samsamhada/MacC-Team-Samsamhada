@@ -183,6 +183,19 @@ class CoreDataManager {
         }
     }
     
+    func updateWorkingStatusData(workingStatus: WorkingStatusEntity, status: Int) {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let context = appDelegate.persistentContainer.viewContext
+        
+        workingStatus.status = Int32(status)
+        
+        do {
+            try context.save()
+        } catch {
+            print(error.localizedDescription)
+        }
+    }
+    
     
     // MARK: - Load Method
     
