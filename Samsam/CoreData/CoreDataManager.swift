@@ -145,6 +145,25 @@ class CoreDataManager {
         }
     }
     
+    func createPhotoData(postingID: Int, photoPath: Data) {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let context = appDelegate.persistentContainer.viewContext
+        
+        let photoEntity = NSEntityDescription.entity(forEntityName: "PhotoEntity", in: context)
+        
+        if let photoEntity = photoEntity {
+            let photo = NSManagedObject(entity: photoEntity, insertInto: context)
+            photo.setValue(coreDataManager.countData(dataType: "photo"), forKey: "photoID")
+            photo.setValue(postingID, forKey: "postingID")
+            photo.setValue(photoPath, forKey: "photoPath")
+            
+            do {
+                try context.save()
+            } catch {
+                print(error.localizedDescription)
+            }
+        }
+    }
     
     // MARK: - Update Method
     
