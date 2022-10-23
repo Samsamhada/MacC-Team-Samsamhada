@@ -20,7 +20,7 @@ class RoomListCell: UICollectionViewCell {
         return $0
     }(UIStackView())
     
-    private let roomStack: UIStackView = {
+    let roomStack: UIStackView = {
         $0.axis = .horizontal
         $0.backgroundColor = .white
         $0.layer.cornerRadius = 16

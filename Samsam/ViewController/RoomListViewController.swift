@@ -45,7 +45,9 @@ class RoomListViewController: UIViewController {
     }
     
     private func setupNavigationTitle() {
-        navigationController?.navigationBar.topItem?.title = "앱 이름"
+        let backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
+        navigationItem.backBarButtonItem = backBarButtonItem
+        navigationItem.title = "앱 이름"
         navigationController?.navigationBar.prefersLargeTitles = false
         navigationController?.setNavigationBarHidden(false, animated: true)
     }
@@ -79,6 +81,10 @@ extension RoomListViewController: UICollectionViewDataSource, UICollectionViewDe
             return cell
         }
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RoomListCell.identifier, for: indexPath) as! RoomListCell
+        
+        let tapRoomListButton = UITapGestureRecognizer(target: self, action: #selector(tapRoomListButton))
+        cell.roomStack.isUserInteractionEnabled = true
+        cell.roomStack.addGestureRecognizer(tapRoomListButton)
         return cell
     }
     
@@ -97,5 +103,10 @@ extension RoomListViewController: UICollectionViewDataSource, UICollectionViewDe
         let roomCreationViewController = RoomCreationViewController()
         roomCreationViewController.modalPresentationStyle = .fullScreen
         present(roomCreationViewController, animated:  true, completion: nil)
+    }
+    
+    @objc func tapRoomListButton() {
+        let workingHistoryViewController = WorkingHistoryViewController()
+        navigationController?.pushViewController(workingHistoryViewController, animated: true)
     }
 }
