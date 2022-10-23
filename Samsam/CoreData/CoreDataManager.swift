@@ -245,6 +245,25 @@ class CoreDataManager {
         }
     }
     
+    func loadWorkingStatusData(roomID: Int) {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let context = appDelegate.persistentContainer.viewContext
+        
+        workingStatuses = [WorkingStatusEntity]()
+        
+        do {
+            let workingStatus = try context.fetch(WorkingStatusEntity.fetchRequest()) as! [WorkingStatusEntity]
+            
+            workingStatus.forEach {
+                if $0.roomID == roomID {
+                    workingStatuses.append($0)
+                }
+            }
+        } catch {
+            print(error.localizedDescription)
+        }
+    }
+    
     
     // MARK: - Count Method
     
