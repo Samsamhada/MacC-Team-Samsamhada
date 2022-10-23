@@ -76,7 +76,30 @@ class CoreDataManager {
     
     @Published var oneRoom: RoomEntity?
     
-    // MARK: - Save Method
+    // MARK: - Create Method
+    
+    func createRoomData(clientName: String, startDate: Date, endDate: Date, warrantyTime: Int) {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let context = appDelegate.persistentContainer.viewContext
+        
+        let roomEntity = NSEntityDescription.entity(forEntityName: "RoomEntity", in: context)
+        
+        if let roomEntity = roomEntity {
+            let room = NSManagedObject(entity: roomEntity, insertInto: context)
+            room.setValue(coreDataManager.countData(dataType: "room"), forKey: "roomID")
+            room.setValue(clientName, forKey: "clientName")
+            room.setValue(startDate, forKey: "startDate")
+            room.setValue(endDate, forKey: "endDate")
+            room.setValue(warrantyTime, forKey: "warrantyTime")
+            // 방상태 어떻게 하더라?
+            
+            do {
+                try context.save()
+            } catch {
+                print(error.localizedDescription)
+            }
+        }
+    }
     
     
     // MARK: - Update Method
