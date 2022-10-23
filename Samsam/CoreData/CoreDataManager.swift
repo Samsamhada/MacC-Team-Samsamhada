@@ -101,6 +101,28 @@ class CoreDataManager {
         }
     }
     
+    func createWorkingStatusData(roomID: Int, categoryID: Int) {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let context = appDelegate.persistentContainer.viewContext
+        
+        let workingStatusEntity = NSEntityDescription.entity(forEntityName: "WorkingStatusEntity", in: context)
+        
+        if let workingStatusEntity = workingStatusEntity {
+            let workingStatus = NSManagedObject(entity: workingStatusEntity, insertInto: context)
+            workingStatus.setValue(coreDataManager.countData(dataType: "workingStatus"), forKey: "statusID")
+            workingStatus.setValue(roomID, forKey: "roomID")
+            workingStatus.setValue(categoryID, forKey: "categoryID")
+            workingStatus.setValue(0, forKey: "status")
+            // 0: 시작안함, 1: 진행중, 2: 완료, 3: 삭제
+            
+            do {
+                try context.save()
+            } catch {
+                print(error.localizedDescription)
+            }
+        }
+    }
+    
     
     // MARK: - Update Method
     
