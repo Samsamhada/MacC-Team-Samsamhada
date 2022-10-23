@@ -196,6 +196,18 @@ class CoreDataManager {
         }
     }
     
+    func updatePostingData(posting: PostingEntity, explanation: String) {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let context = appDelegate.persistentContainer.viewContext
+        
+        posting.explanation = explanation
+        
+        do {
+            try context.save()
+        } catch {
+            print(error.localizedDescription)
+        }
+    }
     
     // MARK: - Load Method
     
