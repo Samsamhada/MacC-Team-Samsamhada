@@ -65,6 +65,8 @@ enum Category: Int {
     }
 }
 
+let coreDataManager = CoreDataManager()
+
 class CoreDataManager {
     
     // MARK: - Property
