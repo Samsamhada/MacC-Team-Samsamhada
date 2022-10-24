@@ -25,7 +25,7 @@ class PostingImageViewController: UIViewController {
         $0.layer.cornerRadius = 16
         $0.setImage(UIImage(named: "CameraBTN"), for: .normal)
         $0.imageView?.contentMode = .scaleAspectFill
-        $0.setPreferredSymbolConfiguration(.init(pointSize: 100), forImageIn: .normal)
+        $0.setPreferredSymbolConfiguration(.init(pointSize: 10), forImageIn: .normal)
         $0.tintColor = .white
         $0.backgroundColor = .lightGray
         $0.addTarget(self, action: #selector(uploadPhoto), for: .touchUpInside)
