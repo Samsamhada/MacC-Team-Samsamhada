@@ -68,6 +68,7 @@ class PhoneNumViewController: UIViewController {
     
     private func attribute() {
         view.backgroundColor = .white
+        submitButton.addTarget(self, action: #selector(tapSubmitButton), for: .touchUpInside)
     }
     
     private func layout() {
@@ -128,5 +129,10 @@ class PhoneNumViewController: UIViewController {
             bottom: uiView.bottomAnchor,
             right: uiView.rightAnchor
         )
+    }
+    
+    @objc private func tapSubmitButton() {
+        let roomListViewController = RoomListViewController()
+        navigationController?.pushViewController(roomListViewController, animated: true)
     }
 }
