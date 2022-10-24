@@ -126,8 +126,9 @@ class PhoneNumViewController: UIViewController {
         
         submitButton.anchor(
             left: uiView.leftAnchor,
-            bottom: uiView.bottomAnchor,
-            right: uiView.rightAnchor
+            bottom: view.keyboardLayoutGuide.topAnchor,
+            right: uiView.rightAnchor,
+            paddingBottom: 20
         )
     }
     
