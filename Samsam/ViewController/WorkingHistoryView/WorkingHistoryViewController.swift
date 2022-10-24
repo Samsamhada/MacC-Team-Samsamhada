@@ -115,9 +115,8 @@ extension WorkingHistoryViewController: UICollectionViewDataSource, UICollection
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: WorkingHistoryViewCell.identifier, for: indexPath) as! WorkingHistoryViewCell
         cell.imageDescription.text = "애플, 동아시아 최초 '디벨로퍼 아카데미' 한국서 운영"
-        cell.imageDescription.textAlignment = .center
-        cell.imageDescription.font = UIFont.systemFont(ofSize: 16, weight: .regular)
-        
+        cell.workType.text = "철거"
+
         return cell
     }
     
@@ -126,5 +125,10 @@ extension WorkingHistoryViewController: UICollectionViewDataSource, UICollection
         let cellHeight = width / 4 * 3 + 30
         
         return CGSize(width: Int(width), height: Int(cellHeight))
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let detailViewController = DetailViewController()
+        navigationController?.pushViewController(detailViewController, animated: true)
     }
 }

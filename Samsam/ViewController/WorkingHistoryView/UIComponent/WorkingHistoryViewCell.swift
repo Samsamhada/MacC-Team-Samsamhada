@@ -29,9 +29,19 @@ class WorkingHistoryViewCell: UICollectionViewCell {
         return $0
     }(UILabel())
     
-    private let workType: UIView = {
+    private let workTypeView: UIView = {
+        $0.backgroundColor = .purple
+        $0.layer.cornerRadius = 16
         return $0
     }(UIView())
+    
+    let workType: UILabel = {
+        $0.text = "철거"
+        $0.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
+        $0.textAlignment = .center
+        $0.textColor = .white
+        return $0
+    }(UILabel())
     
     private let vStack: UIStackView = {
         $0.backgroundColor = .white
@@ -45,6 +55,8 @@ class WorkingHistoryViewCell: UICollectionViewCell {
         return $0
     }(UIStackView())
     
+    // MARK: - Init
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         layout()
@@ -54,9 +66,13 @@ class WorkingHistoryViewCell: UICollectionViewCell {
         fatalError("init(coder:) 가 실행되지 않았습니다.")
     }
     
+    // MARK: - Method
+    
     private func layout() {
         addSubview(vStack)
         vStack.addArrangedSubview(uiImageView)
+        uiImageView.addSubview(workTypeView)
+        workTypeView.addSubview(workType)
         vStack.addArrangedSubview(imageDescription)
         
         vStack.anchor(
@@ -71,6 +87,24 @@ class WorkingHistoryViewCell: UICollectionViewCell {
             left: vStack.leftAnchor,
             bottom: imageDescription.topAnchor,
             right: vStack.rightAnchor
+        )
+        
+        workTypeView.anchor(
+            top: uiImageView.topAnchor,
+            left: uiImageView.leftAnchor,
+            paddingTop: 8,
+            paddingLeft: 8
+        )
+        
+        workType.anchor(
+            top: workTypeView.topAnchor,
+            left: workTypeView.leftAnchor,
+            bottom: workTypeView.bottomAnchor,
+            right: workTypeView.rightAnchor,
+            paddingTop: 8,
+            paddingLeft: 12,
+            paddingBottom: 8,
+            paddingRight: 12
         )
         
         imageDescription.anchor(
