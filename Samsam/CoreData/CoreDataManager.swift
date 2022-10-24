@@ -93,7 +93,6 @@ class CoreDataManager {
             room.setValue(startDate, forKey: "startDate")
             room.setValue(endDate, forKey: "endDate")
             room.setValue(warrantyTime, forKey: "warrantyTime")
-            // 방상태 어떻게 하더라?
             
             do {
                 try context.save()
