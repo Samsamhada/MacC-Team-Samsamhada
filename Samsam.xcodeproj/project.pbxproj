@@ -32,13 +32,12 @@
 		26FEC1E4290466F2006C410B /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26FEC1E3290466F2006C410B /* CoreDataManager.swift */; };
 		4369690C28FE422100DEA89F /* PostingImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4369690B28FE422100DEA89F /* PostingImageViewController.swift */; };
 		4386FB022901353B00314936 /* RoomCategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4386FB012901353B00314936 /* RoomCategoryViewController.swift */; };
+		43956D2C28FF9F0100DD996F /* PostingWritingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43956D2B28FF9F0100DD996F /* PostingWritingView.swift */; };
 		43BD591A29028BD70063EB4F /* RoomCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43BD591929028BD70063EB4F /* RoomCodeViewController.swift */; };
 		43C2110F28FCFAB500E8F6DD /* PostingCategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43C2110E28FCFAB500E8F6DD /* PostingCategoryViewController.swift */; };
 		43C2111128FCFB3800E8F6DD /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43C2111028FCFB3800E8F6DD /* CategoryCell.swift */; };
 		980D900E28FE671B003CC2DA /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980D900D28FE671B003CC2DA /* DetailViewController.swift */; };
 		98366F8D29019A5300E81E27 /* RoomCreationViewContoller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98366F8C29019A5300E81E27 /* RoomCreationViewContoller.swift */; };
-		43956D2C28FF9F0100DD996F /* PostingWritingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43956D2B28FF9F0100DD996F /* PostingWritingView.swift */; };
-		980D900E28FE671B003CC2DA /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980D900D28FE671B003CC2DA /* DetailViewController.swift */; };
 		98C0D06028FCE8EB00E0E439 /* AutoLayout+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98C0D05F28FCE8EB00E0E439 /* AutoLayout+.swift */; };
 		98C0D06428FCE99300E0E439 /* JSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98C0D06328FCE99300E0E439 /* JSON.swift */; };
 		98C0D06728FCE9DC00E0E439 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98C0D06628FCE9DC00E0E439 /* Model.swift */; };
@@ -46,6 +45,7 @@
 		98C0D06C28FCF46500E0E439 /* WorkingHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98C0D06B28FCF46500E0E439 /* WorkingHistoryViewController.swift */; };
 		98C0D07228FD02E400E0E439 /* WorkingHistoryViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98C0D07128FD02E400E0E439 /* WorkingHistoryViewCell.swift */; };
 		98C2448B28FD3EDA0006A01B /* WorkingHistoryViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98C2448A28FD3EDA0006A01B /* WorkingHistoryViewHeader.swift */; };
+		98E1700D2906EFEB00F71D41 /* hideKeyboard+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E1700C2906EFEB00F71D41 /* hideKeyboard+.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -77,13 +77,12 @@
 		26FEC1E3290466F2006C410B /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		4369690B28FE422100DEA89F /* PostingImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostingImageViewController.swift; sourceTree = "<group>"; };
 		4386FB012901353B00314936 /* RoomCategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomCategoryViewController.swift; sourceTree = "<group>"; };
+		43956D2B28FF9F0100DD996F /* PostingWritingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostingWritingView.swift; sourceTree = "<group>"; };
 		43BD591929028BD70063EB4F /* RoomCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomCodeViewController.swift; sourceTree = "<group>"; };
 		43C2110E28FCFAB500E8F6DD /* PostingCategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostingCategoryViewController.swift; sourceTree = "<group>"; };
 		43C2111028FCFB3800E8F6DD /* CategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
 		980D900D28FE671B003CC2DA /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		98366F8C29019A5300E81E27 /* RoomCreationViewContoller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomCreationViewContoller.swift; sourceTree = "<group>"; };
-		43956D2B28FF9F0100DD996F /* PostingWritingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostingWritingView.swift; sourceTree = "<group>"; };
-		980D900D28FE671B003CC2DA /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		98C0D05F28FCE8EB00E0E439 /* AutoLayout+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AutoLayout+.swift"; sourceTree = "<group>"; };
 		98C0D06328FCE99300E0E439 /* JSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSON.swift; sourceTree = "<group>"; };
 		98C0D06628FCE9DC00E0E439 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
@@ -91,6 +90,7 @@
 		98C0D06B28FCF46500E0E439 /* WorkingHistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkingHistoryViewController.swift; sourceTree = "<group>"; };
 		98C0D07128FD02E400E0E439 /* WorkingHistoryViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkingHistoryViewCell.swift; sourceTree = "<group>"; };
 		98C2448A28FD3EDA0006A01B /* WorkingHistoryViewHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkingHistoryViewHeader.swift; sourceTree = "<group>"; };
+		98E1700C2906EFEB00F71D41 /* hideKeyboard+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "hideKeyboard+.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -187,6 +187,7 @@
 			isa = PBXGroup;
 			children = (
 				98C0D05F28FCE8EB00E0E439 /* AutoLayout+.swift */,
+				98E1700C2906EFEB00F71D41 /* hideKeyboard+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -331,6 +332,7 @@
 				26E3749C28FE8E6F00997DA7 /* LoginViewController.swift in Sources */,
 				980D900E28FE671B003CC2DA /* DetailViewController.swift in Sources */,
 				26E3748628FCDC0000997DA7 /* ViewController.swift in Sources */,
+				98E1700D2906EFEB00F71D41 /* hideKeyboard+.swift in Sources */,
 				98C0D06C28FCF46500E0E439 /* WorkingHistoryViewController.swift in Sources */,
 				26FEC1E02902E6F2006C410B /* PhotoEntity+CoreDataProperties.swift in Sources */,
 				98C0D06728FCE9DC00E0E439 /* Model.swift in Sources */,

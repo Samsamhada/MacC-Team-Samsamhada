@@ -8,7 +8,7 @@
 import UIKit
 
 class PhoneNumViewController: UIViewController {
-    
+
     // MARK: - View
     
     private let uiView: UIView = {
@@ -32,9 +32,10 @@ class PhoneNumViewController: UIViewController {
         return $0
     }(UILabel())
     
-    private lazy var numberInput: UITextField = {
+    var numberInput: UITextField = {
         $0.placeholder = "1234-5678"
         $0.font = UIFont.systemFont(ofSize: 16)
+        $0.keyboardType = .decimalPad
         return $0
     }(UITextField())
     
@@ -44,11 +45,11 @@ class PhoneNumViewController: UIViewController {
         return $0
     }(UIView())
     
-    private let submitButton: UIButton = {
+    private lazy var submitButton: UIButton = {
         $0.setTitle("확인", for: .normal)
         $0.setTitleColor(.white, for: .normal)
-        $0.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
         $0.backgroundColor = .blue
+        $0.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
         $0.setHeight(height: 50)
         $0.layer.cornerRadius = 16
         return $0
@@ -58,7 +59,7 @@ class PhoneNumViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        hidekeyboardWhenTappedAround()
         attribute()
         layout()
     }
