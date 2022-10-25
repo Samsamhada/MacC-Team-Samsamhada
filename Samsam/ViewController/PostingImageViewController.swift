@@ -109,7 +109,7 @@ class PostingImageViewController: UIViewController {
     private func setNavigationTitle() {
         navigationController?.navigationBar.topItem?.title = "시공 상황 작성"
         navigationController?.navigationBar.prefersLargeTitles = false
-        navigationController?.setNavigationBarHidden(false, animated: false)
+        navigationController?.setNavigationBarHidden(false, animated: true)
     }
     
     @objc func tapNextBTN() {
