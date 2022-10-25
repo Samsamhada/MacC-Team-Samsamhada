@@ -32,7 +32,6 @@ class RoomCodeViewController: UIViewController {
         let text = NSMutableAttributedString(string: "초대 코드 ")
         text.append(attachmentString)
         $0.attributedText = text
-        
         $0.font = UIFont.systemFont(ofSize: 17, weight: .semibold)
         $0.textAlignment = .center
         return $0
