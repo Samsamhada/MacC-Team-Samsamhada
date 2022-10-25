@@ -184,8 +184,7 @@ extension PostingImageViewController:  UICollectionViewDelegate, UICollectionVie
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PostingImageCell.identifier, for: indexPath) as! PostingImageCell
         
-        let item = imgItems[indexPath.row]
-        cell.preview.image = item.image
+        cell.preview.image = imgItems[indexPath.row].image
         
         return cell
     }
