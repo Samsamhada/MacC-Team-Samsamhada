@@ -58,6 +58,7 @@ class PostingImageViewController: UIViewController {
         super.viewDidLoad()
         layout()
         attribute()
+        PHPhotoLibrary.requestAuthorization { (state) in }
     }
     
     // MARK: - Method
