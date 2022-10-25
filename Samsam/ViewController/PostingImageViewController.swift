@@ -32,7 +32,7 @@ class PostingImageViewController: UIViewController {
         return $0
     }(UILabel())
     
-    var exampleImage: UIImageView = {
+    private var exampleImage: UIImageView = {
         $0.image = UIImage(named: "Test04")
         $0.contentMode = .scaleAspectFit
         return $0
