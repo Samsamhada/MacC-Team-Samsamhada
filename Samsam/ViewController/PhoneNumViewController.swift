@@ -32,7 +32,7 @@ class PhoneNumViewController: UIViewController {
         return $0
     }(UILabel())
     
-    private var numberInput: UITextField = {
+    private let numberInput: UITextField = {
         $0.placeholder = "1234-5678"
         $0.font = UIFont.systemFont(ofSize: 16)
         $0.keyboardType = .decimalPad
@@ -45,12 +45,11 @@ class PhoneNumViewController: UIViewController {
         return $0
     }(UIView())
     
-    private var submitButton: UIButton = {
+    private let submitButton: UIButton = {
         $0.setTitle("확인", for: .normal)
         $0.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
         $0.setHeight(height: 50)
         $0.layer.cornerRadius = 16
-        $0.setTitle("확인", for: .normal)
         $0.isEnabled = false
         $0.backgroundColor = .gray
         return $0
