@@ -11,13 +11,15 @@ class PostingImageCell: UICollectionViewCell {
     
     // MARK: - Property
     
-    static let identifier = "ImageCell"
-    
+    static let identifier = "PostingImageCell"
+
     // MARK: - View
     
-    var cellImage: UIImageView = {
+    var preview: UIImageView = {
         $0.image = UIImage(named: "Test01")
-        $0.contentMode = .scaleAspectFit
+        $0.clipsToBounds = true
+        $0.contentMode = .scaleAspectFill
+        $0.layer.cornerRadius = 16
         return $0
     }(UIImageView())
     
@@ -35,10 +37,12 @@ class PostingImageCell: UICollectionViewCell {
     // MARK: - Method
     
     private func setupCell() {
-        self.addSubview(cellImage)
+        self.addSubview(preview)
         
-        cellImage.anchor(
+        preview.anchor(
+            top: topAnchor,
             left: leftAnchor,
+            bottom: bottomAnchor,
             right: rightAnchor
         )
     }
