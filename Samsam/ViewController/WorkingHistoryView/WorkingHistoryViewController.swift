@@ -80,7 +80,7 @@ class WorkingHistoryViewController: UIViewController {
     // TODO: - postingCategoryView를 FullScreen모달로 띄우는 기능. 추후 수정
 
     @objc func tapWritingButton() {
-        let postingCategoryView = ViewController()
+        let postingCategoryView = PostingCategoryViewController()
         postingCategoryView.modalPresentationStyle = .fullScreen
         present(postingCategoryView, animated:  true, completion: nil)
     }

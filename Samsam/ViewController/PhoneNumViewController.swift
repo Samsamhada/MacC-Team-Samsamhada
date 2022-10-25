@@ -32,7 +32,7 @@ class PhoneNumViewController: UIViewController {
         return $0
     }(UILabel())
     
-    var numberInput: UITextField = {
+    private var numberInput: UITextField = {
         $0.placeholder = "1234-5678"
         $0.font = UIFont.systemFont(ofSize: 16)
         $0.keyboardType = .decimalPad
@@ -45,13 +45,14 @@ class PhoneNumViewController: UIViewController {
         return $0
     }(UIView())
     
-    private lazy var submitButton: UIButton = {
+    private var submitButton: UIButton = {
         $0.setTitle("확인", for: .normal)
-        $0.setTitleColor(.white, for: .normal)
-        $0.backgroundColor = .blue
         $0.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
         $0.setHeight(height: 50)
         $0.layer.cornerRadius = 16
+        $0.setTitle("확인", for: .normal)
+        $0.isEnabled = false
+        $0.backgroundColor = .gray
         return $0
     }(UIButton())
     
@@ -68,7 +69,7 @@ class PhoneNumViewController: UIViewController {
     
     private func attribute() {
         view.backgroundColor = .white
-        submitButton.addTarget(self, action: #selector(tapSubmitButton), for: .touchUpInside)
+        numberInput.addTarget(self, action: #selector(buttonAttributeChanged), for: .editingChanged)
     }
     
     private func layout() {
@@ -130,6 +131,17 @@ class PhoneNumViewController: UIViewController {
             right: uiView.rightAnchor,
             paddingBottom: 20
         )
+    }
+
+    @objc private func buttonAttributeChanged() {
+        if (numberInput.text!.count) == 8 {
+            submitButton.backgroundColor = .blue
+            submitButton.isEnabled = true
+            submitButton.addTarget(self, action: #selector(tapSubmitButton), for: .touchUpInside)
+        } else {
+            submitButton.backgroundColor = .gray
+            submitButton.isEnabled = false
+        }
     }
     
     @objc private func tapSubmitButton() {
