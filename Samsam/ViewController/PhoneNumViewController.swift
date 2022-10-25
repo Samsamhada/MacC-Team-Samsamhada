@@ -8,7 +8,7 @@
 import UIKit
 
 class PhoneNumViewController: UIViewController {
-    
+
     // MARK: - View
     
     private let uiView: UIView = {
@@ -32,9 +32,10 @@ class PhoneNumViewController: UIViewController {
         return $0
     }(UILabel())
     
-    private lazy var numberInput: UITextField = {
+    private let numberInput: UITextField = {
         $0.placeholder = "1234-5678"
         $0.font = UIFont.systemFont(ofSize: 16)
+        $0.keyboardType = .decimalPad
         return $0
     }(UITextField())
     
@@ -46,11 +47,11 @@ class PhoneNumViewController: UIViewController {
     
     private let submitButton: UIButton = {
         $0.setTitle("확인", for: .normal)
-        $0.setTitleColor(.white, for: .normal)
         $0.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
-        $0.backgroundColor = .blue
         $0.setHeight(height: 50)
         $0.layer.cornerRadius = 16
+        $0.isEnabled = false
+        $0.backgroundColor = .gray
         return $0
     }(UIButton())
     
@@ -58,7 +59,7 @@ class PhoneNumViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        hidekeyboardWhenTappedAround()
         attribute()
         layout()
     }
@@ -67,6 +68,7 @@ class PhoneNumViewController: UIViewController {
     
     private func attribute() {
         view.backgroundColor = .white
+        numberInput.addTarget(self, action: #selector(buttonAttributeChanged), for: .editingChanged)
     }
     
     private func layout() {
@@ -124,8 +126,25 @@ class PhoneNumViewController: UIViewController {
         
         submitButton.anchor(
             left: uiView.leftAnchor,
-            bottom: uiView.bottomAnchor,
-            right: uiView.rightAnchor
+            bottom: view.keyboardLayoutGuide.topAnchor,
+            right: uiView.rightAnchor,
+            paddingBottom: 20
         )
+    }
+
+    @objc private func buttonAttributeChanged() {
+        if (numberInput.text!.count) == 8 {
+            submitButton.backgroundColor = .blue
+            submitButton.isEnabled = true
+            submitButton.addTarget(self, action: #selector(tapSubmitButton), for: .touchUpInside)
+        } else {
+            submitButton.backgroundColor = .gray
+            submitButton.isEnabled = false
+        }
+    }
+    
+    @objc private func tapSubmitButton() {
+        let roomListViewController = RoomListViewController()
+        navigationController?.pushViewController(roomListViewController, animated: true)
     }
 }

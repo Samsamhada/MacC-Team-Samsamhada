@@ -129,16 +129,6 @@ class PostingWritingView: UIViewController {
         navigationController?.setNavigationBarHidden(false, animated: false)
     }
     
-    func hidekeyboardWhenTappedAround() {
-        let tap = UITapGestureRecognizer(target: self, action: #selector(endEditingView))
-        tap.cancelsTouchesInView = false
-        view.addGestureRecognizer(tap)
-    }
-    
-    @objc func endEditingView() {
-        view.endEditing(true)
-    }
-    
     private func setupNotificationCenter() {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
