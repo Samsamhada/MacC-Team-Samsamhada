@@ -114,7 +114,7 @@ class PostingImageViewController: UIViewController {
     }
     
     @objc func tapNextBTN() {
-        let vc = ViewController()
+        let vc = PostingWritingView()
         navigationController?.pushViewController(vc, animated: true)
     }
     

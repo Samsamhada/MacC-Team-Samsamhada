@@ -209,8 +209,8 @@
 				43C2110E28FCFAB500E8F6DD /* PostingCategoryViewController.swift */,
 				4330CE9A2906275D001FC8E7 /* PostingImageCell.swift */,
 				4369690B28FE422100DEA89F /* PostingImageViewController.swift */,
-				98366F8B29019A3100E81E27 /* RoomCreationView */,
 				43956D2B28FF9F0100DD996F /* PostingWritingView.swift */,
+				98366F8B29019A3100E81E27 /* RoomCreationView */,
 				4386FB012901353B00314936 /* RoomCategoryViewController.swift */,
 				43BD591929028BD70063EB4F /* RoomCodeViewController.swift */,
 			);
