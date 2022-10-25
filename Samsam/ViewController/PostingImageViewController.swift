@@ -8,18 +8,18 @@
 import UIKit
 import PhotosUI
 
+struct PreviewItem {
+    var name: String
+    var image: UIImage?
+}
+
 class PostingImageViewController: UIViewController {
     
     // MARK: - Property
     
-    struct PreviewItem {
-        var name: Int
-        var image: UIImage?
-    }
-    
     var numberOfItem = 0
     var exampleNUM = 0
-    var imgItems:[PreviewItem] = [PreviewItem(name: 0, image: UIImage(named: "CameraBTN"))]
+    var imgItems:[PreviewItem] = [PreviewItem(name: "camera", image: UIImage(named: "CameraBTN"))]
     
     // MARK: - View
     
@@ -141,7 +141,7 @@ extension PostingImageViewController: UIImagePickerControllerDelegate, UINavigat
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let pickedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
             numberOfItem = numberOfItem + 1
-            imgItems.append(PreviewItem(name: numberOfItem, image: pickedImage))
+            imgItems.append(PreviewItem(name: "\(numberOfItem)", image: pickedImage))
             
             if numberOfItem == 4 {
                 imgItems.remove(at: 0)
