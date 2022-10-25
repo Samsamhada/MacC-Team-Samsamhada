@@ -23,7 +23,7 @@ class PostingImageViewController: UIViewController {
     // MARK: - View
     
     private var titleText: UILabel = {
-        $0.text = "시공한 사진을 추가해주세요. \n (최대 4장까지 가능합니다)."
+        $0.text = "시공한 사진을 추가해주세요.\n(최대 4장까지 가능합니다)."
         $0.textAlignment = .center
         $0.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
         $0.textColor = .lightGray
