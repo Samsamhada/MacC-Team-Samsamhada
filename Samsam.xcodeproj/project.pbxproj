@@ -30,6 +30,7 @@
 		26FEC1E12902E6F2006C410B /* RoomEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26FEC1D72902E6F2006C410B /* RoomEntity+CoreDataClass.swift */; };
 		26FEC1E22902E6F2006C410B /* RoomEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26FEC1D82902E6F2006C410B /* RoomEntity+CoreDataProperties.swift */; };
 		26FEC1E4290466F2006C410B /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26FEC1E3290466F2006C410B /* CoreDataManager.swift */; };
+		4330CE9B2906275D001FC8E7 /* PostingImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4330CE9A2906275D001FC8E7 /* PostingImageCell.swift */; };
 		4369690C28FE422100DEA89F /* PostingImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4369690B28FE422100DEA89F /* PostingImageViewController.swift */; };
 		4386FB022901353B00314936 /* RoomCategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4386FB012901353B00314936 /* RoomCategoryViewController.swift */; };
 		43956D2C28FF9F0100DD996F /* PostingWritingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43956D2B28FF9F0100DD996F /* PostingWritingView.swift */; };
@@ -76,6 +77,7 @@
 		26FEC1D72902E6F2006C410B /* RoomEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RoomEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
 		26FEC1D82902E6F2006C410B /* RoomEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RoomEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		26FEC1E3290466F2006C410B /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		4330CE9A2906275D001FC8E7 /* PostingImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostingImageCell.swift; sourceTree = "<group>"; };
 		4369690B28FE422100DEA89F /* PostingImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostingImageViewController.swift; sourceTree = "<group>"; };
 		4386FB012901353B00314936 /* RoomCategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomCategoryViewController.swift; sourceTree = "<group>"; };
 		43956D2B28FF9F0100DD996F /* PostingWritingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostingWritingView.swift; sourceTree = "<group>"; };
@@ -208,9 +210,10 @@
 				98E1700E29080C9100F71D41 /* ImageDetailViewController.swift */,
 				43C2111028FCFB3800E8F6DD /* CategoryCell.swift */,
 				43C2110E28FCFAB500E8F6DD /* PostingCategoryViewController.swift */,
+				4330CE9A2906275D001FC8E7 /* PostingImageCell.swift */,
 				4369690B28FE422100DEA89F /* PostingImageViewController.swift */,
-				98366F8B29019A3100E81E27 /* RoomCreationView */,
 				43956D2B28FF9F0100DD996F /* PostingWritingView.swift */,
+				98366F8B29019A3100E81E27 /* RoomCreationView */,
 				4386FB012901353B00314936 /* RoomCategoryViewController.swift */,
 				43BD591929028BD70063EB4F /* RoomCodeViewController.swift */,
 			);
@@ -347,6 +350,7 @@
 				98C0D06428FCE99300E0E439 /* JSON.swift in Sources */,
 				26FEC1DA2902E6F2006C410B /* CategoryEntity+CoreDataProperties.swift in Sources */,
 				26FEC1E12902E6F2006C410B /* RoomEntity+CoreDataClass.swift in Sources */,
+				4330CE9B2906275D001FC8E7 /* PostingImageCell.swift in Sources */,
 				98C0D06A28FCEA4900E0E439 /* ImagePicker.swift in Sources */,
 				43956D2C28FF9F0100DD996F /* PostingWritingView.swift in Sources */,
 				26FEC1DC2902E6F2006C410B /* PostingEntity+CoreDataProperties.swift in Sources */,
@@ -515,9 +519,11 @@
 				CODE_SIGN_ENTITLEMENTS = Samsam/Samsam.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = N6LML762WM;
+				DEVELOPMENT_TEAM = UDCS6NMGF8;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Samsam/Info.plist;
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "사진 저장을 위해 라이브러리 접근권한이 필요합니다.";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "사진 업로드를 위해 라이브러리 접근권한이 필요합니다.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -547,9 +553,11 @@
 				CODE_SIGN_ENTITLEMENTS = Samsam/Samsam.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = N6LML762WM;
+				DEVELOPMENT_TEAM = UDCS6NMGF8;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Samsam/Info.plist;
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "사진 저장을 위해 라이브러리 접근권한이 필요합니다.";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "사진 업로드를 위해 라이브러리 접근권한이 필요합니다.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
