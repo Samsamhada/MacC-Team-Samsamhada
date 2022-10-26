@@ -91,8 +91,7 @@ class RoomCodeViewController: UIViewController {
         contentView.anchor(
             left: view.safeAreaLayoutGuide.leftAnchor,
             right: view.safeAreaLayoutGuide.rightAnchor,
-            paddingTop: 50,
-            height: 100
+            height: 200
         )
         contentView.centerY(inView: self.view)
         
@@ -112,7 +111,10 @@ class RoomCodeViewController: UIViewController {
         )
         
         inviteBTN.anchor(
-            top: inviteLabel.bottomAnchor
+            top: inviteLabel.bottomAnchor,
+            bottom: detailLabel.topAnchor,
+            paddingTop: 2,
+            paddingBottom: 2
         )
         inviteBTN.centerX(inView: contentView)
         
@@ -163,15 +165,15 @@ class RoomCodeViewController: UIViewController {
         )
         label.centerX(inView: self.view)
         
-        UIView.animate(withDuration: 1.5, animations: {
+        UIView.animate(withDuration: 0.5, animations: {
             label.alpha = 0.8
         }, completion: { isCompleted in
-                UIView.animate(withDuration: 1.5, animations: {
-                    label.alpha = 0
-                }, completion: { isCompleted in
-                        label.removeFromSuperview()
-                    })
+            UIView.animate(withDuration: 2.0, animations: {
+                label.alpha = 0
+            }, completion: { isCompleted in
+                label.removeFromSuperview()
             })
+        })
     }
     
     @objc func doneBTN() {
