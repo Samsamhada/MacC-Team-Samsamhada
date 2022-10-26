@@ -50,9 +50,18 @@ class ImageDetailViewController: UIViewController {
 
         detailImage.isUserInteractionEnabled = true
 
+        let didPinchGesture = UIPinchGestureRecognizer(target: self, action: #selector(didPinchGesture))
+        detailImage.addGestureRecognizer(didPinchGesture)
+
         let didDoubleTapGesture = UITapGestureRecognizer(target: self, action: #selector(didDoubleTapGesture))
         didDoubleTapGesture.numberOfTapsRequired = 2
         detailImage.addGestureRecognizer(didDoubleTapGesture)
+    }
+    
+    @objc private func didPinchGesture(_ sender: UIPinchGestureRecognizer) {
+        detailImage.transform = detailImage.transform.scaledBy(x: sender.scale, y: sender.scale)
+        sender.scale = 1.0
+        detailImage.center = view.center
     }
     
     @objc private func didDoubleTapGesture() {
