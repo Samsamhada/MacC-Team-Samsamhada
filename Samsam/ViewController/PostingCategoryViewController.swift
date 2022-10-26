@@ -9,6 +9,10 @@ import UIKit
 
 class PostingCategoryViewController: UIViewController {
     
+    // MARK: - Property
+    
+    private var categoryID: Int = 0
+    
     // MARK: - View
     
     let categoryView: UICollectionView = {
