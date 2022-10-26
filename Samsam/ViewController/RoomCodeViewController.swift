@@ -7,7 +7,7 @@
 
 import UIKit
 
-var inviteCode = "ASD12d"
+var code = "ASD12d"
 
 class RoomCodeViewController: UIViewController {
     
@@ -22,18 +22,19 @@ class RoomCodeViewController: UIViewController {
     
     private var contentView: UIImageView = {
         $0.backgroundColor = .yellow
+        $0.isUserInteractionEnabled = true
         return $0
     }(UIImageView())
     
     private var inviteLabel: UILabel = {
-        $0.text = "초대코드 􀉐 "
+        $0.text = "초대 코드 􀉐 "
         $0.font = UIFont.systemFont(ofSize: 17, weight: .semibold)
         $0.textAlignment = .center
         return $0
     }(UILabel())
     
-    private var copyLabel: UILabel = {
-        $0.text = "초대코드를 눌러 복사하세요"
+    private var detailLabel: UILabel = {
+        $0.text = "초대 코드 글자를 눌러 복사하세요"
         $0.font = UIFont.systemFont(ofSize: 15, weight: .semibold)
         $0.textAlignment = .center
         $0.textColor = .lightGray
@@ -41,7 +42,7 @@ class RoomCodeViewController: UIViewController {
     }(UILabel())
     
     private var inviteBTN: UIButton = {
-        $0.setTitle(inviteCode, for: .normal)
+        $0.setTitle(code, for: .normal)
         $0.titleLabel?.font = UIFont.systemFont(ofSize: 17, weight: .semibold)
         $0.setTitleColor(.blue, for: .normal)
         $0.addTarget(self, action: #selector(copyCode), for: .touchUpInside)
@@ -78,7 +79,7 @@ class RoomCodeViewController: UIViewController {
         self.view.addSubview(mainTitle)
         self.view.addSubview(contentView)
         self.contentView.addSubview(inviteLabel)
-        self.contentView.addSubview(copyLabel)
+        self.contentView.addSubview(detailLabel)
         self.contentView.addSubview(inviteBTN)
         self.view.addSubview(finishBTN)
         
@@ -104,18 +105,19 @@ class RoomCodeViewController: UIViewController {
             right: contentView.rightAnchor
         )
         
-        copyLabel.anchor(
+        inviteBTN.anchor(
+            top: inviteLabel.bottomAnchor,
+            paddingTop: 10
+        )
+        inviteBTN.centerX(inView: contentView)
+        
+        
+        
+        detailLabel.anchor(
             top: inviteBTN.bottomAnchor,
             left: contentView.leftAnchor,
             right: contentView.rightAnchor,
-            paddingTop: 10
-        )
-        
-        inviteBTN.anchor(
-            top: inviteLabel.bottomAnchor,
-            left: contentView.leftAnchor,
-            right: contentView.rightAnchor,
-            paddingTop: 10
+            paddingTop: 5
         )
         
         finishBTN.anchor(
@@ -134,12 +136,44 @@ class RoomCodeViewController: UIViewController {
         navigationController?.setNavigationBarHidden(false, animated: true)
     }
     
-    @objc func doneBTN() {
-        navigationController?.popToRootViewController(animated: true)
-        print("no")
+    @objc func copyCode() {
+        UIPasteboard.general.string = code
+        showToast()
     }
     
-    @objc func copyCode() {
-        print("Hi")
+    private func showToast() {
+        let label = UILabel()
+        label.backgroundColor = .lightGray
+        label.textColor = .black
+        label.font = UIFont.systemFont(ofSize: 15, weight: .semibold)
+        label.textAlignment = .center
+        label.text = "초대 코드 복사가 완료되었습니다!"
+        label.layer.cornerRadius = 8
+        label.clipsToBounds = true
+        label.alpha = 0
+        self.view.addSubview(label)
+        
+        label.anchor(
+            bottom: finishBTN.topAnchor,
+            paddingBottom: 30,
+            width: 240,
+            height: 30
+        )
+        label.centerX(inView: self.view)
+        
+        UIView.animate(withDuration: 1.5, animations: {
+            label.alpha = 0.8
+        }, completion: { isCompleted in
+                UIView.animate(withDuration: 1.5, animations: {
+                    label.alpha = 0
+                }, completion: { isCompleted in
+                        label.removeFromSuperview()
+                    })
+            })
+        
+    }
+    
+    @objc func doneBTN() {
+        navigationController?.popToRootViewController(animated: true)
     }
 }
