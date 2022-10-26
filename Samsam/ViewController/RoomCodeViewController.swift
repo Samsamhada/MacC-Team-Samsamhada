@@ -7,9 +7,11 @@
 
 import UIKit
 
-var code = "ASD12d"
-
 class RoomCodeViewController: UIViewController {
+    
+    // MARK: - Property
+    
+    var code = "ASD12d"
     
     // MARK: - View
     
