@@ -112,6 +112,7 @@ extension PostingCategoryViewController:  UICollectionViewDelegate, UICollection
         let cell = collectionView.cellForItem(at: indexPath)
         if cell?.isSelected == false {
             cell?.isSelected = true
+            categoryID = indexPath.item
         }
         return true
     }
