@@ -39,14 +39,6 @@ class RoomCodeViewController: UIViewController {
         return $0
     }(UILabel())
     
-    private var detailLabel: UILabel = {
-        $0.text = "초대 코드 글자를 눌러 복사하세요"
-        $0.font = UIFont.systemFont(ofSize: 15, weight: .semibold)
-        $0.textAlignment = .center
-        $0.textColor = .lightGray
-        return $0
-    }(UILabel())
-    
     private lazy var inviteBTN: UIButton = {
         $0.setTitle(code, for: .normal)
         $0.titleLabel?.font = UIFont.systemFont(ofSize: 17, weight: .semibold)
@@ -54,6 +46,14 @@ class RoomCodeViewController: UIViewController {
         $0.addTarget(self, action: #selector(copyCode), for: .touchUpInside)
         return $0
     }(UIButton())
+    
+    private var detailLabel: UILabel = {
+        $0.text = "초대 코드 글자를 눌러 복사하세요"
+        $0.font = UIFont.systemFont(ofSize: 15, weight: .semibold)
+        $0.textAlignment = .center
+        $0.textColor = .lightGray
+        return $0
+    }(UILabel())
     
     private var finishBTN: UIButton = {
         $0.backgroundColor = .blue
