@@ -22,7 +22,7 @@ class RoomCodeViewController: UIViewController {
         return $0
     }(UILabel())
     
-    private var contentView: UIImageView = {
+    private var contentView: UIView = {
         $0.isUserInteractionEnabled = true
         return $0
     }(UIImageView())
@@ -81,31 +81,32 @@ class RoomCodeViewController: UIViewController {
     }
     
     private func layout() {
-        self.view.addSubview(mainTitle)
         self.view.addSubview(contentView)
+        self.contentView.addSubview(mainTitle)
         self.contentView.addSubview(inviteLabel)
         self.contentView.addSubview(detailLabel)
         self.contentView.addSubview(inviteBTN)
         self.view.addSubview(finishBTN)
         
-        mainTitle.anchor(
-            top: view.safeAreaLayoutGuide.topAnchor,
-            left: view.safeAreaLayoutGuide.leftAnchor,
-            right: view.safeAreaLayoutGuide.rightAnchor,
-            paddingTop: 280,
-            height: 20
-        )
-        
         contentView.anchor(
-            top: mainTitle.bottomAnchor,
             left: view.safeAreaLayoutGuide.leftAnchor,
             right: view.safeAreaLayoutGuide.rightAnchor,
             paddingTop: 50,
             height: 100
         )
+        contentView.centerY(inView: self.view)
+        
+        mainTitle.anchor(
+            top: contentView.topAnchor,
+            left: contentView.leftAnchor,
+            bottom: inviteLabel.topAnchor,
+            right: contentView.rightAnchor,
+            paddingBottom: 50,
+            height: 20
+        )
         
         inviteLabel.anchor(
-            top: contentView.topAnchor,
+            top: mainTitle.bottomAnchor,
             left: contentView.leftAnchor,
             right: contentView.rightAnchor
         )
