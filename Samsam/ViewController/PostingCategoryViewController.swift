@@ -87,6 +87,7 @@ class PostingCategoryViewController: UIViewController {
     
     @objc func tapNextBtn(_sender: UIButton) {
         let vc = PostingImageViewController()
+        vc.categoryID = categoryID
         navigationController?.pushViewController(vc, animated: true)
     }
     

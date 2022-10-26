@@ -116,6 +116,7 @@ class PostingImageViewController: UIViewController {
     
     @objc func tapNextBTN() {
         let vc = PostingWritingView()
+        vc.categoryID = categoryID
         navigationController?.pushViewController(vc, animated: true)
     }
     
