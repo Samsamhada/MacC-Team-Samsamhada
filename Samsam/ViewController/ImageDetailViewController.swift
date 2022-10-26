@@ -47,6 +47,22 @@ class ImageDetailViewController: UIViewController {
     private func attribute() {
         view.backgroundColor = .white
         navigationItem.title = "화장실"
+
+        detailImage.isUserInteractionEnabled = true
+
+        let didDoubleTapGesture = UITapGestureRecognizer(target: self, action: #selector(didDoubleTapGesture))
+        didDoubleTapGesture.numberOfTapsRequired = 2
+        detailImage.addGestureRecognizer(didDoubleTapGesture)
+    }
+    
+    @objc private func didDoubleTapGesture() {
+        isTapped.toggle()
+
+        if isTapped {
+            detailImage.contentMode = .scaleAspectFill
+        } else {
+            detailImage.contentMode = .scaleAspectFit
+        }
+        detailImage.center = view.center
     }
 }
-
