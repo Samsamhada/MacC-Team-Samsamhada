@@ -21,13 +21,18 @@ class RoomCodeViewController: UIViewController {
     }(UILabel())
     
     private var contentView: UIImageView = {
-        $0.backgroundColor = .yellow
         $0.isUserInteractionEnabled = true
         return $0
     }(UIImageView())
     
     private var inviteLabel: UILabel = {
-        $0.text = "초대 코드 􀉐 "
+        let attachment = NSTextAttachment()
+        attachment.image = UIImage(systemName: "arrowshape.turn.up.forward")
+        let attachmentString = NSAttributedString(attachment: attachment)
+        let text = NSMutableAttributedString(string: "초대 코드 ")
+        text.append(attachmentString)
+        $0.attributedText = text
+        
         $0.font = UIFont.systemFont(ofSize: 17, weight: .semibold)
         $0.textAlignment = .center
         return $0
@@ -106,18 +111,14 @@ class RoomCodeViewController: UIViewController {
         )
         
         inviteBTN.anchor(
-            top: inviteLabel.bottomAnchor,
-            paddingTop: 10
+            top: inviteLabel.bottomAnchor
         )
         inviteBTN.centerX(inView: contentView)
-        
-        
         
         detailLabel.anchor(
             top: inviteBTN.bottomAnchor,
             left: contentView.leftAnchor,
-            right: contentView.rightAnchor,
-            paddingTop: 5
+            right: contentView.rightAnchor
         )
         
         finishBTN.anchor(
@@ -170,7 +171,6 @@ class RoomCodeViewController: UIViewController {
                         label.removeFromSuperview()
                     })
             })
-        
     }
     
     @objc func doneBTN() {
