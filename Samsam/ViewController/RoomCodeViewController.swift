@@ -47,7 +47,7 @@ class RoomCodeViewController: UIViewController {
         return $0
     }(UILabel())
     
-    private var inviteBTN: UIButton = {
+    private lazy var inviteBTN: UIButton = {
         $0.setTitle(code, for: .normal)
         $0.titleLabel?.font = UIFont.systemFont(ofSize: 17, weight: .semibold)
         $0.setTitleColor(.blue, for: .normal)
