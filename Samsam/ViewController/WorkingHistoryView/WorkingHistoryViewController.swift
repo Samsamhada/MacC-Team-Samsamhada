@@ -76,13 +76,12 @@ class WorkingHistoryViewController: UIViewController {
         navigationItem.title = "포항공대 포스빌"
         navigationController?.navigationBar.prefersLargeTitles = false
     }
-    
-    // TODO: - postingCategoryView를 FullScreen모달로 띄우는 기능. 추후 수정
 
     @objc func tapWritingButton() {
-        let postingCategoryView = PostingCategoryViewController()
-        postingCategoryView.modalPresentationStyle = .fullScreen
-        present(postingCategoryView, animated:  true, completion: nil)
+        let createVC = PostingCategoryViewController()
+        let navigationController = UINavigationController(rootViewController: createVC)
+        navigationController.modalPresentationStyle = .fullScreen
+        present(navigationController, animated:  true, completion: nil)
     }
 }
 
