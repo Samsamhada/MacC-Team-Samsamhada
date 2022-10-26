@@ -56,6 +56,9 @@ class ImageDetailViewController: UIViewController {
         let didDoubleTapGesture = UITapGestureRecognizer(target: self, action: #selector(didDoubleTapGesture))
         didDoubleTapGesture.numberOfTapsRequired = 2
         detailImage.addGestureRecognizer(didDoubleTapGesture)
+
+        let didPanGesture = UIPanGestureRecognizer(target: self, action: #selector(didPanGesture))
+        detailImage.addGestureRecognizer(didPanGesture)
     }
     
     @objc private func didPinchGesture(_ sender: UIPinchGestureRecognizer) {
@@ -73,5 +76,14 @@ class ImageDetailViewController: UIViewController {
             detailImage.contentMode = .scaleAspectFit
         }
         detailImage.center = view.center
+    }
+    
+    @objc private func didPanGesture(_ sender: UIPanGestureRecognizer) {
+        let translation = sender.translation(in: view)
+        if let view = sender.view {
+            view.center = CGPoint(x: view.center.x + translation.x,
+                                  y: view.center.y + translation.y)
+        }
+        sender.setTranslation(CGPoint.zero, in: view)
     }
 }
