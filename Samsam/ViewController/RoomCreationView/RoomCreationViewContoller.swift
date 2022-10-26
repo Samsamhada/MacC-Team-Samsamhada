@@ -157,17 +157,24 @@ class RoomCreationViewController: UIViewController {
     
     private func attribute() {
         view.backgroundColor = .white
+        
+        navigationItem.title = "방 생성"
+        navigationItem.leftBarButtonItem = UIBarButtonItem(
+            image: UIImage(systemName: "xmark"),
+            style: .plain,
+            target: self,
+            action: #selector(tapCloseButton)
+        )
+        navigationItem.leftBarButtonItem?.tintColor = .black
+        navigationController?.navigationBar.prefersLargeTitles = false
+        navigationController?.setNavigationBarHidden(false, animated: true)
+        
         closeButton.addTarget(self, action: #selector(tapCloseButton), for: .touchUpInside)
         nextButton.addTarget(self, action: #selector(tapNextButton), for: .touchUpInside)
     }
     
     private func layout() {
         view.addSubview(uiView)
-        
-        uiView.addSubview(titleHstack)
-        titleHstack.addArrangedSubview(closeButton)
-        titleHstack.addArrangedSubview(viewTitle)
-        titleHstack.addArrangedSubview(spacer)
         
         uiView.addSubview(customerTitle)
         uiView.addSubview(customerTextField)
@@ -199,25 +206,12 @@ class RoomCreationViewController: UIViewController {
             paddingRight: 16
         )
         
-        titleHstack.anchor(
-            top: uiView.topAnchor,
-            left: uiView.leftAnchor,
-            bottom: customerTitle.topAnchor,
-            right: uiView.rightAnchor,
-            paddingBottom: 40
-        )
-        
-        customerTitle.anchor(
-            left: uiView.leftAnchor,
-            bottom: customerTextField.topAnchor,
-            right: uiView.rightAnchor,
-            paddingBottom: 16
-        )
-        
         customerTextField.anchor(
+            top: uiView.topAnchor,
             left: uiView.leftAnchor,
             bottom: textUnderLine.topAnchor,
             right: uiView.rightAnchor,
+            paddingTop: 40,
             paddingLeft: 4,
             paddingBottom: 4
         )
@@ -269,8 +263,8 @@ class RoomCreationViewController: UIViewController {
     // TODO: - 방생성카테고리 뷰로 수정 예정.
     
     @objc private func tapNextButton() {
-        let VC = ViewController()
-        navigationController?.pushViewController(VC, animated: true)
+        let roomCategoryViewController = RoomCategoryViewController()
+        navigationController?.pushViewController(roomCategoryViewController, animated: true)
     }
     
     @objc private func tapCloseButton() {

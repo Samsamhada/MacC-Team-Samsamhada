@@ -87,7 +87,7 @@ class RoomCategoryViewController: UIViewController {
     }
     
     private func setNavigationTitle() {
-        navigationController?.navigationBar.topItem?.title = "방 생성"
+        navigationItem.title = "방 생성"
         navigationController?.navigationBar.prefersLargeTitles = false
         navigationController?.setNavigationBarHidden(false, animated: true)
     }
@@ -99,8 +99,9 @@ class RoomCategoryViewController: UIViewController {
     }
     
     @objc func tapNextBTN() {
-        let vc = RoomCodeViewController()
-        navigationController?.pushViewController(vc, animated: true)
+//        let vc = RoomCodeViewController()
+//        navigationController?.pushViewController(vc, animated: true)
+        self.dismiss(animated: true)
     }
 }
 
