@@ -135,7 +135,7 @@ class RoomCodeViewController: UIViewController {
     }
     
     private func setNavigationTitle() {
-        navigationController?.navigationBar.topItem?.title = "생성 완료"
+        navigationController?.navigationItem.title = "생성 완료"
         navigationController?.navigationBar.prefersLargeTitles = false
         navigationController?.setNavigationBarHidden(false, animated: true)
     }
