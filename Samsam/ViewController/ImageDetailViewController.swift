@@ -47,6 +47,28 @@ class ImageDetailViewController: UIViewController {
     private func attribute() {
         view.backgroundColor = .white
         navigationItem.title = "화장실"
+
+        detailImage.isUserInteractionEnabled = true
+
+        let didPinchGesture = UIPinchGestureRecognizer(target: self, action: #selector(didPinchGesture))
+        detailImage.addGestureRecognizer(didPinchGesture)
+
+        let didPanGesture = UIPanGestureRecognizer(target: self, action: #selector(didPanGesture))
+        detailImage.addGestureRecognizer(didPanGesture)
+    }
+    
+    @objc private func didPinchGesture(_ sender: UIPinchGestureRecognizer) {
+        detailImage.transform = detailImage.transform.scaledBy(x: sender.scale, y: sender.scale)
+        sender.scale = 1.0
+        detailImage.center = view.center
+    }
+    
+    @objc private func didPanGesture(_ sender: UIPanGestureRecognizer) {
+        let translation = sender.translation(in: view)
+        if let view = sender.view {
+            view.center = CGPoint(x: view.center.x + translation.x,
+                                  y: view.center.y + translation.y)
+        }
+        sender.setTranslation(CGPoint.zero, in: view)
     }
 }
-
