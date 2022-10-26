@@ -19,33 +19,6 @@ class RoomCreationViewController: UIViewController {
         return $0
     }(UIView())
     
-    private let titleHstack: UIStackView = {
-        $0.axis = .horizontal
-        return $0
-    }(UIStackView())
-    
-    private let closeButton: UIButton = {
-        $0.setImage(UIImage(systemName: "xmark"), for: .normal)
-        $0.contentHorizontalAlignment = .left
-        $0.tintColor = .black
-        $0.setWidth(width: (UIScreen.main.bounds.width - 32) / 3)
-        return $0
-    }(UIButton())
-    
-    private let viewTitle: UILabel = {
-        $0.text = "방 생성"
-        $0.textColor = .black
-        $0.textAlignment = .center
-        $0.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
-        $0.setWidth(width: (UIScreen.main.bounds.width - 32) / 3)
-        return $0
-    }(UILabel())
-    
-    private let spacer: UIView = {
-        $0.setWidth(width: (UIScreen.main.bounds.width - 32) / 3)
-        return $0
-    }(UIView())
-    
     private let customerTitle: UILabel = {
         $0.text = "고객명/주소"
         $0.textAlignment = .left
@@ -158,18 +131,8 @@ class RoomCreationViewController: UIViewController {
     private func attribute() {
         view.backgroundColor = .white
         
-        navigationItem.title = "방 생성"
-        navigationItem.leftBarButtonItem = UIBarButtonItem(
-            image: UIImage(systemName: "xmark"),
-            style: .plain,
-            target: self,
-            action: #selector(tapCloseButton)
-        )
-        navigationItem.leftBarButtonItem?.tintColor = .black
-        navigationController?.navigationBar.prefersLargeTitles = false
-        navigationController?.setNavigationBarHidden(false, animated: true)
+        setNavigation()
         
-        closeButton.addTarget(self, action: #selector(tapCloseButton), for: .touchUpInside)
         nextButton.addTarget(self, action: #selector(tapNextButton), for: .touchUpInside)
     }
     
@@ -206,12 +169,19 @@ class RoomCreationViewController: UIViewController {
             paddingRight: 16
         )
         
-        customerTextField.anchor(
+        customerTitle.anchor(
             top: uiView.topAnchor,
+            left: uiView.leftAnchor,
+            right: uiView.rightAnchor,
+            paddingTop: 40
+        )
+        
+        customerTextField.anchor(
+            top: customerTitle.bottomAnchor,
             left: uiView.leftAnchor,
             bottom: textUnderLine.topAnchor,
             right: uiView.rightAnchor,
-            paddingTop: 40,
+            paddingTop: 15,
             paddingLeft: 4,
             paddingBottom: 4
         )
@@ -253,6 +223,19 @@ class RoomCreationViewController: UIViewController {
             right: uiView.rightAnchor,
             height: 50
         )
+    }
+    
+    private func setNavigation() {
+        navigationItem.title = "방 생성"
+        navigationItem.leftBarButtonItem = UIBarButtonItem(
+            image: UIImage(systemName: "xmark"),
+            style: .plain,
+            target: self,
+            action: #selector(tapCloseButton)
+        )
+        navigationItem.leftBarButtonItem?.tintColor = .black
+        navigationController?.navigationBar.prefersLargeTitles = false
+        navigationController?.setNavigationBarHidden(false, animated: true)
     }
     
     @objc private func tapStepper() {
