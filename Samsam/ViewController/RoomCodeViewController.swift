@@ -54,7 +54,6 @@ class RoomCodeViewController: UIViewController {
         return $0
     }(UIButton())
     
-    
     private var finishBTN: UIButton = {
         $0.backgroundColor = .blue
         $0.setTitle("완료", for: .normal)
