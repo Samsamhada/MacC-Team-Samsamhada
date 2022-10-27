@@ -108,9 +108,16 @@ class PostingImageViewController: UIViewController {
     }
     
     private func setNavigationTitle() {
-        navigationController?.navigationBar.topItem?.title = "시공 상황 작성"
+        navigationItem.title = "시공 상황 작성"
+        navigationController?.navigationBar.tintColor = .black
         navigationController?.navigationBar.prefersLargeTitles = false
         navigationController?.setNavigationBarHidden(false, animated: true)
+        navigationItem.backBarButtonItem = UIBarButtonItem(
+            title: "",
+            style: .plain,
+            target: self,
+            action: nil)
+        navigationItem.backBarButtonItem?.tintColor = .black
     }
     
     @objc func tapNextBTN() {
