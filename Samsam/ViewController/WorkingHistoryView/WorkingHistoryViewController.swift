@@ -33,11 +33,16 @@ class WorkingHistoryViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        coreDataManager.loadOneRoomData(roomID: roomID!)
         setNavigationBar()
         
         attribute()
         layout()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        coreDataManager.loadOneRoomData(roomID: roomID!)
+        coreDataManager.loadPostingData(roomID: roomID!)
+        workingHistoryView.reloadData()
     }
     
     // MARK: - Method
