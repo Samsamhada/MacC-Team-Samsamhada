@@ -87,6 +87,7 @@ class WorkingHistoryViewController: UIViewController {
 
     @objc func tapWritingButton() {
         let createVC = PostingCategoryViewController()
+        createVC.roomID = roomID
         let navigationController = UINavigationController(rootViewController: createVC)
         navigationController.modalPresentationStyle = .fullScreen
         present(navigationController, animated:  true, completion: nil)

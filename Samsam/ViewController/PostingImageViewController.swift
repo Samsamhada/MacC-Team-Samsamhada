@@ -16,6 +16,7 @@ class PostingImageViewController: UIViewController {
     
     // MARK: - Property
     
+    var roomID: Int?
     var categoryID: Int?
     var numberOfItem = 0
     var exampleNUM = 0

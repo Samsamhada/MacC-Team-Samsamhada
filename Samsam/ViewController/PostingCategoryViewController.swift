@@ -11,6 +11,7 @@ class PostingCategoryViewController: UIViewController {
     
     // MARK: - Property
     
+    var roomID: Int?
     private var categoryID: Int = 0
     
     // MARK: - View
