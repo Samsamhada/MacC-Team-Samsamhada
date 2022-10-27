@@ -164,7 +164,7 @@ class DetailViewController: UIViewController, UIScrollViewDelegate {
     @objc private func tapShareButton() {
 
         for imgName in images {
-            guard let img = UIImage(named: imgName) else { return }
+            guard let img = UIImage(data: imgName.photoPath!) else { return }
 
             imageArray.append(img)
         }
@@ -201,13 +201,13 @@ extension DetailViewController {
         )
         
         for num in 0..<images.count {
-            addImageView(img: images[num], position: CGFloat(num))
+            addImageView(img: images[num].photoPath!, position: CGFloat(num))
         }
     }
     
-    private func addImageView(img: String, position: CGFloat) {
+    private func addImageView(img: Data, position: CGFloat) {
         let constructionImage = UIImageView()
-        constructionImage.image = UIImage(named: img)
+        constructionImage.image = UIImage(data: img)
         
         scrollView.addSubview(constructionImage)
         
