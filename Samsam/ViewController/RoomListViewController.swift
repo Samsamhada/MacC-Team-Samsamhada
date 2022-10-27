@@ -89,10 +89,11 @@ extension RoomListViewController: UICollectionViewDataSource, UICollectionViewDe
         let tapRoomListButton = UITapGestureRecognizer(target: self, action: #selector(tapRoomListButton))
         cell.roomStack.isUserInteractionEnabled = true
         cell.roomStack.addGestureRecognizer(tapRoomListButton)
-        
-        cell.roomTitle.text = coreDataManager.rooms[indexPath.row].clientName
+                
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yy.MM.dd"
+        
+        cell.roomTitle.text = coreDataManager.rooms[indexPath.row].clientName
         cell.startDate.text = dateFormatter.string(from: coreDataManager.rooms[indexPath.row].startDate!)
         cell.endDate.text = dateFormatter.string(from: coreDataManager.rooms[indexPath.row].endDate!)
         return cell
