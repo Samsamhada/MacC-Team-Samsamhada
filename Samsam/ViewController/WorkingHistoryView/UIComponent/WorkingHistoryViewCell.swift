@@ -15,7 +15,7 @@ class WorkingHistoryViewCell: UICollectionViewCell {
     
     // MARK: - View
     
-    private let uiImageView: UIImageView = {
+    let uiImageView: UIImageView = {
         $0.image = UIImage(named: "TestImage")
         $0.layer.masksToBounds = true
         $0.layer.cornerRadius = 16

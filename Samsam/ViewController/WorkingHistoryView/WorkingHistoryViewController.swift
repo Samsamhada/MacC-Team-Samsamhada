@@ -33,11 +33,16 @@ class WorkingHistoryViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        coreDataManager.loadOneRoomData(roomID: roomID!)
         setNavigationBar()
         
         attribute()
         layout()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        coreDataManager.loadOneRoomData(roomID: roomID!)
+        coreDataManager.loadPostingData(roomID: roomID!)
+        workingHistoryView.reloadData()
     }
     
     // MARK: - Method
@@ -96,7 +101,7 @@ extension WorkingHistoryViewController: UICollectionViewDataSource, UICollection
     // MARK: - Header
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 3
+        return 1
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
@@ -114,13 +119,15 @@ extension WorkingHistoryViewController: UICollectionViewDataSource, UICollection
     // MARK: - Cell
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 3
+        return coreDataManager.postings.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: WorkingHistoryViewCell.identifier, for: indexPath) as! WorkingHistoryViewCell
-        cell.imageDescription.text = "애플, 동아시아 최초 '디벨로퍼 아카데미' 한국서 운영"
-        cell.workType.text = "철거"
+        coreDataManager.loadPhotoData(postingID: indexPath.item)
+        cell.uiImageView.image = UIImage(data: coreDataManager.photos[0].photoPath!)
+        cell.imageDescription.text = coreDataManager.postings[indexPath.item].explanation
+        cell.workType.text = Category.categoryName(Category(rawValue: Int(coreDataManager.postings[indexPath.item].categoryID))!)()
 
         return cell
     }
@@ -134,6 +141,13 @@ extension WorkingHistoryViewController: UICollectionViewDataSource, UICollection
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let detailViewController = DetailViewController()
+        coreDataManager.loadPhotoData(postingID: indexPath.item)
+        detailViewController.images = coreDataManager.photos
+        coreDataManager.postings.forEach {
+            if $0.postingID == indexPath.item + 1 {
+                detailViewController.descriptionLBL.text = $0.explanation
+            }
+        }
         navigationController?.pushViewController(detailViewController, animated: true)
     }
 }
