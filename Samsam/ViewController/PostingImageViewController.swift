@@ -21,8 +21,8 @@ class PostingImageViewController: UIViewController {
     var categoryID: Int?
     var numberOfItem = 0
     var exampleNUM = 0
-    var imgItems: [PreviewItem] = [PreviewItem(image: UIImage(named: "CameraBTN"))]
-    var copyImgItems: [PreviewItem]?
+    private var imgItems: [PreviewItem] = [PreviewItem(image: UIImage(named: "CameraBTN"))]
+    private var copyImgItems: [PreviewItem]?
     
     // MARK: - View
     
