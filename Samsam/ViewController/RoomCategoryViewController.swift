@@ -11,6 +11,8 @@ class RoomCategoryViewController: UIViewController {
     
     // MARK: - Property
     
+    let roomListViewContoller = RoomListViewController()
+    
     var roomEntity: RoomEntity?
     var workingStatusEntity: WorkingStatusEntity?
 

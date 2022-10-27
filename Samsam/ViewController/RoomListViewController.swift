@@ -8,6 +8,7 @@
 import UIKit
 
 class RoomListViewController: UIViewController {
+
     
     // MARK: - View
     
@@ -19,11 +20,15 @@ class RoomListViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         attribute()
         layout()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        coreDataManager.loadAllRoomData()
+        collectionView.reloadData()
+    }
+
     // MARK: - Method
     
     private func attribute() {
@@ -47,7 +52,7 @@ class RoomListViewController: UIViewController {
     private func setupNavigationTitle() {
         let backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
         navigationItem.backBarButtonItem = backBarButtonItem
-        navigationItem.title = "앱 이름"
+        navigationItem.title = "기와집"
         navigationController?.navigationBar.prefersLargeTitles = false
         navigationController?.setNavigationBarHidden(false, animated: true)
     }
@@ -60,7 +65,7 @@ class RoomListViewController: UIViewController {
     }
 }
 
-extension RoomListViewController: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+extension RoomListViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 2
@@ -70,7 +75,7 @@ extension RoomListViewController: UICollectionViewDataSource, UICollectionViewDe
         if section == 0 {
             return 1
         }
-        return 15
+        return coreDataManager.rooms.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -85,6 +90,12 @@ extension RoomListViewController: UICollectionViewDataSource, UICollectionViewDe
         let tapRoomListButton = UITapGestureRecognizer(target: self, action: #selector(tapRoomListButton))
         cell.roomStack.isUserInteractionEnabled = true
         cell.roomStack.addGestureRecognizer(tapRoomListButton)
+        
+        cell.roomTitle.text = coreDataManager.rooms[indexPath.row].clientName
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yy.MM.dd"
+        cell.startDate.text = dateFormatter.string(from: coreDataManager.rooms[indexPath.row].startDate!)
+        cell.endDate.text = dateFormatter.string(from: coreDataManager.rooms[indexPath.row].endDate!)
         return cell
     }
     
