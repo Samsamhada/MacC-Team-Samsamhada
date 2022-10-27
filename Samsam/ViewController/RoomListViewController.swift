@@ -8,7 +8,6 @@
 import UIKit
 
 class RoomListViewController: UIViewController {
-
     
     // MARK: - View
     
@@ -65,7 +64,7 @@ class RoomListViewController: UIViewController {
     }
 }
 
-extension RoomListViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+extension RoomListViewController: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 2
