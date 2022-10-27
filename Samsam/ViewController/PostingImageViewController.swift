@@ -10,6 +10,7 @@ import PhotosUI
 
 struct PreviewItem {
     var image: UIImage?
+    var path: Data?
 }
 
 class PostingImageViewController: UIViewController {
@@ -21,6 +22,7 @@ class PostingImageViewController: UIViewController {
     var numberOfItem = 0
     var exampleNUM = 0
     var imgItems: [PreviewItem] = [PreviewItem(image: UIImage(named: "CameraBTN"))]
+    var copyImgItems: [PreviewItem]?
     
     // MARK: - View
     
@@ -126,6 +128,13 @@ class PostingImageViewController: UIViewController {
         let postingWritingView = PostingWritingView()
         postingWritingView.roomID = roomID
         postingWritingView.categoryID = categoryID
+        if numberOfItem > 3 {
+            postingWritingView.imgItems = imgItems
+        } else {
+            copyImgItems = imgItems
+            copyImgItems?.remove(at: 0)
+            postingWritingView.imgItems = copyImgItems
+        }
         navigationController?.pushViewController(postingWritingView, animated: true)
     }
     
@@ -152,11 +161,11 @@ extension PostingImageViewController: UIImagePickerControllerDelegate, UINavigat
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let pickedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
             numberOfItem = numberOfItem + 1
-            imgItems.append(PreviewItem(image: pickedImage))
-            
+            imgItems.append(PreviewItem(image: pickedImage, path: pickedImage.pngData()))
             if numberOfItem == 4 {
                 imgItems.remove(at: 0)
             }
+            print(imgItems)
             imageCellView.reloadData()
         }
         dismiss(animated: true, completion: nil)
@@ -175,6 +184,7 @@ extension PostingImageViewController: PHPickerViewControllerDelegate {
                 DispatchQueue.main.async { [self] in
                     let image = image as? UIImage
                     imgItems[exampleNUM].image = image
+                    imgItems[exampleNUM].path = image?.pngData()
                     imageCellView.reloadData()
                 }
             }
