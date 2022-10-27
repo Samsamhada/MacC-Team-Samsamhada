@@ -133,6 +133,7 @@ class PostingWritingView: UIViewController {
     
     @objc func tapNextBTN() {
         navigationController?.popToRootViewController(animated: true)
+        self.dismiss(animated: true)
     }
     
     @objc private func keyboardWillShow(notification: NSNotification) {
