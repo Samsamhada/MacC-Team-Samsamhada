@@ -107,16 +107,19 @@ class RoomCategoryViewController: UIViewController {
     }
     
     @objc func tapNextBTN() {
-        self.dismiss(animated: true)
-        
-        coreDataManager.createRoomData(clientName: clientName,
-                                       startDate: startingDate,
-                                       endDate: endingDate,
-                                       warrantyTime: Int(warrantyTime))
+        coreDataManager.createRoomData(
+            clientName: clientName,
+            startDate: startingDate,
+            endDate: endingDate,
+            warrantyTime: Int(warrantyTime)
+        )
         
         selectedCellArray.forEach {
-            coreDataManager.createWorkingStatusData(roomID: coreDataManager.countData(dataType: "room") - 1,
-                                                    categoryID: $0)
+            coreDataManager.createWorkingStatusData(
+                roomID: coreDataManager.countData(dataType: "room") - 1,
+                categoryID: $0
+            )
+        self.dismiss(animated: true)
         }
     }
 }
