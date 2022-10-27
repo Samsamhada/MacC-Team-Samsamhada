@@ -81,7 +81,7 @@ class WorkingHistoryViewController: UIViewController {
     // MARK: - Method
     
     private func setNavigationBar() {
-        navigationItem.title = "포항공대 포스빌"
+        navigationItem.title = coreDataManager.oneRoom?.clientName
         navigationController?.navigationBar.prefersLargeTitles = false
     }
 
