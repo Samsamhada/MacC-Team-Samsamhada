@@ -28,7 +28,7 @@ class RoomListCell: UICollectionViewCell {
         $0.layer.shadowOpacity = 0.25
         $0.layer.shadowOffset = CGSize(width: 2, height: 2)
         $0.layer.shadowRadius = 15
-        $0.layer.borderColor = appColor.campanulaPink?.cgColor
+        $0.layer.borderColor = AppColor.campanulaPink?.cgColor
         $0.layer.borderWidth = 2
         return $0
     }(UIStackView())
@@ -56,7 +56,7 @@ class RoomListCell: UICollectionViewCell {
     
     private let chipShape: UIView = {
         $0.layer.cornerRadius = 8
-        $0.backgroundColor = appColor.campanulaPink
+        $0.backgroundColor = AppColor.campanulaPink
         return $0
     }(UIView())
     

@@ -16,7 +16,7 @@ class WorkingHistoryViewController: UIViewController {
     // MARK: - View
     
     private let writingButton: UIButton = {
-        $0.backgroundColor = appColor.campanulaBlue
+        $0.backgroundColor = AppColor.campanulaBlue
         $0.setTitle("시공상황 작성하기", for: .normal)
         $0.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
         $0.setTitleColor(.white, for: .normal)
