@@ -120,7 +120,6 @@ class PostingWritingView: UIViewController {
     
     private func setupNavigationTitle() {
         navigationItem.title = "시공 상황 작성"
-        navigationController?.navigationBar.topItem?.title="뒤로가기"
         navigationController?.navigationBar.tintColor = .black
         navigationController?.navigationBar.prefersLargeTitles = false
         navigationController?.setNavigationBarHidden(false, animated: false)
