@@ -132,7 +132,10 @@ class PostingWritingView: UIViewController {
     }
     
     @objc func tapNextBTN() {
-        navigationController?.popToRootViewController(animated: true)
+        coreDataManager.createPostingData(roomID: 0, categoryID: categoryID!, explanation: textContent.text!)
+        
+        // TODO: - 사진 저장부분 추가
+        
         self.dismiss(animated: true)
     }
     
