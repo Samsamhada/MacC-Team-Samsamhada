@@ -141,6 +141,13 @@ extension WorkingHistoryViewController: UICollectionViewDataSource, UICollection
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let detailViewController = DetailViewController()
+        coreDataManager.loadPhotoData(postingID: indexPath.item)
+        detailViewController.images = coreDataManager.photos
+        coreDataManager.postings.forEach {
+            if $0.postingID == indexPath.item + 1 {
+                detailViewController.descriptionLBL.text = $0.explanation
+            }
+        }
         navigationController?.pushViewController(detailViewController, animated: true)
     }
 }
