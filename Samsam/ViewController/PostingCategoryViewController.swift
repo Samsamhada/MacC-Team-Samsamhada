@@ -68,7 +68,7 @@ class PostingCategoryViewController: UIViewController {
 
         categoryView.delegate = self
         categoryView.dataSource = self
-        categoryView.allowsMultipleSelection = true
+        categoryView.allowsMultipleSelection = false
         categoryView.register(CategoryCell.self, forCellWithReuseIdentifier: CategoryCell.identifier)
     }
     
