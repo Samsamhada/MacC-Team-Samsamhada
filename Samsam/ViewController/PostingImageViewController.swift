@@ -165,7 +165,6 @@ extension PostingImageViewController: UIImagePickerControllerDelegate, UINavigat
             if numberOfItem == 4 {
                 imgItems.remove(at: 0)
             }
-            print(imgItems)
             imageCellView.reloadData()
         }
         dismiss(animated: true, completion: nil)

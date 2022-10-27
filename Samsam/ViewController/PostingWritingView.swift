@@ -72,8 +72,6 @@ class PostingWritingView: UIViewController {
         layout()
         hidekeyboardWhenTappedAround()
         setupNotificationCenter()
-        print(imgItems?.count)
-        print(imgItems)
     }
     
     // MARK: - Method
