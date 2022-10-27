@@ -38,6 +38,10 @@ class WorkingHistoryViewController: UIViewController {
         layout()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        coreDataManager.loadOneRoomData(roomID: roomID!)
+    }
+    
     // MARK: - Method
     
     private func attribute() {
