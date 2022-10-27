@@ -33,3 +33,15 @@ extension UIColor {
         self.init(red: red, green: green, blue: blue, alpha: opacity)
     }
 }
+
+
+struct AppColor {
+    let campanulaBlue = UIColor(hex: "5A54F4")
+    let campanulaPink = UIColor(hex: "EDB2B2")
+    let bloodRed = UIColor(hex: "9A0000")
+    let mainBlack = UIColor(hex: "101010")
+    let unSelectedGray = UIColor(hex: "D1D1D1")
+    let selectedGray = UIColor(hex: "8B8686")
+}
+
+let appColor = AppColor()
