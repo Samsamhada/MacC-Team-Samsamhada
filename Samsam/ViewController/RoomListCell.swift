@@ -28,8 +28,8 @@ class RoomListCell: UICollectionViewCell {
         $0.layer.shadowOpacity = 0.25
         $0.layer.shadowOffset = CGSize(width: 2, height: 2)
         $0.layer.shadowRadius = 15
-        $0.layer.borderColor = UIColor.blue.cgColor
-        $0.layer.borderWidth = 1
+        $0.layer.borderColor = UIColor(hex: "B2CDED")?.cgColor
+        $0.layer.borderWidth = 3
         return $0
     }(UIStackView())
     
@@ -56,13 +56,13 @@ class RoomListCell: UICollectionViewCell {
     
     private let chipShape: UIView = {
         $0.layer.cornerRadius = 8
-        $0.backgroundColor = .blue
+        $0.backgroundColor = UIColor(hex: "B2CDED")
         return $0
     }(UIView())
     
     private lazy var chipText: UILabel = {
-        $0.text = "AS기간"
-        $0.textColor = .white
+        $0.text = "진행중"
+        $0.textColor = .black
         $0.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
         return $0
     }(UILabel())
