@@ -12,6 +12,7 @@ class PostingWritingView: UIViewController {
     // MARK: - Property
     
     var categoryID: Int?
+    var imgItems: [PreviewItem]?
     private let textViewPlaceHolder = "텍스트를 입력하세요"
 
     // MARK: - View
@@ -137,8 +138,10 @@ class PostingWritingView: UIViewController {
     
     @objc func tapNextBTN() {
         coreDataManager.createPostingData(roomID: 0, categoryID: categoryID!, explanation: textContent.text!)
-//        coreDataManager.createPhotoData(postingID: coreDataManager.countData(dataType: "posting") - 1, photoPath: <#T##Data#>)
-//        navigationController?.popToRootViewController(animated: true)
+        for i in stride(from: 0, to: imgItems!.count, by: 1) {
+            coreDataManager.createPhotoData(postingID: coreDataManager.countData(dataType: "posting") - 1, photoPath: imgItems![i].path!)
+        }
+        navigationController?.popToRootViewController(animated: true)
         self.dismiss(animated: true)
     }
     
