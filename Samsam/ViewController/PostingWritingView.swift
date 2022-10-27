@@ -133,7 +133,9 @@ class PostingWritingView: UIViewController {
     }
     
     @objc func tapNextBTN() {
-        coreDataManager.createPostingData(roomID: 0, categoryID: categoryID!, explanation: textContent.text!)
+        coreDataManager.createPostingData(roomID: roomID!, categoryID: categoryID!, explanation: textContent.text!)
+        coreDataManager.loadPostingData(roomID: roomID!)
+        print(coreDataManager.postings)
         
         // TODO: - 사진 저장부분 추가
         
