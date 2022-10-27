@@ -101,7 +101,7 @@ extension WorkingHistoryViewController: UICollectionViewDataSource, UICollection
     // MARK: - Header
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 3
+        return 1
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
