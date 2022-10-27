@@ -9,6 +9,17 @@ import UIKit
 
 class RoomCategoryViewController: UIViewController {
     
+    // MARK: - Property
+    
+    var roomEntity: RoomEntity?
+    var workingStatusEntity: WorkingStatusEntity?
+
+    var clientName: String = ""
+    var startingDate: Date = Date()
+    var endingDate: Date = Date()
+    var warrantyTime: Int32 = 0
+    var selectedCellArray: [Int] = []
+    
     // MARK: - View
 
     private var titleText: UILabel = {
@@ -99,9 +110,17 @@ class RoomCategoryViewController: UIViewController {
     }
     
     @objc func tapNextBTN() {
-//        let vc = RoomCodeViewController()
-//        navigationController?.pushViewController(vc, animated: true)
         self.dismiss(animated: true)
+        
+        coreDataManager.createRoomData(clientName: clientName,
+                                       startDate: startingDate,
+                                       endDate: endingDate,
+                                       warrantyTime: Int(warrantyTime))
+        
+        selectedCellArray.forEach {
+            coreDataManager.createWorkingStatusData(roomID: coreDataManager.countData(dataType: "room") - 1,
+                                                    categoryID: $0)
+        }
     }
 }
 
@@ -133,7 +152,7 @@ extension RoomCategoryViewController:  UICollectionViewDelegate, UICollectionVie
 
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CategoryCell.identifier, for: indexPath) as! CategoryCell
         cell.categoryImage.image = UIImage(named: CategoryCell.ImageLiteral.noCheck)
-        cell.categoryTitle.text = "\(indexPath.item+1) 카테고리"
+        cell.categoryTitle.text = "\(indexPath.item + 1) 카테고리"
         return cell
     }
     
@@ -142,6 +161,8 @@ extension RoomCategoryViewController:  UICollectionViewDelegate, UICollectionVie
         if cell?.isSelected == false {
             cell?.isSelected = true
         }
+        selectedCellArray.append(indexPath.item)
+
         return true
     }
 
@@ -150,6 +171,7 @@ extension RoomCategoryViewController:  UICollectionViewDelegate, UICollectionVie
         if cell?.isSelected == true {
             cell?.isSelected = false
         }
+        selectedCellArray.remove(at: selectedCellArray.firstIndex(of: indexPath.item)!)
         return true
     }
 

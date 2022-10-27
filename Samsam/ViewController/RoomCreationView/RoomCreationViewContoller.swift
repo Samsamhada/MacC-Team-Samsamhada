@@ -12,6 +12,7 @@ class RoomCreationViewController: UIViewController {
     // MARK: - Property
     
     private lazy var warrantyCount = 12
+    private var roomEntity: RoomEntity?
     
     // MARK: - View
     
@@ -246,7 +247,12 @@ class RoomCreationViewController: UIViewController {
     // TODO: - 방생성카테고리 뷰로 수정 예정.
     
     @objc private func tapNextButton() {
+        
         let roomCategoryViewController = RoomCategoryViewController()
+        roomCategoryViewController.clientName = customerTextField.text ?? ""
+        roomCategoryViewController.startingDate = startDate.date
+        roomCategoryViewController.endingDate = endDate.date
+        roomCategoryViewController.warrantyTime = Int32(warrantyCount)
         navigationController?.pushViewController(roomCategoryViewController, animated: true)
     }
     

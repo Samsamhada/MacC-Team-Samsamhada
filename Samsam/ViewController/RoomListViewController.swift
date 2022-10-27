@@ -100,9 +100,7 @@ extension RoomListViewController: UICollectionViewDataSource, UICollectionViewDe
     }
     
     @objc func tapRoomCreationButton() {
-        let roomCreationViewController = UINavigationController(
-            rootViewController:  RoomCreationViewController()
-        )
+        let roomCreationViewController = UINavigationController(rootViewController:  RoomCreationViewController())
         roomCreationViewController.modalPresentationStyle = .fullScreen
         present(roomCreationViewController, animated:  true, completion: nil)
     }
