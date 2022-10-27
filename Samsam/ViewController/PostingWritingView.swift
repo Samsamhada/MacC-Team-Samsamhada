@@ -11,6 +11,7 @@ class PostingWritingView: UIViewController {
     
     // MARK: - Property
     
+    var categoryID: Int?
     private let textViewPlaceHolder = "텍스트를 입력하세요"
 
     // MARK: - View
