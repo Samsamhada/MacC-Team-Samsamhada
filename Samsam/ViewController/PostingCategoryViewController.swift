@@ -70,15 +70,22 @@ class PostingCategoryViewController: UIViewController {
     }
     
     private func setNavigationTitle() {
-        let appearance = UINavigationBarAppearance()
-        
-        appearance.backgroundColor = .white
-        navigationController?.navigationBar.standardAppearance = appearance
-        navigationController?.navigationBar.scrollEdgeAppearance = appearance
-        navigationController?.navigationBar.backgroundColor = .white
-        navigationController?.navigationBar.topItem?.title = "시공 상황 작성"
+        navigationItem.leftBarButtonItem = UIBarButtonItem(
+            image: UIImage(systemName: "xmark"),
+            style: .plain,
+            target: self,
+            action: #selector(closeBTN)
+        )
+        navigationItem.title = "시공 상황 작성"
+        navigationItem.leftBarButtonItem?.tintColor = .black
         navigationController?.navigationBar.prefersLargeTitles = false
-        navigationController?.setNavigationBarHidden(false, animated: false)
+        navigationController?.setNavigationBarHidden(false, animated: true)
+        navigationItem.backBarButtonItem = UIBarButtonItem(
+            title: "",
+            style: .plain,
+            target: self,
+            action: nil)
+        navigationItem.backBarButtonItem?.tintColor = .black
     }
     
     @objc func tapNextBtn(_sender: UIButton) {
@@ -128,6 +135,10 @@ extension PostingCategoryViewController:  UICollectionViewDelegate, UICollection
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
          return UIEdgeInsets(top: 8, left: 8, bottom: 16, right: 8)
+    }
+        
+    @objc private func closeBTN() {
+        self.dismiss(animated: true)
     }
 }
 
