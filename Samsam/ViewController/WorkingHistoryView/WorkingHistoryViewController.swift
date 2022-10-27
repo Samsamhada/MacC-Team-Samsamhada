@@ -124,8 +124,10 @@ extension WorkingHistoryViewController: UICollectionViewDataSource, UICollection
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: WorkingHistoryViewCell.identifier, for: indexPath) as! WorkingHistoryViewCell
-        cell.imageDescription.text = "애플, 동아시아 최초 '디벨로퍼 아카데미' 한국서 운영"
-        cell.workType.text = "철거"
+        coreDataManager.loadPhotoData(postingID: indexPath.item)
+        cell.uiImageView.image = UIImage(data: coreDataManager.photos[0].photoPath!)
+        cell.imageDescription.text = coreDataManager.postings[indexPath.item].explanation
+        cell.workType.text = Category.categoryName(Category(rawValue: Int(coreDataManager.postings[indexPath.item].categoryID))!)()
 
         return cell
     }
