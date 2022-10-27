@@ -14,7 +14,7 @@ class DetailViewController: UIViewController, UIScrollViewDelegate {
     let screenWidth = UIScreen.main.bounds.width - 32
     
     private var naviTitle = "화장실"
-    var images = ["Test01","Test02","Test03","Test04"]
+    var images: [PhotoEntity] = []
     private var imageArray: [UIImage] = []
     
     // MARK: - View
