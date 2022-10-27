@@ -119,7 +119,7 @@ extension WorkingHistoryViewController: UICollectionViewDataSource, UICollection
     // MARK: - Cell
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 3
+        return coreDataManager.postings.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
