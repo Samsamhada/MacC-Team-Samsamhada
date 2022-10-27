@@ -12,7 +12,6 @@ class RoomCreationViewController: UIViewController {
     // MARK: - Property
     
     private lazy var warrantyCount = 12
-    private var roomEntity: RoomEntity?
     
     // MARK: - View
     

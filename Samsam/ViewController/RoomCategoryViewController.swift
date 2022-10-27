@@ -10,11 +10,6 @@ import UIKit
 class RoomCategoryViewController: UIViewController {
     
     // MARK: - Property
-    
-    let roomListViewContoller = RoomListViewController()
-    
-    var roomEntity: RoomEntity?
-    var workingStatusEntity: WorkingStatusEntity?
 
     var clientName: String = ""
     var startingDate: Date = Date()
