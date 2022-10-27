@@ -47,7 +47,7 @@ class RoomListCell: UICollectionViewCell {
         return $0
     }(UIView())
     
-    private lazy var roomTitle: UILabel = {
+    var roomTitle: UILabel = {
         $0.text = "방 이름"
         $0.font = UIFont.systemFont(ofSize: 20, weight: .bold)
         $0.textAlignment = .center
@@ -107,25 +107,25 @@ class RoomListCell: UICollectionViewCell {
         return $0
     }(UIStackView())
     
-    private let endDateTitle: UILabel = {
+    private let startDateTitle: UILabel = {
         $0.text = "시공일자"
         $0.font = UIFont.systemFont(ofSize: 16)
         return $0
     }(UILabel())
     
-    private lazy var endDate: UILabel = {
+    var startDate: UILabel = {
         $0.text = "2022.10.17"
         $0.font = UIFont.systemFont(ofSize: 16)
         return $0
     }(UILabel())
     
-    private let warrantyTimeTitle: UILabel = {
+    private let endDateTitle: UILabel = {
         $0.text = "준공예정"
         $0.font = UIFont.systemFont(ofSize: 16)
         return $0
     }(UILabel())
     
-    private lazy var warrantyTime: UILabel = {
+    var endDate: UILabel = {
         $0.text = "2022.11.17"
         $0.font = UIFont.systemFont(ofSize: 16)
         return $0
@@ -167,11 +167,11 @@ class RoomListCell: UICollectionViewCell {
         dateInfoStack.addArrangedSubview(dateCenterSpacer)
         dateInfoStack.addArrangedSubview(dateContentStack)
         
+        dateTitleStack.addArrangedSubview(startDateTitle)
         dateTitleStack.addArrangedSubview(endDateTitle)
-        dateTitleStack.addArrangedSubview(warrantyTimeTitle)
         
+        dateContentStack.addArrangedSubview(startDate)
         dateContentStack.addArrangedSubview(endDate)
-        dateContentStack.addArrangedSubview(warrantyTime)
         
         cellStack.anchor(
             top: topAnchor,

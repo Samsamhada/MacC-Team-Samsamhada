@@ -66,7 +66,6 @@ class PostingCategoryViewController: UIViewController {
         categoryView.dataSource = self
         categoryView.allowsMultipleSelection = true
         categoryView.register(CategoryCell.self, forCellWithReuseIdentifier: CategoryCell.identifier)
-        
     }
     
     private func setNavigationTitle() {
@@ -85,7 +84,6 @@ class PostingCategoryViewController: UIViewController {
         let vc = PostingImageViewController()
         navigationController?.pushViewController(vc, animated: true)
     }
-    
 }
 
 // MARK: - UICollectionViewDelegate, DataSourse, DelegateFlowLayout
