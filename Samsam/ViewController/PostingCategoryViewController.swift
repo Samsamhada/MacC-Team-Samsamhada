@@ -115,18 +115,8 @@ extension PostingCategoryViewController:  UICollectionViewDelegate, UICollection
     
     func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
         let cell = collectionView.cellForItem(at: indexPath)
-        if cell?.isSelected == false {
-            cell?.isSelected = true
-            categoryID = indexPath.item
-        }
-        return true
-    }
-
-    func collectionView(_ collectionView: UICollectionView, shouldDeselectItemAt indexPath: IndexPath) -> Bool {
-        let cell = collectionView.cellForItem(at: indexPath)
-        if cell?.isSelected == true {
-            cell?.isSelected = false
-        }
+        categoryID = indexPath.item
+        collectionView.reloadData()
         return true
     }
 
