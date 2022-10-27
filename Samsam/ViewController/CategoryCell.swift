@@ -19,15 +19,14 @@ class CategoryCell: UICollectionViewCell {
     }
     
     override var isSelected: Bool{
-            didSet {
-                    if isSelected {
-                        self.categoryImage.image = UIImage(named: ImageLiteral.Check)
-                        
-                    } else {
-                        self.categoryImage.image = UIImage(named: ImageLiteral.noCheck)
-                    }
-                }
+        didSet {
+            if isSelected {
+                self.categoryImage.image = UIImage(named: ImageLiteral.Check)
+            } else {
+                self.categoryImage.image = UIImage(named: ImageLiteral.noCheck)
+            }
         }
+    }
     
     // MARK: - View
     

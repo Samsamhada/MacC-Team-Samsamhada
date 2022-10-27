@@ -52,14 +52,14 @@ class PostingWritingView: UIViewController {
     }(UIView())
     
     private let finalBTN: UIButton = {
-            $0.backgroundColor = .blue
-            $0.setTitle("작성 완료", for: .normal)
-            $0.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
-            $0.setTitleColor(.black, for: .normal)
-            $0.layer.cornerRadius = 16
-            $0.addTarget(self, action: #selector(tapNextBTN), for: .touchUpInside)
-            return $0
-        }(UIButton())
+        $0.backgroundColor = .blue
+        $0.setTitle("작성 완료", for: .normal)
+        $0.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
+        $0.setTitleColor(.black, for: .normal)
+        $0.layer.cornerRadius = 16
+        $0.addTarget(self, action: #selector(tapNextBTN), for: .touchUpInside)
+        return $0
+    }(UIButton())
     
     // MARK: - Lifecycle
     
