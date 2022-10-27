@@ -121,3 +121,7 @@ extension RoomListViewController: UICollectionViewDataSource, UICollectionViewDe
         navigationController?.pushViewController(workingHistoryViewController, animated: true)
     }
 }
+
+class CustomTapGestureRecognizer: UITapGestureRecognizer {
+    var roomID: Int?
+}
