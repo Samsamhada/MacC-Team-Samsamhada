@@ -56,7 +56,7 @@ class DetailViewController: UIViewController, UIScrollViewDelegate {
         return $0
     }(UIScrollView())
     
-    private let descriptionLBL: UILabel = {
+    let descriptionLBL: UILabel = {
         $0.backgroundColor = .clear
         $0.text = "디너 미뉴 에디 디너 미뉴 에디 fe디너 미뉴 에디 디너 미뉴 에디 디너 미뉴 에디 디너 미뉴 에디 디너 미뉴 에디 디너 미뉴 에디 디너 미뉴 에디 디너 미뉴 에디 디fe너 미뉴 에디 디너 미뉴 에디 디너 미뉴 에디 디너 미뉴ef 에디 디너 미뉴 에디 ef디너 미뉴 에fef디 디너 미뉴 에디 디너 미뉴 에디 디너 미뉴 에디 디너 미뉴 에디 디너 미뉴 에디 디너 미뉴 에디 디너 미뉴 에디 디너 미뉴 에디 디너 미뉴 에디 디너 미뉴 에디 디너 미뉴 에디 디너 미뉴 에디 디너 미뉴 에디 디너 미뉴 에디 디너 미뉴 에디 "
         $0.textColor = .black
