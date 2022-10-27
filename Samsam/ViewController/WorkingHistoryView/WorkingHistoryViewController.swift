@@ -40,13 +40,13 @@ class WorkingHistoryViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         coreDataManager.loadOneRoomData(roomID: roomID!)
+        setNavigationBar()
     }
     
     // MARK: - Method
     
     private func attribute() {
         view.backgroundColor = .white
-        setNavigationBar()
         
         workingHistoryView.delegate = self
         workingHistoryView.dataSource = self
