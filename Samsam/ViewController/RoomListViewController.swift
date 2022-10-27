@@ -86,7 +86,8 @@ extension RoomListViewController: UICollectionViewDataSource, UICollectionViewDe
         }
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RoomListCell.identifier, for: indexPath) as! RoomListCell
         
-        let tapRoomListButton = UITapGestureRecognizer(target: self, action: #selector(tapRoomListButton))
+        let tapRoomListButton = CustomTapGestureRecognizer(target: self, action: #selector(tapRoomListButton))
+        tapRoomListButton.roomID = Int(coreDataManager.rooms[indexPath.item].roomID)
         cell.roomStack.isUserInteractionEnabled = true
         cell.roomStack.addGestureRecognizer(tapRoomListButton)
                 
@@ -116,8 +117,13 @@ extension RoomListViewController: UICollectionViewDataSource, UICollectionViewDe
         present(roomCreationViewController, animated:  true, completion: nil)
     }
     
-    @objc func tapRoomListButton() {
+    @objc func tapRoomListButton(sender: CustomTapGestureRecognizer) {
         let workingHistoryViewController = WorkingHistoryViewController()
+        workingHistoryViewController.roomID = sender.roomID
         navigationController?.pushViewController(workingHistoryViewController, animated: true)
     }
+}
+
+class CustomTapGestureRecognizer: UITapGestureRecognizer {
+    var roomID: Int?
 }

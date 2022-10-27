@@ -11,6 +11,8 @@ class PostingWritingView: UIViewController {
     
     // MARK: - Property
     
+    var roomID: Int?
+    var categoryID: Int?
     private let textViewPlaceHolder = "텍스트를 입력하세요"
 
     // MARK: - View
@@ -52,14 +54,14 @@ class PostingWritingView: UIViewController {
     }(UIView())
     
     private let finalBTN: UIButton = {
-            $0.backgroundColor = .blue
-            $0.setTitle("작성 완료", for: .normal)
-            $0.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
-            $0.setTitleColor(.black, for: .normal)
-            $0.layer.cornerRadius = 16
-            $0.addTarget(self, action: #selector(tapNextBTN), for: .touchUpInside)
-            return $0
-        }(UIButton())
+        $0.backgroundColor = .blue
+        $0.setTitle("작성 완료", for: .normal)
+        $0.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
+        $0.setTitleColor(.black, for: .normal)
+        $0.layer.cornerRadius = 16
+        $0.addTarget(self, action: #selector(tapNextBTN), for: .touchUpInside)
+        return $0
+    }(UIButton())
     
     // MARK: - Lifecycle
     
@@ -131,7 +133,11 @@ class PostingWritingView: UIViewController {
     }
     
     @objc func tapNextBTN() {
-        navigationController?.popToRootViewController(animated: true)
+        coreDataManager.createPostingData(roomID: roomID!, categoryID: categoryID!, explanation: textContent.text!)
+        
+        // TODO: - 사진 저장부분 추가
+        
+        self.dismiss(animated: true)
     }
     
     @objc private func keyboardWillShow(notification: NSNotification) {

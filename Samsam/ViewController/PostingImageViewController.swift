@@ -16,9 +16,11 @@ class PostingImageViewController: UIViewController {
     
     // MARK: - Property
     
+    var roomID: Int?
+    var categoryID: Int?
     var numberOfItem = 0
     var exampleNUM = 0
-    var imgItems:[PreviewItem] = [PreviewItem(image: UIImage(named: "CameraBTN"))]
+    var imgItems: [PreviewItem] = [PreviewItem(image: UIImage(named: "CameraBTN"))]
     
     // MARK: - View
     
@@ -121,8 +123,10 @@ class PostingImageViewController: UIViewController {
     }
     
     @objc func tapNextBTN() {
-        let vc = PostingWritingView()
-        navigationController?.pushViewController(vc, animated: true)
+        let postingWritingView = PostingWritingView()
+        postingWritingView.roomID = roomID
+        postingWritingView.categoryID = categoryID
+        navigationController?.pushViewController(postingWritingView, animated: true)
     }
     
     @objc func uploadPhoto() {

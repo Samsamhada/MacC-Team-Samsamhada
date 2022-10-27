@@ -9,6 +9,11 @@ import UIKit
 
 class PostingCategoryViewController: UIViewController {
     
+    // MARK: - Property
+    
+    var roomID: Int?
+    private var categoryID: Int = 0
+    
     // MARK: - View
     
     let categoryView: UICollectionView = {
@@ -64,7 +69,7 @@ class PostingCategoryViewController: UIViewController {
 
         categoryView.delegate = self
         categoryView.dataSource = self
-        categoryView.allowsMultipleSelection = true
+        categoryView.allowsMultipleSelection = false
         categoryView.register(CategoryCell.self, forCellWithReuseIdentifier: CategoryCell.identifier)
     }
     
@@ -88,8 +93,10 @@ class PostingCategoryViewController: UIViewController {
     }
     
     @objc func tapNextBtn(_sender: UIButton) {
-        let vc = PostingImageViewController()
-        navigationController?.pushViewController(vc, animated: true)
+        let postingImageViewController = PostingImageViewController()
+        postingImageViewController.roomID = roomID
+        postingImageViewController.categoryID = categoryID
+        navigationController?.pushViewController(postingImageViewController, animated: true)
     }
 }
 
@@ -104,24 +111,21 @@ extension PostingCategoryViewController:  UICollectionViewDelegate, UICollection
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CategoryCell.identifier, for: indexPath) as! CategoryCell
-        cell.categoryImage.image = UIImage(named: CategoryCell.ImageLiteral.noCheck)
+        
+        if indexPath.item == categoryID {
+            cell.categoryImage.image = UIImage(named: CategoryCell.ImageLiteral.Check)
+        } else {
+            cell.categoryImage.image = UIImage(named: CategoryCell.ImageLiteral.noCheck)
+        }
+        
         cell.categoryTitle.text = "\(indexPath.item+1) 카테고리"
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
         let cell = collectionView.cellForItem(at: indexPath)
-        if cell?.isSelected == false {
-            cell?.isSelected = true
-        }
-        return true
-    }
-
-    func collectionView(_ collectionView: UICollectionView, shouldDeselectItemAt indexPath: IndexPath) -> Bool {
-        let cell = collectionView.cellForItem(at: indexPath)
-        if cell?.isSelected == true {
-            cell?.isSelected = false
-        }
+        categoryID = indexPath.item
+        collectionView.reloadData()
         return true
     }
 

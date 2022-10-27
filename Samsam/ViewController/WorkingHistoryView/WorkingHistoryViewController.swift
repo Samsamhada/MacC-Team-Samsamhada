@@ -8,6 +8,10 @@
 import UIKit
 
 class WorkingHistoryViewController: UIViewController {
+    
+    // MARK: - Property
+    
+    var roomID: Int?
 
     // MARK: - View
     
@@ -29,6 +33,8 @@ class WorkingHistoryViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        coreDataManager.loadOneRoomData(roomID: roomID!)
+        setNavigationBar()
         
         attribute()
         layout()
@@ -38,7 +44,6 @@ class WorkingHistoryViewController: UIViewController {
     
     private func attribute() {
         view.backgroundColor = .white
-        setNavigationBar()
         
         workingHistoryView.delegate = self
         workingHistoryView.dataSource = self
@@ -73,13 +78,14 @@ class WorkingHistoryViewController: UIViewController {
     // MARK: - Method
     
     private func setNavigationBar() {
-        navigationItem.title = "포항공대 포스빌"
+        navigationItem.title = coreDataManager.oneRoom?.clientName
         navigationController?.navigationBar.prefersLargeTitles = false
     }
 
     @objc func tapWritingButton() {
-        let createVC = PostingCategoryViewController()
-        let navigationController = UINavigationController(rootViewController: createVC)
+        let postingCategoryViewController = PostingCategoryViewController()
+        postingCategoryViewController.roomID = roomID
+        let navigationController = UINavigationController(rootViewController: postingCategoryViewController)
         navigationController.modalPresentationStyle = .fullScreen
         present(navigationController, animated:  true, completion: nil)
     }
