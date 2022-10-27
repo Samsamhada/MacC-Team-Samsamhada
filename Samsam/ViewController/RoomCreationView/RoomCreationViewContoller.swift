@@ -133,7 +133,8 @@ class RoomCreationViewController: UIViewController {
         view.backgroundColor = .white
         
         setNavigation()
-        
+        hidekeyboardWhenTappedAround()
+
         nextButton.addTarget(self, action: #selector(tapNextButton), for: .touchUpInside)
     }
     
