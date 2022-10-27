@@ -210,8 +210,6 @@ extension PostingImageViewController:  UICollectionViewDelegate, UICollectionVie
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PostingImageCell.identifier, for: indexPath) as! PostingImageCell
-        
         if numberOfItem > 3 {
             exampleNUM = indexPath.row
             changePhoto()
