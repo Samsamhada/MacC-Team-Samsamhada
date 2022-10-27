@@ -8,6 +8,10 @@
 import UIKit
 
 class WorkingHistoryViewController: UIViewController {
+    
+    // MARK: - Property
+    
+    var roomID: Int?
 
     // MARK: - View
     
