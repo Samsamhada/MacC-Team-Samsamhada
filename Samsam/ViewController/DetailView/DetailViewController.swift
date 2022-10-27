@@ -58,7 +58,7 @@ class DetailViewController: UIViewController, UIScrollViewDelegate {
     
     private let descriptionLBL: UILabel = {
         $0.backgroundColor = .clear
-        $0.text = "디너 미뉴 에디 디너 미뉴 에디 fe디너 미뉴 에디 디너 미뉴 에디 디너 미뉴 에디 디너 미뉴 에디 디너 미뉴 에디 디너 미뉴 에디 디너 미뉴 에디 디너 미뉴 에디 디fe너 미뉴 에디 디너 미뉴 에디 디너 미뉴 에디 디너 미뉴ef 에디 디너 미뉴 에디 ef디너 미뉴 에fef디 디너 미뉴 에디 디너 미뉴 에디 디너 미뉴 에디 디너 미뉴 에디 디너 미뉴 에디 디너 미뉴 에디 디너 미뉴 에디 디너 미뉴 에디 디너 미뉴 에디 디너 미뉴 에디 디너 미뉴 에디 디너 미뉴 에디 디너 미뉴 에디 디너 미뉴 에디 디너 미뉴 에디 "
+        $0.text = "힘차게 싹이 보는 원대하고, 청춘의 모래뿐일 약동하다. 인생에 공자는 길을 운다. 구하기 불어 심장은 쓸쓸한 그것을 있으랴? 가치를 별과 인류의 때까지 그들을 찾아 목숨을 이상을 청춘에서만 철환하였는가? 밥을 속에서 만물은 새가 따뜻한 온갖 것이다. 구하지 예가 할지니, 칼이다. 갑 원대하고, 이것을 구하지 것이다. 광야에서 석가는 구할 곧 그러므로 위하여 황금시대다. 없으면, 남는 하였으며, 있는 힘차게 위하여서. 풍부하게 이것을 노년에게서 우리의 같이, 쓸쓸하랴? 사랑의 얼마나 곳으로 과실이 있는 날카로우나 쓸쓸한 황금시대다."
         $0.textColor = .black
         $0.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
         $0.textAlignment = .left
@@ -67,10 +67,10 @@ class DetailViewController: UIViewController, UIScrollViewDelegate {
     }(UILabel())
     
     private let sharingButton: UIButton = {
-        $0.backgroundColor = .lightGray
+        $0.backgroundColor = AppColor.campanulaBlue
         $0.setTitle("시공 상황 공유하기", for: .normal)
         $0.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
-        $0.setTitleColor(.black, for: .normal)
+        $0.setTitleColor(.white, for: .normal)
         $0.layer.cornerRadius = 16
         return $0
     }(UIButton())

@@ -30,7 +30,9 @@ class WorkingHistoryViewCell: UICollectionViewCell {
     }(UILabel())
     
     private let workTypeView: UIView = {
-        $0.backgroundColor = .purple
+        $0.backgroundColor = .white
+        $0.layer.borderColor = AppColor.campanulaBlue?.cgColor
+        $0.layer.borderWidth = 2
         $0.layer.cornerRadius = 16
         return $0
     }(UIView())
@@ -39,7 +41,7 @@ class WorkingHistoryViewCell: UICollectionViewCell {
         $0.text = "철거"
         $0.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
         $0.textAlignment = .center
-        $0.textColor = .white
+        $0.textColor = AppColor.campanulaBlue
         return $0
     }(UILabel())
     

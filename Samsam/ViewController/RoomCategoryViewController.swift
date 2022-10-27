@@ -28,10 +28,10 @@ class RoomCategoryViewController: UIViewController {
     }(UILabel())
     
     private let nextBTN: UIButton = {
-        $0.backgroundColor = .blue
+        $0.backgroundColor = AppColor.campanulaBlue
         $0.setTitle("방 생성하기", for: .normal)
         $0.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
-        $0.setTitleColor(.black, for: .normal)
+        $0.setTitleColor(.white, for: .normal)
         $0.layer.cornerRadius = 16
         $0.addTarget(self, action: #selector(tapNextBTN), for: .touchUpInside)
         return $0

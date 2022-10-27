@@ -39,6 +39,7 @@
 		43C2111128FCFB3800E8F6DD /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43C2111028FCFB3800E8F6DD /* CategoryCell.swift */; };
 		980D900E28FE671B003CC2DA /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980D900D28FE671B003CC2DA /* DetailViewController.swift */; };
 		98366F8D29019A5300E81E27 /* RoomCreationViewContoller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98366F8C29019A5300E81E27 /* RoomCreationViewContoller.swift */; };
+		98B08A60290AC8C900401650 /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B08A5F290AC8C900401650 /* UIColor+.swift */; };
 		98C0D06028FCE8EB00E0E439 /* AutoLayout+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98C0D05F28FCE8EB00E0E439 /* AutoLayout+.swift */; };
 		98C0D06428FCE99300E0E439 /* JSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98C0D06328FCE99300E0E439 /* JSON.swift */; };
 		98C0D06728FCE9DC00E0E439 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98C0D06628FCE9DC00E0E439 /* Model.swift */; };
@@ -86,6 +87,7 @@
 		43C2111028FCFB3800E8F6DD /* CategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
 		980D900D28FE671B003CC2DA /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		98366F8C29019A5300E81E27 /* RoomCreationViewContoller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomCreationViewContoller.swift; sourceTree = "<group>"; };
+		98B08A5F290AC8C900401650 /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
 		98C0D05F28FCE8EB00E0E439 /* AutoLayout+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AutoLayout+.swift"; sourceTree = "<group>"; };
 		98C0D06328FCE99300E0E439 /* JSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSON.swift; sourceTree = "<group>"; };
 		98C0D06628FCE9DC00E0E439 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
@@ -192,6 +194,7 @@
 			children = (
 				98C0D05F28FCE8EB00E0E439 /* AutoLayout+.swift */,
 				98E1700C2906EFEB00F71D41 /* hideKeyboard+.swift */,
+				98B08A5F290AC8C900401650 /* UIColor+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -357,6 +360,7 @@
 				26E3748228FCDC0000997DA7 /* AppDelegate.swift in Sources */,
 				43C2111128FCFB3800E8F6DD /* CategoryCell.swift in Sources */,
 				26FEC1DE2902E6F2006C410B /* WorkingStatusEntity+CoreDataProperties.swift in Sources */,
+				98B08A60290AC8C900401650 /* UIColor+.swift in Sources */,
 				26E3748428FCDC0000997DA7 /* SceneDelegate.swift in Sources */,
 				98366F8D29019A5300E81E27 /* RoomCreationViewContoller.swift in Sources */,
 				4386FB022901353B00314936 /* RoomCategoryViewController.swift in Sources */,
@@ -519,7 +523,7 @@
 				CODE_SIGN_ENTITLEMENTS = Samsam/Samsam.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = UDCS6NMGF8;
+				DEVELOPMENT_TEAM = N6LML762WM;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Samsam/Info.plist;
 				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "사진 저장을 위해 라이브러리 접근권한이 필요합니다.";
@@ -553,7 +557,7 @@
 				CODE_SIGN_ENTITLEMENTS = Samsam/Samsam.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = UDCS6NMGF8;
+				DEVELOPMENT_TEAM = N6LML762WM;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Samsam/Info.plist;
 				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "사진 저장을 위해 라이브러리 접근권한이 필요합니다.";

@@ -57,6 +57,7 @@ class RoomCreationViewController: UIViewController {
         $0.locale = Locale(identifier: "ko-KR")
         $0.timeZone = .autoupdatingCurrent
         $0.preferredDatePickerStyle = .compact
+        $0.tintColor = AppColor.campanulaBlue
         return $0
     }(UIDatePicker())
     
@@ -78,6 +79,7 @@ class RoomCreationViewController: UIViewController {
         $0.locale = Locale(identifier: "ko-KR")
         $0.timeZone = .autoupdatingCurrent
         $0.preferredDatePickerStyle = .compact
+        $0.tintColor = AppColor.campanulaBlue
         return $0
     }(UIDatePicker())
     
@@ -112,8 +114,9 @@ class RoomCreationViewController: UIViewController {
     
     private let nextButton: UIButton = {
         $0.setTitle("다음", for: .normal)
-        $0.setTitleColor(.black, for: .normal)
-        $0.backgroundColor = .yellow
+        $0.setTitleColor(.white, for: .normal)
+        $0.backgroundColor = AppColor.campanulaBlue
+        $0.layer.cornerRadius = 16
         return $0
     }(UIButton())
     
