@@ -27,7 +27,7 @@ class PostingCategoryViewController: UIViewController {
         $0.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
         $0.setTitleColor(.white, for: .normal)
         $0.layer.cornerRadius = 16
-        $0.addTarget(self, action: #selector(tapNextBtn(_sender:)), for: .touchUpInside)
+        $0.addTarget(self, action: #selector(tapNextBtn), for: .touchUpInside)
         return $0
     }(UIButton())
     
@@ -123,7 +123,6 @@ extension PostingCategoryViewController:  UICollectionViewDelegate, UICollection
     }
     
     func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
-        let cell = collectionView.cellForItem(at: indexPath)
         categoryID = indexPath.item
         collectionView.reloadData()
         return true
