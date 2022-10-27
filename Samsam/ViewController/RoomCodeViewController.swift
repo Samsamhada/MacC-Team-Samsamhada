@@ -22,10 +22,11 @@ class RoomCodeViewController: UIViewController {
         return $0
     }(UILabel())
     
-    private var contentView: UIView = {
-        $0.isUserInteractionEnabled = true
+    private lazy var contentView: UIView = {
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(copyCode))
+        $0.addGestureRecognizer(tapGesture)
         return $0
-    }(UIImageView())
+    }(UIView())
     
     private var inviteLabel: UILabel = {
         let attachment = NSTextAttachment()
@@ -39,16 +40,16 @@ class RoomCodeViewController: UIViewController {
         return $0
     }(UILabel())
     
-    private lazy var inviteBTN: UIButton = {
-        $0.setTitle(code, for: .normal)
-        $0.titleLabel?.font = UIFont.systemFont(ofSize: 17, weight: .semibold)
-        $0.setTitleColor(.blue, for: .normal)
-        $0.addTarget(self, action: #selector(copyCode), for: .touchUpInside)
+    private lazy var codeLabel: UILabel = {
+        $0.text = code
+        $0.font = UIFont.systemFont(ofSize: 17, weight: .semibold)
+        $0.textAlignment = .center
+        $0.textColor = .blue
         return $0
-    }(UIButton())
+    }(UILabel())
     
     private var detailLabel: UILabel = {
-        $0.text = "초대 코드 글자를 눌러 복사하세요"
+        $0.text = "초대 코드를 눌러 복사하세요"
         $0.font = UIFont.systemFont(ofSize: 15, weight: .semibold)
         $0.textAlignment = .center
         $0.textColor = .lightGray
@@ -81,45 +82,43 @@ class RoomCodeViewController: UIViewController {
     }
     
     private func layout() {
+        self.view.addSubview(mainTitle)
         self.view.addSubview(contentView)
-        self.contentView.addSubview(mainTitle)
         self.contentView.addSubview(inviteLabel)
         self.contentView.addSubview(detailLabel)
-        self.contentView.addSubview(inviteBTN)
+        self.contentView.addSubview(codeLabel)
         self.view.addSubview(finishBTN)
         
-        contentView.anchor(
+        mainTitle.anchor(
             left: view.safeAreaLayoutGuide.leftAnchor,
             right: view.safeAreaLayoutGuide.rightAnchor,
-            height: 200
-        )
-        contentView.centerY(inView: self.view)
-        
-        mainTitle.anchor(
-            top: contentView.topAnchor,
-            left: contentView.leftAnchor,
-            bottom: inviteLabel.topAnchor,
-            right: contentView.rightAnchor,
-            paddingBottom: 50,
             height: 20
         )
+        mainTitle.centerY(inView: self.view)
+        
+        contentView.anchor(
+            top: mainTitle.bottomAnchor,
+            paddingTop: 30,
+            width: 200,
+            height: 70
+        )
+        contentView.centerX(inView: self.view)
         
         inviteLabel.anchor(
-            top: mainTitle.bottomAnchor,
+            top: contentView.topAnchor,
             left: contentView.leftAnchor,
             right: contentView.rightAnchor
         )
         
-        inviteBTN.anchor(
+        codeLabel.anchor(
             top: inviteLabel.bottomAnchor,
             bottom: detailLabel.topAnchor,
-            paddingTop: 2,
-            paddingBottom: 2
+            paddingTop: 4,
+            paddingBottom: 4
         )
-        inviteBTN.centerX(inView: contentView)
+        codeLabel.centerX(inView: contentView)
         
         detailLabel.anchor(
-            top: inviteBTN.bottomAnchor,
             left: contentView.leftAnchor,
             right: contentView.rightAnchor
         )
