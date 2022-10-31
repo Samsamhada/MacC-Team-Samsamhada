@@ -1,5 +1,5 @@
 //
-//  WorkingHistoryViewCell.swift
+//  WorkingHistoryViewContentCell.swift
 //  Samsam
 //
 //  Created by 지준용 on 2022/10/17.
