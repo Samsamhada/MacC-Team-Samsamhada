@@ -124,17 +124,17 @@ extension WorkingHistoryViewController: UICollectionViewDataSource, UICollection
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         
         if indexPath.section == 0 {
-            let firstHeader = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: WorkingHistoryViewTopHeader.identifier, for: indexPath) as! WorkingHistoryViewTopHeader
+            let topHeader = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: WorkingHistoryViewTopHeader.identifier, for: indexPath) as! WorkingHistoryViewTopHeader
             
-            firstHeader.progressDuration.text = "진행상황(10.11 ~ 11.12)"
+            topHeader.progressDuration.text = "진행상황(10.11 ~ 11.12)"
             
-            return firstHeader
+            return topHeader
         } else {
-            let secondHeader = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: WorkingHistoryViewContentHeader.identifier, for: indexPath) as! WorkingHistoryViewContentHeader
+            let contentHeader = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: WorkingHistoryViewContentHeader.identifier, for: indexPath) as! WorkingHistoryViewContentHeader
             
-            secondHeader.uploadDate.text = "10월 12일"
+            contentHeader.uploadDate.text = "10월 12일"
             
-            return secondHeader
+            return contentHeader
         }
     }
     
@@ -151,18 +151,18 @@ extension WorkingHistoryViewController: UICollectionViewDataSource, UICollection
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         if indexPath.section == 0 {
-            let firstCell = collectionView.dequeueReusableCell(withReuseIdentifier: WorkingHistoryViewTopCell.identifier, for: indexPath) as! WorkingHistoryViewTopCell
-            firstCell.viewAll.addTarget(self, action: #selector(tapAllView), for: .touchUpInside)
-            return firstCell
+            let topCell = collectionView.dequeueReusableCell(withReuseIdentifier: WorkingHistoryViewTopCell.identifier, for: indexPath) as! WorkingHistoryViewTopCell
+            topCell.viewAll.addTarget(self, action: #selector(tapAllView), for: .touchUpInside)
+            return topCell
         } else {
-            let secondCell = collectionView.dequeueReusableCell(withReuseIdentifier: WorkingHistoryViewContentCell.identifier, for: indexPath) as! WorkingHistoryViewContentCell
+            let contentCell = collectionView.dequeueReusableCell(withReuseIdentifier: WorkingHistoryViewContentCell.identifier, for: indexPath) as! WorkingHistoryViewContentCell
             coreDataManager.loadPhotoData(postingID: indexPath.item)
             
-            secondCell.uiImageView.image = UIImage(data: coreDataManager.photos[0].photoPath!)
-            secondCell.imageDescription.text = coreDataManager.postings[indexPath.item].explanation
-            secondCell.workType.text = Category.categoryName(Category(rawValue: Int(coreDataManager.postings[indexPath.item].categoryID))!)()
+            contentCell.uiImageView.image = UIImage(data: coreDataManager.photos[0].photoPath!)
+            contentCell.imageDescription.text = coreDataManager.postings[indexPath.item].explanation
+            contentCell.workType.text = Category.categoryName(Category(rawValue: Int(coreDataManager.postings[indexPath.item].categoryID))!)()
             
-            return secondCell
+            return contentCell
         }
     }
     
