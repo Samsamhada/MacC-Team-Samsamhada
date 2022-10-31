@@ -11,17 +11,20 @@ class WorkingHistoryViewTopCell: UICollectionViewCell {
     
     // MARK: - Property
     
-    static let identifier = "workingHistoryFirstCell"
+    static let identifier = "workingHistoryTopCell"
     
     // MARK: - View
     
-    let viewAll: UILabel = {
-        $0.text = "전체보기"
-        $0.textColor = .gray
-        $0.textAlignment = .right
-        $0.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
+    let viewAll: UIButton = {
+        $0.setTitle("전체보기", for: .normal)
+        $0.setTitleColor(.gray, for: .normal)
+        $0.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
+        $0.titleLabel?.textAlignment = .right
+        $0.setImage(UIImage(systemName: "chevron.right"), for: .normal)
+        $0.semanticContentAttribute = .forceRightToLeft
+        $0.tintColor = .gray
         return $0
-    }(UILabel())
+    }(UIButton())
     
     // MARK: - Init
     

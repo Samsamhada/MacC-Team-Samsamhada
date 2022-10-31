@@ -11,7 +11,7 @@ class WorkingHistoryViewTopHeader: UICollectionReusableView {
     
     // MARK: - Property
     
-    static let identifier = "workingHistoryFirstHeader"
+    static let identifier = "workingHistoryTopHeader"
     
     // MARK: - View
     

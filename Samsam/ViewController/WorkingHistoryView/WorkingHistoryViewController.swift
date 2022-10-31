@@ -144,8 +144,7 @@ extension WorkingHistoryViewController: UICollectionViewDataSource, UICollection
         
         if indexPath.section == 0 {
             let firstCell = collectionView.dequeueReusableCell(withReuseIdentifier: WorkingHistoryViewTopCell.identifier, for: indexPath) as! WorkingHistoryViewTopCell
-            firstCell.viewAll.text = "전체보기"
-            
+            firstCell.viewAll.addTarget(self, action: #selector(tapAllView), for: .touchUpInside)
             return firstCell
         } else {
             let secondCell = collectionView.dequeueReusableCell(withReuseIdentifier: WorkingHistoryViewContentCell.identifier, for: indexPath) as! WorkingHistoryViewContentCell
@@ -162,7 +161,7 @@ extension WorkingHistoryViewController: UICollectionViewDataSource, UICollection
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
         if indexPath.section == 0 {
-            let width = UIScreen.main.bounds.width - 32
+            let width = UIScreen.main.bounds.width
             let cellHeight = 20
             return CGSize(width: Int(width), height: cellHeight)
         } else {
@@ -173,14 +172,21 @@ extension WorkingHistoryViewController: UICollectionViewDataSource, UICollection
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let detailViewController = DetailViewController()
-        coreDataManager.loadPhotoData(postingID: indexPath.item)
-        detailViewController.images = coreDataManager.photos
-        coreDataManager.postings.forEach {
-            if $0.postingID == indexPath.item + 1 {
-                detailViewController.descriptionLBL.text = $0.explanation
+        if indexPath.section > 0 {
+            let detailViewController = DetailViewController()
+            coreDataManager.loadPhotoData(postingID: indexPath.item)
+            detailViewController.images = coreDataManager.photos
+            coreDataManager.postings.forEach {
+                if $0.postingID == indexPath.item + 1 {
+                    detailViewController.descriptionLBL.text = $0.explanation
+                }
             }
+            navigationController?.pushViewController(detailViewController, animated: true)
         }
-        navigationController?.pushViewController(detailViewController, animated: true)
+    }
+    
+    @objc func tapAllView() {
+        let chipViewController = ViewController()
+        navigationController?.pushViewController(VC, animated: true)
     }
 }
