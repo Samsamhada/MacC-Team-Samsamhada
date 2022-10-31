@@ -87,6 +87,9 @@ class WorkingHistoryViewController: UIViewController {
     private func setNavigationBar() {
         navigationItem.title = coreDataManager.oneRoom?.clientName
         navigationController?.navigationBar.prefersLargeTitles = false
+        let rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "gearshape"), style: .plain, target: self, action: #selector(tapSettingButton))
+        rightBarButtonItem.tintColor = .black
+        navigationItem.rightBarButtonItem = rightBarButtonItem
     }
 
     @objc func tapWritingButton() {
@@ -95,6 +98,11 @@ class WorkingHistoryViewController: UIViewController {
         let navigationController = UINavigationController(rootViewController: postingCategoryViewController)
         navigationController.modalPresentationStyle = .fullScreen
         present(navigationController, animated:  true, completion: nil)
+    }
+    
+    @objc func tapSettingButton() {
+        let settingViewController = ViewController()
+        navigationController?.pushViewController(settingViewController, animated: true)
     }
 }
 
@@ -187,6 +195,6 @@ extension WorkingHistoryViewController: UICollectionViewDataSource, UICollection
     
     @objc func tapAllView() {
         let chipViewController = ViewController()
-        navigationController?.pushViewController(VC, animated: true)
+        navigationController?.pushViewController(chipViewController , animated: true)
     }
 }
