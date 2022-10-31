@@ -53,8 +53,10 @@ class WorkingHistoryViewController: UIViewController {
         workingHistoryView.delegate = self
         workingHistoryView.dataSource = self
         
-        workingHistoryView.register(WorkingHistoryViewHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: WorkingHistoryViewHeader.identifier)
-        workingHistoryView.register(WorkingHistoryViewCell.self, forCellWithReuseIdentifier: WorkingHistoryViewCell.identifier)
+        workingHistoryView.register(WorkingHistoryViewTopHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: WorkingHistoryViewTopHeader.identifier)
+        workingHistoryView.register(WorkingHistoryViewContentHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: WorkingHistoryViewContentHeader.identifier)
+        workingHistoryView.register(WorkingHistoryViewTopCell.self, forCellWithReuseIdentifier: WorkingHistoryViewTopCell.identifier)
+        workingHistoryView.register(WorkingHistoryViewContentCell.self, forCellWithReuseIdentifier: WorkingHistoryViewContentCell.identifier)
         
         writingButton.addTarget(self, action: #selector(tapWritingButton), for: .touchDown)
     }
@@ -101,42 +103,73 @@ extension WorkingHistoryViewController: UICollectionViewDataSource, UICollection
     // MARK: - Header
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
+        return 3
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        if section == 0 {
+            return CGSize(width: UIScreen.main.bounds.width, height: 100)
+        }
         return CGSize(width: UIScreen.main.bounds.width, height: 70)
     }
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         
-        let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: WorkingHistoryViewHeader.identifier, for: indexPath) as! WorkingHistoryViewHeader
-        header.uploadDate.text = "10월 12일"
-        
-        return header
+        if indexPath.section == 0 {
+            let firstHeader = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: WorkingHistoryViewTopHeader.identifier, for: indexPath) as! WorkingHistoryViewTopHeader
+            
+            firstHeader.progressDuration.text = "진행상황(10.11 ~ 11.12)"
+            
+            return firstHeader
+        } else {
+            let secondHeader = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: WorkingHistoryViewContentHeader.identifier, for: indexPath) as! WorkingHistoryViewContentHeader
+            
+            secondHeader.uploadDate.text = "10월 12일"
+            
+            return secondHeader
+        }
     }
     
     // MARK: - Cell
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return coreDataManager.postings.count
+        if section == 0 {
+            return 1
+        } else {
+            return coreDataManager.postings.count
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: WorkingHistoryViewCell.identifier, for: indexPath) as! WorkingHistoryViewCell
-        coreDataManager.loadPhotoData(postingID: indexPath.item)
-        cell.uiImageView.image = UIImage(data: coreDataManager.photos[0].photoPath!)
-        cell.imageDescription.text = coreDataManager.postings[indexPath.item].explanation
-        cell.workType.text = Category.categoryName(Category(rawValue: Int(coreDataManager.postings[indexPath.item].categoryID))!)()
-
-        return cell
+        
+        if indexPath.section == 0 {
+            let firstCell = collectionView.dequeueReusableCell(withReuseIdentifier: WorkingHistoryViewTopCell.identifier, for: indexPath) as! WorkingHistoryViewTopCell
+            firstCell.viewAll.text = "전체보기"
+            
+            return firstCell
+        } else {
+            let secondCell = collectionView.dequeueReusableCell(withReuseIdentifier: WorkingHistoryViewContentCell.identifier, for: indexPath) as! WorkingHistoryViewContentCell
+            coreDataManager.loadPhotoData(postingID: indexPath.item)
+            
+            secondCell.uiImageView.image = UIImage(data: coreDataManager.photos[0].photoPath!)
+            secondCell.imageDescription.text = coreDataManager.postings[indexPath.item].explanation
+            secondCell.workType.text = Category.categoryName(Category(rawValue: Int(coreDataManager.postings[indexPath.item].categoryID))!)()
+            
+            return secondCell
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width = UIScreen.main.bounds.width - 32
-        let cellHeight = width / 4 * 3 + 30
         
-        return CGSize(width: Int(width), height: Int(cellHeight))
+        if indexPath.section == 0 {
+            let width = UIScreen.main.bounds.width - 32
+            let cellHeight = 20
+            return CGSize(width: Int(width), height: cellHeight)
+        } else {
+            let width = UIScreen.main.bounds.width - 32
+            let cellHeight = width / 4 * 3 + 30
+            return CGSize(width: Int(width), height: Int(cellHeight))
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {

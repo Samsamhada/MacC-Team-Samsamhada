@@ -7,13 +7,21 @@
 
 import UIKit
 
-class WorkingHistoryViewCell: UICollectionViewCell {
+class WorkingHistoryViewContentCell: UICollectionViewCell {
     
     // MARK: - Property
     
-    static let identifier = "workingHistory"
+    static let identifier = "workingHistorySecondCell"
     
     // MARK: - View
+    
+    let viewAll: UILabel = {
+        $0.text = "전체보기"
+        $0.textColor = .gray
+        $0.textAlignment = .right
+        $0.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
+        return $0
+    }(UILabel())
     
     let uiImageView: UIImageView = {
         $0.image = UIImage(named: "TestImage")
