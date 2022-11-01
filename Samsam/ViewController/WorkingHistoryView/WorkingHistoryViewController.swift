@@ -64,6 +64,7 @@ class WorkingHistoryViewController: UIViewController {
     
     private func attribute() {
         view.backgroundColor = .white
+        setSegmentedControl()
         
         workingHistoryView.delegate = self
         workingHistoryView.dataSource = self
@@ -135,6 +136,37 @@ class WorkingHistoryViewController: UIViewController {
     @objc func tapSettingButton() {
         let settingViewController = ViewController()
         navigationController?.pushViewController(settingViewController, animated: true)
+    }
+    
+    @objc func setSegmentedControl(){
+        views = [workingHistoryView, inquiryHistoryView]
+
+        let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(handleGesture(gesture:)))
+        swipeLeft.direction = .left
+        self.view.addGestureRecognizer(swipeLeft)
+
+        let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(handleGesture(gesture:)))
+        swipeRight.direction = .right
+        self.view.addGestureRecognizer(swipeRight)
+    }
+    
+    @objc func handleGesture(gesture: UISwipeGestureRecognizer) {
+        if index >= 0 && index < views.count {
+            if gesture.direction == UISwipeGestureRecognizer.Direction.right {
+                if index != 0 {
+                    index -= 1
+                    self.view.bringSubviewToFront(views[index]!)
+                }
+            }
+            if gesture.direction == UISwipeGestureRecognizer.Direction.left {
+                if index != views.count - 1 {
+                    index += 1
+                    self.view.bringSubviewToFront(views[index]!)
+                }
+            }
+            self.view.bringSubviewToFront(writingButton)
+            segmentedControl.selectedSegmentIndex = index
+        }
     }
     
     @objc func tapSegmentButton() {
