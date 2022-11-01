@@ -12,8 +12,18 @@ class WorkingHistoryViewController: UIViewController {
     // MARK: - Property
     
     var roomID: Int?
-
+    var views: [UIView?] = []
+    var index = 0
+    
     // MARK: - View
+    
+    private let segmentedControl: UISegmentedControl = {
+        $0.tintColor = .black
+        $0.backgroundColor = .clear
+        $0.selectedSegmentIndex = 0
+        $0.addTarget(self, action: #selector(tapSegmentButton), for: .valueChanged)
+        return $0
+    }(UISegmentedControl(items: ["시공내역", "문의내역"]))
     
     private let writingButton: UIButton = {
         $0.backgroundColor = AppColor.campanulaBlue
@@ -28,6 +38,11 @@ class WorkingHistoryViewController: UIViewController {
         return $0
     }(UICollectionView(
         frame: .zero, collectionViewLayout: UICollectionViewFlowLayout()))
+    
+    private let inquiryHistoryView: UIView = {
+        $0.backgroundColor = .black
+        return $0
+    }(UIView())
     
     // MARK: - LifeCycle
     
@@ -62,14 +77,31 @@ class WorkingHistoryViewController: UIViewController {
     }
     
     private func layout() {
+        view.addSubview(segmentedControl)
+        view.addSubview(inquiryHistoryView)
         view.addSubview(workingHistoryView)
         view.addSubview(writingButton)
         
-        workingHistoryView.anchor(
+        segmentedControl.anchor(
             top: view.safeAreaLayoutGuide.topAnchor,
             left: view.safeAreaLayoutGuide.leftAnchor,
-            bottom: view.bottomAnchor,
             right: view.safeAreaLayoutGuide.rightAnchor
+        )
+        
+        inquiryHistoryView.anchor(
+            top: segmentedControl.bottomAnchor,
+            left: view.safeAreaLayoutGuide.leftAnchor,
+            bottom: view.bottomAnchor,
+            right: view.safeAreaLayoutGuide.rightAnchor,
+            paddingTop: 16
+        )
+        
+        workingHistoryView.anchor(
+            top: segmentedControl.bottomAnchor,
+            left: view.safeAreaLayoutGuide.leftAnchor,
+            bottom: view.bottomAnchor,
+            right: view.safeAreaLayoutGuide.rightAnchor,
+            paddingTop: 16
         )
 
         writingButton.anchor(
@@ -103,6 +135,30 @@ class WorkingHistoryViewController: UIViewController {
     @objc func tapSettingButton() {
         let settingViewController = ViewController()
         navigationController?.pushViewController(settingViewController, animated: true)
+    }
+    
+    @objc func tapSegmentButton() {
+        switch segmentedControl.selectedSegmentIndex {
+        case 0:
+            self.view.bringSubviewToFront(workingHistoryView)
+            self.view.bringSubviewToFront(writingButton)
+        case 1:
+            self.view.bringSubviewToFront(inquiryHistoryView)
+            self.view.bringSubviewToFront(writingButton)
+        default:
+            break
+        }
+    }
+    
+    func moveToFrame(contentOffset : CGFloat) {
+
+        let frame: CGRect = CGRect(
+            x: contentOffset,
+            y: self.workingHistoryView.contentOffset.y,
+            width: self.workingHistoryView.frame.width,
+            height: self.workingHistoryView.frame.height
+        )
+        self.workingHistoryView.scrollRectToVisible(frame, animated: true)
     }
 }
 

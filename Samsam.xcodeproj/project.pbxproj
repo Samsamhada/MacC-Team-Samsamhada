@@ -47,6 +47,7 @@
 		98C0D06C28FCF46500E0E439 /* WorkingHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98C0D06B28FCF46500E0E439 /* WorkingHistoryViewController.swift */; };
 		98C0D07228FD02E400E0E439 /* WorkingHistoryViewContentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98C0D07128FD02E400E0E439 /* WorkingHistoryViewContentCell.swift */; };
 		98C2448B28FD3EDA0006A01B /* WorkingHistoryViewTopHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98C2448A28FD3EDA0006A01B /* WorkingHistoryViewTopHeader.swift */; };
+		98CFE3122910FC8E004B2FA1 /* InquiryHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CFE3112910FC8E004B2FA1 /* InquiryHistoryViewController.swift */; };
 		98E1700D2906EFEB00F71D41 /* hideKeyboard+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E1700C2906EFEB00F71D41 /* hideKeyboard+.swift */; };
 		98E1700F29080C9100F71D41 /* ImageDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E1700E29080C9100F71D41 /* ImageDetailViewController.swift */; };
 		98E899BA290FCAAB001245C4 /* WorkingHistoryViewContentHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E899B9290FCAAB001245C4 /* WorkingHistoryViewContentHeader.swift */; };
@@ -97,6 +98,7 @@
 		98C0D06B28FCF46500E0E439 /* WorkingHistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkingHistoryViewController.swift; sourceTree = "<group>"; };
 		98C0D07128FD02E400E0E439 /* WorkingHistoryViewContentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkingHistoryViewContentCell.swift; sourceTree = "<group>"; };
 		98C2448A28FD3EDA0006A01B /* WorkingHistoryViewTopHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkingHistoryViewTopHeader.swift; sourceTree = "<group>"; };
+		98CFE3112910FC8E004B2FA1 /* InquiryHistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InquiryHistoryViewController.swift; sourceTree = "<group>"; };
 		98E1700C2906EFEB00F71D41 /* hideKeyboard+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "hideKeyboard+.swift"; sourceTree = "<group>"; };
 		98E1700E29080C9100F71D41 /* ImageDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDetailViewController.swift; sourceTree = "<group>"; };
 		98E899B9290FCAAB001245C4 /* WorkingHistoryViewContentHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkingHistoryViewContentHeader.swift; sourceTree = "<group>"; };
@@ -255,6 +257,7 @@
 			isa = PBXGroup;
 			children = (
 				98C0D06B28FCF46500E0E439 /* WorkingHistoryViewController.swift */,
+				98CFE3102910FC5A004B2FA1 /* InquiryHistoryView */,
 				98C0D06E28FCF47800E0E439 /* UIComponent */,
 			);
 			path = WorkingHistoryView;
@@ -269,6 +272,14 @@
 				98C0D07128FD02E400E0E439 /* WorkingHistoryViewContentCell.swift */,
 			);
 			path = UIComponent;
+			sourceTree = "<group>";
+		};
+		98CFE3102910FC5A004B2FA1 /* InquiryHistoryView */ = {
+			isa = PBXGroup;
+			children = (
+				98CFE3112910FC8E004B2FA1 /* InquiryHistoryViewController.swift */,
+			);
+			path = InquiryHistoryView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -352,6 +363,7 @@
 				26FEC1E02902E6F2006C410B /* PhotoEntity+CoreDataProperties.swift in Sources */,
 				98C0D06728FCE9DC00E0E439 /* Model.swift in Sources */,
 				98C2448B28FD3EDA0006A01B /* WorkingHistoryViewTopHeader.swift in Sources */,
+				98CFE3122910FC8E004B2FA1 /* InquiryHistoryViewController.swift in Sources */,
 				98E899BC290FD00C001245C4 /* WorkingHistoryViewTopCell.swift in Sources */,
 				98C0D07228FD02E400E0E439 /* WorkingHistoryViewContentCell.swift in Sources */,
 				98E899BA290FCAAB001245C4 /* WorkingHistoryViewContentHeader.swift in Sources */,
