@@ -23,7 +23,9 @@ class PostingImageViewController: UIViewController {
     var exampleNUM = 0
     
     private var photoImages: [cellItem] = [cellItem(image: UIImage(named: "CameraBTN"))]
-
+    private var copyPhotoImages: [cellItem]?
+    private var changeNUM: Int?
+    private var plusBool: Bool = true
     
     // MARK: - View
     
@@ -53,7 +55,7 @@ class PostingImageViewController: UIViewController {
         $0.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
         $0.setTitleColor(.white, for: .normal)
         $0.layer.cornerRadius = 16
-//        $0.addTarget(self, action: #selector(tapNextBTN), for: .touchUpInside)
+        $0.addTarget(self, action: #selector(tapNextBTN), for: .touchUpInside)
         return $0
     }(UIButton())
     
@@ -125,26 +127,32 @@ class PostingImageViewController: UIViewController {
         navigationItem.backBarButtonItem?.tintColor = .black
     }
     
-//    @objc func tapNextBTN() {
-//        let postingWritingView = PostingWritingView()
-//        postingWritingView.roomID = roomID
-//        postingWritingView.categoryID = categoryID
-//        if numberOfItem > 3 {
-//            postingWritingView.imgItems = imgItems
-//        } else {
-//            copyImgItems = imgItems
-//            copyImgItems?.remove(at: 0)
-//            postingWritingView.imgItems = copyImgItems
-//        }
-//        navigationController?.pushViewController(postingWritingView, animated: true)
-//    }
-
-    @objc func setPhoto() {
-        var configure = PHPickerConfiguration()
-        configure.selectionLimit = 4 - numberOfItem
-        if configure.selectionLimit == 0 {
-            configure.selectionLimit = 1
+    @objc func tapNextBTN() {
+        let postingWritingView = PostingWritingView()
+        postingWritingView.roomID = roomID
+        postingWritingView.categoryID = categoryID
+        
+        if numberOfItem > 3 {
+            postingWritingView.photoImages = photoImages
+        } else {
+            copyPhotoImages = photoImages
+            copyPhotoImages?.remove(at: 0)
+            postingWritingView.photoImages = copyPhotoImages
         }
+        navigationController?.pushViewController(postingWritingView, animated: true)
+    }
+
+    @objc func setPhoto(indexPath: Int) {
+        var configure = PHPickerConfiguration()
+       
+        
+        if plusBool == true {
+            configure.selectionLimit = 4 - numberOfItem
+        } else {
+            configure.selectionLimit = 1
+            changeNUM = indexPath
+        }
+
         configure.selection = .ordered
         configure.filter = .images
         let picker = PHPickerViewController(configuration: configure)
@@ -153,26 +161,41 @@ class PostingImageViewController: UIViewController {
     }
 }
 
-
 extension PostingImageViewController: PHPickerViewControllerDelegate {
     func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
         picker.dismiss(animated: true, completion: nil)
-
-        for result in results {
-            let itemProvider = result.itemProvider
-            if itemProvider.canLoadObject(ofClass: UIImage.self) {
-                itemProvider.loadObject(ofClass: UIImage.self) { [weak self](image, error) in
-                    DispatchQueue.main.async {
-                        self?.photoImages.append(cellItem(image: image as! UIImage))
-                        self?.numberOfItem = self!.numberOfItem + 1
-                        self?.imageCellView.reloadData()
+    
+        if plusBool == true {
+            for result in results {
+                let itemProvider = result.itemProvider
+                if itemProvider.canLoadObject(ofClass: UIImage.self) {
+                    itemProvider.loadObject(ofClass: UIImage.self) { [weak self](image, error) in
+                        DispatchQueue.main.async {
+                            self?.photoImages.append(cellItem(image: image as! UIImage))
+                            self?.numberOfItem = self!.numberOfItem + 1
+                            self?.imageCellView.reloadData()
+                        }
+                    }
+                }
+            }
+            if results.count + photoImages.count == 5 {
+                photoImages.remove(at: 0)
+                plusBool = false
+            }
+        } else {
+            for result in results {
+                let itemProvider = result.itemProvider
+                if itemProvider.canLoadObject(ofClass: UIImage.self) {
+                    itemProvider.loadObject(ofClass: UIImage.self) { [weak self](image, error) in
+                        DispatchQueue.main.async {
+                            self?.photoImages[self!.changeNUM!].image = image as! UIImage
+                            self?.imageCellView.reloadData()
+                        }
                     }
                 }
             }
         }
-        if results.count + photoImages.count == 5 {
-            photoImages.remove(at: 0)
-        }
+       
     }
 }
 
@@ -193,7 +216,7 @@ extension PostingImageViewController:  UICollectionViewDelegate, UICollectionVie
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        setPhoto()
+        setPhoto(indexPath: indexPath.row)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
