@@ -8,7 +8,7 @@
 import UIKit
 import PhotosUI
 
-struct PreviewItem {
+struct cellItem {
     var image: UIImage?
     var path: Data?
 }
@@ -21,8 +21,9 @@ class PostingImageViewController: UIViewController {
     var categoryID: Int?
     var numberOfItem = 0
     var exampleNUM = 0
-    private var imgItems: [PreviewItem] = [PreviewItem(image: UIImage(named: "CameraBTN"))]
-    private var copyImgItems: [PreviewItem]?
+    
+    private var photoImages: [cellItem] = [cellItem(image: UIImage(named: "CameraBTN"))]
+
     
     // MARK: - View
     
@@ -52,7 +53,7 @@ class PostingImageViewController: UIViewController {
         $0.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
         $0.setTitleColor(.white, for: .normal)
         $0.layer.cornerRadius = 16
-        $0.addTarget(self, action: #selector(tapNextBTN), for: .touchUpInside)
+//        $0.addTarget(self, action: #selector(tapNextBTN), for: .touchUpInside)
         return $0
     }(UIButton())
     
@@ -124,71 +125,53 @@ class PostingImageViewController: UIViewController {
         navigationItem.backBarButtonItem?.tintColor = .black
     }
     
-    @objc func tapNextBTN() {
-        let postingWritingView = PostingWritingView()
-        postingWritingView.roomID = roomID
-        postingWritingView.categoryID = categoryID
-        if numberOfItem > 3 {
-            postingWritingView.imgItems = imgItems
-        } else {
-            copyImgItems = imgItems
-            copyImgItems?.remove(at: 0)
-            postingWritingView.imgItems = copyImgItems
+//    @objc func tapNextBTN() {
+//        let postingWritingView = PostingWritingView()
+//        postingWritingView.roomID = roomID
+//        postingWritingView.categoryID = categoryID
+//        if numberOfItem > 3 {
+//            postingWritingView.imgItems = imgItems
+//        } else {
+//            copyImgItems = imgItems
+//            copyImgItems?.remove(at: 0)
+//            postingWritingView.imgItems = copyImgItems
+//        }
+//        navigationController?.pushViewController(postingWritingView, animated: true)
+//    }
+
+    @objc func setPhoto() {
+        var configure = PHPickerConfiguration()
+        configure.selectionLimit = 4 - numberOfItem
+        if configure.selectionLimit == 0 {
+            configure.selectionLimit = 1
         }
-        navigationController?.pushViewController(postingWritingView, animated: true)
-    }
-    
-    @objc func uploadPhoto() {
-        let imagePicker = UIImagePickerController()
-        imagePicker.sourceType = .photoLibrary
-        imagePicker.delegate = self
-        present(imagePicker, animated: true)
-    }
-    
-    @objc func changePhoto() {
-        var config = PHPickerConfiguration()
-        config.filter = .images
-        config.selection = .ordered
-        config.selectionLimit = 1
-        
-        let imagePicker = PHPickerViewController(configuration: config)
-        imagePicker.delegate = self
-        present(imagePicker, animated: true)
+        configure.selection = .ordered
+        configure.filter = .images
+        let picker = PHPickerViewController(configuration: configure)
+        picker.delegate = self
+        self.present(picker, animated: true, completion: nil)
     }
 }
 
-extension PostingImageViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        if let pickedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
-            numberOfItem = numberOfItem + 1
-            imgItems.append(PreviewItem(image: pickedImage, path: pickedImage.pngData()))
-            if numberOfItem == 4 {
-                imgItems.remove(at: 0)
-            }
-            imageCellView.reloadData()
-        }
-        dismiss(animated: true, completion: nil)
-    }
-    
-}
 
 extension PostingImageViewController: PHPickerViewControllerDelegate {
     func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
-        picker.dismiss(animated: true)
-        let itemProvider = results.first?.itemProvider
-        
-        if let itemProvider = itemProvider,
-           itemProvider.canLoadObject(ofClass: UIImage.self) {
-            itemProvider.loadObject(ofClass: UIImage.self) { (image, error) in
-                DispatchQueue.main.async { [self] in
-                    let image = image as? UIImage
-                    imgItems[exampleNUM].image = image
-                    imgItems[exampleNUM].path = image?.pngData()
-                    imageCellView.reloadData()
+        picker.dismiss(animated: true, completion: nil)
+
+        for result in results {
+            let itemProvider = result.itemProvider
+            if itemProvider.canLoadObject(ofClass: UIImage.self) {
+                itemProvider.loadObject(ofClass: UIImage.self) { [weak self](image, error) in
+                    DispatchQueue.main.async {
+                        self?.photoImages.append(cellItem(image: image as! UIImage))
+                        self?.numberOfItem = self!.numberOfItem + 1
+                        self?.imageCellView.reloadData()
+                    }
                 }
             }
-        } else {
-            
+        }
+        if results.count + photoImages.count == 5 {
+            photoImages.remove(at: 0)
         }
     }
 }
@@ -198,29 +181,19 @@ extension PostingImageViewController: PHPickerViewControllerDelegate {
 extension PostingImageViewController:  UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return imgItems.count
+        return photoImages.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PostingImageCell.identifier, for: indexPath) as! PostingImageCell
         
-        cell.preview.image = imgItems[indexPath.row].image
+        cell.preview.image = photoImages[indexPath.row].image
         
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if numberOfItem > 3 {
-            exampleNUM = indexPath.row
-            changePhoto()
-        } else {
-            if indexPath.row == 0 {
-                uploadPhoto()
-            } else {
-                exampleNUM = indexPath.row
-                changePhoto()
-            }
-        }
+        setPhoto()
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
