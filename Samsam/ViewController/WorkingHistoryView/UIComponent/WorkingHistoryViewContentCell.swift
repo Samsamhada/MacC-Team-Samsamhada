@@ -1,5 +1,5 @@
 //
-//  WorkingHistoryViewCell.swift
+//  WorkingHistoryViewContentCell.swift
 //  Samsam
 //
 //  Created by 지준용 on 2022/10/17.
@@ -7,11 +7,11 @@
 
 import UIKit
 
-class WorkingHistoryViewCell: UICollectionViewCell {
+class WorkingHistoryViewContentCell: UICollectionViewCell {
     
     // MARK: - Property
     
-    static let identifier = "workingHistory"
+    static let identifier = "workingHistoryContentCell"
     
     // MARK: - View
     
