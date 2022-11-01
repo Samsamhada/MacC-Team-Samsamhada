@@ -13,7 +13,7 @@ class PostingWritingView: UIViewController {
     
     var roomID: Int?
     var categoryID: Int?
-//    var imgItems: [PreviewItem]?
+    var photoImages: [cellItem]?
     private let textViewPlaceHolder = "텍스트를 입력하세요"
 
     // MARK: - View
@@ -67,6 +67,7 @@ class PostingWritingView: UIViewController {
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
+        print(photoImages?.count)
         super.viewDidLoad()
         attribute()
         layout()
