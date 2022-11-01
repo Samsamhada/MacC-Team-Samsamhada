@@ -55,7 +55,7 @@ class PostingImageViewController: UIViewController {
         $0.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
         $0.setTitleColor(.white, for: .normal)
         $0.layer.cornerRadius = 16
-//        $0.addTarget(self, action: #selector(tapNextBTN), for: .touchUpInside)
+        $0.addTarget(self, action: #selector(tapNextBTN), for: .touchUpInside)
         return $0
     }(UIButton())
     
@@ -248,7 +248,6 @@ extension PostingImageViewController: PHPickerViewControllerDelegate {
     
     func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
         picker.dismiss(animated: true, completion: nil)
-        
         // 밑에 plusIndex는 이미지를 업로드 했을 때, 최근에 누른 것이 위쪽에 보이도록 하기 위해서(이미지 추가 버튼 뒤쪽으로 배열에 넣어야 합니다), 그때 사용됩니다. 그러면 굳이 이렇게 변수로 뺀 이유는? 그건 바로 업로드 된 기존 이미지가 4개일 때, 하나를 삭제하면, 이미지 추가 버튼이 다시 나와야 합니다. 그때는 배열 0에 insert를 해야하기 위해서, 그때는 plusIndex가 0이 됩니다.
         var plusIndex = 1
         if plusBool == true && changeNUM == 0 { // 이것은 이미지 업로드 되었을 때 돌리는 if문 입니다.
