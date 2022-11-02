@@ -158,13 +158,25 @@ class PostingImageViewController: UIViewController {
         label.alpha = 0
         self.view.addSubview(label)
         
-        if plusBool == true {
-            configure.selectionLimit = 4 - numberOfItem
-        } else {
-            configure.selectionLimit = 1
-            changeNUM = indexPath
-        }
-
+        label.anchor(
+            bottom: nextBTN.topAnchor,
+            paddingBottom: 30,
+            width: 240,
+            height: 30
+        )
+        label.centerX(inView: self.view)
+        
+        UIView.animate(withDuration: 0.5, animations: {
+            label.alpha = 0.8
+        }, completion: { isCompleted in
+            UIView.animate(withDuration: 2.0, animations: {
+                label.alpha = 0
+            }, completion: { isCompleted in
+                label.removeFromSuperview()
+            })
+        })
+    }
+    
         configure.selection = .ordered
         configure.filter = .images
         let picker = PHPickerViewController(configuration: configure)
