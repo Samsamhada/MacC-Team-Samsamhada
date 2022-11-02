@@ -186,11 +186,47 @@ class PostingImageViewController: UIViewController {
         alertViewController.addAction(okAction)
         self.present(alertViewController, animated: true, completion: nil)
     }
+    
+    // 기존 사진을 클릭했을 때, 사진 변경 or 사진 삭제 알림 창을 띄우는 액션 시트
+    private func makeActionSheet(indexPath: Int) {
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        
+        let okAction = UIAlertAction(title: "사진 변경하기", style: .default, handler: { action in
+            self.changePhoto(indexPath: indexPath)
+        })
+        let removeAction = UIAlertAction(title: "사진 삭제하기", style: .destructive, handler: { action in
+            self.deletePhoto(indexPath: indexPath)
+        })
+        let cancelAction = UIAlertAction(title: "취소", style: .cancel, handler: nil)
+        
+        alert.addAction(okAction)
+        alert.addAction(removeAction)
+        alert.addAction(cancelAction)
+        
+        present(alert, animated: true, completion: nil)
+    }
+    
+    // 기존 이미지 변경 함수, 여기서 changeNUM은 어떤 이미지를 바꾸는 지 알아야 하기에 필요합니다!
+    @objc func changePhoto(indexPath: Int) {
+        changeNUM = indexPath
+        var configure = PHPickerConfiguration()
+        configure.selectionLimit = 1
         configure.selection = .ordered
         configure.filter = .images
         let picker = PHPickerViewController(configuration: configure)
         picker.delegate = self
         self.present(picker, animated: true, completion: nil)
+    }
+    
+    // 기존 이미지 삭제 함수, changeNUM은 어떤 이미지를 삭제하는 지 알기 위해, plusBool은 4개에서 삭제하면 3개가 되고, 그럴 땐 다시 이미지 추가 버튼이 생겨야 하기에 if문을 돌립니다.
+    @objc func deletePhoto(indexPath: Int) {
+        photoImages.remove(at: indexPath)
+        if numberOfItem == 4 {
+            plusBool = true
+            photoImages.insert(cellItem(image: UIImage(named: "CameraBTN")), at: 0)
+        }
+        numberOfItem = numberOfItem - 1
+        imageCellView.reloadData()
     }
 }
 
