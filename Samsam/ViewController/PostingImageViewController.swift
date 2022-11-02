@@ -178,7 +178,7 @@ class PostingImageViewController: UIViewController {
     }
     
     // 사진이 불러와지지 않을 때, 알람을 주기 위한 함수
-    private func makeErrorAlert(tittle: String, message: String? = nil) {
+    private func makeErrorAlert(title: String, message: String? = nil) {
         let alertViewController = UIAlertController(title: title,
                                                     message: message,
                                                     preferredStyle: .alert)
