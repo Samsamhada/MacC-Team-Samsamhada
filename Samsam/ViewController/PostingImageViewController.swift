@@ -269,7 +269,7 @@ extension PostingImageViewController: PHPickerViewControllerDelegate {
                         }
                         if let error = error {
                             DispatchQueue.main.async {
-                                self?.makeErrorAlert(tittle: "",message: "사진을 불러올 수 없습니다")
+                                self?.makeErrorAlert(title: "",message: "사진을 불러올 수 없습니다")
                             }
                         }
                     }
@@ -287,7 +287,7 @@ extension PostingImageViewController: PHPickerViewControllerDelegate {
                         }
                         if let error = error {
                             DispatchQueue.main.async {
-                                self?.makeErrorAlert(tittle: "",message: "사진을 불러올 수 없습니다")
+                                self?.makeErrorAlert(title: "",message: "사진을 불러올 수 없습니다")
                             }
                         }
                     }
