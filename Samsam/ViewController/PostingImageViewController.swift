@@ -23,9 +23,9 @@ class PostingImageViewController: UIViewController {
     var exampleNUM = 0
     
     private var photoImages: [cellItem] = [cellItem(image: UIImage(named: "CameraBTN"))]
-    private var copyPhotoImages: [cellItem]?
-    private var changeNUM: Int?
-    private var plusBool: Bool = true
+    private var copyPhotoImages: [cellItem]? // 다음 뷰에 이미지들을 넘길 때 사용될 배열
+    private var changeNUM: Int? // 이미지 변경 시, 사용될 index 번호
+    private var plusBool: Bool = true // plus 버튼이 나타날 지, 없어질 지에 관하여 사용될 Bool
     
     // MARK: - View
     
@@ -204,6 +204,18 @@ class PostingImageViewController: UIViewController {
         alert.addAction(cancelAction)
         
         present(alert, animated: true, completion: nil)
+    }
+    
+    // 새로운 사진 업로드 함수
+    @objc func uploadPhoto(indexPath: Int) {
+        changeNUM = indexPath
+        var configure = PHPickerConfiguration()
+        configure.selectionLimit = 4 - numberOfItem
+        configure.selection = .ordered
+        configure.filter = .images
+        let picker = PHPickerViewController(configuration: configure)
+        picker.delegate = self
+        self.present(picker, animated: true, completion: nil)
     }
     
     // 기존 이미지 변경 함수, 여기서 changeNUM은 어떤 이미지를 바꾸는 지 알아야 하기에 필요합니다!
