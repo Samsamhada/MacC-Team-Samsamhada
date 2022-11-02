@@ -67,7 +67,6 @@ class PostingWritingView: UIViewController {
     // MARK: - Lifecycle
     
     override func viewDidLoad() {
-        print(photoImages?.count)
         super.viewDidLoad()
         attribute()
         layout()
