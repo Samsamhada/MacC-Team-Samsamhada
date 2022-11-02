@@ -186,6 +186,7 @@ class PostingImageViewController: UIViewController {
         alertViewController.addAction(okAction)
         self.present(alertViewController, animated: true, completion: nil)
     }
+
     // 기존 사진을 클릭했을 때, 사진 변경 or 사진 삭제 알림 창을 띄우는 액션 시트
     private func makeActionSheet(indexPath: Int) {
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
@@ -228,7 +229,7 @@ class PostingImageViewController: UIViewController {
         picker.delegate = self
         self.present(picker, animated: true, completion: nil)
     }
-    
+
     // 기존 이미지 삭제 함수, changeNUM은 어떤 이미지를 삭제하는 지 알기 위해, plusBool은 4개에서 삭제하면 3개가 되고, 그럴 땐 다시 이미지 추가 버튼이 생겨야 하기에 if문을 돌립니다.
     @objc func deletePhoto(indexPath: Int) {
         photoImages.remove(at: indexPath)
