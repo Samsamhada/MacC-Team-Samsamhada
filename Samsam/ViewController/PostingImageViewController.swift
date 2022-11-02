@@ -177,14 +177,50 @@ class PostingImageViewController: UIViewController {
         })
     }
     
+    // 이미지 업로드 전 카메라 권한 체크 후, 체크가 되면, 이미지 업로드합니다.
+    func checkPermissionandGo(indexPath: Int){
+           switch PHPhotoLibrary.authorizationStatus() {
+           case .denied:
+               didMoveToSetting()
+           case .notDetermined:
+               PHPhotoLibrary.requestAuthorization({ (state) in
+                   if state == .authorized {
+                       DispatchQueue.main.async {
+                           if self.plusBool == true && indexPath == 0 {
+                               self.uploadPhoto(indexPath: indexPath)
+                           } else {
+                               self.makeActionSheet(indexPath: indexPath)
+                           }
+                       }
+                   }
+               })
+           case .authorized:
+               if plusBool == true && indexPath == 0 {
+                   uploadPhoto(indexPath: indexPath)
+               } else {
+                   makeActionSheet(indexPath: indexPath)
+               }
+               // 위에 if문은 이미지 추가 버튼 클릭일 때, 밑에 else는 기존 이미지 클릭일 떄 입니다.
+               //if문에 조건을 설명하자면, plusBool은 이미지 추가 버튼이 있을 때, 그리고 클릭한 이미지 index가 0일 때만 돌아갑니다.
+               //이미지가 4장이 이미 업로드된 상황이라면, plusBool이 fasle이기에 else로 갑니다.
+           default:
+               break
+           }
+       }
+
+    
     // 사진이 불러와지지 않을 때, 알람을 주기 위한 함수
-    private func makeErrorAlert(title: String, message: String? = nil) {
+    private func makeAlert(title: String,
+                           message: String? = nil,
+                           okAction: ((UIAlertAction) -> Void)? = nil,
+                           completion : (() -> Void)? = nil) {
         let alertViewController = UIAlertController(title: title,
                                                     message: message,
                                                     preferredStyle: .alert)
-        let okAction = UIAlertAction(title: "확인", style: .default)
+        let okAction = UIAlertAction(title: "확인", style: .default, handler: okAction)
         alertViewController.addAction(okAction)
-        self.present(alertViewController, animated: true, completion: nil)
+        
+        self.present(alertViewController, animated: true, completion: completion)
     }
 
     // 기존 사진을 클릭했을 때, 사진 변경 or 사진 삭제 알림 창을 띄우는 액션 시트
@@ -269,7 +305,7 @@ extension PostingImageViewController: PHPickerViewControllerDelegate {
                         }
                         if let error = error {
                             DispatchQueue.main.async {
-                                self?.makeErrorAlert(title: "",message: "사진을 불러올 수 없습니다")
+                                self?.makeAlert(title: "",message: "사진을 불러올 수 없습니다")
                             }
                         }
                     }
@@ -287,7 +323,7 @@ extension PostingImageViewController: PHPickerViewControllerDelegate {
                         }
                         if let error = error {
                             DispatchQueue.main.async {
-                                self?.makeErrorAlert(title: "",message: "사진을 불러올 수 없습니다")
+                                self?.makeAlert(title: "",message: "사진을 불러올 수 없습니다")
                             }
                         }
                     }
@@ -314,7 +350,7 @@ extension PostingImageViewController:  UICollectionViewDelegate, UICollectionVie
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-
+        
         // 위에 if문은 이미지 추가 버튼 클릭일 때, 밑에 else는 기존 이미지 클릭일 떄 입니다. if문에 조건을 설명하자면, plusBool은 이미지 추가 버튼이 있을 때, 그리고 클릭한 이미지 index가 0일 때만 돌아갑니다. 이미지가 4장이 이미 업로드된 상황이라면, plusBool이 fasle이기에 else로 갑니다.
         if plusBool == true && indexPath.row == 0 {
             uploadPhoto(indexPath: indexPath.row)
