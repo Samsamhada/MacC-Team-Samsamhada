@@ -314,7 +314,13 @@ extension PostingImageViewController:  UICollectionViewDelegate, UICollectionVie
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        setPhoto(indexPath: indexPath.row)
+        
+        // 위에 if문은 이미지 추가 버튼 클릭일 때, 밑에 else는 기존 이미지 클릭일 떄 입니다. if문에 조건을 설명하자면, plusBool은 이미지 추가 버튼이 있을 때, 그리고 클릭한 이미지 index가 0일 때만 돌아갑니다. 이미지가 4장이 이미 업로드된 상황이라면, plusBool이 fasle이기에 else로 갑니다.
+        if plusBool == true && indexPath.row == 0 {
+            uploadPhoto(indexPath: indexPath.row)
+        } else {
+            makeActionSheet(indexPath: indexPath.row)
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
