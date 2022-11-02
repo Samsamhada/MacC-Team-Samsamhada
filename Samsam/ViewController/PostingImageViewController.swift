@@ -243,40 +243,57 @@ class PostingImageViewController: UIViewController {
 }
 
 extension PostingImageViewController: PHPickerViewControllerDelegate {
+    
+    // TODO: - 효율적인 로직 고민 필요: 밑에 if 와 else를 보면 중복되는 부분이 조금 있습니다. 그 부분을 하나로 합칠 수 있을 것 같긴 한데...
+    
     func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
         picker.dismiss(animated: true, completion: nil)
-    
-        if plusBool == true {
-            for result in results {
+        
+        // 밑에 plusIndex는 이미지를 업로드 했을 때, 최근에 누른 것이 위쪽에 보이도록 하기 위해서(이미지 추가 버튼 뒤쪽으로 배열에 넣어야 합니다), 그때 사용됩니다. 그러면 굳이 이렇게 변수로 뺀 이유는? 그건 바로 업로드 된 기존 이미지가 4개일 때, 하나를 삭제하면, 이미지 추가 버튼이 다시 나와야 합니다. 그때는 배열 0에 insert를 해야하기 위해서, 그때는 plusIndex가 0이 됩니다.
+        var plusIndex = 1
+        if plusBool == true && changeNUM == 0 { // 이것은 이미지 업로드 되었을 때 돌리는 if문 입니다.
+            if results.count + photoImages.count == 5 { // 이것은 이미지 업로드 4장이 되었을 떄, 이미지 추가 버튼을 삭제하기 위함입니다.
+                photoImages.remove(at: 0)
+                plusIndex = 0
+                plusBool = false
+            }
+            for result in results.reversed() { //reversed인 이유는 처음에 누른 것이, 맨 위에 올라오도록 하기 위함입니다
                 let itemProvider = result.itemProvider
                 if itemProvider.canLoadObject(ofClass: UIImage.self) {
                     itemProvider.loadObject(ofClass: UIImage.self) { [weak self](image, error) in
                         DispatchQueue.main.async {
-                            self?.photoImages.append(cellItem(image: image as! UIImage))
+                            guard let image = image as? UIImage else { return }
+                            self?.photoImages.insert(cellItem(image: image), at: plusIndex)
                             self?.numberOfItem = self!.numberOfItem + 1
                             self?.imageCellView.reloadData()
+                        }
+                        if let error = error {
+                            DispatchQueue.main.async {
+                                self?.makeErrorAlert(tittle: "",message: "사진을 불러올 수 없습니다")
+                            }
                         }
                     }
                 }
             }
-            if results.count + photoImages.count == 5 {
-                photoImages.remove(at: 0)
-                plusBool = false
-            }
-        } else {
+        } else { // else 이것은 이미지를 변경할 때 사용됩니다.
             for result in results {
                 let itemProvider = result.itemProvider
                 if itemProvider.canLoadObject(ofClass: UIImage.self) {
                     itemProvider.loadObject(ofClass: UIImage.self) { [weak self](image, error) in
                         DispatchQueue.main.async {
+                            guard let image = image as? UIImage else { return }
                             self?.photoImages[self!.changeNUM!].image = image as! UIImage
                             self?.imageCellView.reloadData()
+                        }
+                        if let error = error {
+                            DispatchQueue.main.async {
+                                self?.makeErrorAlert(tittle: "",message: "사진을 불러올 수 없습니다")
+                            }
                         }
                     }
                 }
             }
         }
-       
     }
 }
 
