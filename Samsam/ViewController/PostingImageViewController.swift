@@ -186,7 +186,6 @@ class PostingImageViewController: UIViewController {
         alertViewController.addAction(okAction)
         self.present(alertViewController, animated: true, completion: nil)
     }
-    
     // 기존 사진을 클릭했을 때, 사진 변경 or 사진 삭제 알림 창을 띄우는 액션 시트
     private func makeActionSheet(indexPath: Int) {
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
