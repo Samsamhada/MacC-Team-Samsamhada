@@ -132,19 +132,31 @@ class PostingImageViewController: UIViewController {
         postingWritingView.roomID = roomID
         postingWritingView.categoryID = categoryID
         
-        if numberOfItem > 3 {
+        if numberOfItem == 0 {
+            showToast()
+        } else if numberOfItem > 3 {
             postingWritingView.photoImages = photoImages
+            navigationController?.pushViewController(postingWritingView, animated: true)
         } else {
             copyPhotoImages = photoImages
             copyPhotoImages?.remove(at: 0)
             postingWritingView.photoImages = copyPhotoImages
+            navigationController?.pushViewController(postingWritingView, animated: true)
         }
-        navigationController?.pushViewController(postingWritingView, animated: true)
     }
-
-    @objc func setPhoto(indexPath: Int) {
-        var configure = PHPickerConfiguration()
-       
+    
+    // 이미지를 하나도 선택하지 않고 다음 뷰를 넘어갈 때, 이를 방지하기 위한 함수
+    private func showToast() {
+        let label = UILabel()
+        label.backgroundColor = .lightGray
+        label.textColor = .black
+        label.font = UIFont.systemFont(ofSize: 15, weight: .semibold)
+        label.textAlignment = .center
+        label.text = "사진을 하나 이상 선택해주세요!"
+        label.layer.cornerRadius = 8
+        label.clipsToBounds = true
+        label.alpha = 0
+        self.view.addSubview(label)
         
         if plusBool == true {
             configure.selectionLimit = 4 - numberOfItem
