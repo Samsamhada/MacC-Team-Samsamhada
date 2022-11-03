@@ -1,32 +1,19 @@
 //
-//  WorkingHistoryViewTopHeader.swift
+//  WorkingHistoryViewContentHeader.swift
 //  Samsam
 //
-//  Created by 지준용 on 2022/10/17.
+//  Created by 지준용 on 2022/10/31.
 //
 
 import UIKit
 
-class WorkingHistoryViewTopHeader: UICollectionReusableView {
+class WorkingHistoryViewContentHeader: UICollectionReusableView {
     
     // MARK: - Property
     
-    static let identifier = "workingHistoryTopHeader"
+    static let identifier = "workingHistoryContentHeader"
     
     // MARK: - View
-    
-    let progressMetro: UIView = {
-        $0.backgroundColor = .black
-        return $0
-    }(UIView())
-    
-    let progressDuration: UILabel = {
-        $0.text = "진행상황(10.11 ~ 11.12)"
-        $0.textAlignment = .center
-        $0.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
-        $0.textColor = .gray
-        return $0
-    }(UILabel())
     
     let uploadDate: UILabel = {
         $0.text = "0월 0일"
@@ -36,13 +23,15 @@ class WorkingHistoryViewTopHeader: UICollectionReusableView {
         return $0
     }(UILabel())
 
-    let leftLine: UIView = {
+    private let leftLine: UIView = {
         $0.backgroundColor = .gray
+        $0.setHeight(height: 1)
         return $0
     }(UIView())
     
-    let rightLine: UIView = {
+    private let rightLine: UIView = {
         $0.backgroundColor = .gray
+        $0.setHeight(height: 1)
         return $0
     }(UIView())
     
@@ -58,25 +47,35 @@ class WorkingHistoryViewTopHeader: UICollectionReusableView {
     }
     
     private func layout() {
-        
-        self.addSubview(progressMetro)
-        progressMetro.addSubview(progressDuration)
         self.addSubview(leftLine)
         self.addSubview(uploadDate)
         self.addSubview(rightLine)
         
-        progressMetro.anchor(
+        leftLine.anchor(
             top: topAnchor,
             left: leftAnchor,
             bottom: bottomAnchor,
-            right: rightAnchor
+            right: uploadDate.leftAnchor,
+            paddingTop: 29.5,
+            paddingBottom: 29.5,
+            width: UIScreen.main.bounds.width/3
         )
         
-        progressDuration.anchor(
-            top: progressMetro.topAnchor,
-            left: progressMetro.leftAnchor,
-            paddingTop: 16,
-            paddingLeft: 16
+        uploadDate.anchor(
+            top: topAnchor,
+            bottom: bottomAnchor,
+            width: UIScreen.main.bounds.width/3
+        )
+        
+        rightLine.anchor(
+            top: topAnchor,
+            left: uploadDate.rightAnchor,
+            bottom: bottomAnchor,
+            right: rightAnchor,
+            paddingTop: 29.5,
+            paddingBottom: 29.5,
+            width: UIScreen.main.bounds.width/3
         )
     }
 }
+

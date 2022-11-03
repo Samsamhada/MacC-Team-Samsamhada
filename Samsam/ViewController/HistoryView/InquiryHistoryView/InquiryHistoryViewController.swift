@@ -12,7 +12,7 @@ class InquiryHistoryViewController: UIViewController {
     // MARK: - View
     
     private let uiView: UIView = {
-        $0.backgroundColor = .black
+        $0.backgroundColor = .blue
         return $0
     }(UIView())
     
@@ -27,11 +27,13 @@ class InquiryHistoryViewController: UIViewController {
     // MARK: - Layout
     
     private func layout() {
+        view.addSubview(uiView)
+        
         uiView.anchor(
-            top: view.safeAreaLayoutGuide.topAnchor,
-            left: view.safeAreaLayoutGuide.leftAnchor,
-            bottom: view.safeAreaLayoutGuide.bottomAnchor,
-            right: view.safeAreaLayoutGuide.rightAnchor
+            top: view.topAnchor,
+            left: view.leftAnchor,
+            bottom: view.bottomAnchor,
+            right: view.rightAnchor
         )
     }
 }

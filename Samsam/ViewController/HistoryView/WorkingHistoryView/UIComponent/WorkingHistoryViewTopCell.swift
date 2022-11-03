@@ -45,7 +45,7 @@ class WorkingHistoryViewTopCell: UICollectionViewCell {
         viewAll.anchor(
             top: topAnchor,
             right: rightAnchor,
-            paddingTop: 16,
+            paddingTop: 15,
             paddingRight: 16
         )
     }
