@@ -38,6 +38,7 @@
 		43C2110F28FCFAB500E8F6DD /* PostingCategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43C2110E28FCFAB500E8F6DD /* PostingCategoryViewController.swift */; };
 		43C2111128FCFB3800E8F6DD /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43C2111028FCFB3800E8F6DD /* CategoryCell.swift */; };
 		980200722912513B00E193E6 /* SegmentedControlViewcontroller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980200712912513B00E193E6 /* SegmentedControlViewcontroller.swift */; };
+		43DB5E1C2913733A00BD09BA /* PostingImageButtonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43DB5E1B2913733A00BD09BA /* PostingImageButtonCell.swift */; };
 		980D900E28FE671B003CC2DA /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980D900D28FE671B003CC2DA /* DetailViewController.swift */; };
 		98366F8D29019A5300E81E27 /* RoomCreationViewContoller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98366F8C29019A5300E81E27 /* RoomCreationViewContoller.swift */; };
 		98B08A60290AC8C900401650 /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B08A5F290AC8C900401650 /* UIColor+.swift */; };
@@ -90,6 +91,7 @@
 		43C2110E28FCFAB500E8F6DD /* PostingCategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostingCategoryViewController.swift; sourceTree = "<group>"; };
 		43C2111028FCFB3800E8F6DD /* CategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
 		980200712912513B00E193E6 /* SegmentedControlViewcontroller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentedControlViewcontroller.swift; sourceTree = "<group>"; };
+		43DB5E1B2913733A00BD09BA /* PostingImageButtonCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostingImageButtonCell.swift; sourceTree = "<group>"; };
 		980D900D28FE671B003CC2DA /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		98366F8C29019A5300E81E27 /* RoomCreationViewContoller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomCreationViewContoller.swift; sourceTree = "<group>"; };
 		98B08A5F290AC8C900401650 /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
@@ -232,6 +234,7 @@
 				43C2111028FCFB3800E8F6DD /* CategoryCell.swift */,
 				43C2110E28FCFAB500E8F6DD /* PostingCategoryViewController.swift */,
 				4330CE9A2906275D001FC8E7 /* PostingImageCell.swift */,
+				43DB5E1B2913733A00BD09BA /* PostingImageButtonCell.swift */,
 				4369690B28FE422100DEA89F /* PostingImageViewController.swift */,
 				43956D2B28FF9F0100DD996F /* PostingWritingView.swift */,
 				98366F8B29019A3100E81E27 /* RoomCreationView */,
@@ -367,6 +370,7 @@
 			files = (
 				26FEC1DB2902E6F2006C410B /* PostingEntity+CoreDataClass.swift in Sources */,
 				26E3749C28FE8E6F00997DA7 /* LoginViewController.swift in Sources */,
+				43DB5E1C2913733A00BD09BA /* PostingImageButtonCell.swift in Sources */,
 				980D900E28FE671B003CC2DA /* DetailViewController.swift in Sources */,
 				26E3748628FCDC0000997DA7 /* ViewController.swift in Sources */,
 				98E1700D2906EFEB00F71D41 /* hideKeyboard+.swift in Sources */,
@@ -555,7 +559,7 @@
 				CODE_SIGN_ENTITLEMENTS = Samsam/Samsam.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = N6LML762WM;
+				DEVELOPMENT_TEAM = UDCS6NMGF8;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Samsam/Info.plist;
 				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "사진 저장을 위해 라이브러리 접근권한이 필요합니다.";
@@ -570,7 +574,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.Eddy.Samsam;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Dinner2.Samsam;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -589,7 +593,7 @@
 				CODE_SIGN_ENTITLEMENTS = Samsam/Samsam.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = N6LML762WM;
+				DEVELOPMENT_TEAM = UDCS6NMGF8;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Samsam/Info.plist;
 				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "사진 저장을 위해 라이브러리 접근권한이 필요합니다.";
@@ -604,7 +608,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.Eddy.Samsam;
+				PRODUCT_BUNDLE_IDENTIFIER = com.y.Samsam;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
