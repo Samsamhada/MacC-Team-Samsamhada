@@ -83,7 +83,9 @@ class SegmentedControlViewController: UIViewController {
     
     private func attribute() {
         view.backgroundColor = .white
-                
+        
+        setSegmentedControl()
+        
         pageViewController.delegate = self
         pageViewController.dataSource = self
         
