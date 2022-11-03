@@ -118,7 +118,7 @@ extension RoomListViewController: UICollectionViewDataSource, UICollectionViewDe
     }
     
     @objc func tapRoomListButton(sender: CustomTapGestureRecognizer) {
-        let workingHistoryViewController = WorkingHistoryViewController()
+        let workingHistoryViewController = SegmentedControlViewController()
         workingHistoryViewController.roomID = sender.roomID
         navigationController?.pushViewController(workingHistoryViewController, animated: true)
     }
