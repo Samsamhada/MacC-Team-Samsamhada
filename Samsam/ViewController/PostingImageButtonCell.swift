@@ -17,8 +17,7 @@ class PostingImageButtonCell: UICollectionViewCell {
 
     private var buttomImage: UIImageView = {
         let imageConfig = UIImage.SymbolConfiguration(pointSize: 60, weight: .light)
-        let image = UIImage(systemName: "plus.circle", withConfiguration: imageConfig)?.withTintColor(.white, renderingMode: .alwaysOriginal)
-        $0.image = image
+        $0.image = UIImage(systemName: "plus.circle", withConfiguration: imageConfig)?.withTintColor(.white, renderingMode: .alwaysOriginal)
         $0.clipsToBounds = true
         $0.contentMode = .center
         $0.layer.cornerRadius = 16
