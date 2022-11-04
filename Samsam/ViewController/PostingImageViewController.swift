@@ -176,9 +176,7 @@ class PostingImageViewController: UIViewController {
                           okAction: ((UIAlertAction) -> Void)?,
                           cancelAction: ((UIAlertAction) -> Void)? = nil,
                           completion : (() -> Void)? = nil) {
-        let generator = UIImpactFeedbackGenerator(style: .medium)
-        generator.impactOccurred()
-        
+
         let alertViewController = UIAlertController(title: title, message: message,
                                                     preferredStyle: .alert)
         
