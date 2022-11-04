@@ -256,44 +256,26 @@ class PostingImageViewController: UIViewController {
 }
 
 extension PostingImageViewController: PHPickerViewControllerDelegate {
-    
-    // TODO: - 효율적인 로직 고민 필요: 밑에 if 와 else를 보면 중복되는 부분이 조금 있습니다. 그 부분을 하나로 합칠 수 있을 것 같긴 한데...
-    
     func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
         picker.dismiss(animated: true, completion: nil)
         
-        if changeNUM == -1 {
-            for result in results.reversed() {
-                let itemProvider = result.itemProvider
-                if itemProvider.canLoadObject(ofClass: UIImage.self) {
-                    itemProvider.loadObject(ofClass: UIImage.self) { [weak self](image, error) in
-                        DispatchQueue.main.async {
-                            guard let image = image as? UIImage else { return }
+        for result in results.reversed() {
+            let itemProvider = result.itemProvider
+            if itemProvider.canLoadObject(ofClass: UIImage.self) {
+                itemProvider.loadObject(ofClass: UIImage.self) { [weak self](image, error) in
+                    DispatchQueue.main.async {
+                        guard let image = image as? UIImage else { return }
+                        if self?.changeNUM == -1 {
                             self?.photoImages.insert(CellItem(image: image), at: 0)
                             self?.imageCellView.reloadData()
-                        }
-                        if let error = error {
-                            DispatchQueue.main.async {
-                                self?.makeAlert(title: "",message: "사진을 불러올 수 없습니다")
-                            }
-                        }
-                    }
-                }
-            }
-        } else {
-            for result in results {
-                let itemProvider = result.itemProvider
-                if itemProvider.canLoadObject(ofClass: UIImage.self) {
-                    itemProvider.loadObject(ofClass: UIImage.self) { [weak self](image, error) in
-                        DispatchQueue.main.async {
-                            guard let image = image as? UIImage else { return }
+                        } else {
                             self?.photoImages[self!.changeNUM].image = image as! UIImage
                             self?.imageCellView.reloadData()
                         }
-                        if let error = error {
-                            DispatchQueue.main.async {
-                                self?.makeAlert(title: "",message: "사진을 불러올 수 없습니다")
-                            }
+                    }
+                    if let error = error {
+                        DispatchQueue.main.async {
+                            self?.makeAlert(title: "",message: "사진을 불러올 수 없습니다")
                         }
                     }
                 }
