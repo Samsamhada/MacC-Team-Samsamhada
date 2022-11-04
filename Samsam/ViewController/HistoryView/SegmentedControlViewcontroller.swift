@@ -159,7 +159,6 @@ class SegmentedControlViewController: UIViewController {
         let image = UIImage()
         segmentedControl.setBackgroundImage(image, for: .normal, barMetrics: .default)
         segmentedControl.setBackgroundImage(image, for: .selected, barMetrics: .default)
-        segmentedControl.setBackgroundImage(image, for: .highlighted, barMetrics: .default)
         
         segmentedControl.setDividerImage(image, forLeftSegmentState: .selected, rightSegmentState: .normal, barMetrics: .default)
     }
