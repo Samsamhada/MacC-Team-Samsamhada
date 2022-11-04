@@ -15,10 +15,9 @@ class WorkingHistoryViewTopHeader: UICollectionReusableView {
     
     // MARK: - View
     
-    private let progressMetro: UIView = {
-        $0.backgroundColor = .black
+    private let progressMetro: MetroViewController = {
         return $0
-    }(UIView())
+    }(MetroViewController())
     
     let progressDuration: UILabel = {
         $0.text = "진행상황(10.11 ~ 11.12)"
@@ -33,6 +32,7 @@ class WorkingHistoryViewTopHeader: UICollectionReusableView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         layout()
+        progressMetro.view.backgroundColor = AppColor.unSelectedGray
     }
     
     required init?(coder: NSCoder) {
@@ -40,10 +40,11 @@ class WorkingHistoryViewTopHeader: UICollectionReusableView {
     }
     
     private func layout() {
-        self.addSubview(progressMetro)
-        progressMetro.addSubview(progressDuration)
         
-        progressMetro.anchor(
+        self.addSubview(progressMetro.view)
+        progressMetro.view.addSubview(progressDuration)
+        
+        progressMetro.view.anchor(
             top: topAnchor,
             left: leftAnchor,
             bottom: bottomAnchor,
@@ -51,8 +52,8 @@ class WorkingHistoryViewTopHeader: UICollectionReusableView {
         )
         
         progressDuration.anchor(
-            top: progressMetro.topAnchor,
-            left: progressMetro.leftAnchor,
+            top: progressMetro.view.topAnchor,
+            left: progressMetro.view.leftAnchor,
             paddingTop: 16,
             paddingLeft: 16
         )
