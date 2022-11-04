@@ -32,20 +32,16 @@ class SegmentedControlViewController: UIViewController {
         return $0
     }(InquiryHistoryViewController())
     
-    private lazy var dataViewControllers: [UIViewController] = {
-        return [workingHistoryView, inquiryHistoryView]
-    }()
+    private lazy var dataViewControllers: [UIViewController] = [workingHistoryView, inquiryHistoryView]
     
     private lazy var pageViewController: UIPageViewController = {
-        let vc = UIPageViewController(transitionStyle: .scroll,
-                                      navigationOrientation: .horizontal,
-                                      options: nil
-        )
-        vc.setViewControllers([dataViewControllers[0]],
+        $0.setViewControllers([dataViewControllers[0]],
                               direction: .forward,
                               animated: true)
-        return vc
-    }()
+        return $0
+    }(UIPageViewController(transitionStyle: .scroll,
+                          navigationOrientation: .horizontal,
+                          options: nil))
     
     private let writingButton: UIButton = {
         $0.backgroundColor = AppColor.campanulaBlue
