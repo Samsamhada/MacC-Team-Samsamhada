@@ -169,7 +169,6 @@ class PostingImageViewController: UIViewController {
         self.present(alertViewController, animated: true, completion: completion)
     }
     
-    
     func makeRequestAlert(title: String,
                           message: String,
                           okTitle: String = "확인",
