@@ -20,7 +20,7 @@ class PostingImageViewController: UIViewController {
     var categoryID: Int?
     
     private var photoImages: [CellItem] = []
-    private var changeNUM: Int?
+    private var changeNUM: Int = -1
     private var plusBool: Bool = true
     
     // MARK: - View
@@ -224,7 +224,7 @@ class PostingImageViewController: UIViewController {
     }
     
     @objc func uploadPhoto() {
-        changeNUM = nil
+        changeNUM = -1
         var configure = PHPickerConfiguration()
         configure.selectionLimit = 4 - photoImages.count
         configure.selection = .ordered
@@ -258,7 +258,7 @@ extension PostingImageViewController: PHPickerViewControllerDelegate {
     func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
         picker.dismiss(animated: true, completion: nil)
         
-        if changeNUM == nil {
+        if changeNUM == -1 {
             for result in results.reversed() {
                 let itemProvider = result.itemProvider
                 if itemProvider.canLoadObject(ofClass: UIImage.self) {
@@ -283,7 +283,7 @@ extension PostingImageViewController: PHPickerViewControllerDelegate {
                     itemProvider.loadObject(ofClass: UIImage.self) { [weak self](image, error) in
                         DispatchQueue.main.async {
                             guard let image = image as? UIImage else { return }
-                            self?.photoImages[self!.changeNUM!].image = image as! UIImage
+                            self?.photoImages[self!.changeNUM].image = image as! UIImage
                             self?.imageCellView.reloadData()
                         }
                         if let error = error {
