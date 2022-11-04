@@ -196,7 +196,12 @@ class PostingImageViewController: UIViewController {
             guard let settingURL = URL(string: UIApplication.openSettingsURLString) else { return }
             UIApplication.shared.open(settingURL)
         }
-        if let appName = Bundle.main.infoDictionary!["CFBundleName"] as? String {
+        if let appName = Bundle.main.infoDictionary!["CFBundleDisplayName"] as? String {
+            makeRequestAlert(title: "설정",
+                             message: "\(appName)이 카메라에 접근이 허용되어 있지 않습니다. 설정화면으로 가시겠습니까?",
+                             okAction: settingAction,
+                             completion: nil)
+        } else if let appName = Bundle.main.infoDictionary!["CFBundleName"] as? String {
             makeRequestAlert(title: "설정",
                              message: "\(appName)이 카메라에 접근이 허용되어 있지 않습니다. 설정화면으로 가시겠습니까?",
                              okAction: settingAction,
