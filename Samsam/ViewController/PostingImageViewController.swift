@@ -130,7 +130,7 @@ class PostingImageViewController: UIViewController {
         postingWritingView.categoryID = categoryID
         
         if photoImages.count == 0 {
-            makeAlert(title: "",message: "사진을 최소 하나 이상 선택해야 합니다")
+            makeAlert(title: "", message: "사진을 한 장 이상 선택해야 합니다")
         } else {
             postingWritingView.photoImages = photoImages
             navigationController?.pushViewController(postingWritingView, animated: true)
