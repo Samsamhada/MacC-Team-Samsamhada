@@ -28,7 +28,6 @@ class WorkingHistoryViewContentCell: UICollectionViewCell {
         $0.text = "애플, 동아시아 최초 '디벨로퍼 아카데미' 한국서 운영"
         $0.textAlignment = .left
         $0.numberOfLines = 2
-        $0.sizeToFit()
         $0.font = UIFont.systemFont(ofSize: 16, weight: .regular)
         return $0
     }(UILabel())
