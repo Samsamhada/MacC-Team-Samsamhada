@@ -54,7 +54,7 @@ class SegmentedControlViewController: UIViewController {
     
     private var currentViewNumber: Int = 0 {
         didSet {
-            let direction: UIPageViewController.NavigationDirection = oldValue <= currentViewNumber ? .forward : .reverse
+            let direction: UIPageViewController.NavigationDirection = (oldValue <= currentViewNumber ? .forward : .reverse)
             pageViewController.setViewControllers([dataViewControllers[self.currentViewNumber]], direction: direction, animated: true)
         }
     }
