@@ -40,8 +40,7 @@ class SegmentedControlViewController: UIViewController {
                               animated: true)
         return $0
     }(UIPageViewController(transitionStyle: .scroll,
-                          navigationOrientation: .horizontal,
-                          options: nil))
+                          navigationOrientation: .horizontal))
     
     private let writingButton: UIButton = {
         $0.backgroundColor = AppColor.campanulaBlue
