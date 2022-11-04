@@ -286,7 +286,7 @@ extension PostingImageViewController: PHPickerViewControllerDelegate {
 
 // MARK: - UICollectionViewDelegate, DataSourse, DelegateFlowLayout
 
-extension PostingImageViewController:  UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+extension PostingImageViewController: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 2
