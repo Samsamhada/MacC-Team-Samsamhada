@@ -150,7 +150,7 @@ class SegmentedControlViewController: UIViewController {
         self.segmentedControl.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.gray, .font: UIFont.systemFont(ofSize: 20, weight: .bold)], for: .normal)
         self.segmentedControl.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.black, .font: UIFont.systemFont(ofSize: 20, weight: .bold)], for: .selected)
         self.segmentedControl.selectedSegmentIndex = 0
-        self.segmentedControl.addTarget(self, action: #selector(changeValue(control: )), for: .valueChanged)
+        self.segmentedControl.addTarget(self, action: #selector(changeValue), for: .valueChanged)
         
         self.changeValue(control: self.segmentedControl)
     }
