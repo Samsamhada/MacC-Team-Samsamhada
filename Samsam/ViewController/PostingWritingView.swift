@@ -13,7 +13,7 @@ class PostingWritingView: UIViewController {
     
     var roomID: Int?
     var categoryID: Int?
-    var photoImages: [cellItem]?
+    var photoImages: [CellItem]?
     private let textViewPlaceHolder = "텍스트를 입력하세요"
 
     // MARK: - View

@@ -7,7 +7,7 @@
 import UIKit
 import PhotosUI
 
-struct cellItem {
+struct CellItem {
     var image: UIImage?
     var path: Data?
 }
@@ -19,7 +19,7 @@ class PostingImageViewController: UIViewController {
     var roomID: Int?
     var categoryID: Int?
     
-    private var photoImages: [cellItem] = []
+    private var photoImages: [CellItem] = []
     private var changeNUM: Int?
     private var plusBool: Bool = true
     
@@ -265,7 +265,7 @@ extension PostingImageViewController: PHPickerViewControllerDelegate {
                     itemProvider.loadObject(ofClass: UIImage.self) { [weak self](image, error) in
                         DispatchQueue.main.async {
                             guard let image = image as? UIImage else { return }
-                            self?.photoImages.insert(cellItem(image: image), at: 0)
+                            self?.photoImages.insert(CellItem(image: image), at: 0)
                             self?.imageCellView.reloadData()
                         }
                         if let error = error {
