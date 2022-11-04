@@ -25,13 +25,11 @@ class WorkingHistoryViewContentHeader: UICollectionReusableView {
 
     private let leftLine: UIView = {
         $0.backgroundColor = .gray
-        $0.setHeight(height: 1)
         return $0
     }(UIView())
     
     private let rightLine: UIView = {
         $0.backgroundColor = .gray
-        $0.setHeight(height: 1)
         return $0
     }(UIView())
     
