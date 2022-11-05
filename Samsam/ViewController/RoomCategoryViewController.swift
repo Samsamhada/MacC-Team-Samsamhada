@@ -119,8 +119,8 @@ class RoomCategoryViewController: UIViewController {
                 roomID: coreDataManager.countData(dataType: "room") - 1,
                 categoryID: $0
             )
-        self.dismiss(animated: true)
         }
+        self.dismiss(animated: true)
     }
 }
 
