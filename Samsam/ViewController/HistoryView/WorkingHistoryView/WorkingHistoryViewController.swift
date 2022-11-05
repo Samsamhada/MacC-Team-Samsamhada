@@ -134,7 +134,7 @@ extension WorkingHistoryViewController: UICollectionViewDataSource, UICollection
             coreDataManager.loadPhotoData(postingID: indexPath.item + 1)
             detailViewController.images = coreDataManager.photos
             coreDataManager.postings.forEach {
-                if $0.postingID == indexPath.item + 1 {
+                if $0 == coreDataManager.postings[indexPath.item] {
                     detailViewController.descriptionLBL.text = $0.explanation
                 }
             }
