@@ -34,8 +34,8 @@ class BezierConfiguration {
             
             for i in 0..<segments {
                 
-                var rhsXValue : CGFloat = 0
-                var rhsYValue : CGFloat = 0
+                var rhsXValue: CGFloat = 0
+                var rhsYValue: CGFloat = 0
                 
                 let p0 = data[i]
                 let p3 = data[i+1]
@@ -73,7 +73,7 @@ class BezierConfiguration {
     
     func thomasAlgorithm(bd: [CGFloat], d: [CGFloat], ad: [CGFloat], rhsArray: [CGPoint], segments: Int, data: [CGPoint]) -> [BezierSegmentControlPoints] {
         
-        var controlPoints : [BezierSegmentControlPoints] = []
+        var controlPoints: [BezierSegmentControlPoints] = []
         var ad = ad
         let bd = bd
         let d = d
