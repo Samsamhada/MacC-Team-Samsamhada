@@ -267,7 +267,7 @@ extension PostingImageViewController: PHPickerViewControllerDelegate {
                             self?.photoImages.insert(CellItem(image: image), at: 0)
                             self?.imageCellView.reloadData()
                         } else {
-                            self?.photoImages[self!.changeNUM].image = image as! UIImage
+                            self?.photoImages[self!.changeNUM] = CellItem(image: image, path: image.pngData())
                             self?.imageCellView.reloadData()
                         }
                     }
