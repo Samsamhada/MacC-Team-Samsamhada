@@ -4,11 +4,10 @@
 //
 //  Created by creohwan on 2022/10/18.
 //
-
 import UIKit
 import PhotosUI
 
-struct PreviewItem {
+struct CellItem {
     var image: UIImage?
     var path: Data?
 }
@@ -19,15 +18,15 @@ class PostingImageViewController: UIViewController {
     
     var roomID: Int?
     var categoryID: Int?
-    var numberOfItem = 0
-    var exampleNUM = 0
-    private var imgItems: [PreviewItem] = [PreviewItem(image: UIImage(named: "CameraBTN"))]
-    private var copyImgItems: [PreviewItem]?
+    
+    private var photoImages: [CellItem] = []
+    private var changeNUM: Int = -1
+    private var plusBool: Bool = true
     
     // MARK: - View
     
     private var titleText: UILabel = {
-        $0.text = "시공한 사진을 추가해주세요.\n(최대 4장까지 가능합니다)."
+        $0.text = "시공한 사진을 추가해주세요\n(최대 4장까지 가능합니다)"
         $0.textAlignment = .center
         $0.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
         $0.textColor = .lightGray
@@ -75,6 +74,7 @@ class PostingImageViewController: UIViewController {
         imageCellView.dataSource = self
         imageCellView.allowsMultipleSelection = true
         
+        imageCellView.register(PostingImageButtonCell.self, forCellWithReuseIdentifier: PostingImageButtonCell.identifier)
         imageCellView.register(PostingImageCell.self, forCellWithReuseIdentifier: PostingImageCell.identifier)
         imageCellView.backgroundColor = .white
     }
@@ -128,98 +128,196 @@ class PostingImageViewController: UIViewController {
         let postingWritingView = PostingWritingView()
         postingWritingView.roomID = roomID
         postingWritingView.categoryID = categoryID
-        if numberOfItem > 3 {
-            postingWritingView.imgItems = imgItems
+        
+        if photoImages.count == 0 {
+            makeAlert(title: "", message: "사진을 한 장 이상 선택해야 합니다")
         } else {
-            copyImgItems = imgItems
-            copyImgItems?.remove(at: 0)
-            postingWritingView.imgItems = copyImgItems
+            postingWritingView.photoImages = photoImages
+            navigationController?.pushViewController(postingWritingView, animated: true)
         }
-        navigationController?.pushViewController(postingWritingView, animated: true)
+    }
+    
+    func uploadCheckPermission(){
+        switch PHPhotoLibrary.authorizationStatus() {
+        case .denied:
+            didMoveToSetting()
+        case .notDetermined:
+            PHPhotoLibrary.requestAuthorization({ (state) in
+                if state == .authorized {
+                    DispatchQueue.main.async {
+                        self.uploadPhoto()
+                    }
+                }
+            })
+        case .authorized:
+            uploadPhoto()
+        default:
+            break
+        }
+    }
+    
+    private func makeAlert(title: String,
+                           message: String? = nil,
+                           okAction: ((UIAlertAction) -> Void)? = nil,
+                           completion : (() -> Void)? = nil) {
+        let alertViewController = UIAlertController(title: title,
+                                                    message: message,
+                                                    preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "확인", style: .default, handler: okAction)
+        alertViewController.addAction(okAction)
+        
+        self.present(alertViewController, animated: true, completion: completion)
+    }
+    
+    func makeRequestAlert(title: String,
+                          message: String,
+                          okTitle: String = "확인",
+                          cancelTitle: String = "취소",
+                          okAction: ((UIAlertAction) -> Void)?,
+                          cancelAction: ((UIAlertAction) -> Void)? = nil,
+                          completion : (() -> Void)? = nil) {
+
+        let alertViewController = UIAlertController(title: title, message: message,
+                                                    preferredStyle: .alert)
+        
+        let cancelAction = UIAlertAction(title: cancelTitle, style: .default, handler: cancelAction)
+        alertViewController.addAction(cancelAction)
+        
+        let okAction = UIAlertAction(title: okTitle, style: .destructive, handler: okAction)
+        alertViewController.addAction(okAction)
+        
+        self.present(alertViewController, animated: true, completion: completion)
+    }
+    
+    private func didMoveToSetting() {
+        let settingAction: ((UIAlertAction) -> ()) = { _ in
+            guard let settingURL = URL(string: UIApplication.openSettingsURLString) else { return }
+            UIApplication.shared.open(settingURL)
+        }
+        if let appName = Bundle.main.infoDictionary!["CFBundleDisplayName"] as? String {
+            makeRequestAlert(title: "설정",
+                             message: "\(appName)이 카메라에 접근이 허용되어 있지 않습니다. 설정화면으로 가시겠습니까?",
+                             okAction: settingAction,
+                             completion: nil)
+        } else if let appName = Bundle.main.infoDictionary!["CFBundleName"] as? String {
+            makeRequestAlert(title: "설정",
+                             message: "\(appName)이 카메라에 접근이 허용되어 있지 않습니다. 설정화면으로 가시겠습니까?",
+                             okAction: settingAction,
+                             completion: nil)
+        }
+    }
+    
+    private func makeActionSheet(indexPath: Int) {
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        
+        let okAction = UIAlertAction(title: "사진 변경하기", style: .default, handler: { action in
+            self.changePhoto(indexPath: indexPath)
+        })
+        let removeAction = UIAlertAction(title: "사진 삭제하기", style: .destructive, handler: { action in
+            self.deletePhoto(indexPath: indexPath)
+        })
+        let cancelAction = UIAlertAction(title: "취소", style: .cancel, handler: nil)
+        
+        alert.addAction(okAction)
+        alert.addAction(removeAction)
+        alert.addAction(cancelAction)
+        
+        present(alert, animated: true, completion: nil)
     }
     
     @objc func uploadPhoto() {
-        let imagePicker = UIImagePickerController()
-        imagePicker.sourceType = .photoLibrary
-        imagePicker.delegate = self
-        present(imagePicker, animated: true)
+        changeNUM = -1
+        var configure = PHPickerConfiguration()
+        configure.selectionLimit = 4 - photoImages.count
+        configure.selection = .ordered
+        configure.filter = .images
+        let picker = PHPickerViewController(configuration: configure)
+        picker.delegate = self
+        self.present(picker, animated: true, completion: nil)
     }
     
-    @objc func changePhoto() {
-        var config = PHPickerConfiguration()
-        config.filter = .images
-        config.selection = .ordered
-        config.selectionLimit = 1
-        
-        let imagePicker = PHPickerViewController(configuration: config)
-        imagePicker.delegate = self
-        present(imagePicker, animated: true)
-    }
-}
-
-extension PostingImageViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        if let pickedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
-            numberOfItem = numberOfItem + 1
-            imgItems.append(PreviewItem(image: pickedImage, path: pickedImage.pngData()))
-            if numberOfItem == 4 {
-                imgItems.remove(at: 0)
-            }
-            imageCellView.reloadData()
-        }
-        dismiss(animated: true, completion: nil)
+    @objc func changePhoto(indexPath: Int) {
+        changeNUM = indexPath
+        var configure = PHPickerConfiguration()
+        configure.selectionLimit = 1
+        configure.selection = .ordered
+        configure.filter = .images
+        let picker = PHPickerViewController(configuration: configure)
+        picker.delegate = self
+        self.present(picker, animated: true, completion: nil)
     }
     
+    @objc func deletePhoto(indexPath: Int) {
+        photoImages.remove(at: indexPath)
+        imageCellView.reloadData()
+    }
 }
 
 extension PostingImageViewController: PHPickerViewControllerDelegate {
     func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
-        picker.dismiss(animated: true)
-        let itemProvider = results.first?.itemProvider
+        picker.dismiss(animated: true, completion: nil)
         
-        if let itemProvider = itemProvider,
-           itemProvider.canLoadObject(ofClass: UIImage.self) {
-            itemProvider.loadObject(ofClass: UIImage.self) { (image, error) in
-                DispatchQueue.main.async { [self] in
-                    let image = image as? UIImage
-                    imgItems[exampleNUM].image = image
-                    imgItems[exampleNUM].path = image?.pngData()
-                    imageCellView.reloadData()
+        for result in results.reversed() {
+            let itemProvider = result.itemProvider
+            if itemProvider.canLoadObject(ofClass: UIImage.self) {
+                itemProvider.loadObject(ofClass: UIImage.self) { [weak self](image, error) in
+                    DispatchQueue.main.async {
+                        guard let image = image as? UIImage else { return }
+                        if self?.changeNUM == -1 {
+                            self?.photoImages.insert(CellItem(image: image), at: 0)
+                            self?.imageCellView.reloadData()
+                        } else {
+                            self?.photoImages[self!.changeNUM].image = image as! UIImage
+                            self?.imageCellView.reloadData()
+                        }
+                    }
+                    if let error = error {
+                        DispatchQueue.main.async {
+                            self?.makeAlert(title: "",message: "사진을 불러올 수 없습니다")
+                        }
+                    }
                 }
             }
-        } else {
-            
         }
     }
 }
 
 // MARK: - UICollectionViewDelegate, DataSourse, DelegateFlowLayout
 
-extension PostingImageViewController:  UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+extension PostingImageViewController: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 2
+    }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return imgItems.count
+        
+        if section == 0 && photoImages.count == 4 {
+            return 0
+        } else if section == 0 {
+            return 1
+        } else {
+            return photoImages.count
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PostingImageCell.identifier, for: indexPath) as! PostingImageCell
         
-        cell.preview.image = imgItems[indexPath.row].image
-        
-        return cell
+        if indexPath.section == 0 {
+            let buttonCell = collectionView.dequeueReusableCell(withReuseIdentifier: PostingImageButtonCell.identifier, for: indexPath) as! PostingImageButtonCell
+            return buttonCell
+        } else {
+            let imagecell = collectionView.dequeueReusableCell(withReuseIdentifier: PostingImageCell.identifier, for: indexPath) as! PostingImageCell
+            imagecell.preview.image = photoImages[indexPath.row].image
+            return imagecell
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if numberOfItem > 3 {
-            exampleNUM = indexPath.row
-            changePhoto()
+        if indexPath.section == 0 {
+            uploadCheckPermission()
         } else {
-            if indexPath.row == 0 {
-                uploadPhoto()
-            } else {
-                exampleNUM = indexPath.row
-                changePhoto()
-            }
+            makeActionSheet(indexPath: indexPath.row)
         }
     }
     
