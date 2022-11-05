@@ -9,7 +9,7 @@ import CoreData
 import Foundation
 import UIKit
 
-enum Category: Int {
+enum Category: Int, CaseIterable {
     case zero = 0
     case one = 1
     case two = 2
