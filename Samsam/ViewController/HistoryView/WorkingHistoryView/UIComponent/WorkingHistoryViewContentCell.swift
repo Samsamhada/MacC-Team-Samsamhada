@@ -20,12 +20,15 @@ class WorkingHistoryViewContentCell: UICollectionViewCell {
         $0.layer.masksToBounds = true
         $0.layer.cornerRadius = 16
         $0.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+        $0.contentMode = .scaleAspectFill
         return $0
     }(UIImageView())
     
     let imageDescription: UILabel = {
         $0.text = "애플, 동아시아 최초 '디벨로퍼 아카데미' 한국서 운영"
-        $0.textAlignment = .center
+        $0.textAlignment = .left
+        $0.numberOfLines = 2
+        $0.font = UIFont.systemFont(ofSize: 16, weight: .regular)
         return $0
     }(UILabel())
     
@@ -57,6 +60,10 @@ class WorkingHistoryViewContentCell: UICollectionViewCell {
         return $0
     }(UIStackView())
     
+    private let descriptionCoverView: UIView = {
+        return $0
+    }(UIView())
+    
     // MARK: - Init
     
     override init(frame: CGRect) {
@@ -75,7 +82,8 @@ class WorkingHistoryViewContentCell: UICollectionViewCell {
         vStack.addArrangedSubview(uiImageView)
         uiImageView.addSubview(workTypeView)
         workTypeView.addSubview(workType)
-        vStack.addArrangedSubview(imageDescription)
+        vStack.addArrangedSubview(descriptionCoverView)
+        descriptionCoverView.addSubview(imageDescription)
         
         vStack.anchor(
             top: topAnchor,
@@ -87,9 +95,10 @@ class WorkingHistoryViewContentCell: UICollectionViewCell {
         uiImageView.anchor(
             top: vStack.topAnchor,
             left: vStack.leftAnchor,
-            bottom: imageDescription.topAnchor,
             right: vStack.rightAnchor
         )
+        
+        uiImageView.heightAnchor.constraint(lessThanOrEqualToConstant: (UIScreen.main.bounds.width - 32) / 4 * 3).isActive = true
         
         workTypeView.anchor(
             top: uiImageView.topAnchor,
@@ -109,10 +118,24 @@ class WorkingHistoryViewContentCell: UICollectionViewCell {
             paddingRight: 12
         )
         
-        imageDescription.anchor(
+        descriptionCoverView.anchor(
+            top: uiImageView.bottomAnchor,
             left: vStack.leftAnchor,
             bottom: vStack.bottomAnchor,
             right: vStack.rightAnchor
         )
+        
+        imageDescription.anchor(
+            top: descriptionCoverView.topAnchor,
+            left: descriptionCoverView.leftAnchor,
+            bottom: descriptionCoverView.bottomAnchor,
+            right: descriptionCoverView.rightAnchor,
+            paddingTop: 6,
+            paddingLeft: 6,
+            paddingBottom: 6,
+            paddingRight: 6
+        )
+        descriptionCoverView.setContentCompressionResistancePriority(UILayoutPriority(751), for: .vertical)
+        imageDescription.setContentCompressionResistancePriority(UILayoutPriority(752), for: .vertical)
     }
 }
