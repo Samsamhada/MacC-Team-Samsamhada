@@ -145,14 +145,15 @@ extension String {
 extension RoomCategoryViewController:  UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 24
+        return Category.allCases.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CategoryCell.identifier, for: indexPath) as! CategoryCell
+        let categoryName : Category = Category(rawValue: indexPath.row)!
+        cell.categoryTitle.text = "\(categoryName.categoryName())"
         cell.categoryImage.image = UIImage(named: CategoryCell.ImageLiteral.noCheck)
-        cell.categoryTitle.text = "\(indexPath.item + 1) 카테고리"
         return cell
     }
     
