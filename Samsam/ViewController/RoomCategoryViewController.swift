@@ -116,7 +116,7 @@ class RoomCategoryViewController: UIViewController {
         
         selectedCellArray.forEach {
             coreDataManager.createWorkingStatusData(
-                roomID: coreDataManager.countData(dataType: "room") - 1,
+                roomID: coreDataManager.countData(dataType: "room"),
                 categoryID: $0
             )
         }
