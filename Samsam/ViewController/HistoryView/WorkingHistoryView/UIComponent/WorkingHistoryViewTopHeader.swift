@@ -16,6 +16,7 @@ class WorkingHistoryViewTopHeader: UICollectionReusableView {
     // MARK: - View
     
     private let progressMetro: MetroViewController = {
+        $0.view.backgroundColor = AppColor.unSelectedGray
         return $0
     }(MetroViewController())
     
@@ -32,7 +33,6 @@ class WorkingHistoryViewTopHeader: UICollectionReusableView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         layout()
-        progressMetro.view.backgroundColor = AppColor.unSelectedGray
     }
     
     required init?(coder: NSCoder) {
