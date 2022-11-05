@@ -106,7 +106,6 @@ class BezierConfiguration {
             }
         }
         
-        //Last Element
         let lastElementIndex = segments - 1
         let exp1 = (rhsArray[lastElementIndex].x - bd[lastElementIndex] * rhsArray[lastElementIndex - 1].x)
         let exp1y = (rhsArray[lastElementIndex].y - bd[lastElementIndex] * rhsArray[lastElementIndex - 1].y)
