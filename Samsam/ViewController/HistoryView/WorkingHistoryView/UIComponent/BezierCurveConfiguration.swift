@@ -107,10 +107,10 @@ class BezierConfiguration {
         }
         
         let lastElementIndex = segments - 1
-        let exp1 = (rhsArray[lastElementIndex].x - bd[lastElementIndex] * rhsArray[lastElementIndex - 1].x)
+        let exp1x = (rhsArray[lastElementIndex].x - bd[lastElementIndex] * rhsArray[lastElementIndex - 1].x)
         let exp1y = (rhsArray[lastElementIndex].y - bd[lastElementIndex] * rhsArray[lastElementIndex - 1].y)
         let exp2 = (d[lastElementIndex] - bd[lastElementIndex] * ad[lastElementIndex - 1])
-        rhsArray[lastElementIndex].x = exp1 / exp2
+        rhsArray[lastElementIndex].x = exp1x / exp2
         rhsArray[lastElementIndex].y = exp1y / exp2
         
         solutionSet1[lastElementIndex] = rhsArray[lastElementIndex]
