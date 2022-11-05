@@ -65,8 +65,8 @@ class BezierConfiguration {
                 }
                 rhsArray.append(CGPoint(x: rhsXValue, y: rhsYValue))
             }
-            let solution1 = thomasAlgorithm(bd: bd, d: d, ad: ad, rhsArray: rhsArray, segments: segments, data: data)
-            return solution1
+            let solution = thomasAlgorithm(bd: bd, d: d, ad: ad, rhsArray: rhsArray, segments: segments, data: data)
+            return solution
         }
         return []
     }
@@ -80,8 +80,8 @@ class BezierConfiguration {
         var rhsArray = rhsArray
         let segments = segments
         
-        var solutionSet1 = [CGPoint?]()
-        solutionSet1 = Array(repeating: nil, count: segments)
+        var solutionSet = [CGPoint?]()
+        solutionSet = Array(repeating: nil, count: segments)
         
         ad[0] = ad[0] / d[0]
         rhsArray[0].x = rhsArray[0].x / d[0]
@@ -113,15 +113,15 @@ class BezierConfiguration {
         rhsArray[lastElementIndex].x = exp1x / exp2
         rhsArray[lastElementIndex].y = exp1y / exp2
         
-        solutionSet1[lastElementIndex] = rhsArray[lastElementIndex]
+        solutionSet[lastElementIndex] = rhsArray[lastElementIndex]
         
         for i in (0..<lastElementIndex).reversed() {
-            let controlPointX = rhsArray[i].x - (ad[i] * solutionSet1[i + 1]!.x)
-            let controlPointY = rhsArray[i].y - (ad[i] * solutionSet1[i + 1]!.y)
+            let controlPointX = rhsArray[i].x - (ad[i] * solutionSet[i + 1]!.x)
+            let controlPointY = rhsArray[i].y - (ad[i] * solutionSet[i + 1]!.y)
             
-            solutionSet1[i] = CGPoint(x: controlPointX, y: controlPointY)
+            solutionSet[i] = CGPoint(x: controlPointX, y: controlPointY)
         }
-        firstControlPoints = solutionSet1
+        firstControlPoints = solutionSet
         
         for i in (0..<segments) {
             if i == (segments - 1) {
