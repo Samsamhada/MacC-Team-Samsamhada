@@ -13,6 +13,7 @@ class PostingCategoryViewController: UIViewController {
     
     var roomID: Int?
     private var categoryID: Int = 0
+    var roomCategoryID: [Int] = []
     
     // MARK: - View
     
@@ -105,7 +106,7 @@ class PostingCategoryViewController: UIViewController {
 extension PostingCategoryViewController:  UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 24
+        return roomCategoryID.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -118,7 +119,8 @@ extension PostingCategoryViewController:  UICollectionViewDelegate, UICollection
             cell.categoryImage.image = UIImage(named: CategoryCell.ImageLiteral.noCheck)
         }
         
-        cell.categoryTitle.text = "\(indexPath.item+1) 카테고리"
+        let categoryName : Category = Category(rawValue: roomCategoryID[indexPath.row])!
+        cell.categoryTitle.text = "\(categoryName.categoryName())"
         return cell
     }
     
