@@ -135,6 +135,9 @@ class PostingWritingView: UIViewController {
     
     @objc func tapNextBTN() {
         coreDataManager.createPostingData(roomID: roomID!, categoryID: categoryID!, explanation: textContent.text!)
+        photoImages?.forEach {
+            coreDataManager.createPhotoData(postingID: coreDataManager.countData(dataType: "posting"), photoPath: $0.path!)
+        }
         self.dismiss(animated: true)
     }
     
