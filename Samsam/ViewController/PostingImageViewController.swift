@@ -267,11 +267,10 @@ extension PostingImageViewController: PHPickerViewControllerDelegate {
                         guard let image = image as? UIImage else { return }
                         if self?.changeNUM == -1 {
                             self?.photoImages.insert(CellItem(image: image, path: image.pngData()), at: 0)
-                            self?.imageCellView.reloadData()
                         } else {
                             self?.photoImages[self!.changeNUM] = CellItem(image: image, path: image.pngData())
-                            self?.imageCellView.reloadData()
                         }
+                        self?.imageCellView.reloadData()
                     }
                     if let error = error {
                         DispatchQueue.main.async {
