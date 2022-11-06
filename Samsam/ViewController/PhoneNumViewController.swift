@@ -9,6 +9,10 @@ import UIKit
 
 class PhoneNumViewController: UIViewController {
 
+    // MARK: - Property
+    
+    var phoneNum = ""
+    
     // MARK: - View
     
     private let uiView: UIView = {
@@ -69,6 +73,7 @@ class PhoneNumViewController: UIViewController {
     private func attribute() {
         view.backgroundColor = .white
         numberInput.addTarget(self, action: #selector(buttonAttributeChanged), for: .editingChanged)
+        numberInput.addTarget(self, action: #selector(changedNumStyle), for: .editingChanged)
     }
     
     private func layout() {
@@ -130,6 +135,11 @@ class PhoneNumViewController: UIViewController {
             right: uiView.rightAnchor,
             paddingBottom: 20
         )
+    }
+    
+    @objc func changedNumStyle() {
+        numberInput.text = numberInput.text!.phoneNumberStyle()
+        phoneNum = (numberInput.text?.replacingOccurrences(of: " - ", with: ""))!
     }
 
     @objc private func buttonAttributeChanged() {
