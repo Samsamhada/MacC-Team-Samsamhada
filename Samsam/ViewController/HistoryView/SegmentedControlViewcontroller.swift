@@ -12,6 +12,7 @@ class SegmentedControlViewController: UIViewController {
     // MARK: - Property
     
     var roomID: Int?
+    var roomCategoryID: [Int] = []
     
     // MARK: - View
     
@@ -72,9 +73,18 @@ class SegmentedControlViewController: UIViewController {
         super.viewWillAppear(animated)
         coreDataManager.loadOneRoomData(roomID: roomID!)
         coreDataManager.loadPostingData(roomID: roomID!)
+        coreDataManager.loadWorkingStatusData(roomID: roomID!)
+        setRoomCategoryID()
     }
     
     // MARK: - Method
+    
+    private func setRoomCategoryID() {
+           roomCategoryID = []
+           coreDataManager.workingStatuses.forEach {
+               roomCategoryID.append(Int($0.categoryID))
+           }
+       }
     
     private func attribute() {
         view.backgroundColor = .white
@@ -169,6 +179,7 @@ class SegmentedControlViewController: UIViewController {
     @objc func tapWritingButton() {
         let postingCategoryViewController = PostingCategoryViewController()
         postingCategoryViewController.roomID = roomID
+        postingCategoryViewController.roomCategoryID = roomCategoryID
         let navigationController = UINavigationController(rootViewController: postingCategoryViewController)
         navigationController.modalPresentationStyle = .fullScreen
         present(navigationController, animated:  true, completion: nil)

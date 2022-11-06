@@ -116,11 +116,11 @@ class RoomCategoryViewController: UIViewController {
         
         selectedCellArray.forEach {
             coreDataManager.createWorkingStatusData(
-                roomID: coreDataManager.countData(dataType: "room") - 1,
+                roomID: coreDataManager.countData(dataType: "room"),
                 categoryID: $0
             )
-        self.dismiss(animated: true)
         }
+        self.dismiss(animated: true)
     }
 }
 
@@ -145,14 +145,15 @@ extension String {
 extension RoomCategoryViewController:  UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 24
+        return Category.allCases.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CategoryCell.identifier, for: indexPath) as! CategoryCell
         cell.categoryImage.image = UIImage(named: CategoryCell.ImageLiteral.noCheck)
-        cell.categoryTitle.text = "\(indexPath.item + 1) 카테고리"
+        let category : Category = Category(rawValue: indexPath.row)!
+        cell.categoryTitle.text = "\(category.categoryName())"
         return cell
     }
     
@@ -182,7 +183,7 @@ extension RoomCategoryViewController:  UICollectionViewDelegate, UICollectionVie
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-         return UIEdgeInsets(top: 8, left: 8, bottom: 16, right: 8)
+        return UIEdgeInsets(top: 8, left: 8, bottom: 16, right: 8)
     }
 }
 
