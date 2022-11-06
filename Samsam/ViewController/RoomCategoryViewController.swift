@@ -107,6 +107,7 @@ class RoomCategoryViewController: UIViewController {
     }
     
     @objc func tapNextBTN() {
+        selectedCellArray.sort()
         coreDataManager.createRoomData(
             clientName: clientName,
             startDate: startingDate,
