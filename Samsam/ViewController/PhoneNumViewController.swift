@@ -11,7 +11,7 @@ class PhoneNumViewController: UIViewController {
 
     // MARK: - Property
     
-    var phoneNum = ""
+    private var phoneNum = ""
     
     // MARK: - View
     
@@ -72,6 +72,8 @@ class PhoneNumViewController: UIViewController {
     
     private func attribute() {
         view.backgroundColor = .white
+        
+        numberInput.delegate = self
         numberInput.addTarget(self, action: #selector(buttonAttributeChanged), for: .editingChanged)
         numberInput.addTarget(self, action: #selector(changedNumStyle), for: .editingChanged)
     }
@@ -156,5 +158,14 @@ class PhoneNumViewController: UIViewController {
     @objc private func tapSubmitButton() {
         let roomListViewController = RoomListViewController()
         navigationController?.pushViewController(roomListViewController, animated: true)
+    }
+}
+
+extension PhoneNumViewController: UITextFieldDelegate {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        
+        guard numberInput.text!.count < 9 else { return false }
+        
+        return true
     }
 }
