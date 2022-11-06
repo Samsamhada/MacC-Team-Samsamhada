@@ -119,7 +119,7 @@ extension PostingCategoryViewController:  UICollectionViewDelegate, UICollection
             cell.categoryImage.image = UIImage(named: CategoryCell.ImageLiteral.noCheck)
         }
         
-        let category : Category = Category(rawValue: roomCategoryID[indexPath.row])!
+        let category: Category = Category(rawValue: roomCategoryID[indexPath.row])!
         cell.categoryTitle.text = "\(category.categoryName())"
         return cell
     }
