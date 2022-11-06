@@ -132,6 +132,8 @@ class PostingImageViewController: UIViewController {
         if photoImages.count == 0 {
             makeAlert(title: "", message: "사진을 한 장 이상 선택해야 합니다")
         } else {
+            postingWritingView.roomID = roomID
+            postingWritingView.categoryID = categoryID
             postingWritingView.photoImages = photoImages
             navigationController?.pushViewController(postingWritingView, animated: true)
         }
@@ -264,12 +266,11 @@ extension PostingImageViewController: PHPickerViewControllerDelegate {
                     DispatchQueue.main.async {
                         guard let image = image as? UIImage else { return }
                         if self?.changeNUM == -1 {
-                            self?.photoImages.insert(CellItem(image: image), at: 0)
-                            self?.imageCellView.reloadData()
+                            self?.photoImages.insert(CellItem(image: image, path: image.pngData()), at: 0)
                         } else {
-                            self?.photoImages[self!.changeNUM].image = image as! UIImage
-                            self?.imageCellView.reloadData()
+                            self?.photoImages[self!.changeNUM] = CellItem(image: image, path: image.pngData())
                         }
+                        self?.imageCellView.reloadData()
                     }
                     if let error = error {
                         DispatchQueue.main.async {
