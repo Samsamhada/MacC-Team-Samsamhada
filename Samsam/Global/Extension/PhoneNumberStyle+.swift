@@ -13,7 +13,6 @@ extension String {
             if let regex = try? NSRegularExpression(pattern: "([0-9]{4})([0-9]{4})",
                                                     options: .caseInsensitive) {
                 let modString = regex.stringByReplacingMatches(in: self,
-                                                               options: [],
                                                                range: NSRange(self.startIndex..., in: self),
                                                                withTemplate: "$1 - $2")
                 return modString
