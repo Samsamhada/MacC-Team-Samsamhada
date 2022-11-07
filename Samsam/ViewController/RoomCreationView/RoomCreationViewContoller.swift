@@ -129,7 +129,21 @@ class RoomCreationViewController: UIViewController {
         layout()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        endDate.minimumDate = startDate.date
+        startDate.addTarget(self, action: #selector(setDate), for: .valueChanged)
+        endDate.addTarget(self, action: #selector(setDate), for: .valueChanged)
+    }
+    
     // MARK: - Method
+    
+    @objc func setDate() {
+        if startDate.date > endDate.date {
+            endDate.date = startDate.date
+        }
+        endDate.minimumDate = startDate.date
+    }
     
     private func attribute() {
         view.backgroundColor = .white
