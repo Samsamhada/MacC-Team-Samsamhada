@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ChipViewController: UIViewController, UIScrollViewDelegate {
+class ChipViewController: UIViewController {
     
     // MARK: - Property
     
@@ -29,17 +29,18 @@ class ChipViewController: UIViewController, UIScrollViewDelegate {
         $0.spacing = 10
         return $0
     }(UIStackView())
-    
-    private var textLabel: UILabel = {
-        $0.text = "aasㅁㄴdfsㄴㅇㄹㅁㄴㅇㄹㅁㄴㅇㄹㅁㄴㅇas"
+
+    private var historyView: UICollectionView = {
         return $0
-    }(UILabel())
+    }(UICollectionView(
+        frame: .zero, collectionViewLayout: UICollectionViewFlowLayout()))
     
     // MARK: - LifeCycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         layout()
+        attribute()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -48,6 +49,7 @@ class ChipViewController: UIViewController, UIScrollViewDelegate {
         coreDataManager.loadPostingData(roomID: roomID!)
         coreDataManager.loadWorkingStatusData(roomID: roomID!)
         setChip()
+        historyView.reloadData()
     }
     
     // MARK: - Method
@@ -55,12 +57,14 @@ class ChipViewController: UIViewController, UIScrollViewDelegate {
     private func layout() {
         view.addSubview(chipScrollView)
         chipScrollView.addSubview(chipContentView)
-        chipContentView.addArrangedSubview(textLabel)
+        view.addSubview(historyView)
         
         chipScrollView.anchor(
             top: view.safeAreaLayoutGuide.topAnchor,
             left: view.safeAreaLayoutGuide.leftAnchor,
             right: view.safeAreaLayoutGuide.rightAnchor,
+            paddingLeft: 16,
+            paddingRight: 16,
             height: 60
         )
         
@@ -71,8 +75,22 @@ class ChipViewController: UIViewController, UIScrollViewDelegate {
             right: chipScrollView.contentLayoutGuide.rightAnchor,
             height: 60
         )
-
         
+        historyView.anchor(
+            top:chipScrollView.bottomAnchor,
+            left: view.safeAreaLayoutGuide.leftAnchor,
+            bottom: view.safeAreaLayoutGuide.bottomAnchor,
+            right: view.safeAreaLayoutGuide.rightAnchor
+        )
+    }
+    
+    private func attribute() {
+        view.backgroundColor = .white
+        
+        historyView.delegate = self
+        historyView.dataSource = self
+        
+        historyView.register(WorkingHistoryViewContentCell.self, forCellWithReuseIdentifier: WorkingHistoryViewContentCell.identifier)
     }
     
     private func setChip() {
@@ -98,4 +116,44 @@ class ChipViewController: UIViewController, UIScrollViewDelegate {
         button.layer.cornerRadius = 16
         return button
     }
+}
+
+extension ChipViewController: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        
+        return coreDataManager.postings.count
+    }
+ 
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    
+            let contentCell = collectionView.dequeueReusableCell(withReuseIdentifier: WorkingHistoryViewContentCell.identifier, for: indexPath) as! WorkingHistoryViewContentCell
+            coreDataManager.loadPhotoData(postingID: indexPath.item + 1)
+            
+            contentCell.uiImageView.image = UIImage(data: coreDataManager.photos[0].photoPath!)
+            contentCell.imageDescription.text = coreDataManager.postings[indexPath.item].explanation
+            contentCell.workType.text = Category.categoryName(Category(rawValue: Int(coreDataManager.postings[indexPath.item].categoryID))!)()
+            
+            return contentCell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
+        let width = UIScreen.main.bounds.width - 32
+        let cellHeight = width / 4 * 3 + 30
+        return CGSize(width: Int(width), height: Int(cellHeight))
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let detailViewController = DetailViewController()
+        coreDataManager.loadPhotoData(postingID: indexPath.item + 1)
+        detailViewController.images = coreDataManager.photos
+        coreDataManager.postings.forEach {
+            if $0 == coreDataManager.postings[indexPath.item] {
+                detailViewController.descriptionLBL.text = $0.explanation
+            }
+        }
+        navigationController?.pushViewController(detailViewController, animated: true)
+    }
+    
+    
 }
