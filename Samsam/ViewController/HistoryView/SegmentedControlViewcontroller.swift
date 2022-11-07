@@ -25,7 +25,8 @@ class SegmentedControlViewController: UIViewController {
         return $0
     }(UISegmentedControl(items: ["시공내역", "문의내역"]))
     
-    private let workingHistoryView: WorkingHistoryViewController = {
+    private lazy var workingHistoryView: WorkingHistoryViewController = {
+        $0.roomID = roomID
         return $0
     }(WorkingHistoryViewController())
     

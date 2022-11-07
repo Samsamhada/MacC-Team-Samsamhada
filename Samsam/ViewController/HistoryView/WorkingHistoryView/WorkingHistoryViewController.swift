@@ -9,6 +9,10 @@ import UIKit
 
 class WorkingHistoryViewController: UIViewController {
     
+    // MARK: - Property
+    
+    var roomID: Int?
+    
     // MARK: - View
     
     private let workingHistoryView: UICollectionView = {
@@ -143,7 +147,8 @@ extension WorkingHistoryViewController: UICollectionViewDataSource, UICollection
     }
     
     @objc func tapAllView() {
-        let chipViewController = ViewController()
+        let chipViewController = ChipViewController()
+        chipViewController.roomID = roomID
         navigationController?.pushViewController(chipViewController , animated: true)
     }
 }
