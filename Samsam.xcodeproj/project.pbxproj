@@ -37,12 +37,13 @@
 		43BD591A29028BD70063EB4F /* RoomCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43BD591929028BD70063EB4F /* RoomCodeViewController.swift */; };
 		43C2110F28FCFAB500E8F6DD /* PostingCategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43C2110E28FCFAB500E8F6DD /* PostingCategoryViewController.swift */; };
 		43C2111128FCFB3800E8F6DD /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43C2111028FCFB3800E8F6DD /* CategoryCell.swift */; };
-		980200722912513B00E193E6 /* SegmentedControlViewcontroller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980200712912513B00E193E6 /* SegmentedControlViewcontroller.swift */; };
 		43DB5E1C2913733A00BD09BA /* PostingImageButtonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43DB5E1B2913733A00BD09BA /* PostingImageButtonCell.swift */; };
+		980200722912513B00E193E6 /* SegmentedControlViewcontroller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980200712912513B00E193E6 /* SegmentedControlViewcontroller.swift */; };
 		9802007A2914F82100E193E6 /* MetroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980200792914F82100E193E6 /* MetroViewController.swift */; };
 		9802007C2914F83400E193E6 /* BezierCurveConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9802007B2914F83400E193E6 /* BezierCurveConfiguration.swift */; };
 		980D900E28FE671B003CC2DA /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980D900D28FE671B003CC2DA /* DetailViewController.swift */; };
 		98366F8D29019A5300E81E27 /* RoomCreationViewContoller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98366F8C29019A5300E81E27 /* RoomCreationViewContoller.swift */; };
+		9866F51629189AEE002D3589 /* PhoneNumberStyle+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9866F51529189AEE002D3589 /* PhoneNumberStyle+.swift */; };
 		98B08A60290AC8C900401650 /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B08A5F290AC8C900401650 /* UIColor+.swift */; };
 		98C0D06028FCE8EB00E0E439 /* AutoLayout+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98C0D05F28FCE8EB00E0E439 /* AutoLayout+.swift */; };
 		98C0D06428FCE99300E0E439 /* JSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98C0D06328FCE99300E0E439 /* JSON.swift */; };
@@ -92,12 +93,13 @@
 		43BD591929028BD70063EB4F /* RoomCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomCodeViewController.swift; sourceTree = "<group>"; };
 		43C2110E28FCFAB500E8F6DD /* PostingCategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostingCategoryViewController.swift; sourceTree = "<group>"; };
 		43C2111028FCFB3800E8F6DD /* CategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
-		980200712912513B00E193E6 /* SegmentedControlViewcontroller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentedControlViewcontroller.swift; sourceTree = "<group>"; };
 		43DB5E1B2913733A00BD09BA /* PostingImageButtonCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostingImageButtonCell.swift; sourceTree = "<group>"; };
+		980200712912513B00E193E6 /* SegmentedControlViewcontroller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentedControlViewcontroller.swift; sourceTree = "<group>"; };
 		980200792914F82100E193E6 /* MetroViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetroViewController.swift; sourceTree = "<group>"; };
 		9802007B2914F83400E193E6 /* BezierCurveConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BezierCurveConfiguration.swift; sourceTree = "<group>"; };
 		980D900D28FE671B003CC2DA /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		98366F8C29019A5300E81E27 /* RoomCreationViewContoller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomCreationViewContoller.swift; sourceTree = "<group>"; };
+		9866F51529189AEE002D3589 /* PhoneNumberStyle+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PhoneNumberStyle+.swift"; sourceTree = "<group>"; };
 		98B08A5F290AC8C900401650 /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
 		98C0D05F28FCE8EB00E0E439 /* AutoLayout+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AutoLayout+.swift"; sourceTree = "<group>"; };
 		98C0D06328FCE99300E0E439 /* JSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSON.swift; sourceTree = "<group>"; };
@@ -219,6 +221,7 @@
 				98C0D05F28FCE8EB00E0E439 /* AutoLayout+.swift */,
 				98E1700C2906EFEB00F71D41 /* hideKeyboard+.swift */,
 				98B08A5F290AC8C900401650 /* UIColor+.swift */,
+				9866F51529189AEE002D3589 /* PhoneNumberStyle+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -374,6 +377,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9866F51629189AEE002D3589 /* PhoneNumberStyle+.swift in Sources */,
 				26FEC1DB2902E6F2006C410B /* PostingEntity+CoreDataClass.swift in Sources */,
 				26E3749C28FE8E6F00997DA7 /* LoginViewController.swift in Sources */,
 				43DB5E1C2913733A00BD09BA /* PostingImageButtonCell.swift in Sources */,
