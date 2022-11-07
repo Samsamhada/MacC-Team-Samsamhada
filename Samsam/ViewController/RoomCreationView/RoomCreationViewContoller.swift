@@ -117,6 +117,8 @@ class RoomCreationViewController: UIViewController {
         $0.setTitleColor(.white, for: .normal)
         $0.backgroundColor = AppColor.campanulaBlue
         $0.layer.cornerRadius = 16
+        $0.backgroundColor = .gray
+        $0.isEnabled = false
         return $0
     }(UIButton())
     
@@ -138,20 +140,13 @@ class RoomCreationViewController: UIViewController {
     
     // MARK: - Method
     
-    @objc func setDate() {
-        if startDate.date > endDate.date {
-            endDate.date = startDate.date
-        }
-        endDate.minimumDate = startDate.date
-    }
-    
     private func attribute() {
         view.backgroundColor = .white
         
         setNavigation()
         hidekeyboardWhenTappedAround()
 
-        nextButton.addTarget(self, action: #selector(tapNextButton), for: .touchUpInside)
+        customerTextField.addTarget(self, action: #selector(buttonAttributeChanged), for: .editingChanged)
     }
     
     private func layout() {
@@ -256,6 +251,13 @@ class RoomCreationViewController: UIViewController {
         navigationController?.setNavigationBarHidden(false, animated: true)
     }
     
+    @objc func setDate() {
+        if startDate.date > endDate.date {
+            endDate.date = startDate.date
+        }
+        endDate.minimumDate = startDate.date
+    }
+    
     @objc private func tapStepper() {
         warrantyCount = Int(warrantyStepper.value)
         warrantyText.text = "\(warrantyCount)개월"
@@ -275,5 +277,16 @@ class RoomCreationViewController: UIViewController {
     
     @objc private func tapCloseButton() {
         self.dismiss(animated: true)
+    }
+    
+    @objc private func buttonAttributeChanged() {
+        if (customerTextField.text!.count) >= 1 {
+            nextButton.backgroundColor = .blue
+            nextButton.isEnabled = true
+            nextButton.addTarget(self, action: #selector(tapNextButton), for: .touchUpInside)
+        } else {
+            nextButton.backgroundColor = .gray
+            nextButton.isEnabled = false
+        }
     }
 }
