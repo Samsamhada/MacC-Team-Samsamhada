@@ -13,6 +13,8 @@ class ChipViewController: UIViewController {
     
     var roomID: Int?
     var chips: [UIButton] = []
+    var categoryID: [Int] = []
+    var selectedID: Int = 0
     
     // MARK: - View
     
@@ -48,7 +50,6 @@ class ChipViewController: UIViewController {
         coreDataManager.loadOneRoomData(roomID: roomID!)
         coreDataManager.loadPostingData(roomID: roomID!)
         coreDataManager.loadWorkingStatusData(roomID: roomID!)
-        setChip()
         historyView.reloadData()
     }
     
@@ -87,34 +88,61 @@ class ChipViewController: UIViewController {
     private func attribute() {
         view.backgroundColor = .white
         
+        setChip()
+        
         historyView.delegate = self
         historyView.dataSource = self
-        
         historyView.register(WorkingHistoryViewContentCell.self, forCellWithReuseIdentifier: WorkingHistoryViewContentCell.identifier)
     }
     
     private func setChip() {
-        chips.append(makeButton(title: "  전체  "))
         
-        coreDataManager.workingStatuses.forEach {
-            chips.append(makeButton(title: "  "+Category(rawValue: Int($0.categoryID))!.categoryName()+"  "))
+        chips.append(makeButton(title: "  전체  ", tag: 0))
+        
+        for i in stride(from: 1, to: coreDataManager.workingStatuses.count + 1, by: 1) {
+            chips.append(makeButton(title: "  "+Category(rawValue: Int(coreDataManager.workingStatuses[i-1].categoryID))!.categoryName()+"  ", tag: i))
+            categoryID.append(Int(coreDataManager.workingStatuses[i-1].categoryID))
         }
         
         chips.forEach {
             chipContentView.addArrangedSubview($0)
         }
+        
+        selectedButton(UIButton: chips[selectedID])
+        print(categoryID)
     }
     
-    private func makeButton(title: String) -> UIButton {
-        let button = UIButton()
+    private func makeButton(title: String, tag: Int) -> UIButton {
+        lazy var button = UIButton()
         button.setTitleColor(AppColor.campanulaBlue, for: .normal)
         button.setTitle(title, for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
+        button.backgroundColor = .white
         button.layer.masksToBounds = true
         button.layer.borderWidth = 2
         button.layer.borderColor = AppColor.campanulaBlue?.cgColor
         button.layer.cornerRadius = 16
+        button.addTarget(self, action: #selector(selectButton(name:)), for: .touchUpInside)
+        button.tag = tag
         return button
+    }
+    
+    @objc private func selectButton(name sender: UIButton) {
+        if selectedID != sender.tag {
+            didSelectedButton(UIButton: chips[selectedID])
+            selectedID = sender.tag
+            selectedButton(UIButton: chips[selectedID])
+        }
+    }
+    
+    private func selectedButton(UIButton: UIButton) {
+        UIButton.setTitleColor(.white, for: .normal)
+        UIButton.backgroundColor = AppColor.campanulaBlue
+    }
+
+    private func didSelectedButton(UIButton: UIButton) {
+        UIButton.setTitleColor(AppColor.campanulaBlue, for: .normal)
+        UIButton.backgroundColor = .white
     }
 }
 
