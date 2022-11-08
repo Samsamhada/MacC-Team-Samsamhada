@@ -38,6 +38,16 @@ class ChipViewController: UIViewController {
     }(UICollectionView(
         frame: .zero, collectionViewLayout: UICollectionViewFlowLayout()))
     
+    private lazy var writingButton: UIButton = {
+        $0.backgroundColor = AppColor.campanulaBlue
+        $0.setTitle("시공상황 작성하기", for: .normal)
+        $0.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
+        $0.setTitleColor(.white, for: .normal)
+        $0.layer.cornerRadius = 16
+        $0.addTarget(self, action: #selector(tapWritingButton), for: .touchUpInside)
+        return $0
+    }(UIButton())
+    
     // MARK: - LifeCycle
     
     override func viewDidLoad() {
@@ -60,6 +70,7 @@ class ChipViewController: UIViewController {
         view.addSubview(chipScrollView)
         chipScrollView.addSubview(chipContentView)
         view.addSubview(historyView)
+        view.addSubview(writingButton)
         
         chipScrollView.anchor(
             top: view.safeAreaLayoutGuide.topAnchor,
@@ -84,6 +95,15 @@ class ChipViewController: UIViewController {
             bottom: view.safeAreaLayoutGuide.bottomAnchor,
             right: view.safeAreaLayoutGuide.rightAnchor
         )
+        
+        writingButton.anchor(
+            left: view.safeAreaLayoutGuide.leftAnchor,
+            bottom: view.safeAreaLayoutGuide.bottomAnchor,
+            right: view.safeAreaLayoutGuide.rightAnchor,
+            paddingLeft: 16,
+            paddingRight: 16,
+            height: 50
+        )
     }
     
     private func attribute() {
@@ -94,6 +114,15 @@ class ChipViewController: UIViewController {
         historyView.delegate = self
         historyView.dataSource = self
         historyView.register(WorkingHistoryViewContentCell.self, forCellWithReuseIdentifier: WorkingHistoryViewContentCell.identifier)
+    }
+    
+    @objc func tapWritingButton() {
+        let postingCategoryViewController = PostingCategoryViewController()
+        postingCategoryViewController.roomID = roomID
+        postingCategoryViewController.roomCategoryID = categoryID
+        let navigationController = UINavigationController(rootViewController: postingCategoryViewController)
+        navigationController.modalPresentationStyle = .fullScreen
+        present(navigationController, animated:  true, completion: nil)
     }
     
     private func setChip() {
