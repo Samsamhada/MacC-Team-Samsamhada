@@ -62,16 +62,16 @@ extension LoginViewController: ASAuthorizationControllerDelegate {
         if let appleIDCredential = authorization.credential as? ASAuthorizationAppleIDCredential {
 
             let userIdentifier = appleIDCredential.user
-//            let userFullName = appleIDCredential.fullName
-//            let userFirstName = appleIDCredential.fullName?.givenName
-//            let userLastName = appleIDCredential.fullName?.familyName
-//            let userEmail = appleIDCredential.email
+            let userFirstName = appleIDCredential.fullName?.givenName
+            let userLastName = appleIDCredential.fullName?.familyName
+            let userEmail = appleIDCredential.email
             
             let appleIDProvider = ASAuthorizationAppleIDProvider()
             appleIDProvider.getCredentialState(forUserID: userIdentifier) { (credentialState, error) in
                 switch credentialState {
                 case .authorized:
                     DispatchQueue.main.async {
+                        // TODO: - get -> post : token 받아오기!!!
                         self.navigationController?.pushViewController(PhoneNumViewController(), animated: true)
                     }
                     break
