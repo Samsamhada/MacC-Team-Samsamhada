@@ -15,6 +15,7 @@ class ChipViewController: UIViewController {
     var chips: [UIButton] = []
     var categoryID: [Int] = []
     var selectedID: Int = 0
+    var selectedCategoryItem: [PostingEntity] = []
     
     // MARK: - View
     
@@ -109,7 +110,6 @@ class ChipViewController: UIViewController {
         }
         
         selectedButton(UIButton: chips[selectedID])
-        print(categoryID)
     }
     
     private func makeButton(title: String, tag: Int) -> UIButton {
@@ -132,6 +132,8 @@ class ChipViewController: UIViewController {
             didSelectedButton(UIButton: chips[selectedID])
             selectedID = sender.tag
             selectedButton(UIButton: chips[selectedID])
+            selectedCategoryItem = []
+            historyView.reloadData()
         }
     }
     
@@ -149,19 +151,34 @@ class ChipViewController: UIViewController {
 extension ChipViewController: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        return coreDataManager.postings.count
+        if selectedID == 0 {
+            return coreDataManager.postings.count
+        } else {
+            coreDataManager.postings.forEach {
+                if $0.categoryID == categoryID[selectedID-1] {
+                    selectedCategoryItem.append($0)
+                }
+            }
+            return selectedCategoryItem.count
+        }
     }
  
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-    
-            let contentCell = collectionView.dequeueReusableCell(withReuseIdentifier: WorkingHistoryViewContentCell.identifier, for: indexPath) as! WorkingHistoryViewContentCell
-            coreDataManager.loadPhotoData(postingID: indexPath.item + 1)
-            
+        
+        let contentCell = collectionView.dequeueReusableCell(withReuseIdentifier: WorkingHistoryViewContentCell.identifier, for: indexPath) as! WorkingHistoryViewContentCell
+        
+        if selectedID == 0 {
+            coreDataManager.loadPhotoData(postingID: Int(coreDataManager.postings[indexPath.item].postingID))
             contentCell.uiImageView.image = UIImage(data: coreDataManager.photos[0].photoPath!)
             contentCell.imageDescription.text = coreDataManager.postings[indexPath.item].explanation
             contentCell.workType.text = Category.categoryName(Category(rawValue: Int(coreDataManager.postings[indexPath.item].categoryID))!)()
-            
-            return contentCell
+        } else {
+            coreDataManager.loadPhotoData(postingID: Int(selectedCategoryItem[indexPath.item].postingID))
+            contentCell.uiImageView.image = UIImage(data: coreDataManager.photos[0].photoPath!)
+            contentCell.imageDescription.text = selectedCategoryItem[indexPath.item].explanation
+            contentCell.workType.text = Category.categoryName(Category(rawValue: Int(selectedCategoryItem[indexPath.item].categoryID))!)()
+        }
+        return contentCell
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -173,7 +190,7 @@ extension ChipViewController: UICollectionViewDataSource, UICollectionViewDelega
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let detailViewController = DetailViewController()
-        coreDataManager.loadPhotoData(postingID: indexPath.item + 1)
+        coreDataManager.loadPhotoData(postingID: Int(coreDataManager.postings[indexPath.item].postingID))
         detailViewController.images = coreDataManager.photos
         coreDataManager.postings.forEach {
             if $0 == coreDataManager.postings[indexPath.item] {
