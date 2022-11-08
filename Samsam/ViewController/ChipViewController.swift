@@ -19,21 +19,21 @@ class ChipViewController: UIViewController {
     
     // MARK: - View
     
-    private var chipScrollView: UIScrollView = {
+    private let chipScrollView: UIScrollView = {
         $0.showsVerticalScrollIndicator = false
         $0.showsHorizontalScrollIndicator = false
         $0.backgroundColor = .white
         return $0
     }(UIScrollView())
     
-    private var chipContentView: UIStackView = {
+    private let chipContentView: UIStackView = {
         $0.alignment = .center
         $0.axis = .horizontal
         $0.spacing = 10
         return $0
     }(UIStackView())
 
-    private var historyView: UICollectionView = {
+    private let historyView: UICollectionView = {
         return $0
     }(UICollectionView(
         frame: .zero, collectionViewLayout: UICollectionViewFlowLayout()))
