@@ -81,11 +81,11 @@ class SegmentedControlViewController: UIViewController {
     // MARK: - Method
     
     private func setRoomCategoryID() {
-           roomCategoryID = []
-           coreDataManager.workingStatuses.forEach {
-               roomCategoryID.append(Int($0.categoryID))
-           }
-       }
+        roomCategoryID = []
+        coreDataManager.workingStatuses.forEach {
+            roomCategoryID.append(Int($0.categoryID))
+        }
+    }
     
     private func attribute() {
         view.backgroundColor = .white
