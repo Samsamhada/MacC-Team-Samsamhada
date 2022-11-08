@@ -181,6 +181,19 @@
 			path = CoreData;
 			sourceTree = "<group>";
 		};
+		436C4364291A0F6300504171 /* PostingView */ = {
+			isa = PBXGroup;
+			children = (
+				43C2111028FCFB3800E8F6DD /* CategoryCell.swift */,
+				4330CE9A2906275D001FC8E7 /* PostingImageCell.swift */,
+				43C2110E28FCFAB500E8F6DD /* PostingCategoryViewController.swift */,
+				43DB5E1B2913733A00BD09BA /* PostingImageButtonCell.swift */,
+				4369690B28FE422100DEA89F /* PostingImageViewController.swift */,
+				43956D2B28FF9F0100DD996F /* PostingWritingView.swift */,
+			);
+			path = PostingView;
+			sourceTree = "<group>";
+		};
 		980200732912514700E193E6 /* HistoryView */ = {
 			isa = PBXGroup;
 			children = (
@@ -194,6 +207,7 @@
 		980D900C28FE6705003CC2DA /* DetailView */ = {
 			isa = PBXGroup;
 			children = (
+				98E1700E29080C9100F71D41 /* ImageDetailViewController.swift */,
 				980D900D28FE671B003CC2DA /* DetailViewController.swift */,
 			);
 			path = DetailView;
@@ -203,6 +217,8 @@
 			isa = PBXGroup;
 			children = (
 				98366F8C29019A5300E81E27 /* RoomCreationViewContoller.swift */,
+				4386FB012901353B00314936 /* RoomCategoryViewController.swift */,
+				43BD591929028BD70063EB4F /* RoomCodeViewController.swift */,
 			);
 			path = RoomCreationView;
 			sourceTree = "<group>";
@@ -232,24 +248,16 @@
 			isa = PBXGroup;
 			children = (
 				26E3748528FCDC0000997DA7 /* ViewController.swift */,
+				26E3749B28FE8E6F00997DA7 /* LoginViewController.swift */,
+				26E3749E28FE9DA300997DA7 /* PhoneNumViewController.swift */,
 				26E3749528FCF56400997DA7 /* RoomListViewController.swift */,
 				26FEC1B528FFF52D006C410B /* RoomCreationCell.swift */,
 				26E3749728FD2D0700997DA7 /* RoomListCell.swift */,
-				980200732912514700E193E6 /* HistoryView */,
-				26E3749B28FE8E6F00997DA7 /* LoginViewController.swift */,
-				26E3749E28FE9DA300997DA7 /* PhoneNumViewController.swift */,
-				980D900C28FE6705003CC2DA /* DetailView */,
-				98E1700E29080C9100F71D41 /* ImageDetailViewController.swift */,
-				43C2111028FCFB3800E8F6DD /* CategoryCell.swift */,
-				43C2110E28FCFAB500E8F6DD /* PostingCategoryViewController.swift */,
-				4330CE9A2906275D001FC8E7 /* PostingImageCell.swift */,
-				43DB5E1B2913733A00BD09BA /* PostingImageButtonCell.swift */,
-				4369690B28FE422100DEA89F /* PostingImageViewController.swift */,
-				43956D2B28FF9F0100DD996F /* PostingWritingView.swift */,
-				98366F8B29019A3100E81E27 /* RoomCreationView */,
-				4386FB012901353B00314936 /* RoomCategoryViewController.swift */,
-				43BD591929028BD70063EB4F /* RoomCodeViewController.swift */,
 				436E81BF2918BA3D002A2641 /* ChipViewController.swift */,
+				980200732912514700E193E6 /* HistoryView */,
+				980D900C28FE6705003CC2DA /* DetailView */,
+				436C4364291A0F6300504171 /* PostingView */,
+				98366F8B29019A3100E81E27 /* RoomCreationView */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
