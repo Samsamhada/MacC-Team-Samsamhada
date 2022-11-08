@@ -12,10 +12,10 @@ class ChipViewController: UIViewController {
     // MARK: - Property
     
     var roomID: Int?
-    var chips: [UIButton] = []
-    var categoryID: [Int] = []
-    var selectedID: Int = 0
-    var selectedCategoryItem: [PostingEntity] = []
+    private var chips: [UIButton] = []
+    private var categoryID: [Int] = []
+    private var selectedID: Int = 0
+    private var selectedCategoryItem: [PostingEntity] = []
     
     // MARK: - View
     
