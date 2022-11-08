@@ -79,7 +79,7 @@ class CategoryCell: UICollectionViewCell {
             top: vStackView.topAnchor,
             left: vStackView.leftAnchor,
             bottom: categoryTitle.topAnchor,
-            right: vStackView.leftAnchor
+            right: vStackView.rightAnchor
         )
         
         categoryTitle.anchor(
