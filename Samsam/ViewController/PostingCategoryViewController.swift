@@ -96,7 +96,7 @@ class PostingCategoryViewController: UIViewController {
     @objc func tapNextBtn(_sender: UIButton) {
         let postingImageViewController = PostingImageViewController()
         postingImageViewController.roomID = roomID
-        postingImageViewController.categoryID = categoryID
+        postingImageViewController.categoryID = roomCategoryID[categoryID]
         navigationController?.pushViewController(postingImageViewController, animated: true)
     }
 }
