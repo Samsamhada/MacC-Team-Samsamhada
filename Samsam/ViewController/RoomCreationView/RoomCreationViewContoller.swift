@@ -350,6 +350,17 @@ extension RoomCreationViewController: UITableViewDelegate, UITableViewDataSource
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 2 {
             let warrantyCell = tableView.dequeueReusableCell(withIdentifier: RoomCreationViewWarrantyCell.identifier, for: indexPath) as! RoomCreationViewWarrantyCell
+            let background = UIView()
+            background.backgroundColor = .clear
+            warrantyCell.selectedBackgroundView = background
+            
+            warrantyCell.contentView.addSubview(warrantyCell.warrantyView)
+            warrantyCell.warrantyView.anchor(
+                top: warrantyCell.topAnchor,
+                left: warrantyCell.leftAnchor,
+                bottom: warrantyCell.bottomAnchor,
+                right: warrantyCell.rightAnchor
+            )
             
             roomCategoryViewController.warrantyTime = Int32(warrantyCell.warrantyCount)
             
@@ -357,16 +368,33 @@ extension RoomCreationViewController: UITableViewDelegate, UITableViewDataSource
         }
         if indexPath.row == 0 {
             let header = tableView.dequeueReusableCell(withIdentifier: RoomCreationViewDateHeader.identifier, for: indexPath) as! RoomCreationViewDateHeader
-
+            let background = UIView()
+            background.backgroundColor = .clear
+            header.selectedBackgroundView = background
+            header.contentView.addSubview(header.dateView)
+            header.dateView.anchor(
+                top: header.topAnchor,
+                left: header.leftAnchor,
+                bottom: header.bottomAnchor,
+                right: header.rightAnchor
+            )
+            
             if indexPath.section == 0 {
                 header.dateLabel.text = "시공일"
+                header.dateButton.setTitle("22.11.11", for: .normal)
             } else {
                 header.dateLabel.text = "준공일"
+                header.dateButton.setTitle("22.11.12", for: .normal)
             }
+            
             
             return header
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: RoomCreationViewDateCell.identifier, for: indexPath) as! RoomCreationViewDateCell
+            cell.selectionStyle = .none
+//            let background = UIView()
+//            background.backgroundColor = .clear
+//            cell.selectedBackgroundView = background
             
             if indexPath.section == 0 {
                 roomCategoryViewController.startingDate = cell.datePicker.date
@@ -379,7 +407,7 @@ extension RoomCreationViewController: UITableViewDelegate, UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
+//        tableView.deselectRow(at: indexPath, animated: true)
         if indexPath.row == 0 {
             tableViewData[indexPath.section].isOpend = !tableViewData[indexPath.section].isOpend
             tableView.reloadSections([indexPath.section], with: .none)

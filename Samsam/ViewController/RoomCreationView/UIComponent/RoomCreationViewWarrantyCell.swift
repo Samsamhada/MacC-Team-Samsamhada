@@ -13,9 +13,12 @@ class RoomCreationViewWarrantyCell: UITableViewCell {
     
     static let identifier = "roomCreationViewWarrantyCell"
     var warrantyCount = 12
-
     
     // MARK: - View
+    
+    let warrantyView: UIView = {
+        return $0
+    }(UIView())
     
     private let warrantyLabel: UILabel = {
         $0.text = "AS기간"
@@ -55,28 +58,35 @@ class RoomCreationViewWarrantyCell: UITableViewCell {
     // MARK: - Method
     
     private func layout() {
-        self.addSubview(warrantyLabel)
-        self.addSubview(warrantyText)
-        self.addSubview(warrantyStepper)
+        self.addSubview(warrantyView)
+        warrantyView.addSubview(warrantyLabel)
+        warrantyView.addSubview(warrantyText)
+        warrantyView.addSubview(warrantyStepper)
         
-        warrantyLabel.anchor(
+        warrantyView.anchor(
             top: topAnchor,
             left: leftAnchor,
-            bottom: bottomAnchor
+            bottom: bottomAnchor,
+            right: rightAnchor
+        )
+        
+        warrantyLabel.anchor(
+            top: warrantyView.topAnchor,
+            left: warrantyView.leftAnchor,
+            bottom: warrantyView.bottomAnchor
         )
         
         warrantyText.anchor(
-            top: topAnchor,
-            bottom: bottomAnchor,
+            top: warrantyView.topAnchor,
+            bottom: warrantyView.bottomAnchor,
             right: warrantyStepper.leftAnchor,
             paddingRight: 10
         )
         
         warrantyStepper.anchor(
-            top: topAnchor,
-            bottom: bottomAnchor,
-            right: rightAnchor
+            right: warrantyView.rightAnchor
         )
+        warrantyStepper.centerY(inView: warrantyView)
     }
     
     @objc private func tapStepper() {
