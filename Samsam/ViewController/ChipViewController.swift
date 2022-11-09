@@ -150,14 +150,14 @@ class ChipViewController: UIViewController {
         button.layer.borderWidth = 2
         button.layer.borderColor = AppColor.campanulaBlue?.cgColor
         button.layer.cornerRadius = 16
-        button.addTarget(self, action: #selector(selectButton(name:)), for: .touchUpInside)
+        button.addTarget(self, action: #selector(tapSelectedButton(name:)), for: .touchUpInside)
         button.tag = tag
         return button
     }
     
-    @objc private func selectButton(name sender: UIButton) {
+    @objc private func tapSelectedButton(name sender: UIButton) {
         if selectedID != sender.tag {
-            didSelectedButton(UIButton: chips[selectedID])
+            unselectedButton(UIButton: chips[selectedID])
             selectedID = sender.tag
             selectedButton(UIButton: chips[selectedID])
             selectedCategoryItem = []
@@ -170,7 +170,7 @@ class ChipViewController: UIViewController {
         UIButton.backgroundColor = AppColor.campanulaBlue
     }
 
-    private func didSelectedButton(UIButton: UIButton) {
+    private func unselectedButton(UIButton: UIButton) {
         UIButton.setTitleColor(AppColor.campanulaBlue, for: .normal)
         UIButton.backgroundColor = .white
     }
