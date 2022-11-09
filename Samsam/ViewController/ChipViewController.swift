@@ -75,8 +75,6 @@ class ChipViewController: UIViewController {
             top: view.safeAreaLayoutGuide.topAnchor,
             left: view.safeAreaLayoutGuide.leftAnchor,
             right: view.safeAreaLayoutGuide.rightAnchor,
-            paddingLeft: 16,
-            paddingRight: 16,
             height: 60
         )
         
@@ -85,6 +83,8 @@ class ChipViewController: UIViewController {
             left: chipScrollView.contentLayoutGuide.leftAnchor,
             bottom: chipScrollView.contentLayoutGuide.bottomAnchor,
             right: chipScrollView.contentLayoutGuide.rightAnchor,
+            paddingLeft: 16,
+            paddingRight: 16,
             height: 60
         )
         
