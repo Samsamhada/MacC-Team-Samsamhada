@@ -7,12 +7,17 @@
 
 import UIKit
 
-class RoomCreationViewDateCell: UITableViewCell {
+protocol RoomCreationViewDateSecondCellDelegate: AnyObject {
+    func secondDateDidTap(date: Date)
+}
+
+class RoomCreationViewDateSecondCell: UITableViewCell {
     
     // MARK: - Property
     
-    static let identifier = "roomCreationViewDateCell"
-    
+    weak var secondDelegate: RoomCreationViewDateSecondCellDelegate?
+    static let identifier = "roomCreationViewSecondDateCell"
+
     // MARK: - View
     
     var datePicker: UIDatePicker = {
@@ -29,6 +34,7 @@ class RoomCreationViewDateCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         layout()
+        checkValueForDate()
     }
     
     required init?(coder: NSCoder) {
@@ -46,5 +52,19 @@ class RoomCreationViewDateCell: UITableViewCell {
             bottom: bottomAnchor,
             right: rightAnchor
         )
+    }
+    
+    private func checkValueForDate() {
+        datePicker.addTarget(self, action: #selector(check), for: .valueChanged)
+    }
+    
+    @objc private func check() {
+        secondDelegate?.secondDateDidTap(date: datePicker.date)
+    }
+    
+    func configure(date: Date?) {
+        if let date = date {
+            datePicker.setDate(date, animated: true)
+        }
     }
 }
