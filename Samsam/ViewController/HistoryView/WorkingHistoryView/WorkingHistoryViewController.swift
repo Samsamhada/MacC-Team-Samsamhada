@@ -9,6 +9,10 @@ import UIKit
 
 class WorkingHistoryViewController: UIViewController {
     
+    // MARK: - Property
+    
+    var roomID: Int?
+    
     // MARK: - View
     
     private let workingHistoryView: UICollectionView = {
@@ -104,8 +108,8 @@ extension WorkingHistoryViewController: UICollectionViewDataSource, UICollection
             return topCell
         } else {
             let contentCell = collectionView.dequeueReusableCell(withReuseIdentifier: WorkingHistoryViewContentCell.identifier, for: indexPath) as! WorkingHistoryViewContentCell
-            coreDataManager.loadPhotoData(postingID: indexPath.item + 1)
             
+            coreDataManager.loadPhotoData(postingID: Int(coreDataManager.postings[indexPath.item].postingID))
             contentCell.uiImageView.image = UIImage(data: coreDataManager.photos[0].photoPath!)
             contentCell.imageDescription.text = coreDataManager.postings[indexPath.item].explanation
             contentCell.workType.text = Category.categoryName(Category(rawValue: Int(coreDataManager.postings[indexPath.item].categoryID))!)()
@@ -131,7 +135,7 @@ extension WorkingHistoryViewController: UICollectionViewDataSource, UICollection
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if indexPath.section > 0 {
             let detailViewController = DetailViewController()
-            coreDataManager.loadPhotoData(postingID: indexPath.item + 1)
+            coreDataManager.loadPhotoData(postingID: Int(coreDataManager.postings[indexPath.item].postingID))
             detailViewController.images = coreDataManager.photos
             coreDataManager.postings.forEach {
                 if $0 == coreDataManager.postings[indexPath.item] {
@@ -143,7 +147,8 @@ extension WorkingHistoryViewController: UICollectionViewDataSource, UICollection
     }
     
     @objc func tapAllView() {
-        let chipViewController = ViewController()
+        let chipViewController = ChipViewController()
+        chipViewController.roomID = roomID
         navigationController?.pushViewController(chipViewController , animated: true)
     }
 }

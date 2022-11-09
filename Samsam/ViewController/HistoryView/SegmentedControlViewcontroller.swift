@@ -25,7 +25,8 @@ class SegmentedControlViewController: UIViewController {
         return $0
     }(UISegmentedControl(items: ["시공내역", "문의내역"]))
     
-    private let workingHistoryView: WorkingHistoryViewController = {
+    private lazy var workingHistoryView: WorkingHistoryViewController = {
+        $0.roomID = roomID
         return $0
     }(WorkingHistoryViewController())
     
@@ -80,11 +81,11 @@ class SegmentedControlViewController: UIViewController {
     // MARK: - Method
     
     private func setRoomCategoryID() {
-           roomCategoryID = []
-           coreDataManager.workingStatuses.forEach {
-               roomCategoryID.append(Int($0.categoryID))
-           }
-       }
+        roomCategoryID = []
+        coreDataManager.workingStatuses.forEach {
+            roomCategoryID.append(Int($0.categoryID))
+        }
+    }
     
     private func attribute() {
         view.backgroundColor = .white

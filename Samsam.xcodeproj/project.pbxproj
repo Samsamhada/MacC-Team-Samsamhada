@@ -32,6 +32,7 @@
 		26FEC1E4290466F2006C410B /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26FEC1E3290466F2006C410B /* CoreDataManager.swift */; };
 		4330CE9B2906275D001FC8E7 /* PostingImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4330CE9A2906275D001FC8E7 /* PostingImageCell.swift */; };
 		4369690C28FE422100DEA89F /* PostingImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4369690B28FE422100DEA89F /* PostingImageViewController.swift */; };
+		436E81C02918BA3D002A2641 /* ChipViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 436E81BF2918BA3D002A2641 /* ChipViewController.swift */; };
 		4386FB022901353B00314936 /* RoomCategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4386FB012901353B00314936 /* RoomCategoryViewController.swift */; };
 		43956D2C28FF9F0100DD996F /* PostingWritingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43956D2B28FF9F0100DD996F /* PostingWritingView.swift */; };
 		43BD591A29028BD70063EB4F /* RoomCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43BD591929028BD70063EB4F /* RoomCodeViewController.swift */; };
@@ -88,6 +89,7 @@
 		26FEC1E3290466F2006C410B /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		4330CE9A2906275D001FC8E7 /* PostingImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostingImageCell.swift; sourceTree = "<group>"; };
 		4369690B28FE422100DEA89F /* PostingImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostingImageViewController.swift; sourceTree = "<group>"; };
+		436E81BF2918BA3D002A2641 /* ChipViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChipViewController.swift; sourceTree = "<group>"; };
 		4386FB012901353B00314936 /* RoomCategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomCategoryViewController.swift; sourceTree = "<group>"; };
 		43956D2B28FF9F0100DD996F /* PostingWritingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostingWritingView.swift; sourceTree = "<group>"; };
 		43BD591929028BD70063EB4F /* RoomCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomCodeViewController.swift; sourceTree = "<group>"; };
@@ -179,6 +181,19 @@
 			path = CoreData;
 			sourceTree = "<group>";
 		};
+		436C4364291A0F6300504171 /* PostingView */ = {
+			isa = PBXGroup;
+			children = (
+				43C2111028FCFB3800E8F6DD /* CategoryCell.swift */,
+				4330CE9A2906275D001FC8E7 /* PostingImageCell.swift */,
+				43C2110E28FCFAB500E8F6DD /* PostingCategoryViewController.swift */,
+				43DB5E1B2913733A00BD09BA /* PostingImageButtonCell.swift */,
+				4369690B28FE422100DEA89F /* PostingImageViewController.swift */,
+				43956D2B28FF9F0100DD996F /* PostingWritingView.swift */,
+			);
+			path = PostingView;
+			sourceTree = "<group>";
+		};
 		980200732912514700E193E6 /* HistoryView */ = {
 			isa = PBXGroup;
 			children = (
@@ -192,6 +207,7 @@
 		980D900C28FE6705003CC2DA /* DetailView */ = {
 			isa = PBXGroup;
 			children = (
+				98E1700E29080C9100F71D41 /* ImageDetailViewController.swift */,
 				980D900D28FE671B003CC2DA /* DetailViewController.swift */,
 			);
 			path = DetailView;
@@ -201,6 +217,8 @@
 			isa = PBXGroup;
 			children = (
 				98366F8C29019A5300E81E27 /* RoomCreationViewContoller.swift */,
+				4386FB012901353B00314936 /* RoomCategoryViewController.swift */,
+				43BD591929028BD70063EB4F /* RoomCodeViewController.swift */,
 			);
 			path = RoomCreationView;
 			sourceTree = "<group>";
@@ -230,23 +248,16 @@
 			isa = PBXGroup;
 			children = (
 				26E3748528FCDC0000997DA7 /* ViewController.swift */,
+				26E3749B28FE8E6F00997DA7 /* LoginViewController.swift */,
+				26E3749E28FE9DA300997DA7 /* PhoneNumViewController.swift */,
 				26E3749528FCF56400997DA7 /* RoomListViewController.swift */,
 				26FEC1B528FFF52D006C410B /* RoomCreationCell.swift */,
 				26E3749728FD2D0700997DA7 /* RoomListCell.swift */,
+				436E81BF2918BA3D002A2641 /* ChipViewController.swift */,
 				980200732912514700E193E6 /* HistoryView */,
-				26E3749B28FE8E6F00997DA7 /* LoginViewController.swift */,
-				26E3749E28FE9DA300997DA7 /* PhoneNumViewController.swift */,
 				980D900C28FE6705003CC2DA /* DetailView */,
-				98E1700E29080C9100F71D41 /* ImageDetailViewController.swift */,
-				43C2111028FCFB3800E8F6DD /* CategoryCell.swift */,
-				43C2110E28FCFAB500E8F6DD /* PostingCategoryViewController.swift */,
-				4330CE9A2906275D001FC8E7 /* PostingImageCell.swift */,
-				43DB5E1B2913733A00BD09BA /* PostingImageButtonCell.swift */,
-				4369690B28FE422100DEA89F /* PostingImageViewController.swift */,
-				43956D2B28FF9F0100DD996F /* PostingWritingView.swift */,
+				436C4364291A0F6300504171 /* PostingView */,
 				98366F8B29019A3100E81E27 /* RoomCreationView */,
-				4386FB012901353B00314936 /* RoomCategoryViewController.swift */,
-				43BD591929028BD70063EB4F /* RoomCodeViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -399,6 +410,7 @@
 				98C0D06428FCE99300E0E439 /* JSON.swift in Sources */,
 				980200722912513B00E193E6 /* SegmentedControlViewcontroller.swift in Sources */,
 				9802007A2914F82100E193E6 /* MetroViewController.swift in Sources */,
+				436E81C02918BA3D002A2641 /* ChipViewController.swift in Sources */,
 				26FEC1DA2902E6F2006C410B /* CategoryEntity+CoreDataProperties.swift in Sources */,
 				26FEC1E12902E6F2006C410B /* RoomEntity+CoreDataClass.swift in Sources */,
 				4330CE9B2906275D001FC8E7 /* PostingImageCell.swift in Sources */,
