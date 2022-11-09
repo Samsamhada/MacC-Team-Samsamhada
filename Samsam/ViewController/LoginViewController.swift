@@ -10,6 +10,46 @@ import UIKit
 
 class LoginViewController: UIViewController {
     
+    // MARK: - URL Session
+    
+    func requestPOSTWithURL(url: String, parameters: [String: Any]) {
+        
+        guard let url = URL(string: url) else {
+            print("Error: cannot create URL")
+            return
+        }
+        
+        let requestBody = try! JSONSerialization.data(withJSONObject: parameters, options: [])
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.httpBody = requestBody
+        
+        let defaultSession = URLSession(configuration: .default)
+        
+        defaultSession.dataTask(with: request) { (data: Data?, response: URLResponse?, error: Error?) in
+            guard error == nil else {
+                print("Error occur: error calling POST - \(String(describing: error))")
+                return
+            }
+            
+            guard let data = data, let response = response as? HTTPURLResponse, (200..<300) ~= response.statusCode else {
+                print("Error: HTTP request failed")
+                return
+            }
+            
+            if let json = try? JSONSerialization.jsonObject(with: data, options: []) as? [String : Any] {
+                print("json")
+                print(json)
+            }
+        }.resume()
+    }
+    
+    func setLoginParameters(userIdentifier: String, name: String, email: String) -> [String: Any] {
+        return [ "userIdentifier": "\(userIdentifier)", "name": "\(name)", "email": "\(email)"]
+    }
+
     // MARK: - View
     
     private lazy var authorizationButton: ASAuthorizationAppleIDButton = {
@@ -71,6 +111,8 @@ extension LoginViewController: ASAuthorizationControllerDelegate {
                 switch credentialState {
                 case .authorized:
                     DispatchQueue.main.async {
+                        self.requestPOSTWithURL(url: "http://3.39.76.231:3000/giwazip/workers", parameters: self.setLoginParameters(userIdentifier: userIdentifier, name: userLastName!+userFirstName!, email: userEmail!))
+                        
                         // TODO: - get -> post : token 받아오기!!!
                         self.navigationController?.pushViewController(PhoneNumViewController(), animated: true)
                     }
