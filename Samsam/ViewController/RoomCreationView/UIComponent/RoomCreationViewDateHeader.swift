@@ -23,12 +23,20 @@ class RoomCreationViewDateHeader: UITableViewCell {
         $0.text = "시공일"
         $0.textAlignment = .left
         $0.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
-        $0.textColor = .black
+        $0.textColor = AppColor.mainBlack
         return $0
     }(UILabel())
     
-    let dateButton: UILabel = {
-        $0.text = "2022.11.11."
+    private let dateFrame: UIView = {
+        $0.backgroundColor = AppColor.buttonGray
+        $0.layer.cornerRadius = 8
+        return $0
+    }(UIView())
+    
+    lazy var dateButton: UILabel = {
+        $0.text = ""
+        $0.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
+        $0.textColor = AppColor.mainBlack
         return $0
     }(UILabel())
     
@@ -43,21 +51,39 @@ class RoomCreationViewDateHeader: UITableViewCell {
         fatalError("init(coder:)가 실행되지 않았습니다.")
     }
     
+    // MARK: - Method
+    
     private func layout() {
         self.addSubview(dateView)
         dateView.addSubview(dateLabel)
-        dateView.addSubview(dateButton)
+        dateView.addSubview(dateFrame)
+        dateFrame.addSubview(dateButton)
         
-        dateLabel.anchor(
+        dateView.anchor(
             top: topAnchor,
             left: leftAnchor,
-            bottom: bottomAnchor
-        )
-        
-        dateButton.anchor(
-            top: topAnchor,
             bottom: bottomAnchor,
             right: rightAnchor
         )
+        
+        dateLabel.anchor(
+            top: dateView.topAnchor,
+            left: dateView.leftAnchor,
+            bottom: dateView.bottomAnchor
+        )
+        
+        dateFrame.anchor(
+            top: dateView.topAnchor,
+            bottom: dateView.bottomAnchor,
+            right: dateView.rightAnchor
+        )
+        
+        dateButton.anchor(
+            left: dateFrame.leftAnchor,
+            right: dateFrame.rightAnchor,
+            paddingLeft: 10,
+            paddingRight: 10
+        )
+        dateButton.centerY(inView: dateFrame)
     }
 }

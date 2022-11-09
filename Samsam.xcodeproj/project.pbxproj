@@ -45,9 +45,10 @@
 		980D900E28FE671B003CC2DA /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980D900D28FE671B003CC2DA /* DetailViewController.swift */; };
 		98366F8D29019A5300E81E27 /* RoomCreationViewContoller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98366F8C29019A5300E81E27 /* RoomCreationViewContoller.swift */; };
 		9866F51629189AEE002D3589 /* PhoneNumberStyle+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9866F51529189AEE002D3589 /* PhoneNumberStyle+.swift */; };
-		9866F518291960CE002D3589 /* RoomCreationViewDateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9866F517291960CE002D3589 /* RoomCreationViewDateCell.swift */; };
+		9866F518291960CE002D3589 /* RoomCreationViewDateFirstCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9866F517291960CE002D3589 /* RoomCreationViewDateFirstCell.swift */; };
 		9866F51A291960E0002D3589 /* RoomCreationViewDateHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9866F519291960E0002D3589 /* RoomCreationViewDateHeader.swift */; };
 		9866F5212919E2DC002D3589 /* RoomCreationViewWarrantyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9866F5202919E2DC002D3589 /* RoomCreationViewWarrantyCell.swift */; };
+		9866F523291BF173002D3589 /* RoomCreationViewDateCell copy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9866F522291BF173002D3589 /* RoomCreationViewDateCell copy.swift */; };
 		98B08A60290AC8C900401650 /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B08A5F290AC8C900401650 /* UIColor+.swift */; };
 		98C0D06028FCE8EB00E0E439 /* AutoLayout+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98C0D05F28FCE8EB00E0E439 /* AutoLayout+.swift */; };
 		98C0D06428FCE99300E0E439 /* JSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98C0D06328FCE99300E0E439 /* JSON.swift */; };
@@ -105,9 +106,10 @@
 		980D900D28FE671B003CC2DA /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		98366F8C29019A5300E81E27 /* RoomCreationViewContoller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomCreationViewContoller.swift; sourceTree = "<group>"; };
 		9866F51529189AEE002D3589 /* PhoneNumberStyle+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PhoneNumberStyle+.swift"; sourceTree = "<group>"; };
-		9866F517291960CE002D3589 /* RoomCreationViewDateCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomCreationViewDateCell.swift; sourceTree = "<group>"; };
+		9866F517291960CE002D3589 /* RoomCreationViewDateFirstCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomCreationViewDateFirstCell.swift; sourceTree = "<group>"; };
 		9866F519291960E0002D3589 /* RoomCreationViewDateHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomCreationViewDateHeader.swift; sourceTree = "<group>"; };
 		9866F5202919E2DC002D3589 /* RoomCreationViewWarrantyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomCreationViewWarrantyCell.swift; sourceTree = "<group>"; };
+		9866F522291BF173002D3589 /* RoomCreationViewDateCell copy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RoomCreationViewDateCell copy.swift"; sourceTree = "<group>"; };
 		98B08A5F290AC8C900401650 /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
 		98C0D05F28FCE8EB00E0E439 /* AutoLayout+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AutoLayout+.swift"; sourceTree = "<group>"; };
 		98C0D06328FCE99300E0E439 /* JSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSON.swift; sourceTree = "<group>"; };
@@ -234,7 +236,8 @@
 			isa = PBXGroup;
 			children = (
 				9866F519291960E0002D3589 /* RoomCreationViewDateHeader.swift */,
-				9866F517291960CE002D3589 /* RoomCreationViewDateCell.swift */,
+				9866F517291960CE002D3589 /* RoomCreationViewDateFirstCell.swift */,
+				9866F522291BF173002D3589 /* RoomCreationViewDateCell copy.swift */,
 				9866F5202919E2DC002D3589 /* RoomCreationViewWarrantyCell.swift */,
 			);
 			path = UIComponent;
@@ -420,7 +423,7 @@
 				98CFE3122910FC8E004B2FA1 /* InquiryHistoryViewController.swift in Sources */,
 				98E899BC290FD00C001245C4 /* WorkingHistoryViewTopCell.swift in Sources */,
 				98C0D07228FD02E400E0E439 /* WorkingHistoryViewContentCell.swift in Sources */,
-				9866F518291960CE002D3589 /* RoomCreationViewDateCell.swift in Sources */,
+				9866F518291960CE002D3589 /* RoomCreationViewDateFirstCell.swift in Sources */,
 				98E899BA290FCAAB001245C4 /* WorkingHistoryViewContentHeader.swift in Sources */,
 				9866F51A291960E0002D3589 /* RoomCreationViewDateHeader.swift in Sources */,
 				26E3749828FD2D0700997DA7 /* RoomListCell.swift in Sources */,
@@ -430,6 +433,7 @@
 				980200722912513B00E193E6 /* SegmentedControlViewcontroller.swift in Sources */,
 				9802007A2914F82100E193E6 /* MetroViewController.swift in Sources */,
 				436E81C02918BA3D002A2641 /* ChipViewController.swift in Sources */,
+				9866F523291BF173002D3589 /* RoomCreationViewDateCell copy.swift in Sources */,
 				26FEC1DA2902E6F2006C410B /* CategoryEntity+CoreDataProperties.swift in Sources */,
 				26FEC1E12902E6F2006C410B /* RoomEntity+CoreDataClass.swift in Sources */,
 				4330CE9B2906275D001FC8E7 /* PostingImageCell.swift in Sources */,

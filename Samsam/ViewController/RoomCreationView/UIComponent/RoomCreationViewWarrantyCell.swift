@@ -24,17 +24,17 @@ class RoomCreationViewWarrantyCell: UITableViewCell {
         $0.text = "AS기간"
         $0.textAlignment = .left
         $0.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
-        $0.textColor = .black
+        $0.textColor = AppColor.mainBlack
         return $0
     }(UILabel())
 
-    var warrantyText: UILabel = {
+    private var warrantyText: UILabel = {
         $0.text = "12개월"
         $0.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
         return $0
     }(UILabel())
     
-    let warrantyStepper: UIStepper = {
+    private let warrantyStepper: UIStepper = {
         $0.value = 12
         $0.maximumValue = 24
         $0.minimumValue = 0
