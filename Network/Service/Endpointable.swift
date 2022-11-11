@@ -1,6 +1,6 @@
 //
 //  Endpointable.swift
-//  Manito
+//  Samsam
 //
 //  Created by creohwan on 2022/11/10.
 //
