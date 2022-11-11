@@ -30,6 +30,19 @@
 		26FEC1E12902E6F2006C410B /* RoomEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26FEC1D72902E6F2006C410B /* RoomEntity+CoreDataClass.swift */; };
 		26FEC1E22902E6F2006C410B /* RoomEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26FEC1D82902E6F2006C410B /* RoomEntity+CoreDataProperties.swift */; };
 		26FEC1E4290466F2006C410B /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26FEC1E3290466F2006C410B /* CoreDataManager.swift */; };
+		431F074E291DEA62004FC4B6 /* Login.swift in Sources */ = {isa = PBXBuildFile; fileRef = 431F073C291DEA62004FC4B6 /* Login.swift */; };
+		431F074F291DEA62004FC4B6 /* LoginDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 431F073E291DEA62004FC4B6 /* LoginDTO.swift */; };
+		431F0750291DEA62004FC4B6 /* LoginProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 431F0740291DEA62004FC4B6 /* LoginProtocol.swift */; };
+		431F0751291DEA62004FC4B6 /* LoginEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 431F0742291DEA62004FC4B6 /* LoginEndPoint.swift */; };
+		431F0752291DEA62004FC4B6 /* LoginAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 431F0744291DEA62004FC4B6 /* LoginAPI.swift */; };
+		431F0753291DEA62004FC4B6 /* Endpointable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 431F0746291DEA62004FC4B6 /* Endpointable.swift */; };
+		431F0754291DEA62004FC4B6 /* Requestable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 431F0747291DEA62004FC4B6 /* Requestable.swift */; };
+		431F0755291DEA62004FC4B6 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 431F0748291DEA62004FC4B6 /* APIService.swift */; };
+		431F0756291DEA62004FC4B6 /* APIEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 431F0749291DEA62004FC4B6 /* APIEnvironment.swift */; };
+		431F0757291DEA62004FC4B6 /* Encodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 431F074A291DEA62004FC4B6 /* Encodable.swift */; };
+		431F0758291DEA62004FC4B6 /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 431F074B291DEA62004FC4B6 /* HTTPMethod.swift */; };
+		431F0759291DEA62004FC4B6 /* NetworkRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 431F074C291DEA62004FC4B6 /* NetworkRequest.swift */; };
+		431F075A291DEA62004FC4B6 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 431F074D291DEA62004FC4B6 /* NetworkError.swift */; };
 		4330CE9B2906275D001FC8E7 /* PostingImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4330CE9A2906275D001FC8E7 /* PostingImageCell.swift */; };
 		4369690C28FE422100DEA89F /* PostingImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4369690B28FE422100DEA89F /* PostingImageViewController.swift */; };
 		436E81C02918BA3D002A2641 /* ChipViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 436E81BF2918BA3D002A2641 /* ChipViewController.swift */; };
@@ -91,6 +104,19 @@
 		26FEC1D72902E6F2006C410B /* RoomEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RoomEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
 		26FEC1D82902E6F2006C410B /* RoomEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RoomEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		26FEC1E3290466F2006C410B /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		431F073C291DEA62004FC4B6 /* Login.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Login.swift; sourceTree = "<group>"; };
+		431F073E291DEA62004FC4B6 /* LoginDTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginDTO.swift; sourceTree = "<group>"; };
+		431F0740291DEA62004FC4B6 /* LoginProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginProtocol.swift; sourceTree = "<group>"; };
+		431F0742291DEA62004FC4B6 /* LoginEndPoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginEndPoint.swift; sourceTree = "<group>"; };
+		431F0744291DEA62004FC4B6 /* LoginAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginAPI.swift; sourceTree = "<group>"; };
+		431F0746291DEA62004FC4B6 /* Endpointable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Endpointable.swift; sourceTree = "<group>"; };
+		431F0747291DEA62004FC4B6 /* Requestable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Requestable.swift; sourceTree = "<group>"; };
+		431F0748291DEA62004FC4B6 /* APIService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
+		431F0749291DEA62004FC4B6 /* APIEnvironment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIEnvironment.swift; sourceTree = "<group>"; };
+		431F074A291DEA62004FC4B6 /* Encodable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Encodable.swift; sourceTree = "<group>"; };
+		431F074B291DEA62004FC4B6 /* HTTPMethod.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
+		431F074C291DEA62004FC4B6 /* NetworkRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkRequest.swift; sourceTree = "<group>"; };
+		431F074D291DEA62004FC4B6 /* NetworkError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		4330CE9A2906275D001FC8E7 /* PostingImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostingImageCell.swift; sourceTree = "<group>"; };
 		4369690B28FE422100DEA89F /* PostingImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostingImageViewController.swift; sourceTree = "<group>"; };
 		436E81BF2918BA3D002A2641 /* ChipViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChipViewController.swift; sourceTree = "<group>"; };
@@ -158,6 +184,7 @@
 				26E3749D28FE95D100997DA7 /* Samsam.entitlements */,
 				26FEC1BA2902D87E006C410B /* CoreData */,
 				98C0D05D28FCE8C300E0E439 /* Global */,
+				431F073A291DEA62004FC4B6 /* Network */,
 				98C0D06128FCE8FA00E0E439 /* ViewController */,
 				98C0D06528FCE9C700E0E439 /* Model */,
 				98C0D06228FCE95E00E0E439 /* Data */,
@@ -187,6 +214,75 @@
 				26FEC1E3290466F2006C410B /* CoreDataManager.swift */,
 			);
 			path = CoreData;
+			sourceTree = "<group>";
+		};
+		431F073A291DEA62004FC4B6 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				431F073B291DEA62004FC4B6 /* Models */,
+				431F073F291DEA62004FC4B6 /* Protocol */,
+				431F0741291DEA62004FC4B6 /* EndPoint */,
+				431F0743291DEA62004FC4B6 /* API */,
+				431F0745291DEA62004FC4B6 /* Service */,
+			);
+			name = Network;
+			path = ../../sad/sad/Network;
+			sourceTree = "<group>";
+		};
+		431F073B291DEA62004FC4B6 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				431F073C291DEA62004FC4B6 /* Login.swift */,
+				431F073D291DEA62004FC4B6 /* Request */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		431F073D291DEA62004FC4B6 /* Request */ = {
+			isa = PBXGroup;
+			children = (
+				431F073E291DEA62004FC4B6 /* LoginDTO.swift */,
+			);
+			path = Request;
+			sourceTree = "<group>";
+		};
+		431F073F291DEA62004FC4B6 /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				431F0740291DEA62004FC4B6 /* LoginProtocol.swift */,
+			);
+			path = Protocol;
+			sourceTree = "<group>";
+		};
+		431F0741291DEA62004FC4B6 /* EndPoint */ = {
+			isa = PBXGroup;
+			children = (
+				431F0742291DEA62004FC4B6 /* LoginEndPoint.swift */,
+			);
+			path = EndPoint;
+			sourceTree = "<group>";
+		};
+		431F0743291DEA62004FC4B6 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				431F0744291DEA62004FC4B6 /* LoginAPI.swift */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
+		431F0745291DEA62004FC4B6 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				431F0746291DEA62004FC4B6 /* Endpointable.swift */,
+				431F0747291DEA62004FC4B6 /* Requestable.swift */,
+				431F0748291DEA62004FC4B6 /* APIService.swift */,
+				431F0749291DEA62004FC4B6 /* APIEnvironment.swift */,
+				431F074A291DEA62004FC4B6 /* Encodable.swift */,
+				431F074B291DEA62004FC4B6 /* HTTPMethod.swift */,
+				431F074C291DEA62004FC4B6 /* NetworkRequest.swift */,
+				431F074D291DEA62004FC4B6 /* NetworkError.swift */,
+			);
+			path = Service;
 			sourceTree = "<group>";
 		};
 		436C4364291A0F6300504171 /* PostingView */ = {
@@ -408,6 +504,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				431F074E291DEA62004FC4B6 /* Login.swift in Sources */,
 				9866F51629189AEE002D3589 /* PhoneNumberStyle+.swift in Sources */,
 				26FEC1DB2902E6F2006C410B /* PostingEntity+CoreDataClass.swift in Sources */,
 				26E3749C28FE8E6F00997DA7 /* LoginViewController.swift in Sources */,
@@ -415,6 +512,7 @@
 				980D900E28FE671B003CC2DA /* DetailViewController.swift in Sources */,
 				9802007C2914F83400E193E6 /* BezierCurveConfiguration.swift in Sources */,
 				26E3748628FCDC0000997DA7 /* ViewController.swift in Sources */,
+				431F0751291DEA62004FC4B6 /* LoginEndPoint.swift in Sources */,
 				98E1700D2906EFEB00F71D41 /* hideKeyboard+.swift in Sources */,
 				98C0D06C28FCF46500E0E439 /* WorkingHistoryViewController.swift in Sources */,
 				26FEC1E02902E6F2006C410B /* PhotoEntity+CoreDataProperties.swift in Sources */,
@@ -428,7 +526,11 @@
 				9866F51A291960E0002D3589 /* RoomCreationViewDateHeader.swift in Sources */,
 				26E3749828FD2D0700997DA7 /* RoomListCell.swift in Sources */,
 				26FEC1B92902D85A006C410B /* DataTable.xcdatamodeld in Sources */,
+				431F0754291DEA62004FC4B6 /* Requestable.swift in Sources */,
 				26FEC1E4290466F2006C410B /* CoreDataManager.swift in Sources */,
+				431F0755291DEA62004FC4B6 /* APIService.swift in Sources */,
+				431F0758291DEA62004FC4B6 /* HTTPMethod.swift in Sources */,
+				431F0756291DEA62004FC4B6 /* APIEnvironment.swift in Sources */,
 				98C0D06428FCE99300E0E439 /* JSON.swift in Sources */,
 				980200722912513B00E193E6 /* SegmentedControlViewcontroller.swift in Sources */,
 				9802007A2914F82100E193E6 /* MetroViewController.swift in Sources */,
@@ -437,7 +539,10 @@
 				26FEC1DA2902E6F2006C410B /* CategoryEntity+CoreDataProperties.swift in Sources */,
 				26FEC1E12902E6F2006C410B /* RoomEntity+CoreDataClass.swift in Sources */,
 				4330CE9B2906275D001FC8E7 /* PostingImageCell.swift in Sources */,
+				431F0750291DEA62004FC4B6 /* LoginProtocol.swift in Sources */,
 				98C0D06A28FCEA4900E0E439 /* ImagePicker.swift in Sources */,
+				431F0759291DEA62004FC4B6 /* NetworkRequest.swift in Sources */,
+				431F0757291DEA62004FC4B6 /* Encodable.swift in Sources */,
 				43956D2C28FF9F0100DD996F /* PostingWritingView.swift in Sources */,
 				26FEC1DC2902E6F2006C410B /* PostingEntity+CoreDataProperties.swift in Sources */,
 				26E3748228FCDC0000997DA7 /* AppDelegate.swift in Sources */,
@@ -448,16 +553,20 @@
 				98366F8D29019A5300E81E27 /* RoomCreationViewContoller.swift in Sources */,
 				4386FB022901353B00314936 /* RoomCategoryViewController.swift in Sources */,
 				43BD591A29028BD70063EB4F /* RoomCodeViewController.swift in Sources */,
+				431F0753291DEA62004FC4B6 /* Endpointable.swift in Sources */,
 				26FEC1DD2902E6F2006C410B /* WorkingStatusEntity+CoreDataClass.swift in Sources */,
 				26E3749F28FE9DA300997DA7 /* PhoneNumViewController.swift in Sources */,
 				98C0D06028FCE8EB00E0E439 /* AutoLayout+.swift in Sources */,
 				26E3749628FCF56400997DA7 /* RoomListViewController.swift in Sources */,
 				9866F5212919E2DC002D3589 /* RoomCreationViewWarrantyCell.swift in Sources */,
 				26FEC1B628FFF52D006C410B /* RoomCreationCell.swift in Sources */,
+				431F074F291DEA62004FC4B6 /* LoginDTO.swift in Sources */,
 				43C2110F28FCFAB500E8F6DD /* PostingCategoryViewController.swift in Sources */,
 				26FEC1D92902E6F2006C410B /* CategoryEntity+CoreDataClass.swift in Sources */,
 				4369690C28FE422100DEA89F /* PostingImageViewController.swift in Sources */,
 				26FEC1DF2902E6F2006C410B /* PhotoEntity+CoreDataClass.swift in Sources */,
+				431F0752291DEA62004FC4B6 /* LoginAPI.swift in Sources */,
+				431F075A291DEA62004FC4B6 /* NetworkError.swift in Sources */,
 				98E1700F29080C9100F71D41 /* ImageDetailViewController.swift in Sources */,
 				26FEC1E22902E6F2006C410B /* RoomEntity+CoreDataProperties.swift in Sources */,
 			);
