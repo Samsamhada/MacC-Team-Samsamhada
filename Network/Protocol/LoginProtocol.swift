@@ -8,5 +8,5 @@
 import Foundation
 
 protocol LoginProtocol {
-    func startAppleLogin(content: LoginDTO) async throws -> Login?
+    func startAppleLogin(LoginDTO: LoginDTO) async throws -> Login?
 }

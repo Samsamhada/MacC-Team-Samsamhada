@@ -8,7 +8,7 @@
 import Foundation
 
 enum LoginEndPoint: EndPointable {
-    case startAppleLogin(content: LoginDTO)
+    case startAppleLogin(LoginDTO: LoginDTO)
     
     var requestTimeOut: Float {
         return 10
@@ -32,8 +32,7 @@ enum LoginEndPoint: EndPointable {
     func getURL(baseURL: String) -> String {
         switch self {
         case .startAppleLogin:
-//            return "\(baseURL)/workers"
-            return "https://ptsv2.com/t/b8hkj-1668126938/post"
+            return "\(baseURL)/workers"
         }
     }
     
