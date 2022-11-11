@@ -65,10 +65,10 @@ class LoginViewController: UIViewController {
         controller.performRequests()
     }
     
-    private func requestLogin() {
+    private func requestLogin(LoginDTO: LoginDTO) {
         Task{
             do {
-//                let response = try await self.loginService.startAppleLogin(content: )
+                let response = try await self.loginService.startAppleLogin(LoginDTO: LoginDTO)
                 print(response as Any)
             } catch NetworkError.serverError {
                 print("server Error")
@@ -95,9 +95,9 @@ extension LoginViewController: ASAuthorizationControllerDelegate {
                 switch credentialState {
                 case .authorized:
                     DispatchQueue.main.async {
-                        self.requestPOSTWithURL(url: "http://3.39.76.231:3000/giwazip/workers", parameters: self.setLoginParameters(userIdentifier: userIdentifier, name: userLastName!+userFirstName!, email: userEmail!))
                         
-                        // TODO: - get -> post : token 받아오기!!!
+                        
+                        // TODO: - token 처리
                         self.navigationController?.pushViewController(PhoneNumViewController(), animated: true)
                     }
                     break
