@@ -32,7 +32,6 @@ class LoginViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        requestLogin()
     }
     
     // MARK: - Method
@@ -95,7 +94,10 @@ extension LoginViewController: ASAuthorizationControllerDelegate {
                 switch credentialState {
                 case .authorized:
                     DispatchQueue.main.async {
-                        
+                        let loginDTO = LoginDTO(userIdentifier: userIdentifier,
+                                                name: (userLastName!)+(userFirstName!),
+                                                email: userEmail ?? nil)
+                        self.requestLogin(LoginDTO: loginDTO)
                         
                         // TODO: - token 처리
                         self.navigationController?.pushViewController(PhoneNumViewController(), animated: true)
