@@ -16,7 +16,7 @@ struct LoginAPI: LoginProtocol {
     
     func startAppleLogin(LoginDTO: LoginDTO) async throws -> Login? {
         let request = LoginEndPoint
-            .startAppleLogin(content: content)
+            .startAppleLogin(LoginDTO: LoginDTO)
             .createRequest()
         return try await apiService.request(request)
     }
