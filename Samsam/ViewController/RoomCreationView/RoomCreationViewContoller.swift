@@ -68,6 +68,7 @@ class RoomCreationViewController: UIViewController{
         $0.layer.cornerRadius = 16
         $0.backgroundColor = .gray
         $0.isEnabled = false
+        $0.addTarget(self, action: #selector(tapNextButton), for: .touchUpInside)
         return $0
     }(UIButton())
     
@@ -187,7 +188,6 @@ class RoomCreationViewController: UIViewController{
         if (customerTextField.text!.count) >= 1 {
             nextButton.backgroundColor = .blue
             nextButton.isEnabled = true
-            nextButton.addTarget(self, action: #selector(tapNextButton), for: .touchUpInside)
         } else {
             nextButton.backgroundColor = .gray
             nextButton.isEnabled = false
