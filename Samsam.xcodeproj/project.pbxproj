@@ -35,6 +35,7 @@
 		436E81C02918BA3D002A2641 /* ChipViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 436E81BF2918BA3D002A2641 /* ChipViewController.swift */; };
 		4386FB022901353B00314936 /* RoomCategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4386FB012901353B00314936 /* RoomCategoryViewController.swift */; };
 		43956D2C28FF9F0100DD996F /* PostingWritingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43956D2B28FF9F0100DD996F /* PostingWritingView.swift */; };
+		43AEA21B2921DE6F008579C8 /* InquiryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43AEA21A2921DE6F008579C8 /* InquiryCell.swift */; };
 		43BD591A29028BD70063EB4F /* RoomCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43BD591929028BD70063EB4F /* RoomCodeViewController.swift */; };
 		43C2110F28FCFAB500E8F6DD /* PostingCategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43C2110E28FCFAB500E8F6DD /* PostingCategoryViewController.swift */; };
 		43C2111128FCFB3800E8F6DD /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43C2111028FCFB3800E8F6DD /* CategoryCell.swift */; };
@@ -96,6 +97,7 @@
 		436E81BF2918BA3D002A2641 /* ChipViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChipViewController.swift; sourceTree = "<group>"; };
 		4386FB012901353B00314936 /* RoomCategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomCategoryViewController.swift; sourceTree = "<group>"; };
 		43956D2B28FF9F0100DD996F /* PostingWritingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostingWritingView.swift; sourceTree = "<group>"; };
+		43AEA21A2921DE6F008579C8 /* InquiryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InquiryCell.swift; sourceTree = "<group>"; };
 		43BD591929028BD70063EB4F /* RoomCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomCodeViewController.swift; sourceTree = "<group>"; };
 		43C2110E28FCFAB500E8F6DD /* PostingCategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostingCategoryViewController.swift; sourceTree = "<group>"; };
 		43C2111028FCFB3800E8F6DD /* CategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
@@ -331,6 +333,7 @@
 		98CFE3102910FC5A004B2FA1 /* InquiryHistoryView */ = {
 			isa = PBXGroup;
 			children = (
+				43AEA21A2921DE6F008579C8 /* InquiryCell.swift */,
 				98CFE3112910FC8E004B2FA1 /* InquiryHistoryViewController.swift */,
 			);
 			path = InquiryHistoryView;
@@ -445,6 +448,7 @@
 				26FEC1DE2902E6F2006C410B /* WorkingStatusEntity+CoreDataProperties.swift in Sources */,
 				98B08A60290AC8C900401650 /* UIColor+.swift in Sources */,
 				26E3748428FCDC0000997DA7 /* SceneDelegate.swift in Sources */,
+				43AEA21B2921DE6F008579C8 /* InquiryCell.swift in Sources */,
 				98366F8D29019A5300E81E27 /* RoomCreationViewContoller.swift in Sources */,
 				4386FB022901353B00314936 /* RoomCategoryViewController.swift in Sources */,
 				43BD591A29028BD70063EB4F /* RoomCodeViewController.swift in Sources */,
