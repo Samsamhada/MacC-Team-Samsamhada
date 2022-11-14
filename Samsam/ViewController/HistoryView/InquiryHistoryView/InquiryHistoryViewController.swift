@@ -36,6 +36,7 @@ class InquiryHistoryViewController: UIViewController {
         inquiryHistoryView.delegate = self
         inquiryHistoryView.dataSource = self
 
+        inquiryHistoryView.register(WorkingHistoryViewTopHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: WorkingHistoryViewTopHeader.identifier)
         inquiryHistoryView.register(InquiryCell.self, forCellWithReuseIdentifier: InquiryCell.identifier)
     }
     
@@ -52,6 +53,17 @@ class InquiryHistoryViewController: UIViewController {
 }
 
 extension InquiryHistoryViewController: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        return CGSize(width: UIScreen.main.bounds.width, height: 100)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: WorkingHistoryViewTopHeader.identifier, for: indexPath) as! WorkingHistoryViewTopHeader
+        header.progressDuration.text = "진행상황(10.11 ~ 11.12)"
+        return header
+    }
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 3
     }
@@ -65,6 +77,10 @@ extension InquiryHistoryViewController: UICollectionViewDataSource, UICollection
         let width = UIScreen.main.bounds.width - 32
         let cellHeight = width / 4 * 3 + 30
         return CGSize(width: Int(width), height: Int(cellHeight))
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets(top: 8, left: 0, bottom: 0, right: 0)
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
