@@ -40,6 +40,10 @@ class RoomCreationViewDateHeader: UITableViewCell {
         return $0
     }(UILabel())
     
+    var spacer: UIView = {
+        return $0
+    }(UIView())
+    
     // MARK: - LifeCycle
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -57,6 +61,7 @@ class RoomCreationViewDateHeader: UITableViewCell {
         self.addSubview(dateView)
         dateView.addSubview(dateLabel)
         dateView.addSubview(dateFrame)
+        dateView.addSubview(spacer)
         dateFrame.addSubview(dateButton)
         
         dateView.anchor(
@@ -65,16 +70,17 @@ class RoomCreationViewDateHeader: UITableViewCell {
             bottom: bottomAnchor,
             right: rightAnchor
         )
+        dateView.setHeight(height: 50)
         
         dateLabel.anchor(
             top: dateView.topAnchor,
             left: dateView.leftAnchor,
-            bottom: dateView.bottomAnchor
+            bottom: spacer.topAnchor
         )
         
         dateFrame.anchor(
             top: dateView.topAnchor,
-            bottom: dateView.bottomAnchor,
+            bottom: spacer.topAnchor,
             right: dateView.rightAnchor
         )
         
@@ -85,5 +91,14 @@ class RoomCreationViewDateHeader: UITableViewCell {
             paddingRight: 10
         )
         dateButton.centerY(inView: dateFrame)
+        
+        spacer.anchor(
+            left: dateView.leftAnchor,
+            bottom: dateView.bottomAnchor,
+            right: dateView.rightAnchor
+        )
+        spacer.setHeight(height: 18)
+//        spacer.setContentHuggingPriority(UILayoutPriority(600), for: .vertical)
+//        spacer.setContentCompressionResistancePriority(UILayoutPriority(752), for: .vertical)
     }
 }

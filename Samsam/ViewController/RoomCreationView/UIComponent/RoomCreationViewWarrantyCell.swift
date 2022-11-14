@@ -44,6 +44,10 @@ class RoomCreationViewWarrantyCell: UITableViewCell {
         return $0
     }(UIStepper())
     
+    var spacer: UIView = {
+        return $0
+    }(UIView())
+    
     // MARK: - Init
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -62,6 +66,7 @@ class RoomCreationViewWarrantyCell: UITableViewCell {
         warrantyView.addSubview(warrantyLabel)
         warrantyView.addSubview(warrantyText)
         warrantyView.addSubview(warrantyStepper)
+        warrantyView.addSubview(spacer)
         
         warrantyView.anchor(
             top: topAnchor,
@@ -69,24 +74,33 @@ class RoomCreationViewWarrantyCell: UITableViewCell {
             bottom: bottomAnchor,
             right: rightAnchor
         )
+        warrantyView.setHeight(height: 50)
         
         warrantyLabel.anchor(
             top: warrantyView.topAnchor,
             left: warrantyView.leftAnchor,
-            bottom: warrantyView.bottomAnchor
+            bottom: spacer.topAnchor
         )
         
         warrantyText.anchor(
             top: warrantyView.topAnchor,
-            bottom: warrantyView.bottomAnchor,
+            bottom: spacer.topAnchor,
             right: warrantyStepper.leftAnchor,
             paddingRight: 10
         )
         
         warrantyStepper.anchor(
+            bottom: spacer.topAnchor,
             right: warrantyView.rightAnchor
         )
-        warrantyStepper.centerY(inView: warrantyView)
+//        warrantyStepper.centerY(inView: warrantyView)
+        
+        spacer.anchor(
+            left: warrantyView.leftAnchor,
+            bottom: warrantyView.bottomAnchor,
+            right: warrantyView.rightAnchor
+        )
+        spacer.setHeight(height: 18)
     }
     
     @objc private func tapStepper() {
