@@ -26,6 +26,7 @@ class RoomCreationViewDateFirstCell: UITableViewCell {
         $0.timeZone = .autoupdatingCurrent
         $0.preferredDatePickerStyle = .inline
         $0.tintColor = AppColor.campanulaBlue
+        $0.addTarget(self, action: #selector(check), for: .valueChanged)
         return $0
     }(UIDatePicker())
     
@@ -34,7 +35,6 @@ class RoomCreationViewDateFirstCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         layout()
-        checkValueForDate()
     }
     
     required init?(coder: NSCoder) {
@@ -52,10 +52,6 @@ class RoomCreationViewDateFirstCell: UITableViewCell {
             bottom: bottomAnchor,
             right: rightAnchor
         )
-    }
-    
-    private func checkValueForDate() {
-        datePicker.addTarget(self, action: #selector(check), for: .valueChanged)
     }
     
     @objc private func check() {
