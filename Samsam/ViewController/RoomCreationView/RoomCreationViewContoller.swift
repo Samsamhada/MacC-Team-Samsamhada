@@ -47,6 +47,7 @@ class RoomCreationViewController: UIViewController{
     private let customerTextField: UITextField = {
         $0.placeholder = "고객의 별칭을 작성해주세요."
         $0.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
+        $0.addTarget(self, action: #selector(buttonAttributeChanged), for: .editingChanged)
         return $0
     }(UITextField())
     
@@ -99,8 +100,6 @@ class RoomCreationViewController: UIViewController{
         setTableView()
         setNavigation()
         hidekeyboardWhenTappedAround()
-
-        customerTextField.addTarget(self, action: #selector(buttonAttributeChanged), for: .editingChanged)
     }
     
     private func layout() {
