@@ -38,6 +38,7 @@ class InquiryHistoryViewController: UIViewController {
         inquiryHistoryView.dataSource = self
 
         inquiryHistoryView.register(WorkingHistoryViewTopHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: WorkingHistoryViewTopHeader.identifier)
+        inquiryHistoryView.register(AsHeaderCell.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: AsHeaderCell.identifier)
         inquiryHistoryView.register(InquiryCell.self, forCellWithReuseIdentifier: InquiryCell.identifier)
     }
     
@@ -60,9 +61,12 @@ extension InquiryHistoryViewController: UICollectionViewDataSource, UICollection
     }
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: WorkingHistoryViewTopHeader.identifier, for: indexPath) as! WorkingHistoryViewTopHeader
-        header.progressDuration.text = "진행상황(10.11 ~ 11.12)"
-        return header
+        let header1 = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: WorkingHistoryViewTopHeader.identifier, for: indexPath) as! WorkingHistoryViewTopHeader
+        header1.progressDuration.text = "진행상황(10.11 ~ 11.12)"
+
+        let header2 = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: AsHeaderCell.identifier, for: indexPath) as! AsHeaderCell
+        header2.remainingDay.text = "179일"
+        return header2
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
