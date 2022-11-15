@@ -20,7 +20,7 @@ class AsHeaderCell: UICollectionReusableView {
         return $0
     }(UIView())
     
-    let progressDuration: UILabel = {
+    private let progressDuration: UILabel = {
         $0.text = "AS 기간(~23. 11.12)"
         $0.textAlignment = .center
         $0.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
@@ -28,10 +28,20 @@ class AsHeaderCell: UICollectionReusableView {
         return $0
     }(UILabel())
     
+    private let remainingView: UIView = UIView()
+
     let remainingDay: UILabel = {
-        $0.text = "152일 남았어요"
+        $0.text = "152일"
         $0.textAlignment = .center
-        $0.font = UIFont.systemFont(ofSize: 20, weight: .regular)
+        $0.font = UIFont.systemFont(ofSize: 22, weight: .bold)
+        $0.textColor = AppColor.campanulaBlue
+        return $0
+    }(UILabel())
+    
+    private let remainingText: UILabel = {
+        $0.text = "남았어요"
+        $0.textAlignment = .center
+        $0.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
         $0.textColor = .gray
         return $0
     }(UILabel())
@@ -51,7 +61,9 @@ class AsHeaderCell: UICollectionReusableView {
         
         self.addSubview(contentView)
         contentView.addSubview(progressDuration)
-        contentView.addSubview(remainingDay)
+        contentView.addSubview(remainingView)
+        remainingView.addSubview(remainingDay)
+        remainingView.addSubview(remainingText)
         
         contentView.anchor(
             top: topAnchor,
@@ -63,14 +75,26 @@ class AsHeaderCell: UICollectionReusableView {
         progressDuration.anchor(
             top: contentView.topAnchor,
             left: contentView.leftAnchor,
-            paddingTop: 16,
-            paddingLeft: 16
+            paddingTop: 15,
+            paddingLeft: 15
         )
         
-        remainingDay.centerX(inView: contentView)
-        remainingDay.anchor(
+        remainingView.anchor(
             top: progressDuration.bottomAnchor,
-            paddingTop: 15
+            paddingTop: 15,
+            width: 130,
+            height: 25
         )
+        remainingView.centerX(inView: contentView)
+        
+        remainingDay.anchor(
+            left: remainingView.leftAnchor
+        )
+        remainingDay.centerY(inView: remainingView)
+        
+        remainingText.anchor(
+            right: remainingView.rightAnchor
+        )
+        remainingText.centerY(inView: remainingView)
     }
 }
