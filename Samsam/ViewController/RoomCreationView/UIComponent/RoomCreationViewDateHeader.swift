@@ -98,7 +98,5 @@ class RoomCreationViewDateHeader: UITableViewCell {
             right: dateView.rightAnchor
         )
         spacer.setHeight(height: 18)
-//        spacer.setContentHuggingPriority(UILayoutPriority(600), for: .vertical)
-//        spacer.setContentCompressionResistancePriority(UILayoutPriority(752), for: .vertical)
     }
 }
