@@ -93,7 +93,6 @@ class RoomCreationViewWarrantyCell: UITableViewCell {
             bottom: spacer.topAnchor,
             right: warrantyView.rightAnchor
         )
-//        warrantyStepper.centerY(inView: warrantyView)
         
         spacer.anchor(
             left: warrantyView.leftAnchor,
