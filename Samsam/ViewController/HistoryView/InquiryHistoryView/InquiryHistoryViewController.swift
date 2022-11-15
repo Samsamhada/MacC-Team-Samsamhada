@@ -12,9 +12,10 @@ class InquiryHistoryViewController: UIViewController {
     // MARK: - View
     
     private let inquiryHistoryView: UICollectionView = {
-        return $0
-    }(UICollectionView(
-        frame: .zero, collectionViewLayout: UICollectionViewFlowLayout()))
+        let flowLayout = UICollectionViewFlowLayout()
+        flowLayout.sectionInset = UIEdgeInsets(top: 10, left: 0, bottom: 0, right: 0)
+        return UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
+    }()
     
     // MARK: - LifeCycle
     
@@ -78,11 +79,7 @@ extension InquiryHistoryViewController: UICollectionViewDataSource, UICollection
         let cellHeight = width / 4 * 3 + 30
         return CGSize(width: Int(width), height: Int(cellHeight))
     }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 8, left: 0, bottom: 0, right: 0)
-    }
-    
+
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let detailViewController = DetailViewController()
         navigationController?.pushViewController(detailViewController, animated: true)
