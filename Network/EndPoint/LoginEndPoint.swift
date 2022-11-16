@@ -23,8 +23,7 @@ enum LoginEndPoint: EndPointable {
     
     var requestBody: Data? {
         switch self {
-        case .startAppleLogin(let setting):
-            let body = setting
+        case .startAppleLogin(let body):
             return body.encode()
         }
     }
