@@ -83,9 +83,18 @@ extension LoginViewController: ASAuthorizationControllerDelegate {
         if let appleIDCredential = authorization.credential as? ASAuthorizationAppleIDCredential {
 
             let userIdentifier = appleIDCredential.user
+            let Name = appleIDCredential.fullName
             let userFirstName = appleIDCredential.fullName?.givenName
             let userLastName = appleIDCredential.fullName?.familyName
             let userEmail = appleIDCredential.email
+            
+            var name = ""
+            if let firstName = userFirstName {
+                name += firstName
+            }
+            if let lastName = userLastName {
+                name += lastName
+            }
             
             let appleIDProvider = ASAuthorizationAppleIDProvider()
             appleIDProvider.getCredentialState(forUserID: userIdentifier) { (credentialState, error) in
@@ -93,7 +102,7 @@ extension LoginViewController: ASAuthorizationControllerDelegate {
                 case .authorized:
                     DispatchQueue.main.async {
                         let loginDTO = LoginDTO(userIdentifier: userIdentifier,
-                                                name: (userLastName!)+(userFirstName!),
+                                                name: name,
                                                 email: userEmail ?? nil)
                         self.requestLogin(LoginDTO: loginDTO)
                     }
