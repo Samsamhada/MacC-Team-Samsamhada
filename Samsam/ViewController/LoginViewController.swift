@@ -12,6 +12,7 @@ class LoginViewController: UIViewController {
     
     // MARK: = Property
     
+    private var workerID: Int?
     let loginService: LoginAPI = LoginAPI(apiService: APIService())
     
     // MARK: - View
@@ -65,7 +66,8 @@ class LoginViewController: UIViewController {
         Task{
             do {
                 let response = try await self.loginService.startAppleLogin(LoginDTO: LoginDTO)
-                print(response as Any)
+                guard let ID = response?.workerID else {return}
+                workerID = ID
             } catch NetworkError.serverError {
             } catch NetworkError.encodingError {
             } catch NetworkError.clientError(_) {
@@ -94,6 +96,8 @@ extension LoginViewController: ASAuthorizationControllerDelegate {
                         self.requestLogin(LoginDTO: loginDTO)
                         
                         // TODO: - token 처리
+                        let phoneNumViewController = PhoneNumViewController()
+                        phoneNumViewController.workerID = workerID
                         self.navigationController?.pushViewController(PhoneNumViewController(), animated: true)
                     }
                     break
