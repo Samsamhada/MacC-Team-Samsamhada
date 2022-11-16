@@ -34,7 +34,7 @@ extension APIService {
     private func requestDataToURL(_ request: NetworkRequest) async throws -> URLResponse {
         let sessionConfig = URLSessionConfiguration.default
         sessionConfig.timeoutIntervalForRequest = TimeInterval(request.requestTimeOut ?? requestTimeOut)
-        guard let encodedURL = request.URL.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed),
+        guard let encodedURL = request.url.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed),
             let url = URL(string: encodedURL) else {
             throw NetworkError.encodingError
         }

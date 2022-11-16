@@ -68,6 +68,10 @@ class LoginViewController: UIViewController {
                 let response = try await self.loginService.startAppleLogin(LoginDTO: LoginDTO)
                 guard let ID = response?.workerID else {return}
                 workerID = ID
+                // TODO: - token 처리
+                let phoneNumViewController = PhoneNumViewController()
+                phoneNumViewController.workerID = self.workerID
+                self.navigationController?.pushViewController(PhoneNumViewController(), animated: true)
             } catch NetworkError.serverError {
             } catch NetworkError.encodingError {
             } catch NetworkError.clientError(_) {
@@ -94,11 +98,6 @@ extension LoginViewController: ASAuthorizationControllerDelegate {
                                                 name: (userLastName!)+(userFirstName!),
                                                 email: userEmail ?? nil)
                         self.requestLogin(LoginDTO: loginDTO)
-                        
-                        // TODO: - token 처리
-                        let phoneNumViewController = PhoneNumViewController()
-                        phoneNumViewController.workerID = workerID
-                        self.navigationController?.pushViewController(PhoneNumViewController(), animated: true)
                     }
                     break
                 case .revoked:
