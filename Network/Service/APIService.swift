@@ -13,7 +13,7 @@ final class APIService: Requestable {
     var requestTimeOut: Float = 30
 
     func request<T: Decodable>(_ request: NetworkRequest) async throws -> T? {
-        let (data, httpResponse) = try await requestDataToUrl(request)
+        let (data, httpResponse) = try await requestDataToURL(request)
         
         switch httpResponse.statusCode {
         case (200..<300):
@@ -29,13 +29,13 @@ final class APIService: Requestable {
 }
 
 extension APIService {
-    typealias UrlResponse = (Data, HTTPURLResponse)
+    typealias URLResponse = (Data, HTTPURLResponse)
     
-    private func requestDataToUrl(_ request: NetworkRequest) async throws -> UrlResponse {
+    private func requestDataToURL(_ request: NetworkRequest) async throws -> URLResponse {
         let sessionConfig = URLSessionConfiguration.default
         sessionConfig.timeoutIntervalForRequest = TimeInterval(request.requestTimeOut ?? requestTimeOut)
-        guard let encodedUrl = request.url.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed),
-            let url = URL(string: encodedUrl) else {
+        guard let encodedURL = request.URL.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed),
+            let url = URL(string: encodedURL) else {
             throw NetworkError.encodingError
         }
         
