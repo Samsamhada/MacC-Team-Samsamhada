@@ -12,7 +12,6 @@ class LoginViewController: UIViewController {
     
     // MARK: = Property
     
-    private var workerID: Int?
     let loginService: LoginAPI = LoginAPI(apiService: APIService())
     
     // MARK: - View
@@ -66,12 +65,11 @@ class LoginViewController: UIViewController {
         Task{
             do {
                 let response = try await self.loginService.startAppleLogin(LoginDTO: LoginDTO)
-                guard let ID = response?.workerID else {return}
-                workerID = ID
                 // TODO: - token 처리
+                guard let ID = response?.workerID else {return}
                 let phoneNumViewController = PhoneNumViewController()
-                phoneNumViewController.workerID = self.workerID
-                self.navigationController?.pushViewController(PhoneNumViewController(), animated: true)
+                phoneNumViewController.workerID = ID
+                self.navigationController?.pushViewController(phoneNumViewController, animated: true)
             } catch NetworkError.serverError {
             } catch NetworkError.encodingError {
             } catch NetworkError.clientError(_) {
