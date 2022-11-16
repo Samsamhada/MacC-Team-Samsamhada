@@ -67,11 +67,8 @@ class LoginViewController: UIViewController {
                 let response = try await self.loginService.startAppleLogin(LoginDTO: LoginDTO)
                 print(response as Any)
             } catch NetworkError.serverError {
-                print("server Error")
             } catch NetworkError.encodingError {
-                print("encoding Error")
             } catch NetworkError.clientError(_) {
-                print("client Error")
             }
         }
     }
@@ -112,7 +109,6 @@ extension LoginViewController: ASAuthorizationControllerDelegate {
     }
     
     func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
-        print(error)
     }
 }
 
