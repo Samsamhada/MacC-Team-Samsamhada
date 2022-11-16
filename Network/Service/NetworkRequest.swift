@@ -15,10 +15,10 @@ struct NetworkRequest {
     let httpMethod: HTTPMethod
 
     init(url: String,
-        headers: [String: String]? = nil,
+         headers: [String: String]? = nil,
          reqBody: Data? = nil,
-        reqTimeout: Float? = nil,
-        httpMethod: HTTPMethod
+         reqTimeout: Float? = nil,
+         httpMethod: HTTPMethod
     ) {
         self.url = url
         self.headers = headers
