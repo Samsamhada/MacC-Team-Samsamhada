@@ -1,5 +1,5 @@
 //
-//  AsHeaderCell.swift
+//  ASHeaderCell.swift
 //  Samsam
 //
 //  Created by creohwan on 2022/11/15.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class AsHeaderCell: UICollectionReusableView {
+class ASHeaderCell: UICollectionReusableView {
     
     // MARK: - Property
     

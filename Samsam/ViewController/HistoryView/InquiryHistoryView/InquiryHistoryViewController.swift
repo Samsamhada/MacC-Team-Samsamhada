@@ -38,7 +38,7 @@ class InquiryHistoryViewController: UIViewController {
         inquiryHistoryView.dataSource = self
 
         inquiryHistoryView.register(WorkingHistoryViewTopHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: WorkingHistoryViewTopHeader.identifier)
-        inquiryHistoryView.register(AsHeaderCell.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: AsHeaderCell.identifier)
+        inquiryHistoryView.register(ASHeaderCell.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: ASHeaderCell.identifier)
         inquiryHistoryView.register(InquiryCell.self, forCellWithReuseIdentifier: InquiryCell.identifier)
     }
     
@@ -64,7 +64,7 @@ extension InquiryHistoryViewController: UICollectionViewDataSource, UICollection
         let header1 = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: WorkingHistoryViewTopHeader.identifier, for: indexPath) as! WorkingHistoryViewTopHeader
         header1.progressDuration.text = "진행상황(10.11 ~ 11.12)"
 
-        let header2 = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: AsHeaderCell.identifier, for: indexPath) as! AsHeaderCell
+        let header2 = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: ASHeaderCell.identifier, for: indexPath) as! ASHeaderCell
         header2.remainingDay.text = "179일"
         return header2
     }
