@@ -11,6 +11,7 @@ class PhoneNumViewController: UIViewController {
 
     // MARK: - Property
     
+    var workerID: Int?
     private var phoneNum = ""
     
     // MARK: - View
