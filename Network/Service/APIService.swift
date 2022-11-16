@@ -38,11 +38,8 @@ extension APIService {
             let url = URL(string: encodedUrl) else {
             throw NetworkError.encodingError
         }
-        print("encodedUrl = \(encodedUrl)")
         
         let (data, response) = try await URLSession.shared.data(for: request.buildURLRequest(with: url))
-        // FIXME: 
-        print((data, response))
         
         guard let httpResponse = response as? HTTPURLResponse else { throw NetworkError.serverError }
         
