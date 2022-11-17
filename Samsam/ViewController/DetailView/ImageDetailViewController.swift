@@ -78,12 +78,12 @@ extension ImageDetailViewController: UIScrollViewDelegate {
     func viewForZooming(in scrollView: UIScrollView) -> UIView? {
         return detailImage
     }
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if scrollView.zoomScale <= 1.0 {
-            scrollView.zoomScale = 1.0
-        }
-        if scrollView.zoomScale >= 3.0 {
-            scrollView.zoomScale = 3.0
-        }
-    }
+//    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+//        if scrollView.zoomScale <= 1.0 {
+//            scrollView.zoomScale = 1.0
+//        }
+//        if scrollView.zoomScale >= 3.0 {
+//            scrollView.zoomScale = 3.0
+//        }
+//    }
 }
