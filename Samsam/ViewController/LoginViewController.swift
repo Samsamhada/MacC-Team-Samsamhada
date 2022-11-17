@@ -83,7 +83,6 @@ extension LoginViewController: ASAuthorizationControllerDelegate {
         if let appleIDCredential = authorization.credential as? ASAuthorizationAppleIDCredential {
 
             let userIdentifier = appleIDCredential.user
-            let Name = appleIDCredential.fullName
             let userFirstName = appleIDCredential.fullName?.givenName
             let userLastName = appleIDCredential.fullName?.familyName
             let userEmail = appleIDCredential.email

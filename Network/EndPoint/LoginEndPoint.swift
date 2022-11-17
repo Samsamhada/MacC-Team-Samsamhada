@@ -8,7 +8,7 @@
 import Foundation
 
 enum LoginEndPoint: EndPointable {
-    case startAppleLogin(LoginDTO: LoginDTO)
+    case startAppleLogin(body: LoginDTO)
     
     var requestTimeOut: Float {
         return 10
