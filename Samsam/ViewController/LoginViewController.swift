@@ -65,11 +65,14 @@ class LoginViewController: UIViewController {
         Task{
             do {
                 let response = try await self.loginService.startAppleLogin(LoginDTO: LoginDTO)
-                // TODO: - token 처리
-                guard let ID = response?.workerID else {return}
-                let phoneNumViewController = PhoneNumViewController()
-                phoneNumViewController.workerID = ID
-                self.navigationController?.pushViewController(phoneNumViewController, animated: true)
+                if let data = response {
+                    guard let userIdentifier = data.userIdentifier,
+                          let workerID = data.workerID
+                    else {return}
+                    UserDefaults.standard.setValue(userIdentifier, forKey: "userIdentifier")
+                    UserDefaults.standard.setValue(workerID, forKey: "workerID")
+                }
+                self.navigationController?.pushViewController(PhoneNumViewController(), animated: true)
             } catch NetworkError.serverError {
             } catch NetworkError.encodingError {
             } catch NetworkError.clientError(_) {
@@ -87,21 +90,14 @@ extension LoginViewController: ASAuthorizationControllerDelegate {
             let userLastName = appleIDCredential.fullName?.familyName
             let userEmail = appleIDCredential.email
             
-            var name = ""
-            if let firstName = userFirstName {
-                name += firstName
-            }
-            if let lastName = userLastName {
-                name += lastName
-            }
-            
             let appleIDProvider = ASAuthorizationAppleIDProvider()
             appleIDProvider.getCredentialState(forUserID: userIdentifier) { (credentialState, error) in
                 switch credentialState {
                 case .authorized:
                     DispatchQueue.main.async {
                         let loginDTO = LoginDTO(userIdentifier: userIdentifier,
-                                                name: name,
+                                                lastName:userLastName ?? nil,
+                                                firstName: userFirstName ?? nil,
                                                 email: userEmail ?? nil)
                         self.requestLogin(LoginDTO: loginDTO)
                     }

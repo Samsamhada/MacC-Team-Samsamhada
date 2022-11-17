@@ -9,12 +9,14 @@ import Foundation
 
 struct LoginDTO: Encodable {
     var userIdentifier: String
-    var name: String?
+    var lastName: String?
+    var firstName: String?
     var email: String?
     
-    init(userIdentifier: String, name: String? = nil, email: String? = nil) {
+    init(userIdentifier: String, lastName: String? = nil, firstName: String? = nil, email: String? = nil) {
         self.userIdentifier = userIdentifier
-        self.name = name
+        self.lastName = lastName
+        self.firstName = firstName
         self.email = email
     }
 }
