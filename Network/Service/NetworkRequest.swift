@@ -29,7 +29,6 @@ struct NetworkRequest {
 
     func buildURLRequest(with url: URL) -> URLRequest {
         var urlRequest = URLRequest(url: url)
-//        urlRequest.setValue("Bearer " + UserDefaultStorage.accessToken, forHTTPHeaderField: "Authorization")
         urlRequest.setValue(APIEnvironment.apiKey, forHTTPHeaderField: "API-Key")
         urlRequest.httpMethod = httpMethod.rawValue
         urlRequest.allHTTPHeaderFields = headers ?? [:]
