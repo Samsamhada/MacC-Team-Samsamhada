@@ -37,7 +37,7 @@ class PhoneNumViewController: UIViewController {
     }(UILabel())
 
     private let numberInput: UITextField = {
-        $0.placeholder = "1234-5678"
+        $0.placeholder = "1234 - 5678"
         $0.font = UIFont.systemFont(ofSize: 16)
         $0.keyboardType = .decimalPad
         return $0
@@ -49,13 +49,14 @@ class PhoneNumViewController: UIViewController {
         return $0
     }(UIView())
 
-    private let submitButton: UIButton = {
+    private lazy var submitButton: UIButton = {
         $0.setTitle("확인", for: .normal)
         $0.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
         $0.setHeight(height: 50)
         $0.layer.cornerRadius = 16
         $0.isEnabled = false
         $0.backgroundColor = .gray
+        $0.addTarget(self, action: #selector(tapSubmitButton), for: .touchUpInside)
         return $0
     }(UIButton())
 
@@ -75,7 +76,6 @@ class PhoneNumViewController: UIViewController {
 
         numberInput.delegate = self
         numberInput.addTarget(self, action: #selector(buttonAttributeChanged), for: .editingChanged)
-        numberInput.addTarget(self, action: #selector(changedNumStyle), for: .editingChanged)
     }
 
     private func layout() {
@@ -145,10 +145,11 @@ class PhoneNumViewController: UIViewController {
     }
 
     @objc private func buttonAttributeChanged() {
-        if (numberInput.text!.count) == 8 {
+        phoneNum = numberInput.text!
+        if phoneNum.count == 8 {
             submitButton.backgroundColor = .blue
             submitButton.isEnabled = true
-            submitButton.addTarget(self, action: #selector(tapSubmitButton), for: .touchUpInside)
+            numberInput.text = numberInput.text!.phoneNumberStyle()
         } else {
             submitButton.backgroundColor = .gray
             submitButton.isEnabled = false
@@ -163,7 +164,9 @@ class PhoneNumViewController: UIViewController {
 
 extension PhoneNumViewController: UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+
         guard numberInput.text!.count < 9 else { return false }
+
 
         return true
     }
