@@ -88,7 +88,6 @@ class DetailViewController: UIViewController, UIScrollViewDelegate {
     
     private func attribute() {
         view.backgroundColor = .white
-        
         setNavigationBar()
         
         scrollView.delegate = self
@@ -162,12 +161,11 @@ class DetailViewController: UIViewController, UIScrollViewDelegate {
     }
 
     @objc private func tapShareButton() {
-
         for imgName in images {
             guard let img = UIImage(data: imgName.photoPath!) else { return }
-
             imageArray.append(img)
         }
+        
         let vc = UIActivityViewController(activityItems: imageArray, applicationActivities: [])
         if !imageArray.isEmpty {
             present(vc, animated: true)
@@ -209,6 +207,10 @@ extension DetailViewController {
         let constructionImage = UIImageView()
         constructionImage.image = UIImage(data: img)
         
+        let changedView = UITapGestureRecognizer(target: self, action: #selector(changedView))
+        constructionImage.addGestureRecognizer(changedView)
+        constructionImage.isUserInteractionEnabled = true
+        
         scrollView.addSubview(constructionImage)
         
         constructionImage.frame = CGRect(
@@ -217,5 +219,10 @@ extension DetailViewController {
             width: screenWidth,
             height: screenWidth / 4 * 3
         )
+    }
+    
+    @objc func changedView() {
+        let imageDetailViewController = ImageDetailViewController()
+        navigationController?.pushViewController(imageDetailViewController, animated: true)
     }
 }
