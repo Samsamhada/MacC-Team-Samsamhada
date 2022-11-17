@@ -36,10 +36,11 @@ class PhoneNumViewController: UIViewController {
         return $0
     }(UILabel())
 
-    private let numberInput: UITextField = {
+    private lazy var numberInput: UITextField = {
         $0.placeholder = "1234 - 5678"
         $0.font = UIFont.systemFont(ofSize: 16)
         $0.keyboardType = .decimalPad
+        $0.addTarget(self, action: #selector(buttonAttributeChanged), for: .editingChanged)
         return $0
     }(UITextField())
 
@@ -75,7 +76,6 @@ class PhoneNumViewController: UIViewController {
         view.backgroundColor = .white
 
         numberInput.delegate = self
-        numberInput.addTarget(self, action: #selector(buttonAttributeChanged), for: .editingChanged)
     }
 
     private func layout() {
