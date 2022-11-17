@@ -9,15 +9,13 @@ import UIKit
 
 class ImageDetailViewController: UIViewController {
     
-    private var isTapped = false
-    
     // MARK: - View
     
-    private let uiView: UIView = {
+    private let scrollView: UIScrollView = {
         return $0
-    }(UIView())
+    }(UIScrollView())
     
-    private let detailImage: UIImageView = {
+    let detailImage: UIImageView = {
         $0.image = UIImage(named: "TestImage")
         $0.contentMode = .scaleAspectFit
         return $0
@@ -34,33 +32,36 @@ class ImageDetailViewController: UIViewController {
     // MARK: - Method
     
     private func layout() {
-        view.addSubview(detailImage)
+        view.addSubview(scrollView)
+        scrollView.addSubview(detailImage)
 
-        detailImage.anchor(
+        scrollView.anchor(
             top: view.safeAreaLayoutGuide.topAnchor,
             left: view.safeAreaLayoutGuide.leftAnchor,
             bottom: view.safeAreaLayoutGuide.bottomAnchor,
             right: view.safeAreaLayoutGuide.rightAnchor
         )
+        
+        detailImage.anchor(
+            top: scrollView.topAnchor,
+            bottom: scrollView.bottomAnchor
+        )
+        detailImage.centerX(inView: scrollView)
     }
     
     private func attribute() {
         view.backgroundColor = .white
         navigationItem.title = "화장실"
-
+        
+        scrollView.delegate = self
+        scrollView.zoomScale = 1.0
+        scrollView.minimumZoomScale = 1.0
+        scrollView.maximumZoomScale = 3.0
+        scrollView.showsHorizontalScrollIndicator = false
+        
         detailImage.isUserInteractionEnabled = true
-
-        let didPinchGesture = UIPinchGestureRecognizer(target: self, action: #selector(didPinchGesture))
-        detailImage.addGestureRecognizer(didPinchGesture)
-
         let didPanGesture = UIPanGestureRecognizer(target: self, action: #selector(didPanGesture))
         detailImage.addGestureRecognizer(didPanGesture)
-    }
-    
-    @objc private func didPinchGesture(_ sender: UIPinchGestureRecognizer) {
-        detailImage.transform = detailImage.transform.scaledBy(x: sender.scale, y: sender.scale)
-        sender.scale = 1.0
-        detailImage.center = view.center
     }
     
     @objc private func didPanGesture(_ sender: UIPanGestureRecognizer) {
@@ -70,5 +71,19 @@ class ImageDetailViewController: UIViewController {
                                   y: view.center.y + translation.y)
         }
         sender.setTranslation(CGPoint.zero, in: view)
+    }
+}
+
+extension ImageDetailViewController: UIScrollViewDelegate {
+    func viewForZooming(in scrollView: UIScrollView) -> UIView? {
+        return detailImage
+    }
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if scrollView.zoomScale <= 1.0 {
+            scrollView.zoomScale = 1.0
+        }
+        if scrollView.zoomScale >= 3.0 {
+            scrollView.zoomScale = 3.0
+        }
     }
 }
