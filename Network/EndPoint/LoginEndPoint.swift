@@ -9,7 +9,8 @@ import Foundation
 
 enum LoginEndPoint: EndPointable {
     case startAppleLogin(body: LoginDTO)
-
+    case addPhoneNumber(workerID: Int, body: LoginDTO)
+    
     var requestTimeOut: Float {
         return 10
     }
@@ -18,12 +19,16 @@ enum LoginEndPoint: EndPointable {
         switch self {
         case .startAppleLogin:
             return .post
+        case .addPhoneNumber:
+            return .put
         }
     }
 
     var requestBody: Data? {
         switch self {
         case .startAppleLogin(let body):
+            return body.encode()
+        case .addPhoneNumber(_, let body):
             return body.encode()
         }
     }
@@ -32,6 +37,8 @@ enum LoginEndPoint: EndPointable {
         switch self {
         case .startAppleLogin:
             return "\(baseURL)/workers"
+        case .addPhoneNumber(let workerID, _):
+            return "\(baseURL)/workers/\(workerID)"
         }
     }
 
