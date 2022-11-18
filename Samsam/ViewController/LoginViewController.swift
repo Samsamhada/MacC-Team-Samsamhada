@@ -11,9 +11,9 @@ import UIKit
 class LoginViewController: UIViewController {
 
     // MARK: = Property
-
-    let loginService: LoginAPI = LoginAPI(apiService: APIService())
-
+    
+    private let loginService: LoginAPI = LoginAPI(apiService: APIService())
+    
     // MARK: - View
 
     private lazy var authorizationButton: ASAuthorizationAppleIDButton = {

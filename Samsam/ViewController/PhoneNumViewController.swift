@@ -12,6 +12,7 @@ class PhoneNumViewController: UIViewController {
     // MARK: - Property
 
     private var phoneNum = ""
+    private let loginService: LoginAPI = LoginAPI(apiService: APIService())
 
     // MARK: - View
 
@@ -149,6 +150,7 @@ class PhoneNumViewController: UIViewController {
         if phoneNum.count >= maxLength {
             let endIndex = phoneNum.index(phoneNum.startIndex, offsetBy: maxLength)
             let fixedText = phoneNum[phoneNum.startIndex..<endIndex]
+            self.phoneNum = String(fixedText)
             textField.text = String(fixedText).phoneNumberStyle()
         }
     }
@@ -166,8 +168,25 @@ class PhoneNumViewController: UIViewController {
     }
 
     @objc private func tapSubmitButton() {
+        let loginDTO = LoginDTO(userIdentifier: UserDefaults.standard.string(forKey: "userIdentifier")!, number: phoneNum)
+        requestPutPhoneNumber(workerID: Int(UserDefaults.standard.string(forKey: "workerID")!)!, LoginDTO: loginDTO)
         let roomListViewController = RoomListViewController()
         navigationController?.pushViewController(roomListViewController, animated: true)
+    }
+    
+    private func requestPutPhoneNumber(workerID: Int ,LoginDTO: LoginDTO) {
+        Task{
+            do {
+                let response = try await self.loginService.addPhoneNumber(workerID: workerID, LoginDTO: LoginDTO)
+                if let data = response {
+                    print(data)
+                }
+                self.navigationController?.pushViewController(PhoneNumViewController(), animated: true)
+            } catch NetworkError.serverError {
+            } catch NetworkError.encodingError {
+            } catch NetworkError.clientError(_) {
+            }
+        }
     }
 }
 
