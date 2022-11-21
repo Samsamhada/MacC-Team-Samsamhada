@@ -16,6 +16,8 @@ class RoomCategoryViewController: UIViewController {
     var endingDate: Date = Date()
     var warrantyTime: Int32 = 0
     var selectedCellArray: [Int] = []
+    let roomAPI: RoomAPI = RoomAPI(apiService: APIService())
+    var room: Room?
     
     // MARK: - View
 
@@ -106,6 +108,20 @@ class RoomCategoryViewController: UIViewController {
         titleText.attributedText = statement
     }
     
+    private func createRoom(RoomDTO: RoomDTO) {
+        Task{
+            do {
+                let response = try await self.roomAPI.createRoom(RoomDTO: RoomDTO)
+                if let data = response {
+                    self.room = data
+                }
+            } catch NetworkError.serverError {
+            } catch NetworkError.encodingError {
+            } catch NetworkError.clientError(_) {
+            }
+        }
+    }
+
     @objc func tapNextBTN() {
         selectedCellArray.sort()
         coreDataManager.createRoomData(
@@ -121,6 +137,10 @@ class RoomCategoryViewController: UIViewController {
                 categoryID: $0
             )
         }
+        var roomDTO: RoomDTO = RoomDTO(workerID: workerID, clientName: clientName, startDate: startDate, endDate: endDate, warrantyTime: warrantyTime)
+
+        createRoom(RoomDTO: roomDTO)
+
         self.dismiss(animated: true)
     }
 }
