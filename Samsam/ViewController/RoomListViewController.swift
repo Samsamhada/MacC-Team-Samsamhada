@@ -87,7 +87,7 @@ extension RoomListViewController: UICollectionViewDataSource, UICollectionViewDe
         let tapRoomListButton = CustomTapGestureRecognizer(target: self, action: #selector(tapRoomListButton))
         cell.roomStack.isUserInteractionEnabled = true
         cell.roomStack.addGestureRecognizer(tapRoomListButton)
-                
+
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yy.MM.dd"
         return cell
