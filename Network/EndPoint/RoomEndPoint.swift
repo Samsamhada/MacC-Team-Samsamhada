@@ -11,6 +11,7 @@ enum RoomEndPoint: EndPointable {
     case startAppleLogin(body: LoginDTO)
     case createRoom(body: RoomDTO)
     case loadRoomByWorkerID(workerID: Int)
+    case createStatus(body: StatusDTO)
     
     var requestTimeOut: Float {
         return 10
@@ -18,7 +19,7 @@ enum RoomEndPoint: EndPointable {
     
     var httpMethod: HTTPMethod {
         switch self {
-        case .startAppleLogin, .createRoom:
+        case .startAppleLogin, .createRoom, .createStatus:
             return .post
         case .loadRoomByWorkerID:
             return .get
@@ -30,6 +31,8 @@ enum RoomEndPoint: EndPointable {
         case .startAppleLogin(let body):
             return body.encode()
         case .createRoom(let body):
+            return body.encode()
+        case .createStatus(let body):
             return body.encode()
         default:
             return nil
@@ -43,7 +46,9 @@ enum RoomEndPoint: EndPointable {
         case .createRoom:
             return "\(APIEnvironment.roomsURL)"
         case .loadRoomByWorkerID(let workerID):
-            return "\(baseURL)/rooms/worker/\(workerID)"
+            return "\(APIEnvironment.roomsURL)/worker/\(workerID)"
+        case .createStatus:
+            return "\(APIEnvironment.statusesURL)"
         }
     }
     
