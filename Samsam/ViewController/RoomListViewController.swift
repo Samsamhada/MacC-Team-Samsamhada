@@ -9,6 +9,14 @@ import UIKit
 
 class RoomListViewController: UIViewController {
     
+    // MARK: - Property
+    let roomAPI: RoomAPI = RoomAPI(apiService: APIService())
+    var rooms = [Room]() {
+        didSet {
+            collectionView.reloadData()
+        }
+    }
+
     // MARK: - View
     
     private let collectionView: UICollectionView = {
@@ -24,6 +32,9 @@ class RoomListViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        loadRoomByWorkerID(workerID: 5) { room in
+            self.rooms = room ?? []
+        }
     }
 
     // MARK: - Method
@@ -59,6 +70,21 @@ class RoomListViewController: UIViewController {
         collectionView.register(RoomListCell.self, forCellWithReuseIdentifier: RoomListCell.identifier)
         collectionView.delegate = self
         collectionView.dataSource = self
+    }
+    
+    private func loadRoomByWorkerID(workerID: Int, completionHandler: @escaping([Room]?) -> Void) {
+        Task {
+            do {
+                let response = try await self.roomAPI.loadRoomByWorkerID(workerID: workerID)
+                guard let data = response else {
+                    return
+                }
+                completionHandler(data)
+            } catch NetworkError.serverError {
+            } catch NetworkError.encodingError {
+            } catch NetworkError.clientError(_) {
+            }
+        }
     }
 }
 
