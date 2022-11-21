@@ -8,9 +8,9 @@
 import UIKit
 
 class PostingImageButtonCell: UICollectionViewCell {
-    
+
     // MARK: - Property
-    
+
     static let identifier = "PostingImageButtonCell"
 
     // MARK: - View
@@ -26,7 +26,7 @@ class PostingImageButtonCell: UICollectionViewCell {
     }(UIImageView())
 
     // MARK: - Init
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupCell()
@@ -35,12 +35,12 @@ class PostingImageButtonCell: UICollectionViewCell {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     // MARK: - Method
-    
+
     private func setupCell() {
         self.addSubview(buttomImage)
-      
+
         buttomImage.anchor(
             top: topAnchor,
             left: leftAnchor,
@@ -48,5 +48,4 @@ class PostingImageButtonCell: UICollectionViewCell {
             right: rightAnchor
         )
     }
-    
 }

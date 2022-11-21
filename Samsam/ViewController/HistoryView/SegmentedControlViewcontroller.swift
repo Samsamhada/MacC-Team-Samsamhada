@@ -8,34 +8,34 @@
 import UIKit
 
 class SegmentedControlViewController: UIViewController {
-    
+
     // MARK: - Property
-    
+
     var roomID: Int?
     var roomCategoryID: [Int] = []
-    
+
     // MARK: - View
-    
+
     private let pageControlBackgroundView: UIView = {
         $0.backgroundColor = .white
         return $0
     }(UIView())
-    
+
     private let segmentedControl: UISegmentedControl = {
         return $0
     }(UISegmentedControl(items: ["시공내역", "문의내역"]))
-    
+
     private lazy var workingHistoryView: WorkingHistoryViewController = {
         $0.roomID = roomID
         return $0
     }(WorkingHistoryViewController())
-    
+
     private let inquiryHistoryView: InquiryHistoryViewController = {
         return $0
     }(InquiryHistoryViewController())
-    
+
     private lazy var dataViewControllers: [UIViewController] = [workingHistoryView, inquiryHistoryView]
-    
+
     private lazy var pageViewController: UIPageViewController = {
         $0.setViewControllers([dataViewControllers[0]],
                               direction: .forward,
@@ -43,7 +43,7 @@ class SegmentedControlViewController: UIViewController {
         return $0
     }(UIPageViewController(transitionStyle: .scroll,
                           navigationOrientation: .horizontal))
-    
+
     private let writingButton: UIButton = {
         $0.backgroundColor = AppColor.campanulaBlue
         $0.setTitle("시공상황 작성하기", for: .normal)
@@ -52,24 +52,24 @@ class SegmentedControlViewController: UIViewController {
         $0.layer.cornerRadius = 16
         return $0
     }(UIButton())
-    
+
     private var currentViewNumber: Int = 0 {
         didSet {
             let direction: UIPageViewController.NavigationDirection = (oldValue <= currentViewNumber ? .forward : .reverse)
             pageViewController.setViewControllers([dataViewControllers[self.currentViewNumber]], direction: direction, animated: true)
         }
     }
-    
+
     // MARK: - LifeCycle
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setNavigationBar()
-        
+
         attribute()
         layout()
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         coreDataManager.loadOneRoomData(roomID: roomID!)
@@ -77,34 +77,34 @@ class SegmentedControlViewController: UIViewController {
         coreDataManager.loadWorkingStatusData(roomID: roomID!)
         setRoomCategoryID()
     }
-    
+
     // MARK: - Method
-    
+
     private func setRoomCategoryID() {
         roomCategoryID = []
         coreDataManager.workingStatuses.forEach {
             roomCategoryID.append(Int($0.categoryID))
         }
     }
-    
+
     private func attribute() {
         view.backgroundColor = .white
-        
+
         setSegmentedControl()
-        
+
         pageViewController.delegate = self
         pageViewController.dataSource = self
-        
+
         writingButton.addTarget(self, action: #selector(tapWritingButton), for: .touchDown)
     }
-    
+
     private func layout() {
         view.addSubview(segmentedControl)
         view.addSubview(pageControlBackgroundView)
         addChild(pageViewController)
         view.addSubview(pageViewController.view)
         view.addSubview(writingButton)
-        
+
         segmentedControl.anchor(
             top: view.safeAreaLayoutGuide.topAnchor,
             left: view.safeAreaLayoutGuide.leftAnchor,
@@ -113,14 +113,14 @@ class SegmentedControlViewController: UIViewController {
             width: 180,
             height: 40
         )
-        
+
         pageControlBackgroundView.anchor(
             top: segmentedControl.bottomAnchor,
             left: view.leftAnchor,
             bottom: view.bottomAnchor,
             right: view.rightAnchor
         )
-        
+
         pageViewController.view.anchor(
             top: pageControlBackgroundView.topAnchor,
             left: pageControlBackgroundView.leftAnchor,
@@ -138,9 +138,9 @@ class SegmentedControlViewController: UIViewController {
             height: 50
         )
     }
-    
+
     // MARK: - Method
-    
+
     private func setNavigationBar() {
         navigationItem.title = coreDataManager.oneRoom?.clientName
         navigationController?.navigationBar.prefersLargeTitles = false
@@ -148,31 +148,31 @@ class SegmentedControlViewController: UIViewController {
         rightBarButtonItem.tintColor = .black
         navigationItem.rightBarButtonItem = rightBarButtonItem
     }
-    
+
     @objc func tapSettingButton() {
         let settingViewController = ViewController()
         navigationController?.pushViewController(settingViewController, animated: true)
     }
-    
+
     private func setSegmentedControl() {
         removeBackgroundAndDivider()
-        
+
         self.segmentedControl.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.gray, .font: UIFont.systemFont(ofSize: 20, weight: .bold)], for: .normal)
         self.segmentedControl.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.black, .font: UIFont.systemFont(ofSize: 20, weight: .bold)], for: .selected)
         self.segmentedControl.selectedSegmentIndex = 0
         self.segmentedControl.addTarget(self, action: #selector(changeValue), for: .valueChanged)
-        
+
         self.changeValue(control: self.segmentedControl)
     }
-    
+
     private func removeBackgroundAndDivider() {
         let image = UIImage()
         segmentedControl.setBackgroundImage(image, for: .normal, barMetrics: .default)
         segmentedControl.setBackgroundImage(image, for: .selected, barMetrics: .default)
-        
+
         segmentedControl.setDividerImage(image, forLeftSegmentState: .selected, rightSegmentState: .normal, barMetrics: .default)
     }
-    
+
     @objc func changeValue(control: UISegmentedControl) {
         self.currentViewNumber = control.selectedSegmentIndex
     }
@@ -192,12 +192,12 @@ extension SegmentedControlViewController: UIPageViewControllerDelegate, UIPageVi
         guard let index = dataViewControllers.firstIndex(of: viewController), index - 1 >= 0 else { return nil }
         return dataViewControllers[index - 1]
     }
-    
+
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
         guard let index = dataViewControllers.firstIndex(of: viewController), index + 1 < dataViewControllers.count else { return nil }
         return dataViewControllers[index + 1]
     }
-    
+
     func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
         guard
             let vc = pageViewController.viewControllers?[0],
@@ -207,4 +207,3 @@ extension SegmentedControlViewController: UIPageViewControllerDelegate, UIPageVi
         self.segmentedControl.selectedSegmentIndex = index
     }
 }
-

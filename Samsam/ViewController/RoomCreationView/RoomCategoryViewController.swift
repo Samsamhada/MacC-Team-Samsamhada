@@ -8,7 +8,7 @@
 import UIKit
 
 class RoomCategoryViewController: UIViewController {
-    
+
     // MARK: - Property
 
     var clientName: String = ""
@@ -25,7 +25,7 @@ class RoomCategoryViewController: UIViewController {
         }
     }
     var statuses: [Status] = []
-    
+
     // MARK: - View
 
     private var titleText: UILabel = {
@@ -173,11 +173,11 @@ extension String {
 // MARK: - UICollectionViewDelegate, DataSourse, DelegateFlowLayout
 
 extension RoomCategoryViewController:  UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
-    
+
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return Category.allCases.count
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CategoryCell.identifier, for: indexPath) as! CategoryCell
@@ -186,7 +186,7 @@ extension RoomCategoryViewController:  UICollectionViewDelegate, UICollectionVie
         cell.categoryTitle.text = "\(category.categoryName())"
         return cell
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
         let cell = collectionView.cellForItem(at: indexPath)
         if cell?.isSelected == false {
@@ -211,7 +211,7 @@ extension RoomCategoryViewController:  UICollectionViewDelegate, UICollectionVie
         let cellHeight = 120
         return CGSize(width: Int(cellWidth), height: cellHeight)
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return UIEdgeInsets(top: 8, left: 8, bottom: 16, right: 8)
     }

@@ -8,13 +8,13 @@
 import UIKit
 
 class RoomCreationCell: UICollectionViewCell {
-    
+
     // MARK: - Property
-    
+
     static let identifier = "RoomCreationCell"
-    
+
     // MARK: - View
-    
+
     let creationButton: UIButton = {
         $0.setImage(UIImage(systemName: "plus"), for: .normal)
         $0.tintColor = .black
@@ -29,23 +29,23 @@ class RoomCreationCell: UICollectionViewCell {
         $0.layer.shadowRadius = 15
         return $0
     }(UIButton())
-    
+
     // MARK: - Init
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupCell()
     }
-    
+
     required init(coder aDecoder: NSCoder) {
         fatalError("init(codeer:) has not been implemented")
     }
-    
+
     // MARK: - Method
-    
+
     private func setupCell() {
         addSubview(creationButton)
-        
+
         creationButton.anchor(
             top: topAnchor,
             left: leftAnchor,

@@ -12,11 +12,11 @@ enum RoomEndPoint: EndPointable {
     case createRoom(body: RoomDTO)
     case loadRoomByWorkerID(workerID: Int)
     case createStatus(body: StatusDTO)
-    
+
     var requestTimeOut: Float {
         return 10
     }
-    
+
     var httpMethod: HTTPMethod {
         switch self {
         case .startAppleLogin, .createRoom, .createStatus:
@@ -25,7 +25,7 @@ enum RoomEndPoint: EndPointable {
             return .get
         }
     }
-    
+
     var requestBody: Data? {
         switch self {
         case .startAppleLogin(let body):
@@ -38,7 +38,7 @@ enum RoomEndPoint: EndPointable {
             return nil
         }
     }
-    
+
     func getURL(baseURL: String) -> String {
         switch self {
         case .startAppleLogin:
@@ -51,7 +51,7 @@ enum RoomEndPoint: EndPointable {
             return "\(APIEnvironment.statusesURL)"
         }
     }
-    
+
     func createRequest() -> NetworkRequest {
         var headers: [String: String] = [:]
         headers["Content-Type"] = "application/json"
