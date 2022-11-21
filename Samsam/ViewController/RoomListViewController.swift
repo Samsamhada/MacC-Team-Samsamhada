@@ -111,11 +111,16 @@ extension RoomListViewController: UICollectionViewDataSource, UICollectionViewDe
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RoomListCell.identifier, for: indexPath) as! RoomListCell
         
         let tapRoomListButton = CustomTapGestureRecognizer(target: self, action: #selector(tapRoomListButton))
+        tapRoomListButton.roomID = Int(rooms[indexPath.item].roomID)
         cell.roomStack.isUserInteractionEnabled = true
         cell.roomStack.addGestureRecognizer(tapRoomListButton)
 
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yy.MM.dd"
+
+        cell.roomTitle.text = rooms[indexPath.row].clientName
+        cell.startDate.text = convertDate(dateString: rooms[indexPath.row].startDate)
+        cell.endDate.text = convertDate(dateString: rooms[indexPath.row].endDate)
         return cell
     }
 
