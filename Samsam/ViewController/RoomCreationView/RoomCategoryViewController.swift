@@ -124,19 +124,7 @@ class RoomCategoryViewController: UIViewController {
 
     @objc func tapNextBTN() {
         selectedCellArray.sort()
-        coreDataManager.createRoomData(
-            clientName: clientName,
-            startDate: startingDate,
-            endDate: endingDate,
-            warrantyTime: Int(warrantyTime)
-        )
-        
-        selectedCellArray.forEach {
-            coreDataManager.createWorkingStatusData(
-                roomID: coreDataManager.countData(dataType: "room"),
-                categoryID: $0
-            )
-        }
+
         var roomDTO: RoomDTO = RoomDTO(workerID: workerID, clientName: clientName, startDate: startDate, endDate: endDate, warrantyTime: warrantyTime)
 
         createRoom(RoomDTO: roomDTO)
