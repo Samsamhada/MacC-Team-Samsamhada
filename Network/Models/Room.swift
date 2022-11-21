@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Room: Decodable, Hashable {
+struct Room: Decodable {
     let roomID: Int
     let workerID: Int
     let clientName: String
