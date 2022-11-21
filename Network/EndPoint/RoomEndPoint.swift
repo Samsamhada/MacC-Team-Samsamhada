@@ -9,6 +9,7 @@ import Foundation
 
 enum RoomEndPoint: EndPointable {
     case startAppleLogin(body: LoginDTO)
+    case createRoom(body: RoomDTO)
     case loadRoomByWorkerID(workerID: Int)
     
     var requestTimeOut: Float {
@@ -17,7 +18,7 @@ enum RoomEndPoint: EndPointable {
     
     var httpMethod: HTTPMethod {
         switch self {
-        case .startAppleLogin:
+        case .startAppleLogin, .createRoom:
             return .post
         case .loadRoomByWorkerID:
             return .get
@@ -28,6 +29,8 @@ enum RoomEndPoint: EndPointable {
         switch self {
         case .startAppleLogin(let body):
             return body.encode()
+        case .createRoom(let body):
+            return body.encode()
         default:
             return nil
         }
@@ -37,6 +40,8 @@ enum RoomEndPoint: EndPointable {
         switch self {
         case .startAppleLogin:
             return "\(baseURL)/workers"
+        case .createRoom:
+            return "\(APIEnvironment.roomsURL)"
         case .loadRoomByWorkerID(let workerID):
             return "\(baseURL)/rooms/worker/\(workerID)"
         }
