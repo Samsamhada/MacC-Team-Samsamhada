@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		26664F6B292B043B00C2D4F0 /* Room.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26664F6A292B043B00C2D4F0 /* Room.swift */; };
 		26E3748228FCDC0000997DA7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E3748128FCDC0000997DA7 /* AppDelegate.swift */; };
 		26E3748428FCDC0000997DA7 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E3748328FCDC0000997DA7 /* SceneDelegate.swift */; };
 		26E3748628FCDC0000997DA7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E3748528FCDC0000997DA7 /* ViewController.swift */; };
@@ -78,6 +79,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		26664F6A292B043B00C2D4F0 /* Room.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Room.swift; sourceTree = "<group>"; };
 		26E3747E28FCDC0000997DA7 /* Samsam.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Samsam.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		26E3748128FCDC0000997DA7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		26E3748328FCDC0000997DA7 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -234,6 +236,7 @@
 			children = (
 				431F0765291DEB8A004FC4B6 /* Request */,
 				431F0763291DEB81004FC4B6 /* Login.swift */,
+				26664F6A292B043B00C2D4F0 /* Room.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -553,6 +556,7 @@
 				98B08A60290AC8C900401650 /* UIColor+.swift in Sources */,
 				26E3748428FCDC0000997DA7 /* SceneDelegate.swift in Sources */,
 				98366F8D29019A5300E81E27 /* RoomCreationViewContoller.swift in Sources */,
+				26664F6B292B043B00C2D4F0 /* Room.swift in Sources */,
 				4386FB022901353B00314936 /* RoomCategoryViewController.swift in Sources */,
 				43BD591A29028BD70063EB4F /* RoomCodeViewController.swift in Sources */,
 				26FEC1DD2902E6F2006C410B /* WorkingStatusEntity+CoreDataClass.swift in Sources */,
