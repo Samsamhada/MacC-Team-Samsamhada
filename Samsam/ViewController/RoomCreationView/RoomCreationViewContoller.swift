@@ -14,9 +14,9 @@ struct CellData {
 }
 
 class RoomCreationViewController: UIViewController{
-    
+
     // MARK: - Property
-    
+
     private var tableViewData = [CellData]()
     private let roomCategoryViewController = RoomCategoryViewController()
     private let roomCreationViewDateHeader = RoomCreationViewDateHeader()
@@ -105,7 +105,7 @@ class RoomCreationViewController: UIViewController{
     
     private func layout() {
         view.addSubview(uiView)
-        
+
         uiView.addSubview(customerTitle)
         uiView.addSubview(customerTextField)
         uiView.addSubview(textUnderLine)

@@ -28,7 +28,7 @@ class RoomCategoryViewController: UIViewController {
         $0.textColor = .black
         return $0
     }(UILabel())
-    
+
     private let nextBTN: UIButton = {
         $0.backgroundColor = AppColor.campanulaBlue
         $0.setTitle("방 생성하기", for: .normal)
@@ -38,38 +38,38 @@ class RoomCategoryViewController: UIViewController {
         $0.addTarget(self, action: #selector(tapNextBTN), for: .touchUpInside)
         return $0
     }(UIButton())
-    
+
     private let categoryView: UICollectionView = {
         return $0
     }(UICollectionView(
         frame: .zero, collectionViewLayout: UICollectionViewFlowLayout()))
 
     // MARK: - LifeCycle
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         layout()
         attribute()
     }
-    
+
     // MARK: - Method
-    
+
     private func attribute() {
         self.view.backgroundColor = .white
         setNavigationTitle()
         setTitleText()
-        
+
         categoryView.delegate = self
         categoryView.dataSource = self
         categoryView.allowsMultipleSelection = true
         categoryView.register(CategoryCell.self, forCellWithReuseIdentifier: CategoryCell.identifier)
     }
-    
+
     private func layout() {
         view.addSubview(titleText)
         view.addSubview(nextBTN)
         view.addSubview(categoryView)
-        
+
         titleText.anchor(
             top: view.safeAreaLayoutGuide.topAnchor,
             left: view.safeAreaLayoutGuide.leftAnchor,
@@ -77,7 +77,7 @@ class RoomCategoryViewController: UIViewController {
             paddingTop: 30,
             height: 20
         )
-        
+
         categoryView.anchor(
             top: titleText.bottomAnchor,
             left: view.safeAreaLayoutGuide.leftAnchor,
@@ -85,7 +85,7 @@ class RoomCategoryViewController: UIViewController {
             right: view.safeAreaLayoutGuide.rightAnchor,
             paddingTop: 20
         )
-        
+
         nextBTN.anchor(
             left: view.safeAreaLayoutGuide.leftAnchor,
             bottom: view.safeAreaLayoutGuide.bottomAnchor,
@@ -95,19 +95,19 @@ class RoomCategoryViewController: UIViewController {
             height: 50
         )
     }
-    
+
     private func setNavigationTitle() {
         navigationItem.title = "방 생성"
         navigationController?.navigationBar.prefersLargeTitles = false
         navigationController?.setNavigationBarHidden(false, animated: true)
     }
-    
+
     private func setTitleText() {
         let statement = "시공 과정을 모두 선택해주세요".getColoredText("모두", .red)
         titleText.text = ""
         titleText.attributedText = statement
     }
-    
+
     private func createRoom(RoomDTO: RoomDTO) {
         Task{
             do {
@@ -207,5 +207,3 @@ extension RoomCategoryViewController:  UICollectionViewDelegate, UICollectionVie
         return UIEdgeInsets(top: 8, left: 8, bottom: 16, right: 8)
     }
 }
-
-

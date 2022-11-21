@@ -8,7 +8,7 @@
 import UIKit
 
 class RoomListViewController: UIViewController {
-    
+
     // MARK: - Property
     let roomAPI: RoomAPI = RoomAPI(apiService: APIService())
     var rooms = [Room]() {
