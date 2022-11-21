@@ -32,4 +32,11 @@ struct RoomAPI {
         let request = RoomEndPoint.loadRoomByWorkerID(workerID: workerID).createRequest()
         return try await apiService.request(request)
     }
+    
+    func createStatus(StatusDTO: StatusDTO) async throws -> Status? {
+        let request = RoomEndPoint
+            .createStatus(body: StatusDTO)
+            .createRequest()
+        return try await apiService.request(request)
+    }
 }
