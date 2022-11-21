@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		26664F69292A7DB400C2D4F0 /* RoomEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26664F68292A7DB400C2D4F0 /* RoomEndPoint.swift */; };
 		26664F6B292B043B00C2D4F0 /* Room.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26664F6A292B043B00C2D4F0 /* Room.swift */; };
 		26E3748228FCDC0000997DA7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E3748128FCDC0000997DA7 /* AppDelegate.swift */; };
 		26E3748428FCDC0000997DA7 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E3748328FCDC0000997DA7 /* SceneDelegate.swift */; };
@@ -79,6 +80,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		26664F68292A7DB400C2D4F0 /* RoomEndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomEndPoint.swift; sourceTree = "<group>"; };
 		26664F6A292B043B00C2D4F0 /* Room.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Room.swift; sourceTree = "<group>"; };
 		26E3747E28FCDC0000997DA7 /* Samsam.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Samsam.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		26E3748128FCDC0000997DA7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -245,6 +247,7 @@
 			isa = PBXGroup;
 			children = (
 				431F0768291DEB9B004FC4B6 /* LoginEndPoint.swift */,
+				26664F68292A7DB400C2D4F0 /* RoomEndPoint.swift */,
 			);
 			path = EndPoint;
 			sourceTree = "<group>";
@@ -528,6 +531,7 @@
 				98E899BC290FD00C001245C4 /* WorkingHistoryViewTopCell.swift in Sources */,
 				431F077D291DF130004FC4B6 /* APIEnvironment.swift in Sources */,
 				98C0D07228FD02E400E0E439 /* WorkingHistoryViewContentCell.swift in Sources */,
+				26664F69292A7DB400C2D4F0 /* RoomEndPoint.swift in Sources */,
 				9866F518291960CE002D3589 /* RoomCreationViewDateFirstCell.swift in Sources */,
 				98E899BA290FCAAB001245C4 /* WorkingHistoryViewContentHeader.swift in Sources */,
 				9866F51A291960E0002D3589 /* RoomCreationViewDateHeader.swift in Sources */,
