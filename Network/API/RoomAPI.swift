@@ -29,7 +29,9 @@ struct RoomAPI {
     }
 
     func loadRoomByWorkerID(workerID: Int) async throws -> [Room]? {
-        let request = RoomEndPoint.loadRoomByWorkerID(workerID: workerID).createRequest()
+        let request = RoomEndPoint
+            .loadRoomByWorkerID(workerID: workerID)
+            .createRequest()
         return try await apiService.request(request)
     }
 
