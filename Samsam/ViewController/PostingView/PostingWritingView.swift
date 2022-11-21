@@ -8,16 +8,16 @@
 import UIKit
 
 class PostingWritingView: UIViewController {
-    
+
     // MARK: - Property
-    
+
     var roomID: Int?
     var categoryID: Int?
     var photoImages: [CellItem]?
     private let textViewPlaceHolder = "텍스트를 입력하세요"
 
     // MARK: - View
-    
+
     private var textTitle: UILabel = {
         $0.text = "시공 사진에 관하여 부가 설명을 써주세요"
         $0.textAlignment = .center
@@ -25,7 +25,7 @@ class PostingWritingView: UIViewController {
         $0.textColor = .black
         return $0
     }(UILabel())
-    
+
     private lazy var textContent: UITextView = {
         let linestyle = NSMutableParagraphStyle()
         linestyle.lineSpacing = 4.0
@@ -43,7 +43,7 @@ class PostingWritingView: UIViewController {
         $0.delegate = self
         return $0
     }(UITextView())
-    
+
     private var shadowView: UIView = {
         $0.backgroundColor = .gray
         $0.layer.cornerRadius = 10
@@ -53,7 +53,7 @@ class PostingWritingView: UIViewController {
         $0.layer.shadowRadius = 10
         return $0
     }(UIView())
-    
+
     private let finalBTN: UIButton = {
         $0.backgroundColor = AppColor.campanulaBlue
         $0.setTitle("작성 완료", for: .normal)
@@ -63,9 +63,9 @@ class PostingWritingView: UIViewController {
         $0.addTarget(self, action: #selector(tapNextBTN), for: .touchUpInside)
         return $0
     }(UIButton())
-    
+
     // MARK: - Lifecycle
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         attribute()
@@ -73,20 +73,20 @@ class PostingWritingView: UIViewController {
         hidekeyboardWhenTappedAround()
         setupNotificationCenter()
     }
-    
+
     // MARK: - Method
-    
+
     private func attribute() {
         view.backgroundColor = .white
         setupNavigationTitle()
     }
-    
+
     private func layout() {
         self.view.addSubview(textTitle)
         self.view.addSubview(shadowView)
         self.shadowView.addSubview(textContent)
         self.view.addSubview(finalBTN)
-        
+
         textTitle.anchor(
             top: view.safeAreaLayoutGuide.topAnchor,
             left: view.safeAreaLayoutGuide.leftAnchor,
@@ -94,13 +94,13 @@ class PostingWritingView: UIViewController {
             paddingTop: 20,
             height: 20
         )
-        
+
         textContent.anchor(
             left: shadowView.leftAnchor,
             right: shadowView.rightAnchor,
             height: 280
         )
-        
+
         finalBTN.anchor(
             left: view.safeAreaLayoutGuide.leftAnchor,
             bottom: view.safeAreaLayoutGuide.bottomAnchor,
@@ -109,7 +109,7 @@ class PostingWritingView: UIViewController {
             paddingRight: 16,
             height: 50
         )
-        
+
         shadowView.anchor(
             top: textTitle.bottomAnchor,
             left: view.safeAreaLayoutGuide.leftAnchor,
@@ -120,19 +120,19 @@ class PostingWritingView: UIViewController {
             height: 280
         )
     }
-    
+
     private func setupNavigationTitle() {
         navigationItem.title = "시공 상황 작성"
         navigationController?.navigationBar.tintColor = .black
         navigationController?.navigationBar.prefersLargeTitles = false
         navigationController?.setNavigationBarHidden(false, animated: false)
     }
-    
+
     private func setupNotificationCenter() {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
-    
+
     @objc func tapNextBTN() {
         coreDataManager.createPostingData(roomID: roomID!, categoryID: categoryID!, explanation: textContent.text!)
         photoImages?.forEach {
@@ -140,7 +140,7 @@ class PostingWritingView: UIViewController {
         }
         self.dismiss(animated: true)
     }
-    
+
     @objc private func keyboardWillShow(notification: NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
             UIView.animate(withDuration: 0.2, animations: {
@@ -148,7 +148,7 @@ class PostingWritingView: UIViewController {
             })
         }
     }
-    
+
     @objc private func keyboardWillHide(notification:NSNotification) {
         UIView.animate(withDuration: 0.2, animations: {
             self.finalBTN.transform = .identity
@@ -163,7 +163,7 @@ extension PostingWritingView: UITextViewDelegate {
             textView.textColor = .black
         }
     }
-    
+
     func textViewDidEndEditing(_ textView: UITextView) {
         if textView.text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
             textView.text = textViewPlaceHolder

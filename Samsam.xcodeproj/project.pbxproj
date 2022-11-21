@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		26664F69292A7DB400C2D4F0 /* RoomEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26664F68292A7DB400C2D4F0 /* RoomEndPoint.swift */; };
+		26664F6B292B043B00C2D4F0 /* Room.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26664F6A292B043B00C2D4F0 /* Room.swift */; };
+		26664F6D292B04D400C2D4F0 /* RoomAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26664F6C292B04D400C2D4F0 /* RoomAPI.swift */; };
+		26664F71292B705400C2D4F0 /* RoomDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26664F70292B705400C2D4F0 /* RoomDTO.swift */; };
+		26664F73292B95A500C2D4F0 /* StatusDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26664F72292B95A500C2D4F0 /* StatusDTO.swift */; };
+		26664F75292B960D00C2D4F0 /* Status.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26664F74292B960D00C2D4F0 /* Status.swift */; };
 		26E3748228FCDC0000997DA7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E3748128FCDC0000997DA7 /* AppDelegate.swift */; };
 		26E3748428FCDC0000997DA7 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E3748328FCDC0000997DA7 /* SceneDelegate.swift */; };
 		26E3748628FCDC0000997DA7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E3748528FCDC0000997DA7 /* ViewController.swift */; };
@@ -78,6 +84,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		26664F68292A7DB400C2D4F0 /* RoomEndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomEndPoint.swift; sourceTree = "<group>"; };
+		26664F6A292B043B00C2D4F0 /* Room.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Room.swift; sourceTree = "<group>"; };
+		26664F6C292B04D400C2D4F0 /* RoomAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomAPI.swift; sourceTree = "<group>"; };
+		26664F70292B705400C2D4F0 /* RoomDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomDTO.swift; sourceTree = "<group>"; };
+		26664F72292B95A500C2D4F0 /* StatusDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusDTO.swift; sourceTree = "<group>"; };
+		26664F74292B960D00C2D4F0 /* Status.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Status.swift; sourceTree = "<group>"; };
 		26E3747E28FCDC0000997DA7 /* Samsam.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Samsam.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		26E3748128FCDC0000997DA7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		26E3748328FCDC0000997DA7 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -234,6 +246,8 @@
 			children = (
 				431F0765291DEB8A004FC4B6 /* Request */,
 				431F0763291DEB81004FC4B6 /* Login.swift */,
+				26664F6A292B043B00C2D4F0 /* Room.swift */,
+				26664F74292B960D00C2D4F0 /* Status.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -242,6 +256,7 @@
 			isa = PBXGroup;
 			children = (
 				431F0768291DEB9B004FC4B6 /* LoginEndPoint.swift */,
+				26664F68292A7DB400C2D4F0 /* RoomEndPoint.swift */,
 			);
 			path = EndPoint;
 			sourceTree = "<group>";
@@ -250,6 +265,7 @@
 			isa = PBXGroup;
 			children = (
 				431F076A291DEBA9004FC4B6 /* LoginAPI.swift */,
+				26664F6C292B04D400C2D4F0 /* RoomAPI.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -281,6 +297,8 @@
 			isa = PBXGroup;
 			children = (
 				431F0766291DEB90004FC4B6 /* LoginDTO.swift */,
+				26664F70292B705400C2D4F0 /* RoomDTO.swift */,
+				26664F72292B95A500C2D4F0 /* StatusDTO.swift */,
 			);
 			path = Request;
 			sourceTree = "<group>";
@@ -525,9 +543,11 @@
 				98E899BC290FD00C001245C4 /* WorkingHistoryViewTopCell.swift in Sources */,
 				431F077D291DF130004FC4B6 /* APIEnvironment.swift in Sources */,
 				98C0D07228FD02E400E0E439 /* WorkingHistoryViewContentCell.swift in Sources */,
+				26664F69292A7DB400C2D4F0 /* RoomEndPoint.swift in Sources */,
 				9866F518291960CE002D3589 /* RoomCreationViewDateFirstCell.swift in Sources */,
 				98E899BA290FCAAB001245C4 /* WorkingHistoryViewContentHeader.swift in Sources */,
 				9866F51A291960E0002D3589 /* RoomCreationViewDateHeader.swift in Sources */,
+				26664F75292B960D00C2D4F0 /* Status.swift in Sources */,
 				26E3749828FD2D0700997DA7 /* RoomListCell.swift in Sources */,
 				431F0774291DEBB7004FC4B6 /* NetworkRequest.swift in Sources */,
 				26FEC1B92902D85A006C410B /* DataTable.xcdatamodeld in Sources */,
@@ -541,6 +561,7 @@
 				9866F523291BF173002D3589 /* RoomCreationViewDateSecondCell.swift in Sources */,
 				26FEC1DA2902E6F2006C410B /* CategoryEntity+CoreDataProperties.swift in Sources */,
 				431F0777291DEBB7004FC4B6 /* Endpointable.swift in Sources */,
+				26664F71292B705400C2D4F0 /* RoomDTO.swift in Sources */,
 				26FEC1E12902E6F2006C410B /* RoomEntity+CoreDataClass.swift in Sources */,
 				4330CE9B2906275D001FC8E7 /* PostingImageCell.swift in Sources */,
 				98C0D06A28FCEA4900E0E439 /* ImagePicker.swift in Sources */,
@@ -553,16 +574,19 @@
 				98B08A60290AC8C900401650 /* UIColor+.swift in Sources */,
 				26E3748428FCDC0000997DA7 /* SceneDelegate.swift in Sources */,
 				98366F8D29019A5300E81E27 /* RoomCreationViewContoller.swift in Sources */,
+				26664F6B292B043B00C2D4F0 /* Room.swift in Sources */,
 				4386FB022901353B00314936 /* RoomCategoryViewController.swift in Sources */,
 				43BD591A29028BD70063EB4F /* RoomCodeViewController.swift in Sources */,
 				26FEC1DD2902E6F2006C410B /* WorkingStatusEntity+CoreDataClass.swift in Sources */,
 				431F075E291DEB36004FC4B6 /* LoginProtocol.swift in Sources */,
+				26664F6D292B04D400C2D4F0 /* RoomAPI.swift in Sources */,
 				26E3749F28FE9DA300997DA7 /* PhoneNumViewController.swift in Sources */,
 				98C0D06028FCE8EB00E0E439 /* AutoLayout+.swift in Sources */,
 				26E3749628FCF56400997DA7 /* RoomListViewController.swift in Sources */,
 				9866F5212919E2DC002D3589 /* RoomCreationViewWarrantyCell.swift in Sources */,
 				26FEC1B628FFF52D006C410B /* RoomCreationCell.swift in Sources */,
 				43C2110F28FCFAB500E8F6DD /* PostingCategoryViewController.swift in Sources */,
+				26664F73292B95A500C2D4F0 /* StatusDTO.swift in Sources */,
 				26FEC1D92902E6F2006C410B /* CategoryEntity+CoreDataClass.swift in Sources */,
 				4369690C28FE422100DEA89F /* PostingImageViewController.swift in Sources */,
 				26FEC1DF2902E6F2006C410B /* PhotoEntity+CoreDataClass.swift in Sources */,

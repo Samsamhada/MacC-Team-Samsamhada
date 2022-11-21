@@ -8,7 +8,7 @@
 import UIKit
 
 class MetroViewController: UIViewController {
-    
+
     let bezierPath = UIBezierPath()
     let data = [CGPoint(x: 30 + 330/6.5 * 0, y: 50),
                 CGPoint(x: 30 + 330/6.5 * 1, y: 50),
@@ -27,12 +27,12 @@ class MetroViewController: UIViewController {
                 CGPoint(x: 30 + 330/6.5 * 2, y: 80),
                 CGPoint(x: 30 + 330/6.5 * 1, y: 80),
                 CGPoint(x: 30 + 330/6.5 * 0, y: 80) ]
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         let config = BezierConfiguration()
         let controlPoints = config.configureControlPoints(data: data)
-        
+
         for i in 0..<data.count {
             let point = data[i]
             if i == 0 {
@@ -49,10 +49,10 @@ class MetroViewController: UIViewController {
         shapeLayer.fillColor = .none
         shapeLayer.lineCap = .round
         view.layer.addSublayer(shapeLayer)
-        
+
         createPoints()
     }
-    
+
     func createPoints() {
         for point in data {
             let circleLayer = CAShapeLayer()
@@ -64,4 +64,3 @@ class MetroViewController: UIViewController {
         }
     }
 }
-

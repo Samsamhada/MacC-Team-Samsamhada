@@ -8,13 +8,13 @@
 import UIKit
 
 class WorkingHistoryViewContentHeader: UICollectionReusableView {
-    
+
     // MARK: - Property
-    
+
     static let identifier = "workingHistoryContentHeader"
-    
+
     // MARK: - View
-    
+
     let uploadDate: UILabel = {
         $0.text = "0월 0일"
         $0.textAlignment = .center
@@ -27,28 +27,28 @@ class WorkingHistoryViewContentHeader: UICollectionReusableView {
         $0.backgroundColor = .gray
         return $0
     }(UIView())
-    
+
     private let rightLine: UIView = {
         $0.backgroundColor = .gray
         return $0
     }(UIView())
-    
+
     // MARK: - LifeCycle
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         layout()
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:)가 실행되지 않았습니다.")
     }
-    
+
     private func layout() {
         self.addSubview(leftLine)
         self.addSubview(uploadDate)
         self.addSubview(rightLine)
-        
+
         leftLine.anchor(
             top: topAnchor,
             left: leftAnchor,
@@ -58,13 +58,13 @@ class WorkingHistoryViewContentHeader: UICollectionReusableView {
             paddingBottom: 29.5,
             width: UIScreen.main.bounds.width/3
         )
-        
+
         uploadDate.anchor(
             top: topAnchor,
             bottom: bottomAnchor,
             width: UIScreen.main.bounds.width/3
         )
-        
+
         rightLine.anchor(
             top: topAnchor,
             left: uploadDate.rightAnchor,
@@ -76,4 +76,3 @@ class WorkingHistoryViewContentHeader: UICollectionReusableView {
         )
     }
 }
-

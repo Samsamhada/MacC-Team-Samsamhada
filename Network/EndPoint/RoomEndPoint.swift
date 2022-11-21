@@ -1,14 +1,17 @@
 //
-//  LoginEndPoint.swift
+//  RoomEndPoint.swift
 //  Samsam
 //
-//  Created by creohwan on 2022/11/10.
+//  Created by 김민택 on 2022/11/21.
 //
 
 import Foundation
 
-enum LoginEndPoint: EndPointable {
+enum RoomEndPoint: EndPointable {
     case startAppleLogin(body: LoginDTO)
+    case createRoom(body: RoomDTO)
+    case loadRoomByWorkerID(workerID: Int)
+    case createStatus(body: StatusDTO)
 
     var requestTimeOut: Float {
         return 10
@@ -16,8 +19,10 @@ enum LoginEndPoint: EndPointable {
 
     var httpMethod: HTTPMethod {
         switch self {
-        case .startAppleLogin:
+        case .startAppleLogin, .createRoom, .createStatus:
             return .post
+        case .loadRoomByWorkerID:
+            return .get
         }
     }
 
@@ -25,13 +30,25 @@ enum LoginEndPoint: EndPointable {
         switch self {
         case .startAppleLogin(let body):
             return body.encode()
+        case .createRoom(let body):
+            return body.encode()
+        case .createStatus(let body):
+            return body.encode()
+        default:
+            return nil
         }
     }
 
     func getURL(baseURL: String) -> String {
         switch self {
         case .startAppleLogin:
-            return "\(baseURL)/workers"
+            return "\(APIEnvironment.workersURL)"
+        case .createRoom:
+            return "\(APIEnvironment.roomsURL)"
+        case .loadRoomByWorkerID(let workerID):
+            return "\(APIEnvironment.roomsURL)/worker/\(workerID)"
+        case .createStatus:
+            return "\(APIEnvironment.statusesURL)"
         }
     }
 

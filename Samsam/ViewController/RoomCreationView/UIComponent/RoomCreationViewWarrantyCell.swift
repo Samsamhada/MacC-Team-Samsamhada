@@ -8,18 +8,18 @@
 import UIKit
 
 class RoomCreationViewWarrantyCell: UITableViewCell {
-    
+
     // MARK: - Property
-    
+
     static let identifier = "roomCreationViewWarrantyCell"
     var warrantyCount = 12
-    
+
     // MARK: - View
-    
+
     let warrantyView: UIView = {
         return $0
     }(UIView())
-    
+
     private let warrantyLabel: UILabel = {
         $0.text = "AS기간"
         $0.textAlignment = .left
@@ -33,7 +33,7 @@ class RoomCreationViewWarrantyCell: UITableViewCell {
         $0.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
         return $0
     }(UILabel())
-    
+
     private let warrantyStepper: UIStepper = {
         $0.value = 12
         $0.maximumValue = 24
@@ -43,31 +43,31 @@ class RoomCreationViewWarrantyCell: UITableViewCell {
         $0.addTarget(self, action: #selector(tapStepper), for: .touchUpInside)
         return $0
     }(UIStepper())
-    
+
     var spacer: UIView = {
         return $0
     }(UIView())
-    
+
     // MARK: - Init
-    
+
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         layout()
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:)가 실행되지 않았습니다.")
     }
-    
+
     // MARK: - Method
-    
+
     private func layout() {
         self.addSubview(warrantyView)
         warrantyView.addSubview(warrantyLabel)
         warrantyView.addSubview(warrantyText)
         warrantyView.addSubview(warrantyStepper)
         warrantyView.addSubview(spacer)
-        
+
         warrantyView.anchor(
             top: topAnchor,
             left: leftAnchor,
@@ -75,25 +75,25 @@ class RoomCreationViewWarrantyCell: UITableViewCell {
             right: rightAnchor
         )
         warrantyView.setHeight(height: 50)
-        
+
         warrantyLabel.anchor(
             top: warrantyView.topAnchor,
             left: warrantyView.leftAnchor,
             bottom: spacer.topAnchor
         )
-        
+
         warrantyText.anchor(
             top: warrantyView.topAnchor,
             bottom: spacer.topAnchor,
             right: warrantyStepper.leftAnchor,
             paddingRight: 10
         )
-        
+
         warrantyStepper.anchor(
             bottom: spacer.topAnchor,
             right: warrantyView.rightAnchor
         )
-        
+
         spacer.anchor(
             left: warrantyView.leftAnchor,
             bottom: warrantyView.bottomAnchor,
@@ -101,7 +101,7 @@ class RoomCreationViewWarrantyCell: UITableViewCell {
         )
         spacer.setHeight(height: 18)
     }
-    
+
     @objc private func tapStepper() {
         warrantyCount = Int(warrantyStepper.value)
         warrantyText.text = "\(warrantyCount)개월"

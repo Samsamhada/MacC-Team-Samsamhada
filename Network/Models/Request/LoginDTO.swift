@@ -12,7 +12,7 @@ struct LoginDTO: Encodable {
     var lastName: String?
     var firstName: String?
     var email: String?
-    
+
     init(userIdentifier: String, lastName: String? = nil, firstName: String? = nil, email: String? = nil) {
         self.userIdentifier = userIdentifier
         self.lastName = lastName

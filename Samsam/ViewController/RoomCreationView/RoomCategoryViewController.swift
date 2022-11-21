@@ -8,7 +8,7 @@
 import UIKit
 
 class RoomCategoryViewController: UIViewController {
-    
+
     // MARK: - Property
 
     var clientName: String = ""
@@ -16,7 +16,16 @@ class RoomCategoryViewController: UIViewController {
     var endingDate: Date = Date()
     var warrantyTime: Int32 = 0
     var selectedCellArray: [Int] = []
-    
+    let roomAPI: RoomAPI = RoomAPI(apiService: APIService())
+    var room: Room? {
+        didSet {
+            selectedCellArray.forEach {
+                createStatus(StatusDTO: StatusDTO(roomID: room!.roomID, category: $0))
+            }
+        }
+    }
+    var statuses: [Status] = []
+
     // MARK: - View
 
     private var titleText: UILabel = {
@@ -26,7 +35,7 @@ class RoomCategoryViewController: UIViewController {
         $0.textColor = .black
         return $0
     }(UILabel())
-    
+
     private let nextBTN: UIButton = {
         $0.backgroundColor = AppColor.campanulaBlue
         $0.setTitle("방 생성하기", for: .normal)
@@ -36,38 +45,38 @@ class RoomCategoryViewController: UIViewController {
         $0.addTarget(self, action: #selector(tapNextBTN), for: .touchUpInside)
         return $0
     }(UIButton())
-    
+
     private let categoryView: UICollectionView = {
         return $0
     }(UICollectionView(
         frame: .zero, collectionViewLayout: UICollectionViewFlowLayout()))
 
     // MARK: - LifeCycle
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         layout()
         attribute()
     }
-    
+
     // MARK: - Method
-    
+
     private func attribute() {
         self.view.backgroundColor = .white
         setNavigationTitle()
         setTitleText()
-        
+
         categoryView.delegate = self
         categoryView.dataSource = self
         categoryView.allowsMultipleSelection = true
         categoryView.register(CategoryCell.self, forCellWithReuseIdentifier: CategoryCell.identifier)
     }
-    
+
     private func layout() {
         view.addSubview(titleText)
         view.addSubview(nextBTN)
         view.addSubview(categoryView)
-        
+
         titleText.anchor(
             top: view.safeAreaLayoutGuide.topAnchor,
             left: view.safeAreaLayoutGuide.leftAnchor,
@@ -75,7 +84,7 @@ class RoomCategoryViewController: UIViewController {
             paddingTop: 30,
             height: 20
         )
-        
+
         categoryView.anchor(
             top: titleText.bottomAnchor,
             left: view.safeAreaLayoutGuide.leftAnchor,
@@ -83,7 +92,7 @@ class RoomCategoryViewController: UIViewController {
             right: view.safeAreaLayoutGuide.rightAnchor,
             paddingTop: 20
         )
-        
+
         nextBTN.anchor(
             left: view.safeAreaLayoutGuide.leftAnchor,
             bottom: view.safeAreaLayoutGuide.bottomAnchor,
@@ -93,34 +102,54 @@ class RoomCategoryViewController: UIViewController {
             height: 50
         )
     }
-    
+
     private func setNavigationTitle() {
         navigationItem.title = "방 생성"
         navigationController?.navigationBar.prefersLargeTitles = false
         navigationController?.setNavigationBarHidden(false, animated: true)
     }
-    
+
     private func setTitleText() {
         let statement = "시공 과정을 모두 선택해주세요".getColoredText("모두", .red)
         titleText.text = ""
         titleText.attributedText = statement
     }
-    
+
+    private func createRoom(RoomDTO: RoomDTO) {
+        Task{
+            do {
+                let response = try await self.roomAPI.createRoom(RoomDTO: RoomDTO)
+                if let data = response {
+                    self.room = data
+                }
+            } catch NetworkError.serverError {
+            } catch NetworkError.encodingError {
+            } catch NetworkError.clientError(_) {
+            }
+        }
+    }
+
+    private func createStatus(StatusDTO: StatusDTO) {
+        Task{
+            do {
+                let response = try await self.roomAPI.createStatus(StatusDTO: StatusDTO)
+                if let data = response {
+                    self.statuses.append(data)
+                }
+            } catch NetworkError.serverError {
+            } catch NetworkError.encodingError {
+            } catch NetworkError.clientError(_) {
+            }
+        }
+    }
+
     @objc func tapNextBTN() {
         selectedCellArray.sort()
-        coreDataManager.createRoomData(
-            clientName: clientName,
-            startDate: startingDate,
-            endDate: endingDate,
-            warrantyTime: Int(warrantyTime)
-        )
-        
-        selectedCellArray.forEach {
-            coreDataManager.createWorkingStatusData(
-                roomID: coreDataManager.countData(dataType: "room"),
-                categoryID: $0
-            )
-        }
+
+        var roomDTO: RoomDTO = RoomDTO(workerID: workerID, clientName: clientName, startDate: startDate, endDate: endDate, warrantyTime: warrantyTime)
+
+        createRoom(RoomDTO: roomDTO)
+
         self.dismiss(animated: true)
     }
 }
@@ -144,11 +173,11 @@ extension String {
 // MARK: - UICollectionViewDelegate, DataSourse, DelegateFlowLayout
 
 extension RoomCategoryViewController:  UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
-    
+
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return Category.allCases.count
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CategoryCell.identifier, for: indexPath) as! CategoryCell
@@ -157,7 +186,7 @@ extension RoomCategoryViewController:  UICollectionViewDelegate, UICollectionVie
         cell.categoryTitle.text = "\(category.categoryName())"
         return cell
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
         let cell = collectionView.cellForItem(at: indexPath)
         if cell?.isSelected == false {
@@ -182,10 +211,8 @@ extension RoomCategoryViewController:  UICollectionViewDelegate, UICollectionVie
         let cellHeight = 120
         return CGSize(width: Int(cellWidth), height: cellHeight)
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return UIEdgeInsets(top: 8, left: 8, bottom: 16, right: 8)
     }
 }
-
-
