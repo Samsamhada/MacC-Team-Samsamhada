@@ -92,6 +92,14 @@ extension RoomListViewController: UICollectionViewDataSource, UICollectionViewDe
         dateFormatter.dateFormat = "yy.MM.dd"
         return cell
     }
+
+    func convertDate(dateString: String) -> String {
+        let year = dateString.dropFirst(2).dropLast(20)
+        let month = dateString.dropFirst(5).dropLast(17)
+        let day = dateString.dropFirst(8).dropLast(14)
+
+        return "\(year).\(month).\(day)"
+    }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if indexPath.section == 0 {
