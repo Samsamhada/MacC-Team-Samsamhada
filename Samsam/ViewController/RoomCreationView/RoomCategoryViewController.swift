@@ -17,7 +17,14 @@ class RoomCategoryViewController: UIViewController {
     var warrantyTime: Int32 = 0
     var selectedCellArray: [Int] = []
     let roomAPI: RoomAPI = RoomAPI(apiService: APIService())
-    var room: Room?
+    var room: Room? {
+        didSet {
+            selectedCellArray.forEach {
+                createStatus(StatusDTO: StatusDTO(roomID: room!.roomID, category: $0))
+            }
+        }
+    }
+    var statuses: [Status] = []
     
     // MARK: - View
 
@@ -114,6 +121,20 @@ class RoomCategoryViewController: UIViewController {
                 let response = try await self.roomAPI.createRoom(RoomDTO: RoomDTO)
                 if let data = response {
                     self.room = data
+                }
+            } catch NetworkError.serverError {
+            } catch NetworkError.encodingError {
+            } catch NetworkError.clientError(_) {
+            }
+        }
+    }
+
+    private func createStatus(StatusDTO: StatusDTO) {
+        Task{
+            do {
+                let response = try await self.roomAPI.createStatus(StatusDTO: StatusDTO)
+                if let data = response {
+                    self.statuses.append(data)
                 }
             } catch NetworkError.serverError {
             } catch NetworkError.encodingError {
