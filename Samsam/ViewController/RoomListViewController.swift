@@ -24,8 +24,6 @@ class RoomListViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        coreDataManager.loadAllRoomData()
-        collectionView.reloadData()
     }
 
     // MARK: - Method
@@ -74,7 +72,7 @@ extension RoomListViewController: UICollectionViewDataSource, UICollectionViewDe
         if section == 0 {
             return 1
         }
-        return coreDataManager.rooms.count
+        return rooms.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -87,16 +85,11 @@ extension RoomListViewController: UICollectionViewDataSource, UICollectionViewDe
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RoomListCell.identifier, for: indexPath) as! RoomListCell
         
         let tapRoomListButton = CustomTapGestureRecognizer(target: self, action: #selector(tapRoomListButton))
-        tapRoomListButton.roomID = Int(coreDataManager.rooms[indexPath.item].roomID)
         cell.roomStack.isUserInteractionEnabled = true
         cell.roomStack.addGestureRecognizer(tapRoomListButton)
                 
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yy.MM.dd"
-        
-        cell.roomTitle.text = coreDataManager.rooms[indexPath.row].clientName
-        cell.startDate.text = dateFormatter.string(from: coreDataManager.rooms[indexPath.row].startDate!)
-        cell.endDate.text = dateFormatter.string(from: coreDataManager.rooms[indexPath.row].endDate!)
         return cell
     }
     
