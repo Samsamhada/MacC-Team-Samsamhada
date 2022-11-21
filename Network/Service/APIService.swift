@@ -38,10 +38,9 @@ extension APIService {
             let url = URL(string: encodedURL) else {
             throw NetworkError.encodingError
         }
-        
+
         let (data, response) = try await URLSession.shared.data(for: request.buildURLRequest(with: url))
         guard let httpResponse = response as? HTTPURLResponse else { throw NetworkError.serverError }
-        
         return (data, httpResponse)
     }
 }
