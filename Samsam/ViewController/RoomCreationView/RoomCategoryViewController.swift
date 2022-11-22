@@ -25,7 +25,15 @@ class RoomCategoryViewController: UIViewController {
             }
         }
     }
-    var statuses: [Status] = []
+    var statuses: [Status] = [] {
+        didSet {
+            if selectedCellArray.count == statuses.count {
+                let roomCodeViewController = RoomCodeViewController()
+                roomCodeViewController.inviteCode = room!.inviteCode
+                navigationController?.pushViewController(roomCodeViewController, animated: true)
+            }
+        }
+    }
 
     // MARK: - View
 
@@ -153,8 +161,6 @@ class RoomCategoryViewController: UIViewController {
         let roomDTO: RoomDTO = RoomDTO(workerID: workerID, clientName: clientName, startDate: dateFormatter.string(from: startDate), endDate: dateFormatter.string(from: endDate), warrantyTime: warrantyTime)
 
         createRoom(RoomDTO: roomDTO)
-
-        self.dismiss(animated: true)
     }
 }
 
