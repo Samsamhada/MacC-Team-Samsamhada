@@ -136,7 +136,7 @@ class RoomCodeViewController: UIViewController {
     private func setNavigationTitle() {
         navigationController?.navigationItem.title = "생성 완료"
         navigationController?.navigationBar.prefersLargeTitles = false
-        navigationController?.setNavigationBarHidden(false, animated: true)
+        navigationController?.setNavigationBarHidden(true, animated: true)
     }
 
     @objc func copyCode() {
@@ -176,6 +176,6 @@ class RoomCodeViewController: UIViewController {
     }
 
     @objc func doneBTN() {
-        navigationController?.popToRootViewController(animated: true)
+        self.dismiss(animated: true)
     }
 }
