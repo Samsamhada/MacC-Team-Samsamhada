@@ -137,33 +137,24 @@ class PhoneNumViewController: UIViewController {
             paddingBottom: 20
         )
     }
-
-
-    @objc func changedNumStyle() {
-        numberInput.text = numberInput.text!.phoneNumberStyle()
-        phoneNum = (numberInput.text?.replacingOccurrences(of: " - ", with: ""))!
-    }
-
-    
-    private func checkText(textField: UITextField, phoneNum: String, maxLength: Int) {
-        if phoneNum.count >= maxLength {
-            let endIndex = phoneNum.index(phoneNum.startIndex, offsetBy: maxLength)
-            let fixedText = phoneNum[phoneNum.startIndex..<endIndex]
-            self.phoneNum = String(fixedText)
-            textField.text = String(fixedText).phoneNumberStyle()
-        }
-    }
     
     @objc private func buttonAttributeChanged() {
         phoneNum = (numberInput.text?.replacingOccurrences(of: " - ", with: ""))!
         if phoneNum.count >= 8 {
             submitButton.backgroundColor = .blue
             submitButton.isEnabled = true
-            checkText(textField: numberInput, phoneNum: phoneNum, maxLength: 8)
+            checkText(textField: numberInput, phoneNum: phoneNum)
         } else {
             submitButton.backgroundColor = .gray
             submitButton.isEnabled = false
         }
+    }
+    
+    private func checkText(textField: UITextField, phoneNum: String) {
+            let endIndex = phoneNum.index(phoneNum.startIndex, offsetBy: 8)
+            let fixedText = phoneNum[phoneNum.startIndex..<endIndex]
+            self.phoneNum = String(fixedText)
+            textField.text = String(fixedText).phoneNumberStyle()
     }
 
     @objc private func tapSubmitButton() {
