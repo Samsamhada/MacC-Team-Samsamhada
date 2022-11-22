@@ -57,9 +57,12 @@ class ChipViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        coreDataManager.loadOneRoomData(roomID: roomID!)
-        coreDataManager.loadPostingData(roomID: roomID!)
-        coreDataManager.loadWorkingStatusData(roomID: roomID!)
+        
+        // TODO: - 칩뷰 데이터(이미지, 설명, 칩 정보) 로드
+        
+//        coreDataManager.loadOneRoomData(roomID: roomID!)
+//        coreDataManager.loadPostingData(roomID: roomID!)
+//        coreDataManager.loadWorkingStatusData(roomID: roomID!)
         historyView.reloadData()
     }
 
