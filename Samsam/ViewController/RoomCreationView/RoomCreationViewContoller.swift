@@ -27,7 +27,7 @@ class RoomCreationViewController: UIViewController{
 
     private var startDate = "\(Date.now)"
     private var endDate = "\(Date.now)"
-    
+
     private var currentSelectedFirstDate: Date?
     private var currentSelectedSecondDate: Date?
 
@@ -276,7 +276,7 @@ extension RoomCreationViewController: UITableViewDelegate, UITableViewDataSource
             if indexPath.section == 0 {
                 firstCell.firstDelegate = self
                 firstCell.configure(date: currentSelectedFirstDate)
-                
+
                 setCell(UITableViewCell: firstCell, UIView: firstCell.datePicker)
 
                 return firstCell
@@ -284,7 +284,7 @@ extension RoomCreationViewController: UITableViewDelegate, UITableViewDataSource
             if indexPath.section == 1 {
                 secondCell.secondDelegate = self
                 secondCell.configure(date: currentSelectedSecondDate)
-                
+
                 setCell(UITableViewCell: secondCell, UIView: secondCell.datePicker)
 
                 return secondCell
