@@ -10,6 +10,8 @@ import UIKit
 class RoomListViewController: UIViewController {
 
     // MARK: - Property
+
+    var workerID = 5
     let roomAPI: RoomAPI = RoomAPI(apiService: APIService())
     var rooms = [Room]() {
         didSet {
