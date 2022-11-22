@@ -10,12 +10,28 @@ import UIKit
 class SegmentedControlViewController: UIViewController {
 
     // MARK: - Property
-    let postAPI: RoomAPI = RoomAPI(apiService: APIService())
+
+    let roomAPI: RoomAPI = RoomAPI(apiService: APIService())
     var room: Room?
-    var post: [Post]?
-    
-    var roomID: Int?
-    var roomCategoryID: [Int] = []
+    var posts = [Post]() {
+        didSet {
+            posts.forEach {
+                loadPhotoByRoom(postID: $0.postID)
+            }
+            posts = posts.reversed()
+        }
+    }
+    var photos = [Photo]() {
+        didSet {
+            if photos.count == posts.count {
+                for i in 0..<posts.count {
+                    url.append(URL(string: photos[i].photoPath)!)
+                }
+                workingHistoryView.url = url.reversed()
+            }
+        }
+    }
+    var url: [URL] = []
 
     // MARK: - View
 
@@ -75,20 +91,14 @@ class SegmentedControlViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        // TODO: - 방정보, 게시물정보, 작업데이터 로드를 위한 코드
-        
-//        coreDataManager.loadOneRoomData(roomID: roomID!)
-//        coreDataManager.loadPostingData(roomID: roomID!)
-//        coreDataManager.loadWorkingStatusData(roomID: roomID!)
-        setRoomCategoryID()
+//        setRoomCategoryID()
         loadPostByRoom(roomID: room!.roomID)
     }
 
     // MARK: - Method
 
-    
     // TODO: - 카테고리 설정을 위한 코드
+    
     private func setRoomCategoryID() {
 //        roomCategoryID = []
 //        coreDataManager.workingStatuses.forEach {
@@ -187,8 +197,8 @@ class SegmentedControlViewController: UIViewController {
     @objc func tapWritingButton() {
         let postingCategoryViewController = PostingCategoryViewController()
         
-        
-        
+        // TODO: - 시공상황작성하기 버튼 클릭 시, PostingCategoryView 작업에 필요한 내용.
+
 //        postingCategoryViewController.roomID = roomID
 //        postingCategoryViewController.roomCategoryID = roomCategoryID
         let navigationController = UINavigationController(rootViewController: postingCategoryViewController)
@@ -199,14 +209,27 @@ class SegmentedControlViewController: UIViewController {
     private func loadPostByRoom(roomID: Int) {
         Task {
             do {
-                let response = try await self.postAPI.loadPostByRoom(roomID: roomID)
+                let response = try await self.roomAPI.loadPostByRoom(roomID: roomID)
                 guard let data = response else {
-                    print("데이터 에러!")
                     return
                 }
-                post = data
-                workingHistoryView.post = post
-                
+                posts = data
+                workingHistoryView.post = posts
+            } catch NetworkError.serverError {
+            } catch NetworkError.encodingError {
+            } catch NetworkError.clientError(_) {
+            }
+        }
+    }
+    private func loadPhotoByRoom(postID: Int) {
+        Task {
+            do {
+                let response = try await self.roomAPI.loadPhotobyroom(postID: postID)
+                guard let data = response else {
+                    return
+                }
+                photos.append(data[0])
+                workingHistoryView.photos = photos
             } catch NetworkError.serverError {
             } catch NetworkError.encodingError {
             } catch NetworkError.clientError(_) {
