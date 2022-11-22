@@ -278,7 +278,6 @@ extension RoomCreationViewController: UITableViewDelegate, UITableViewDataSource
                 firstCell.configure(date: currentSelectedFirstDate)
                 
                 setCell(UITableViewCell: firstCell, UIView: firstCell.datePicker)
-                roomCategoryViewController.startingDate = firstCell.datePicker.date
 
                 return firstCell
             }
@@ -287,7 +286,6 @@ extension RoomCreationViewController: UITableViewDelegate, UITableViewDataSource
                 secondCell.configure(date: currentSelectedSecondDate)
                 
                 setCell(UITableViewCell: secondCell, UIView: secondCell.datePicker)
-                roomCategoryViewController.endingDate = secondCell.datePicker.date
 
                 return secondCell
             }
