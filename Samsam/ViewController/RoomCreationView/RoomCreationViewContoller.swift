@@ -17,6 +17,7 @@ class RoomCreationViewController: UIViewController{
 
     // MARK: - Property
 
+    var workerID = 0
     private var tableViewData = [CellData]()
     private let roomCategoryViewController = RoomCategoryViewController()
     private let roomCreationViewDateHeader = RoomCreationViewDateHeader()
@@ -26,7 +27,7 @@ class RoomCreationViewController: UIViewController{
 
     private var startDate = "\(Date.now)"
     private var endDate = "\(Date.now)"
-    
+
     private var currentSelectedFirstDate: Date?
     private var currentSelectedSecondDate: Date?
 
@@ -176,7 +177,9 @@ class RoomCreationViewController: UIViewController{
     }
 
     @objc private func tapNextButton() {
+        roomCategoryViewController.workerID = workerID
         roomCategoryViewController.clientName = customerTextField.text ?? ""
+
         navigationController?.pushViewController(roomCategoryViewController, animated: true)
     }
 
@@ -248,8 +251,8 @@ extension RoomCreationViewController: UITableViewDelegate, UITableViewDataSource
         // MARK: - AS기간
 
         if indexPath.section == 2 {
+            warrantyCell.warrantyTimeDelegate = self
             setCell(UITableViewCell: warrantyCell, UIView: warrantyCell.warrantyView)
-            roomCategoryViewController.warrantyTime = Int32(warrantyCell.warrantyCount)
 
             return warrantyCell
         }
@@ -273,18 +276,16 @@ extension RoomCreationViewController: UITableViewDelegate, UITableViewDataSource
             if indexPath.section == 0 {
                 firstCell.firstDelegate = self
                 firstCell.configure(date: currentSelectedFirstDate)
-                
+
                 setCell(UITableViewCell: firstCell, UIView: firstCell.datePicker)
-                roomCategoryViewController.startingDate = firstCell.datePicker.date
 
                 return firstCell
             }
             if indexPath.section == 1 {
                 secondCell.secondDelegate = self
                 secondCell.configure(date: currentSelectedSecondDate)
-                
+
                 setCell(UITableViewCell: secondCell, UIView: secondCell.datePicker)
-                roomCategoryViewController.endingDate = secondCell.datePicker.date
 
                 return secondCell
             }
@@ -321,6 +322,8 @@ extension RoomCreationViewController: RoomCreationViewDateFirstCellDelegate {
 
         startDate = strDate
         currentSelectedFirstDate = date
+
+        roomCategoryViewController.startDate = date
         tableView.reloadData()
     }
 }
@@ -334,6 +337,14 @@ extension RoomCreationViewController: RoomCreationViewDateSecondCellDelegate {
 
         endDate = strDate
         currentSelectedSecondDate = date
+
+        roomCategoryViewController.endDate = date
         tableView.reloadData()
+    }
+}
+
+extension RoomCreationViewController: RoomCreationViewWarrantyCellDelegate {
+    func warrantyTimeChanged(warrantyTime: Int) {
+        roomCategoryViewController.warrantyTime = warrantyTime
     }
 }

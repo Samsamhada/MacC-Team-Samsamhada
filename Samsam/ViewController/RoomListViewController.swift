@@ -10,6 +10,8 @@ import UIKit
 class RoomListViewController: UIViewController {
 
     // MARK: - Property
+
+    var workerID = 5
     let roomAPI: RoomAPI = RoomAPI(apiService: APIService())
     var rooms = [Room]() {
         didSet {
@@ -143,7 +145,9 @@ extension RoomListViewController: UICollectionViewDataSource, UICollectionViewDe
     }
 
     @objc func tapRoomCreationButton() {
-        let roomCreationViewController = UINavigationController(rootViewController:  RoomCreationViewController())
+        let roomCreationView = RoomCreationViewController()
+        roomCreationView.workerID = workerID
+        let roomCreationViewController = UINavigationController(rootViewController:  roomCreationView)
         roomCreationViewController.modalPresentationStyle = .fullScreen
         present(roomCreationViewController, animated:  true, completion: nil)
     }

@@ -7,10 +7,15 @@
 
 import UIKit
 
+protocol RoomCreationViewWarrantyCellDelegate: AnyObject {
+    func warrantyTimeChanged(warrantyTime: Int)
+}
+
 class RoomCreationViewWarrantyCell: UITableViewCell {
 
     // MARK: - Property
 
+    weak var warrantyTimeDelegate: RoomCreationViewWarrantyCellDelegate?
     static let identifier = "roomCreationViewWarrantyCell"
     var warrantyCount = 12
 
@@ -41,6 +46,7 @@ class RoomCreationViewWarrantyCell: UITableViewCell {
         $0.wraps = true
         $0.autorepeat = true
         $0.addTarget(self, action: #selector(tapStepper), for: .touchUpInside)
+        $0.addTarget(self, action: #selector(changeWarrantyTime), for: .touchUpInside)
         return $0
     }(UIStepper())
 
@@ -105,5 +111,9 @@ class RoomCreationViewWarrantyCell: UITableViewCell {
     @objc private func tapStepper() {
         warrantyCount = Int(warrantyStepper.value)
         warrantyText.text = "\(warrantyCount)개월"
+    }
+    
+    @objc private func changeWarrantyTime() {
+        warrantyTimeDelegate?.warrantyTimeChanged(warrantyTime: Int(warrantyStepper.value))
     }
 }

@@ -11,10 +11,11 @@ class RoomCategoryViewController: UIViewController {
 
     // MARK: - Property
 
+    var workerID: Int = 0
     var clientName: String = ""
-    var startingDate: Date = Date()
-    var endingDate: Date = Date()
-    var warrantyTime: Int32 = 0
+    lazy var startDate: Date = Date.now
+    lazy var endDate: Date = Date.now
+    var warrantyTime = 12
     var selectedCellArray: [Int] = []
     let roomAPI: RoomAPI = RoomAPI(apiService: APIService())
     var room: Room? {
@@ -24,7 +25,15 @@ class RoomCategoryViewController: UIViewController {
             }
         }
     }
-    var statuses: [Status] = []
+    var statuses: [Status] = [] {
+        didSet {
+            if selectedCellArray.count == statuses.count {
+                let roomCodeViewController = RoomCodeViewController()
+                roomCodeViewController.inviteCode = room!.inviteCode
+                navigationController?.pushViewController(roomCodeViewController, animated: true)
+            }
+        }
+    }
 
     // MARK: - View
 
@@ -145,12 +154,13 @@ class RoomCategoryViewController: UIViewController {
 
     @objc func tapNextBTN() {
         selectedCellArray.sort()
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss.SSS"
+        dateFormatter.locale = Locale(identifier: "ko_KR")
 
-        var roomDTO: RoomDTO = RoomDTO(workerID: workerID, clientName: clientName, startDate: startDate, endDate: endDate, warrantyTime: warrantyTime)
+        let roomDTO: RoomDTO = RoomDTO(workerID: workerID, clientName: clientName, startDate: dateFormatter.string(from: startDate), endDate: dateFormatter.string(from: endDate), warrantyTime: warrantyTime)
 
         createRoom(RoomDTO: roomDTO)
-
-        self.dismiss(animated: true)
     }
 }
 
