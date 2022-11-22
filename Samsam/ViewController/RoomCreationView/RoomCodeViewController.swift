@@ -10,8 +10,8 @@ import UIKit
 class RoomCodeViewController: UIViewController {
 
     // MARK: - Property
-    var code = "ASD12d"
 
+    var inviteCode = "000000"
 
     // MARK: - View
 
@@ -41,7 +41,7 @@ class RoomCodeViewController: UIViewController {
     }(UILabel())
 
     private lazy var codeLabel: UILabel = {
-        $0.text = code
+        $0.text = inviteCode
         $0.font = UIFont.systemFont(ofSize: 17, weight: .semibold)
         $0.textAlignment = .center
         $0.textColor = .blue
@@ -140,7 +140,7 @@ class RoomCodeViewController: UIViewController {
     }
 
     @objc func copyCode() {
-        UIPasteboard.general.string = code
+        UIPasteboard.general.string = inviteCode
         showToast()
     }
 
