@@ -75,7 +75,6 @@ class PhoneNumViewController: UIViewController {
 
     private func attribute() {
         view.backgroundColor = .white
-
     }
 
     private func layout() {
