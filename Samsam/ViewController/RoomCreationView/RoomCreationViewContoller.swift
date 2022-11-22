@@ -322,10 +322,8 @@ extension RoomCreationViewController: RoomCreationViewDateFirstCellDelegate {
 
         startDate = strDate
         currentSelectedFirstDate = date
-        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss.SSS"
-        dateFormatter.locale = Locale(identifier: "ko_KR")
 
-        roomCategoryViewController.startDate = dateFormatter.string(from: date)
+        roomCategoryViewController.startDate = date
         tableView.reloadData()
     }
 }
@@ -339,10 +337,8 @@ extension RoomCreationViewController: RoomCreationViewDateSecondCellDelegate {
 
         endDate = strDate
         currentSelectedSecondDate = date
-        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss.SSS"
-        dateFormatter.locale = Locale(identifier: "ko_KR")
 
-        roomCategoryViewController.endDate = dateFormatter.string(from: date)
+        roomCategoryViewController.endDate = date
         tableView.reloadData()
     }
 }
