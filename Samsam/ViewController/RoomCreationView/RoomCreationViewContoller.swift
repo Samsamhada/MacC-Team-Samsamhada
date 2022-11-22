@@ -17,6 +17,7 @@ class RoomCreationViewController: UIViewController{
 
     // MARK: - Property
 
+    var workerID = 0
     private var tableViewData = [CellData]()
     private let roomCategoryViewController = RoomCategoryViewController()
     private let roomCreationViewDateHeader = RoomCreationViewDateHeader()
