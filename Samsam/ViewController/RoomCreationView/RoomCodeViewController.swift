@@ -11,7 +11,7 @@ class RoomCodeViewController: UIViewController {
 
     // MARK: - Property
 
-    var inviteCode = "000000"
+    var inviteCode = "------"
 
     // MARK: - View
 
