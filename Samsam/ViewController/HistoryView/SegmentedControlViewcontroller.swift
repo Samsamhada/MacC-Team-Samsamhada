@@ -92,13 +92,19 @@ class SegmentedControlViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 //        setRoomCategoryID()
+        
+        // TODO: - 방정보, 게시물정보, 작업데이터 로드를 위한 코드
+        
+//        coreDataManager.loadOneRoomData(roomID: roomID!)
+//        coreDataManager.loadPostingData(roomID: roomID!)
+//        coreDataManager.loadWorkingStatusData(roomID: roomID!)
         loadPostByRoom(roomID: room!.roomID)
     }
 
     // MARK: - Method
 
     // TODO: - 카테고리 설정을 위한 코드
-    
+
     private func setRoomCategoryID() {
 //        roomCategoryID = []
 //        coreDataManager.workingStatuses.forEach {
@@ -229,7 +235,6 @@ class SegmentedControlViewController: UIViewController {
                     return
                 }
                 photos.append(data[0])
-                workingHistoryView.photos = photos
             } catch NetworkError.serverError {
             } catch NetworkError.encodingError {
             } catch NetworkError.clientError(_) {
