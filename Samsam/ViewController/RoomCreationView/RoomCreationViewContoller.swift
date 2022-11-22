@@ -177,7 +177,9 @@ class RoomCreationViewController: UIViewController{
     }
 
     @objc private func tapNextButton() {
+        roomCategoryViewController.workerID = workerID
         roomCategoryViewController.clientName = customerTextField.text ?? ""
+
         navigationController?.pushViewController(roomCategoryViewController, animated: true)
     }
 
@@ -322,6 +324,10 @@ extension RoomCreationViewController: RoomCreationViewDateFirstCellDelegate {
 
         startDate = strDate
         currentSelectedFirstDate = date
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss.SSS"
+        dateFormatter.locale = Locale(identifier: "ko_KR")
+
+        roomCategoryViewController.startDate = dateFormatter.string(from: date)
         tableView.reloadData()
     }
 }
@@ -335,6 +341,10 @@ extension RoomCreationViewController: RoomCreationViewDateSecondCellDelegate {
 
         endDate = strDate
         currentSelectedSecondDate = date
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss.SSS"
+        dateFormatter.locale = Locale(identifier: "ko_KR")
+
+        roomCategoryViewController.endDate = dateFormatter.string(from: date)
         tableView.reloadData()
     }
 }
