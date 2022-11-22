@@ -9,5 +9,5 @@ import Foundation
 
 struct Post: Codable {
     let postID, roomID, category, type: Int
-    let welcomeDescription, createDate: String
+    let description, createDate: String
 }
