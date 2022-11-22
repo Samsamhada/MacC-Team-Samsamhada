@@ -251,8 +251,8 @@ extension RoomCreationViewController: UITableViewDelegate, UITableViewDataSource
         // MARK: - AS기간
 
         if indexPath.section == 2 {
+            warrantyCell.warrantyTimeDelegate = self
             setCell(UITableViewCell: warrantyCell, UIView: warrantyCell.warrantyView)
-            roomCategoryViewController.warrantyTime = Int32(warrantyCell.warrantyCount)
 
             return warrantyCell
         }
@@ -344,5 +344,11 @@ extension RoomCreationViewController: RoomCreationViewDateSecondCellDelegate {
 
         roomCategoryViewController.endDate = dateFormatter.string(from: date)
         tableView.reloadData()
+    }
+}
+
+extension RoomCreationViewController: RoomCreationViewWarrantyCellDelegate {
+    func warrantyTimeChanged(warrantyTime: Int) {
+        roomCategoryViewController.warrantyTime = warrantyTime
     }
 }
