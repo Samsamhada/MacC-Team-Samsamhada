@@ -92,7 +92,6 @@ class SegmentedControlViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 //        setRoomCategoryID()
-        
         // TODO: - 방정보, 게시물정보, 작업데이터 로드를 위한 코드
         
 //        coreDataManager.loadOneRoomData(roomID: roomID!)
