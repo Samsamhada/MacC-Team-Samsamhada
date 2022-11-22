@@ -10,7 +10,19 @@ import UIKit
 class WorkingHistoryViewController: UIViewController {
 
     // MARK: - Property
-
+    
+    var room: Room? {
+        didSet {
+            print("workingHistoryView room입니다!!!!!")
+        }
+    }
+    var post: [Post]? {
+        didSet {
+            workingHistoryView.reloadData()
+            print("workingHistoryView Post입니다!!!")
+        }
+    }
+    
     var roomID: Int?
 
     // MARK: - View
@@ -26,6 +38,7 @@ class WorkingHistoryViewController: UIViewController {
         super.viewDidLoad()
         attribute()
         layout()
+//        print(post)
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -95,7 +108,8 @@ extension WorkingHistoryViewController: UICollectionViewDataSource, UICollection
         if section == 0 {
             return 1
         } else {
-            return coreDataManager.postings.count
+            return post?.count ?? 0
+//            return coreDataManager.postings.count
         }
     }
 
@@ -107,10 +121,12 @@ extension WorkingHistoryViewController: UICollectionViewDataSource, UICollection
         } else {
             let contentCell = collectionView.dequeueReusableCell(withReuseIdentifier: WorkingHistoryViewContentCell.identifier, for: indexPath) as! WorkingHistoryViewContentCell
 
-            coreDataManager.loadPhotoData(postingID: Int(coreDataManager.postings[indexPath.item].postingID))
-            contentCell.uiImageView.image = UIImage(data: coreDataManager.photos[0].photoPath!)
-            contentCell.imageDescription.text = coreDataManager.postings[indexPath.item].explanation
-            contentCell.workType.text = Category.categoryName(Category(rawValue: Int(coreDataManager.postings[indexPath.item].categoryID))!)()
+
+            contentCell.imageDescription.text = post![indexPath.item].description
+            contentCell.workType.text = Category.categoryName(Category(rawValue: post![indexPath.item].category)!)()
+//            post[indexPath.item].category
+//            coreDataManager.loadPhotoData(postingID: Int(coreDataManager.postings[indexPath.item].postingID))
+//            contentCell.uiImageView.image = UIImage(data: coreDataManager.photos[0].photoPath!)
 
             return contentCell
         }
@@ -133,13 +149,13 @@ extension WorkingHistoryViewController: UICollectionViewDataSource, UICollection
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if indexPath.section > 0 {
             let detailViewController = DetailViewController()
-            coreDataManager.loadPhotoData(postingID: Int(coreDataManager.postings[indexPath.item].postingID))
-            detailViewController.images = coreDataManager.photos
-            coreDataManager.postings.forEach {
-                if $0 == coreDataManager.postings[indexPath.item] {
-                    detailViewController.descriptionLBL.text = $0.explanation
-                }
-            }
+//            coreDataManager.loadPhotoData(postingID: Int(coreDataManager.postings[indexPath.item].postingID))
+//            detailViewController.images = coreDataManager.photos
+//            coreDataManager.postings.forEach {
+//                if $0 == coreDataManager.postings[indexPath.item] {
+//                    detailViewController.descriptionLBL.text = $0.explanation
+//                }
+//            }
             navigationController?.pushViewController(detailViewController, animated: true)
         }
     }
