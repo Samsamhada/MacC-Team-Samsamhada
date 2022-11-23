@@ -19,7 +19,6 @@ class WorkingHistoryViewController: UIViewController {
         }
     }
     var roomID: Int?
-    var url: [URL] = []
 
     // MARK: - View
 
@@ -114,16 +113,14 @@ extension WorkingHistoryViewController: UICollectionViewDataSource, UICollection
             return topCell
         } else {
             let contentCell = collectionView.dequeueReusableCell(withReuseIdentifier: WorkingHistoryViewContentCell.identifier, for: indexPath) as! WorkingHistoryViewContentCell
-
+            
             contentCell.imageDescription.text = post![indexPath.item].description
             contentCell.workType.text = Category.categoryName(Category(rawValue: post![indexPath.item].category)!)()
-            if url != [] {
-                DispatchQueue.global().async {
-                    let data = try? Data(contentsOf: self.url[indexPath.item])
-                    DispatchQueue.main.async {
-                        let image = UIImage(data: data!)
-                        contentCell.uiImageView.image = image
-                    }
+            
+            DispatchQueue.global().async {
+                let data = try? Data(contentsOf: URL(string: self.photos[indexPath.item].photoPath)!)
+                DispatchQueue.main.async {
+                    contentCell.uiImageView.image = UIImage(data: data!)
                 }
             }
             return contentCell
