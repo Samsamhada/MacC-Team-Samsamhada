@@ -10,23 +10,20 @@ import UIKit
 class SegmentedControlViewController: UIViewController {
 
     // MARK: - Property
-
+    
+    var postIDArray: [Int] = []
     let roomAPI: RoomAPI = RoomAPI(apiService: APIService())
     var room: Room?
     var posts = [Post]() {
         didSet {
+            posts.sort(by: {$0.postID > $1.postID})
             posts.forEach {
-                loadPhotoByRoom(postID: $0.postID)
-            }
-            workingHistoryView.post = posts.reversed()
-        }
-    }
-    
-    var photos = [Photo]() {
-        didSet {
-            if photos.count == posts.count {
-                photos.sort(by: {$0.postID < $1.postID})
-                workingHistoryView.photos = photos.reversed()
+                if $0.type == 0 {
+                    workingHistoryView.posts.append($0)
+                }
+                if $0.type == 1 {
+                    print("문의내역으로 보내져야함!")
+                }
             }
         }
     }
@@ -90,12 +87,11 @@ class SegmentedControlViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 //        setRoomCategoryID()
-        // TODO: - 방정보, 게시물정보, 작업데이터 로드를 위한 코드
+        // TODO: - 작업상태 로드를 위한 코드
         
-//        coreDataManager.loadOneRoomData(roomID: roomID!)
-//        coreDataManager.loadPostingData(roomID: roomID!)
-//        coreDataManager.loadWorkingStatusData(roomID: roomID!)
-        loadPostByRoom(roomID: room!.roomID)
+//        coreDataManager.loadWorkingStatusData(roomID: roomID!))
+        loadContentByRoom(roomID: room!.roomID)
+        
     }
 
     // MARK: - Method
@@ -209,29 +205,14 @@ class SegmentedControlViewController: UIViewController {
         present(navigationController, animated:  true, completion: nil)
     }
     
-    private func loadPostByRoom(roomID: Int) {
+    private func loadContentByRoom(roomID: Int) {
         Task {
             do {
-                let response = try await self.roomAPI.loadPostByRoom(roomID: roomID)
+                let response = try await self.roomAPI.loadContentByRoom(roomID: roomID)
                 guard let data = response else {
                     return
                 }
                 posts = data
-            } catch NetworkError.serverError {
-            } catch NetworkError.encodingError {
-            } catch NetworkError.clientError(_) {
-            }
-        }
-    }
-    
-    private func loadPhotoByRoom(postID: Int) {
-        Task {
-            do {
-                let response = try await self.roomAPI.loadPhotoByRoom(postID: postID)
-                guard let data = response else {
-                    return
-                }
-                photos.append(data[0])
             } catch NetworkError.serverError {
             } catch NetworkError.encodingError {
             } catch NetworkError.clientError(_) {
