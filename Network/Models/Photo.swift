@@ -8,6 +8,12 @@
 import Foundation
 
 struct Photo: Codable {
-    let photoID, postID: Int
+    let photoID: Int
     let photoPath: String
+}
+
+struct PhotoElement: Codable {
+    let postID, roomID, category, type: Int
+    let description, createDate: String
+    let photos: [Photo]
 }
