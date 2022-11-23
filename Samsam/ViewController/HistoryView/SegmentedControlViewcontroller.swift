@@ -11,7 +11,6 @@ class SegmentedControlViewController: UIViewController {
 
     // MARK: - Property
     
-    var postIDArray: [Int] = []
     let roomAPI: RoomAPI = RoomAPI(apiService: APIService())
     var room: Room?
     var posts = [Post]() {
