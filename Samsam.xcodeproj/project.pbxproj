@@ -59,6 +59,8 @@
 		43C2110F28FCFAB500E8F6DD /* PostingCategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43C2110E28FCFAB500E8F6DD /* PostingCategoryViewController.swift */; };
 		43C2111128FCFB3800E8F6DD /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43C2111028FCFB3800E8F6DD /* CategoryCell.swift */; };
 		43C3ED48292DA2DE0056CEDB /* SettingWorkerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43C3ED47292DA2DE0056CEDB /* SettingWorkerViewController.swift */; };
+		43C3ED4A292DA5A00056CEDB /* DeveloperViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43C3ED49292DA5A00056CEDB /* DeveloperViewController.swift */; };
+		43C3ED4C292DA6880056CEDB /* VersionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43C3ED4B292DA6880056CEDB /* VersionViewController.swift */; };
 		43DB5E1C2913733A00BD09BA /* PostingImageButtonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43DB5E1B2913733A00BD09BA /* PostingImageButtonCell.swift */; };
 		980200722912513B00E193E6 /* SegmentedControlViewcontroller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980200712912513B00E193E6 /* SegmentedControlViewcontroller.swift */; };
 		9802007A2914F82100E193E6 /* MetroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980200792914F82100E193E6 /* MetroViewController.swift */; };
@@ -142,6 +144,8 @@
 		43C2110E28FCFAB500E8F6DD /* PostingCategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostingCategoryViewController.swift; sourceTree = "<group>"; };
 		43C2111028FCFB3800E8F6DD /* CategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
 		43C3ED47292DA2DE0056CEDB /* SettingWorkerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingWorkerViewController.swift; sourceTree = "<group>"; };
+		43C3ED49292DA5A00056CEDB /* DeveloperViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeveloperViewController.swift; sourceTree = "<group>"; };
+		43C3ED4B292DA6880056CEDB /* VersionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionViewController.swift; sourceTree = "<group>"; };
 		43DB5E1B2913733A00BD09BA /* PostingImageButtonCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostingImageButtonCell.swift; sourceTree = "<group>"; };
 		980200712912513B00E193E6 /* SegmentedControlViewcontroller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentedControlViewcontroller.swift; sourceTree = "<group>"; };
 		980200792914F82100E193E6 /* MetroViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetroViewController.swift; sourceTree = "<group>"; };
@@ -328,6 +332,8 @@
 			isa = PBXGroup;
 			children = (
 				43C3ED47292DA2DE0056CEDB /* SettingWorkerViewController.swift */,
+				43C3ED49292DA5A00056CEDB /* DeveloperViewController.swift */,
+				43C3ED4B292DA6880056CEDB /* VersionViewController.swift */,
 			);
 			path = SettingView;
 			sourceTree = "<group>";
@@ -565,6 +571,7 @@
 				9866F518291960CE002D3589 /* RoomCreationViewDateFirstCell.swift in Sources */,
 				98E899BA290FCAAB001245C4 /* WorkingHistoryViewContentHeader.swift in Sources */,
 				9866F51A291960E0002D3589 /* RoomCreationViewDateHeader.swift in Sources */,
+				43C3ED4C292DA6880056CEDB /* VersionViewController.swift in Sources */,
 				26664F75292B960D00C2D4F0 /* Status.swift in Sources */,
 				26E3749828FD2D0700997DA7 /* RoomListCell.swift in Sources */,
 				431F0774291DEBB7004FC4B6 /* NetworkRequest.swift in Sources */,
@@ -612,6 +619,7 @@
 				26FEC1DF2902E6F2006C410B /* PhotoEntity+CoreDataClass.swift in Sources */,
 				431F076B291DEBA9004FC4B6 /* LoginAPI.swift in Sources */,
 				98E1700F29080C9100F71D41 /* ImageDetailViewController.swift in Sources */,
+				43C3ED4A292DA5A00056CEDB /* DeveloperViewController.swift in Sources */,
 				26FEC1E22902E6F2006C410B /* RoomEntity+CoreDataProperties.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
