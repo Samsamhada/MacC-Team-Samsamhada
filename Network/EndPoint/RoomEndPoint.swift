@@ -12,8 +12,7 @@ enum RoomEndPoint: EndPointable {
     case createRoom(body: RoomDTO)
     case loadRoomByWorkerID(workerID: Int)
     case createStatus(body: StatusDTO)
-    case loadPostByRoom(roomID: Int)
-    case loadPhotoByRoom(postID: Int)
+    case loadContentsRoom(roomID: Int)
 
     var requestTimeOut: Float {
         return 10
@@ -23,7 +22,7 @@ enum RoomEndPoint: EndPointable {
         switch self {
         case .startAppleLogin, .createRoom, .createStatus:
             return .post
-        case .loadRoomByWorkerID, .loadPostByRoom, .loadPhotoByRoom:
+        case .loadRoomByWorkerID, .loadContentsRoom:
             return .get
         }
     }
@@ -51,10 +50,8 @@ enum RoomEndPoint: EndPointable {
             return "\(APIEnvironment.roomsURL)/worker/\(workerID)"
         case .createStatus:
             return "\(APIEnvironment.statusesURL)"
-        case .loadPostByRoom(let roomID):
-            return "\(APIEnvironment.postsURL)/room/\(roomID)"
-        case .loadPhotoByRoom(postID: let postID):
-            return "\(APIEnvironment.photosURL)/post/\(postID)"
+        case .loadContentsRoom(let roomID):
+            return "\(APIEnvironment.contentsURL)/\(roomID)"
         }
     }
 
