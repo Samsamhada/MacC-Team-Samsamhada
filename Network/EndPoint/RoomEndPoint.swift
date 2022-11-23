@@ -51,7 +51,7 @@ enum RoomEndPoint: EndPointable {
         case .createStatus:
             return "\(APIEnvironment.statusesURL)"
         case .loadContentsRoom(let roomID):
-            return "\(APIEnvironment.contentsURL)/\(roomID)"
+            return "\(APIEnvironment.postsURL)/photo/room/\(roomID)"
         }
     }
 
