@@ -30,7 +30,8 @@ class SettingRoomViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        invitecode = "asdf" // 추후 수정 예정
+        // TODO: - 추후 수정 예정
+        invitecode = "asdf"
     }
 
     // MARK: - Method
@@ -74,9 +75,15 @@ extension SettingRoomViewController: UITableViewDataSource, UITableViewDelegate 
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell(style: .default, reuseIdentifier: .none)
+        let cell = UITableViewCell(style: .value1, reuseIdentifier: .none)
         cell.textLabel?.text = data[indexPath.section][indexPath.row]
         cell.selectionStyle = .none
+        
+        if indexPath == [0,0] {
+            cell.detailTextLabel?.text = invitecode
+            cell.detailTextLabel?.textColor = AppColor.campanulaBlue
+        }
+        
         return cell
     }
     
