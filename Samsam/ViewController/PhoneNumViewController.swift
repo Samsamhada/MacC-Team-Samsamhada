@@ -37,13 +37,13 @@ class PhoneNumViewController: UIViewController {
         return $0
     }(UILabel())
 
-    private lazy var numberInput: UITextField = {
+    private lazy var numberInput: CustomUITextField = {
         $0.placeholder = "1234 - 5678"
         $0.font = UIFont.systemFont(ofSize: 16)
-        $0.keyboardType = .decimalPad
+        $0.keyboardType = .numberPad
         $0.addTarget(self, action: #selector(buttonAttributeChanged), for: .editingChanged)
         return $0
-    }(UITextField())
+    }(CustomUITextField())
 
     private let inputUnderLine: UIView = {
         $0.setHeight(height: 1)
@@ -178,3 +178,11 @@ class PhoneNumViewController: UIViewController {
     }
 }
 
+class CustomUITextField: UITextField {
+    override func canPerformAction(_ action: Selector, withSender sender: Any?) -> Bool {
+        if action == #selector(UIResponderStandardEditActions.paste(_:)) {
+            return false
+        }
+        return super.canPerformAction(action, withSender: sender)
+    }
+}
