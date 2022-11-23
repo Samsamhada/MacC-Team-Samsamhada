@@ -91,7 +91,6 @@ class SegmentedControlViewController: UIViewController {
         
 //        coreDataManager.loadWorkingStatusData(roomID: roomID!))
         loadContentByRoom(roomID: room!.roomID)
-        
     }
 
     // MARK: - Method
