@@ -11,10 +11,14 @@ class WorkingHistoryViewController: UIViewController {
 
     // MARK: - Property
     
+    var postDate = Set<String>()
     var room: Room?
     var posts = [Post]() {
         didSet {
             workingHistoryView.reloadData()
+            posts.forEach {
+                postDate.insert(String($0.createDate.dropLast(14)))
+            }
         }
     }
     var roomID: Int?
@@ -61,10 +65,11 @@ class WorkingHistoryViewController: UIViewController {
 }
 
 extension WorkingHistoryViewController: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+
     // MARK: - Header
 
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 3
+        return postDate.count + 1
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
