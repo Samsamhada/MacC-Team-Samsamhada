@@ -9,4 +9,5 @@ import Foundation
 
 protocol LoginProtocol {
     func startAppleLogin(LoginDTO: LoginDTO) async throws -> Login?
+    func addPhoneNumber(workerID: Int, LoginDTO: LoginDTO) async throws -> Message?
 }

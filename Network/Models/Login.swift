@@ -8,8 +8,6 @@
 import Foundation
 
 struct Login: Decodable {
-//    let accessToken: String?
-//    let refreshToken: String?
     let workerID: Int?
     let userIdentifier: String?
     let name: String?

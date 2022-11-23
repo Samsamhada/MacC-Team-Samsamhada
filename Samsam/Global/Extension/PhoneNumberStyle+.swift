@@ -9,7 +9,6 @@ import UIKit
 
 extension String {
     func phoneNumberStyle() -> String {
-        if self.count > 7 {
             if let regex = try? NSRegularExpression(pattern: "([0-9]{4})([0-9]{4})",
                                                     options: .caseInsensitive) {
                 let modString = regex.stringByReplacingMatches(in: self,
@@ -17,7 +16,6 @@ extension String {
                                                                withTemplate: "$1 - $2")
                 return modString
             }
-        }
         return self
     }
 }

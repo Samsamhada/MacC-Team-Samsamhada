@@ -20,4 +20,11 @@ struct LoginAPI: LoginProtocol {
             .createRequest()
         return try await apiService.request(request)
     }
+    
+    func addPhoneNumber(workerID: Int, LoginDTO: LoginDTO) async throws -> Message? {
+        let request = LoginEndPoint
+            .addPhoneNumber(workerID: workerID, body: LoginDTO)
+            .createRequest()
+        return try await apiService.request(request)
+    }
 }

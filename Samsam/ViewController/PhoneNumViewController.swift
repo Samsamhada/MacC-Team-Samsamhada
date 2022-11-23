@@ -8,10 +8,11 @@
 import UIKit
 
 class PhoneNumViewController: UIViewController {
-
+    
     // MARK: - Property
 
     private var phoneNum = ""
+    private let loginService: LoginAPI = LoginAPI(apiService: APIService())
 
     // MARK: - View
 
@@ -36,10 +37,11 @@ class PhoneNumViewController: UIViewController {
         return $0
     }(UILabel())
 
-    private let numberInput: UITextField = {
-        $0.placeholder = "1234-5678"
+    private lazy var numberInput: UITextField = {
+        $0.placeholder = "1234 - 5678"
         $0.font = UIFont.systemFont(ofSize: 16)
         $0.keyboardType = .decimalPad
+        $0.addTarget(self, action: #selector(buttonAttributeChanged), for: .editingChanged)
         return $0
     }(UITextField())
 
@@ -49,18 +51,19 @@ class PhoneNumViewController: UIViewController {
         return $0
     }(UIView())
 
-    private let submitButton: UIButton = {
+    private lazy var submitButton: UIButton = {
         $0.setTitle("확인", for: .normal)
         $0.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
         $0.setHeight(height: 50)
         $0.layer.cornerRadius = 16
         $0.isEnabled = false
         $0.backgroundColor = .gray
+        $0.addTarget(self, action: #selector(tapSubmitButton), for: .touchUpInside)
         return $0
     }(UIButton())
 
     // MARK: - LifeCycle
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         hidekeyboardWhenTappedAround()
@@ -72,10 +75,6 @@ class PhoneNumViewController: UIViewController {
 
     private func attribute() {
         view.backgroundColor = .white
-
-        numberInput.delegate = self
-        numberInput.addTarget(self, action: #selector(buttonAttributeChanged), for: .editingChanged)
-        numberInput.addTarget(self, action: #selector(changedNumStyle), for: .editingChanged)
     }
 
     private func layout() {
@@ -138,33 +137,44 @@ class PhoneNumViewController: UIViewController {
             paddingBottom: 20
         )
     }
-
-    @objc func changedNumStyle() {
-        numberInput.text = numberInput.text!.phoneNumberStyle()
-        phoneNum = (numberInput.text?.replacingOccurrences(of: " - ", with: ""))!
-    }
-
+    
     @objc private func buttonAttributeChanged() {
-        if (numberInput.text!.count) == 8 {
+        phoneNum = (numberInput.text?.replacingOccurrences(of: " - ", with: ""))!
+        if phoneNum.count >= 8 {
             submitButton.backgroundColor = .blue
             submitButton.isEnabled = true
-            submitButton.addTarget(self, action: #selector(tapSubmitButton), for: .touchUpInside)
+            checkText(textField: numberInput, phoneNum: phoneNum)
         } else {
             submitButton.backgroundColor = .gray
             submitButton.isEnabled = false
         }
     }
+    
+    private func checkText(textField: UITextField, phoneNum: String) {
+            let endIndex = phoneNum.index(phoneNum.startIndex, offsetBy: 8)
+            let fixedText = phoneNum[phoneNum.startIndex..<endIndex]
+            self.phoneNum = String(fixedText)
+            textField.text = String(fixedText).phoneNumberStyle()
+    }
 
     @objc private func tapSubmitButton() {
+        let number = "+82010" + phoneNum
+        let loginDTO = LoginDTO(userIdentifier: UserDefaults.standard.string(forKey: "userIdentifier")!, number: number)
+        requestPutPhoneNumber(workerID: Int(UserDefaults.standard.string(forKey: "workerID")!)!, LoginDTO: loginDTO)
         let roomListViewController = RoomListViewController()
         navigationController?.pushViewController(roomListViewController, animated: true)
     }
-}
-
-extension PhoneNumViewController: UITextFieldDelegate {
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        guard numberInput.text!.count < 9 else { return false }
-
-        return true
+    
+    private func requestPutPhoneNumber(workerID: Int ,LoginDTO: LoginDTO) {
+        Task{
+            do {
+                let response = try await self.loginService.addPhoneNumber(workerID: workerID, LoginDTO: LoginDTO)
+                self.navigationController?.pushViewController(PhoneNumViewController(), animated: true)
+            } catch NetworkError.serverError {
+            } catch NetworkError.encodingError {
+            } catch NetworkError.clientError(_) {
+            }
+        }
     }
 }
+
