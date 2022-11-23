@@ -13,6 +13,7 @@ class SegmentedControlViewController: UIViewController {
 
     let roomAPI: RoomAPI = RoomAPI(apiService: APIService())
     var room: Room?
+    var url: [URL] = []
     var posts = [Post]() {
         didSet {
             posts.forEach {
@@ -21,6 +22,7 @@ class SegmentedControlViewController: UIViewController {
             posts = posts.reversed()
         }
     }
+    
     var photos = [Photo]() {
         didSet {
             if photos.count == posts.count {
@@ -31,7 +33,6 @@ class SegmentedControlViewController: UIViewController {
             }
         }
     }
-    var url: [URL] = []
 
     // MARK: - View
 
@@ -226,10 +227,11 @@ class SegmentedControlViewController: UIViewController {
             }
         }
     }
+    
     private func loadPhotoByRoom(postID: Int) {
         Task {
             do {
-                let response = try await self.roomAPI.loadPhotobyroom(postID: postID)
+                let response = try await self.roomAPI.loadPhotoByRoom(postID: postID)
                 guard let data = response else {
                     return
                 }
