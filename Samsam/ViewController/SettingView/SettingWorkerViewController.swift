@@ -5,6 +5,7 @@
 //  Created by creohwan on 2022/11/23.
 //
 
+import MessageUI
 import UIKit
 
 class SettingWorkerViewController: UIViewController {
@@ -14,7 +15,7 @@ class SettingWorkerViewController: UIViewController {
     private let tableView = UITableView(frame: .zero, style: .insetGrouped)
     
     private let header = ["","",""]
-    private let data = [["개인 정보 수정"],["이용약관","개인정보 처리방침","고객 센터","개발자정보","버전 정보"],["로그 아웃","회원 탈퇴"]]
+    private let data = [["개인 정보 수정"],["이용약관","개인정보 처리방침","고객 센터 문의하기","개발자정보","버전 정보"],["로그 아웃","회원 탈퇴"]]
 
     // MARK: - LifeCycle
 
@@ -61,8 +62,6 @@ extension SettingWorkerViewController: UITableViewDataSource, UITableViewDelegat
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print(indexPath)
-        print(indexPath.row)
         switch indexPath
         {
         case [0,0]: // 개인 정보 수정
@@ -76,7 +75,7 @@ extension SettingWorkerViewController: UITableViewDataSource, UITableViewDelegat
                 UIApplication.shared.open(url, options: [:])
             }
         case [1,2]: // 고객센터
-            print("고객 센터 문의")
+            self.sendReportMail()
         case [1,3]: // 개발자 정보
             self.navigationController?.pushViewController(DeveloperViewController(), animated: true)
         case [1,4]: // 버전 정보
@@ -88,5 +87,52 @@ extension SettingWorkerViewController: UITableViewDataSource, UITableViewDelegat
         default:
             break
         }
+    }
+}
+
+// MARK: - MFMailComposeViewControllerDelegate
+extension SettingWorkerViewController: MFMailComposeViewControllerDelegate {
+    func sendReportMail() {
+        if MFMailComposeViewController.canSendMail() {
+            let composeVC = MFMailComposeViewController()
+            let Email = "samsamhada0915@gmail.com"
+            let messageBody = """
+                              
+                              -----------------------------
+                              
+                              - 성함:
+                              - 전화번호:
+                              - 문의 메시지 제목 한줄 요약:
+                              - 문의 날짜: \(Date())
+                              
+                              ------------------------------
+                              
+                              문의 내용을 작성해주세요.
+                              
+                              """
+            
+            composeVC.mailComposeDelegate = self
+            composeVC.setToRecipients([Email])
+            composeVC.setSubject("[문의 사항]")
+            composeVC.setMessageBody(messageBody, isHTML: false)
+            
+            self.present(composeVC, animated: true, completion: nil)
+        }
+        else {
+            self.showSendMailErrorAlert()
+        }
+    }
+    
+    private func showSendMailErrorAlert() {
+        let sendMailErrorAlert = UIAlertController(title: "메일 전송 실패", message: "아이폰 이메일 설정을 확인하고 다시 시도해주세요.", preferredStyle: .alert)
+        let confirmAction = UIAlertAction(title: "확인", style: .default) {
+            (action) in
+        }
+        sendMailErrorAlert.addAction(confirmAction)
+        self.present(sendMailErrorAlert, animated: true, completion: nil)
+    }
+    
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        controller.dismiss(animated: true, completion: nil)
     }
 }
