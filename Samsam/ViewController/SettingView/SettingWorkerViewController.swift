@@ -66,7 +66,7 @@ extension SettingWorkerViewController: UITableViewDataSource, UITableViewDelegat
         switch indexPath
         {
         case [0,0]: // 개인 정보 수정
-            print("개인 정보 수정")
+            print("개인 정보 수정") // 추후 수정 예정
         case [1,0]: // 고객 센터 문의하기
             self.sendReportMail()
         case [2,0]: // 이용 약관
@@ -82,9 +82,9 @@ extension SettingWorkerViewController: UITableViewDataSource, UITableViewDelegat
         case [2,3]: // 버전 정보
             self.navigationController?.pushViewController(VersionViewController(), animated: true)
         case [3,0]: // 로그 아웃
-            print("로그 아웃")
+            print("로그 아웃") // 추후 토큰 발행 시 수정 예정
         case [3,1]: // 회원 탈퇴
-            print("회원 탈퇴")
+            print("회원 탈퇴") // 추후 토큰 발행 시 수정 예정
         default:
             break
         }
