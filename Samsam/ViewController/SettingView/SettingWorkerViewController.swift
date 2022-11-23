@@ -56,9 +56,15 @@ extension SettingWorkerViewController: UITableViewDataSource, UITableViewDelegat
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell(style: .default, reuseIdentifier: .none)
+        let cell = UITableViewCell(style: .value1, reuseIdentifier: .none)
         cell.textLabel?.text = data[indexPath.section][indexPath.row]
         cell.selectionStyle = .none
+        
+        if indexPath == [2,3] {
+            let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as! String
+            cell.detailTextLabel?.text = version
+        }
+        
         return cell
     }
     
