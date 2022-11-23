@@ -14,8 +14,8 @@ class SettingWorkerViewController: UIViewController {
 
     private let tableView = UITableView(frame: .zero, style: .insetGrouped)
     
-    private let header = ["","",""]
-    private let data = [["개인 정보 수정"],["이용약관","개인정보 처리방침","고객 센터 문의하기","개발자정보","버전 정보"],["로그 아웃","회원 탈퇴"]]
+    private let header = ["","","",""]
+    private let data = [["개인 정보 수정"],["고객 센터 문의하기"],["이용 약관","개인정보 처리방침","개발자 정보","버전 정보"],["로그 아웃","회원 탈퇴"]]
 
     // MARK: - LifeCycle
 
@@ -58,6 +58,7 @@ extension SettingWorkerViewController: UITableViewDataSource, UITableViewDelegat
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: .default, reuseIdentifier: .none)
         cell.textLabel?.text = data[indexPath.section][indexPath.row]
+        cell.selectionStyle = .none
         return cell
     }
     
@@ -66,23 +67,23 @@ extension SettingWorkerViewController: UITableViewDataSource, UITableViewDelegat
         {
         case [0,0]: // 개인 정보 수정
             print("개인 정보 수정")
-        case [1,0]: // 이용 약관
-            if let url = URL(string: "https://giwazip.notion.site/c9ce45548c834d6d9ab91a139c489a2c") {
-                UIApplication.shared.open(url, options: [:])
-            }
-        case [1,1]: // 개인정보 처리방침
-            if let url = URL(string: "https://giwazip.notion.site/c9ce45548c834d6d9ab91a139c489a2c") {
-                UIApplication.shared.open(url, options: [:])
-            }
-        case [1,2]: // 고객센터
+        case [1,0]: // 고객 센터 문의하기
             self.sendReportMail()
-        case [1,3]: // 개발자 정보
+        case [2,0]: // 이용 약관
+            if let url = URL(string: "https://giwazip.notion.site/c9ce45548c834d6d9ab91a139c489a2c") {
+                UIApplication.shared.open(url, options: [:])
+            }
+        case [2,1]: // 개인정보 처리방침
+            if let url = URL(string: "https://giwazip.notion.site/c9ce45548c834d6d9ab91a139c489a2c") {
+                UIApplication.shared.open(url, options: [:])
+            }
+        case [2,2]: // 개발자 정보
             self.navigationController?.pushViewController(DeveloperViewController(), animated: true)
-        case [1,4]: // 버전 정보
+        case [2,3]: // 버전 정보
             self.navigationController?.pushViewController(VersionViewController(), animated: true)
-        case [2,0]: // 로그 아웃
+        case [3,0]: // 로그 아웃
             print("로그 아웃")
-        case [2,1]: // 회원 탈퇴
+        case [3,1]: // 회원 탈퇴
             print("회원 탈퇴")
         default:
             break
@@ -90,7 +91,6 @@ extension SettingWorkerViewController: UITableViewDataSource, UITableViewDelegat
     }
 }
 
-// MARK: - MFMailComposeViewControllerDelegate
 extension SettingWorkerViewController: MFMailComposeViewControllerDelegate {
     func sendReportMail() {
         if MFMailComposeViewController.canSendMail() {
