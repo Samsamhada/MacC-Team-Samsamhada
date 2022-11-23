@@ -13,23 +13,20 @@ class SegmentedControlViewController: UIViewController {
 
     let roomAPI: RoomAPI = RoomAPI(apiService: APIService())
     var room: Room?
-    var url: [URL] = []
     var posts = [Post]() {
         didSet {
             posts.forEach {
                 loadPhotoByRoom(postID: $0.postID)
             }
-            posts = posts.reversed()
+            workingHistoryView.post = posts.reversed()
         }
     }
     
     var photos = [Photo]() {
         didSet {
             if photos.count == posts.count {
-                for i in 0..<posts.count {
-                    url.append(URL(string: photos[i].photoPath)!)
-                }
-                workingHistoryView.url = url.reversed()
+                photos.sort(by: {$0.postID < $1.postID})
+                workingHistoryView.photos = photos.reversed()
             }
         }
     }
@@ -220,7 +217,6 @@ class SegmentedControlViewController: UIViewController {
                     return
                 }
                 posts = data
-                workingHistoryView.post = posts
             } catch NetworkError.serverError {
             } catch NetworkError.encodingError {
             } catch NetworkError.clientError(_) {
