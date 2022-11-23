@@ -83,7 +83,6 @@ extension SettingRoomViewController: UITableViewDataSource, UITableViewDelegate 
             cell.detailTextLabel?.text = invitecode
             cell.detailTextLabel?.textColor = AppColor.campanulaBlue
         }
-        
         return cell
     }
     
