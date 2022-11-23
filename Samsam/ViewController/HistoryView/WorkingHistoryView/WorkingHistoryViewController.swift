@@ -12,8 +12,7 @@ class WorkingHistoryViewController: UIViewController {
     // MARK: - Property
     
     var room: Room?
-    var post: [Post]?
-    var photos = [Photo]() {
+    var posts = [Post]() {
         didSet {
             workingHistoryView.reloadData()
         }
@@ -33,10 +32,6 @@ class WorkingHistoryViewController: UIViewController {
         super.viewDidLoad()
         attribute()
         layout()
-    }
-
-    override func viewWillAppear(_ animated: Bool) {
-        workingHistoryView.reloadData()
     }
 
     // MARK: - Method
@@ -101,9 +96,8 @@ extension WorkingHistoryViewController: UICollectionViewDataSource, UICollection
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if section == 0 {
             return 1
-        } else {
-            return post?.count ?? 0
         }
+        return posts.count
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -113,12 +107,12 @@ extension WorkingHistoryViewController: UICollectionViewDataSource, UICollection
             return topCell
         } else {
             let contentCell = collectionView.dequeueReusableCell(withReuseIdentifier: WorkingHistoryViewContentCell.identifier, for: indexPath) as! WorkingHistoryViewContentCell
-            
-            contentCell.imageDescription.text = post![indexPath.item].description
-            contentCell.workType.text = Category.categoryName(Category(rawValue: post![indexPath.item].category)!)()
+
+            contentCell.imageDescription.text = posts[indexPath.item].description
+            contentCell.workType.text = Category.categoryName(Category(rawValue: posts[indexPath.item].category)!)()
             
             DispatchQueue.global().async {
-                let data = try? Data(contentsOf: URL(string: self.photos[indexPath.item].photoPath)!)
+                let data = try? Data(contentsOf: URL(string: self.posts[indexPath.item].photos[0].photoPath)!)
                 DispatchQueue.main.async {
                     contentCell.uiImageView.image = UIImage(data: data!)
                 }
