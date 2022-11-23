@@ -90,7 +90,7 @@ class SegmentedControlViewController: UIViewController {
         // TODO: - 작업상태 로드를 위한 코드
         
 //        coreDataManager.loadWorkingStatusData(roomID: roomID!))
-        loadContentByRoom(roomID: room!.roomID)
+        loadPostByRoom(roomID: room!.roomID)
     }
 
     // MARK: - Method
@@ -204,10 +204,10 @@ class SegmentedControlViewController: UIViewController {
         present(navigationController, animated:  true, completion: nil)
     }
     
-    private func loadContentByRoom(roomID: Int) {
+    private func loadPostByRoom(roomID: Int) {
         Task {
             do {
-                let response = try await self.roomAPI.loadContentByRoom(roomID: roomID)
+                let response = try await self.roomAPI.loadPostByRoom(roomID: roomID)
                 guard let data = response else {
                     return
                 }
