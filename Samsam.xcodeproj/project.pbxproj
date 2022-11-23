@@ -58,6 +58,7 @@
 		43C15C6B2927A89100E8DD92 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43C15C6A2927A89100E8DD92 /* Message.swift */; };
 		43C2110F28FCFAB500E8F6DD /* PostingCategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43C2110E28FCFAB500E8F6DD /* PostingCategoryViewController.swift */; };
 		43C2111128FCFB3800E8F6DD /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43C2111028FCFB3800E8F6DD /* CategoryCell.swift */; };
+		43C3ED48292DA2DE0056CEDB /* SettingWorkerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43C3ED47292DA2DE0056CEDB /* SettingWorkerViewController.swift */; };
 		43DB5E1C2913733A00BD09BA /* PostingImageButtonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43DB5E1B2913733A00BD09BA /* PostingImageButtonCell.swift */; };
 		980200722912513B00E193E6 /* SegmentedControlViewcontroller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980200712912513B00E193E6 /* SegmentedControlViewcontroller.swift */; };
 		9802007A2914F82100E193E6 /* MetroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980200792914F82100E193E6 /* MetroViewController.swift */; };
@@ -139,6 +140,7 @@
 		43C15C6A2927A89100E8DD92 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		43C2110E28FCFAB500E8F6DD /* PostingCategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostingCategoryViewController.swift; sourceTree = "<group>"; };
 		43C2111028FCFB3800E8F6DD /* CategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
+		43C3ED47292DA2DE0056CEDB /* SettingWorkerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingWorkerViewController.swift; sourceTree = "<group>"; };
 		43DB5E1B2913733A00BD09BA /* PostingImageButtonCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostingImageButtonCell.swift; sourceTree = "<group>"; };
 		980200712912513B00E193E6 /* SegmentedControlViewcontroller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentedControlViewcontroller.swift; sourceTree = "<group>"; };
 		980200792914F82100E193E6 /* MetroViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetroViewController.swift; sourceTree = "<group>"; };
@@ -319,6 +321,14 @@
 			path = PostingView;
 			sourceTree = "<group>";
 		};
+		43C3ED46292DA29A0056CEDB /* SettingView */ = {
+			isa = PBXGroup;
+			children = (
+				43C3ED47292DA2DE0056CEDB /* SettingWorkerViewController.swift */,
+			);
+			path = SettingView;
+			sourceTree = "<group>";
+		};
 		980200732912514700E193E6 /* HistoryView */ = {
 			isa = PBXGroup;
 			children = (
@@ -384,6 +394,7 @@
 		98C0D06128FCE8FA00E0E439 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				43C3ED46292DA29A0056CEDB /* SettingView */,
 				26E3748528FCDC0000997DA7 /* ViewController.swift */,
 				26E3749B28FE8E6F00997DA7 /* LoginViewController.swift */,
 				26E3749E28FE9DA300997DA7 /* PhoneNumViewController.swift */,
@@ -558,6 +569,7 @@
 				431F0775291DEBB7004FC4B6 /* APIService.swift in Sources */,
 				98C0D06428FCE99300E0E439 /* JSON.swift in Sources */,
 				980200722912513B00E193E6 /* SegmentedControlViewcontroller.swift in Sources */,
+				43C3ED48292DA2DE0056CEDB /* SettingWorkerViewController.swift in Sources */,
 				431F0764291DEB81004FC4B6 /* Login.swift in Sources */,
 				9802007A2914F82100E193E6 /* MetroViewController.swift in Sources */,
 				436E81C02918BA3D002A2641 /* ChipViewController.swift in Sources */,
