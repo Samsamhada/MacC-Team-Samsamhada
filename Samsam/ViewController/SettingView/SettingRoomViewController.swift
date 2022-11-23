@@ -83,10 +83,11 @@ extension SettingRoomViewController: UITableViewDataSource, UITableViewDelegate 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath
         {
-        case [0,0]: // 초대 코드 공유
+        case [0,0]:
             self.shareInvitecode()
-        case [1,0]: // 방 정보 수정
-            print("방 정보 수정") // 추후 수정 예정
+        case [1,0]:
+            // TODO: - 추후 수정 예정
+            print("방 정보 수정")
         default:
             break
         }

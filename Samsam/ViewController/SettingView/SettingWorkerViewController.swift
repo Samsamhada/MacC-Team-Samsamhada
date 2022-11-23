@@ -65,26 +65,27 @@ extension SettingWorkerViewController: UITableViewDataSource, UITableViewDelegat
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath
         {
-        case [0,0]: // 개인 정보 수정
-            print("개인 정보 수정") // 추후 수정 예정
-        case [1,0]: // 고객 센터 문의하기
+        case [0,0]:
+            // TODO: - 추후 수정 예정
+            print("개인 정보 수정")
+        case [1,0]:
             self.sendReportMail()
-        case [2,0]: // 이용 약관
+        case [2,0]:
             if let url = URL(string: "https://giwazip.notion.site/c9ce45548c834d6d9ab91a139c489a2c") {
                 UIApplication.shared.open(url, options: [:])
             }
-        case [2,1]: // 개인정보 처리방침
+        case [2,1]:
             if let url = URL(string: "https://giwazip.notion.site/c9ce45548c834d6d9ab91a139c489a2c") {
                 UIApplication.shared.open(url, options: [:])
             }
-        case [2,2]: // 개발자 정보
+        case [2,2]:
             self.navigationController?.pushViewController(DeveloperViewController(), animated: true)
-        case [2,3]: // 버전 정보
+        case [2,3]:
             self.navigationController?.pushViewController(VersionViewController(), animated: true)
-        case [3,0]: // 로그 아웃
-            print("로그 아웃") // 추후 토큰 발행 시 수정 예정
-        case [3,1]: // 회원 탈퇴
-            print("회원 탈퇴") // 추후 토큰 발행 시 수정 예정
+        case [3,0]:
+            print("로그 아웃")
+        case [3,1]:
+            print("회원 탈퇴")
         default:
             break
         }
