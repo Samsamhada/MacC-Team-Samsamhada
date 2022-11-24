@@ -16,7 +16,7 @@ class WorkingHistoryViewContentCell: UICollectionViewCell {
     // MARK: - View
 
     let uiImageView: UIImageView = {
-        $0.image = UIImage(named: "TestImage")
+        $0.image = UIImage(named: "GrayBox")
         $0.layer.masksToBounds = true
         $0.layer.cornerRadius = 16
         $0.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]

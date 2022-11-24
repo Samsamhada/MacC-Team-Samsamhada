@@ -10,12 +10,22 @@ import UIKit
 class WorkingHistoryViewController: UIViewController {
 
     // MARK: - Property
-
+    
+    var postDate = Set<String>()
+    var room: Room?
+    var posts = [Post]() {
+        didSet {
+            workingHistoryView.reloadData()
+            posts.forEach {
+                postDate.insert(String($0.createDate.dropLast(14)))
+            }
+        }
+    }
     var roomID: Int?
 
     // MARK: - View
 
-    private let workingHistoryView: UICollectionView = {
+    let workingHistoryView: UICollectionView = {
         return $0
     }(UICollectionView(
         frame: .zero, collectionViewLayout: UICollectionViewFlowLayout()))
@@ -26,10 +36,6 @@ class WorkingHistoryViewController: UIViewController {
         super.viewDidLoad()
         attribute()
         layout()
-    }
-
-    override func viewWillAppear(_ animated: Bool) {
-        workingHistoryView.reloadData()
     }
 
     // MARK: - Method
@@ -59,10 +65,11 @@ class WorkingHistoryViewController: UIViewController {
 }
 
 extension WorkingHistoryViewController: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+
     // MARK: - Header
 
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 3
+        return postDate.count + 1
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
@@ -82,8 +89,8 @@ extension WorkingHistoryViewController: UICollectionViewDataSource, UICollection
             return topHeader
         } else {
             let contentHeader = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: WorkingHistoryViewContentHeader.identifier, for: indexPath) as! WorkingHistoryViewContentHeader
-
-            contentHeader.uploadDate.text = "10월 12일"
+            
+            contentHeader.uploadDate.text = "12월 10일"
 
             return contentHeader
         }
@@ -94,9 +101,8 @@ extension WorkingHistoryViewController: UICollectionViewDataSource, UICollection
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if section == 0 {
             return 1
-        } else {
-            return coreDataManager.postings.count
         }
+        return posts.count
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -107,11 +113,15 @@ extension WorkingHistoryViewController: UICollectionViewDataSource, UICollection
         } else {
             let contentCell = collectionView.dequeueReusableCell(withReuseIdentifier: WorkingHistoryViewContentCell.identifier, for: indexPath) as! WorkingHistoryViewContentCell
 
-            coreDataManager.loadPhotoData(postingID: Int(coreDataManager.postings[indexPath.item].postingID))
-            contentCell.uiImageView.image = UIImage(data: coreDataManager.photos[0].photoPath!)
-            contentCell.imageDescription.text = coreDataManager.postings[indexPath.item].explanation
-            contentCell.workType.text = Category.categoryName(Category(rawValue: Int(coreDataManager.postings[indexPath.item].categoryID))!)()
-
+            contentCell.imageDescription.text = posts[indexPath.item].description
+            contentCell.workType.text = Category.categoryName(Category(rawValue: posts[indexPath.item].category)!)()
+            
+            DispatchQueue.global().async {
+                let data = try? Data(contentsOf: URL(string: self.posts[indexPath.item].photos[0].photoPath)!)
+                DispatchQueue.main.async {
+                    contentCell.uiImageView.image = UIImage(data: data!)
+                }
+            }
             return contentCell
         }
     }
@@ -133,13 +143,16 @@ extension WorkingHistoryViewController: UICollectionViewDataSource, UICollection
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if indexPath.section > 0 {
             let detailViewController = DetailViewController()
-            coreDataManager.loadPhotoData(postingID: Int(coreDataManager.postings[indexPath.item].postingID))
-            detailViewController.images = coreDataManager.photos
-            coreDataManager.postings.forEach {
-                if $0 == coreDataManager.postings[indexPath.item] {
-                    detailViewController.descriptionLBL.text = $0.explanation
-                }
-            }
+            
+            // TODO: - 이미지 및 설명 클릭 시 데이터 바인딩
+            
+//            coreDataManager.loadPhotoData(postingID: Int(coreDataManager.postings[indexPath.item].postingID))
+//            detailViewController.images = coreDataManager.photos
+//            coreDataManager.postings.forEach {
+//                if $0 == coreDataManager.postings[indexPath.item] {
+//                    detailViewController.descriptionLBL.text = $0.explanation
+//                }
+//            }
             navigationController?.pushViewController(detailViewController, animated: true)
         }
     }

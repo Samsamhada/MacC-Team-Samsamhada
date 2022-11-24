@@ -10,9 +10,22 @@ import UIKit
 class SegmentedControlViewController: UIViewController {
 
     // MARK: - Property
-
-    var roomID: Int?
-    var roomCategoryID: [Int] = []
+    
+    let roomAPI: RoomAPI = RoomAPI(apiService: APIService())
+    var room: Room?
+    var posts = [Post]() {
+        didSet {
+            posts.sort(by: {$0.postID > $1.postID})
+            posts.forEach {
+                if $0.type == 0 {
+                    workingHistoryView.posts.append($0)
+                }
+                if $0.type == 1 {
+                    print("문의내역으로 보내져야함!")
+                }
+            }
+        }
+    }
 
     // MARK: - View
 
@@ -26,7 +39,7 @@ class SegmentedControlViewController: UIViewController {
     }(UISegmentedControl(items: ["시공내역", "문의내역"]))
 
     private lazy var workingHistoryView: WorkingHistoryViewController = {
-        $0.roomID = roomID
+        $0.room = room
         return $0
     }(WorkingHistoryViewController())
 
@@ -72,19 +85,22 @@ class SegmentedControlViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        coreDataManager.loadOneRoomData(roomID: roomID!)
-        coreDataManager.loadPostingData(roomID: roomID!)
-        coreDataManager.loadWorkingStatusData(roomID: roomID!)
-        setRoomCategoryID()
+//        setRoomCategoryID()
+        // TODO: - 작업상태 로드를 위한 코드
+        
+//        coreDataManager.loadWorkingStatusData(roomID: roomID!))
+        loadPostByRoom(roomID: room!.roomID)
     }
 
     // MARK: - Method
 
+    // TODO: - 카테고리 설정을 위한 코드
+
     private func setRoomCategoryID() {
-        roomCategoryID = []
-        coreDataManager.workingStatuses.forEach {
-            roomCategoryID.append(Int($0.categoryID))
-        }
+//        roomCategoryID = []
+//        coreDataManager.workingStatuses.forEach {
+//            roomCategoryID.append(Int($0.categoryID))
+//        }
     }
 
     private func attribute() {
@@ -139,10 +155,8 @@ class SegmentedControlViewController: UIViewController {
         )
     }
 
-    // MARK: - Method
-
     private func setNavigationBar() {
-        navigationItem.title = coreDataManager.oneRoom?.clientName
+        navigationItem.title = room?.clientName
         navigationController?.navigationBar.prefersLargeTitles = false
         let rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "gearshape"), style: .plain, target: self, action: #selector(tapSettingButton))
         rightBarButtonItem.tintColor = .black
@@ -179,11 +193,29 @@ class SegmentedControlViewController: UIViewController {
 
     @objc func tapWritingButton() {
         let postingCategoryViewController = PostingCategoryViewController()
-        postingCategoryViewController.roomID = roomID
-        postingCategoryViewController.roomCategoryID = roomCategoryID
+        
+        // TODO: - 시공상황작성하기 버튼 클릭 시, PostingCategoryView 작업에 필요한 내용.
+
+//        postingCategoryViewController.roomID = roomID
+//        postingCategoryViewController.roomCategoryID = roomCategoryID
         let navigationController = UINavigationController(rootViewController: postingCategoryViewController)
         navigationController.modalPresentationStyle = .fullScreen
         present(navigationController, animated:  true, completion: nil)
+    }
+    
+    private func loadPostByRoom(roomID: Int) {
+        Task {
+            do {
+                let response = try await self.roomAPI.loadPostByRoom(roomID: roomID)
+                guard let data = response else {
+                    return
+                }
+                posts = data
+            } catch NetworkError.serverError {
+            } catch NetworkError.encodingError {
+            } catch NetworkError.clientError(_) {
+            }
+        }
     }
 }
 

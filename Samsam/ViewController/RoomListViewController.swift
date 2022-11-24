@@ -34,9 +34,7 @@ class RoomListViewController: UIViewController {
     }
 
     override func viewWillAppear(_ animated: Bool) {
-        loadRoomByWorkerID(workerID: 5) { room in
-            self.rooms = room ?? []
-        }
+        loadRoomByWorkerID(workerID: 5)
     }
 
     // MARK: - Method
@@ -74,14 +72,14 @@ class RoomListViewController: UIViewController {
         collectionView.dataSource = self
     }
 
-    private func loadRoomByWorkerID(workerID: Int, completionHandler: @escaping([Room]?) -> Void) {
+    private func loadRoomByWorkerID(workerID: Int) {
         Task {
             do {
                 let response = try await self.roomAPI.loadRoomByWorkerID(workerID: workerID)
                 guard let data = response else {
                     return
                 }
-                completionHandler(data)
+                rooms = data
             } catch NetworkError.serverError {
             } catch NetworkError.encodingError {
             } catch NetworkError.clientError(_) {
@@ -112,7 +110,7 @@ extension RoomListViewController: UICollectionViewDataSource, UICollectionViewDe
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RoomListCell.identifier, for: indexPath) as! RoomListCell
 
         let tapRoomListButton = CustomTapGestureRecognizer(target: self, action: #selector(tapRoomListButton))
-        tapRoomListButton.roomID = Int(rooms[indexPath.item].roomID)
+        tapRoomListButton.rooms = rooms[indexPath.item]
         cell.roomStack.isUserInteractionEnabled = true
         cell.roomStack.addGestureRecognizer(tapRoomListButton)
 
@@ -154,11 +152,11 @@ extension RoomListViewController: UICollectionViewDataSource, UICollectionViewDe
 
     @objc func tapRoomListButton(sender: CustomTapGestureRecognizer) {
         let segmentedControlViewController = SegmentedControlViewController()
-        segmentedControlViewController.roomID = sender.roomID
+        segmentedControlViewController.room = sender.rooms!
         navigationController?.pushViewController(segmentedControlViewController, animated: true)
     }
 }
 
 class CustomTapGestureRecognizer: UITapGestureRecognizer {
-    var roomID: Int?
+    var rooms: Room?
 }

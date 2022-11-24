@@ -69,6 +69,7 @@
 		9866F51A291960E0002D3589 /* RoomCreationViewDateHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9866F519291960E0002D3589 /* RoomCreationViewDateHeader.swift */; };
 		9866F5212919E2DC002D3589 /* RoomCreationViewWarrantyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9866F5202919E2DC002D3589 /* RoomCreationViewWarrantyCell.swift */; };
 		9866F523291BF173002D3589 /* RoomCreationViewDateSecondCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9866F522291BF173002D3589 /* RoomCreationViewDateSecondCell.swift */; };
+		986805F2292C6C77000B997E /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 986805F1292C6C77000B997E /* Post.swift */; };
 		98B08A60290AC8C900401650 /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98B08A5F290AC8C900401650 /* UIColor+.swift */; };
 		98C0D06028FCE8EB00E0E439 /* AutoLayout+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98C0D05F28FCE8EB00E0E439 /* AutoLayout+.swift */; };
 		98C0D06428FCE99300E0E439 /* JSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98C0D06328FCE99300E0E439 /* JSON.swift */; };
@@ -150,6 +151,7 @@
 		9866F519291960E0002D3589 /* RoomCreationViewDateHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomCreationViewDateHeader.swift; sourceTree = "<group>"; };
 		9866F5202919E2DC002D3589 /* RoomCreationViewWarrantyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomCreationViewWarrantyCell.swift; sourceTree = "<group>"; };
 		9866F522291BF173002D3589 /* RoomCreationViewDateSecondCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomCreationViewDateSecondCell.swift; sourceTree = "<group>"; };
+		986805F1292C6C77000B997E /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		98B08A5F290AC8C900401650 /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
 		98C0D05F28FCE8EB00E0E439 /* AutoLayout+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AutoLayout+.swift"; sourceTree = "<group>"; };
 		98C0D06328FCE99300E0E439 /* JSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSON.swift; sourceTree = "<group>"; };
@@ -251,6 +253,7 @@
 				26664F6A292B043B00C2D4F0 /* Room.swift */,
 				26664F74292B960D00C2D4F0 /* Status.swift */,
 				43C15C6A2927A89100E8DD92 /* Message.swift */,
+				986805F1292C6C77000B997E /* Post.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -526,6 +529,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				431F0776291DEBB7004FC4B6 /* Requestable.swift in Sources */,
+				986805F2292C6C77000B997E /* Post.swift in Sources */,
 				9866F51629189AEE002D3589 /* PhoneNumberStyle+.swift in Sources */,
 				26FEC1DB2902E6F2006C410B /* PostingEntity+CoreDataClass.swift in Sources */,
 				26E3749C28FE8E6F00997DA7 /* LoginViewController.swift in Sources */,
@@ -744,7 +748,7 @@
 				CODE_SIGN_ENTITLEMENTS = Samsam/Samsam.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = UDCS6NMGF8;
+				DEVELOPMENT_TEAM = N6LML762WM;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Samsam/Info.plist;
 				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "사진 저장을 위해 라이브러리 접근권한이 필요합니다.";
@@ -759,7 +763,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.Dinner2.Samsam;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Eddy.Samsam;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -778,7 +782,7 @@
 				CODE_SIGN_ENTITLEMENTS = Samsam/Samsam.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = UDCS6NMGF8;
+				DEVELOPMENT_TEAM = N6LML762WM;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Samsam/Info.plist;
 				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "사진 저장을 위해 라이브러리 접근권한이 필요합니다.";
@@ -793,7 +797,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.y.Samsam;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Eddy.Samsam;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
