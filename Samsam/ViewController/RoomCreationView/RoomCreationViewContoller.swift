@@ -17,7 +17,23 @@ class RoomCreationViewController: UIViewController{
 
     // MARK: - Property
 
-    var roomCreation: Bool?
+    var room: Room?
+    var roomCreation: Bool? {
+        didSet {
+            if roomCreation == true {
+                navigationItem.title = "방 생성"
+                nextButton.setTitle("다음", for: .normal)
+                nextButton.isEnabled = false
+                nextButton.addTarget(self, action: #selector(tapNextButton), for: .touchUpInside)
+            } else {
+                navigationItem.title = "방 정보 수정"
+                nextButton.setTitle("수정 완료", for: .normal)
+                nextButton.isEnabled = true
+                nextButton.addTarget(self, action: #selector(tapModificationDoneButton), for: .touchUpInside)
+            }
+        }
+    }
+    
     var workerID = 0
     private var tableViewData = [CellData]()
     private let roomCategoryViewController = RoomCategoryViewController()
@@ -69,8 +85,6 @@ class RoomCreationViewController: UIViewController{
         $0.backgroundColor = AppColor.campanulaBlue
         $0.layer.cornerRadius = 16
         $0.backgroundColor = .gray
-        $0.isEnabled = false
-        $0.addTarget(self, action: #selector(tapNextButton), for: .touchUpInside)
         return $0
     }(UIButton())
 
@@ -165,7 +179,6 @@ class RoomCreationViewController: UIViewController{
     }
 
     private func setNavigation() {
-        navigationItem.title = "방 생성"
         navigationItem.leftBarButtonItem = UIBarButtonItem(
             image: UIImage(systemName: "xmark"),
             style: .plain,
@@ -182,6 +195,10 @@ class RoomCreationViewController: UIViewController{
         roomCategoryViewController.clientName = customerTextField.text ?? ""
 
         navigationController?.pushViewController(roomCategoryViewController, animated: true)
+    }
+    
+    @objc private func tapModificationDoneButton() {
+        // 여기에서 정보 취합
     }
 
     @objc private func tapCloseButton() {
@@ -262,7 +279,7 @@ extension RoomCreationViewController: UITableViewDelegate, UITableViewDataSource
 
         if indexPath.row == 0 {
             setCell(UITableViewCell: header, UIView: header.dateView)
-
+            
             if indexPath.section == 0 {
                 header.dateLabel.text = "시공일"
                 header.dateButton.text = startDate

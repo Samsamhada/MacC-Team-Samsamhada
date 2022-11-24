@@ -76,9 +76,11 @@ class SettingRoomViewController: UIViewController {
     
     private func tapRoomModification() {
         let roomCreationView = RoomCreationViewController()
+        roomCreationView.room = room
         roomCreationView.roomCreation = false
-        roomCreationView.modalPresentationStyle = .fullScreen
-        present(roomCreationView, animated:  true, completion: nil)
+        let navigationController = UINavigationController(rootViewController: roomCreationView)
+        navigationController.modalPresentationStyle = .fullScreen
+        present(navigationController, animated:  true, completion: nil)
     }
 }
 
