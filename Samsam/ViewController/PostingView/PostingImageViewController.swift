@@ -237,7 +237,7 @@ class PostingImageViewController: UIViewController {
             newHeight = image.size.height * scale
         } else {
             scale = 1.0
-            newHeight = image.size.height * scale
+            newHeight = image.size.height
         }
         UIGraphicsBeginImageContext(CGSizeMake(newWidth, newHeight))
         image.draw(in: CGRectMake(0, 0, newWidth, newHeight))
