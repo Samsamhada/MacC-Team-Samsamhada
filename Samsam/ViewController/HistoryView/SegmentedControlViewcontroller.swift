@@ -196,8 +196,7 @@ class SegmentedControlViewController: UIViewController {
         
         // TODO: - 시공상황작성하기 버튼 클릭 시, PostingCategoryView 작업에 필요한 내용.
 
-//        postingCategoryViewController.roomID = roomID
-//        postingCategoryViewController.roomCategoryID = roomCategoryID
+        postingCategoryViewController.room = room
         let navigationController = UINavigationController(rootViewController: postingCategoryViewController)
         navigationController.modalPresentationStyle = .fullScreen
         present(navigationController, animated:  true, completion: nil)
