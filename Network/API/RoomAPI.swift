@@ -42,6 +42,13 @@ struct RoomAPI {
         return try await apiService.request(request)
     }
     
+    func loadStatusesByRoom(roomID: Int) async throws -> [Status]? {
+        let request = RoomEndPoint
+            .loadStatusesByRoom(roomID: roomID)
+            .createRequest()
+        return try await apiService.request(request)
+    }
+    
     func loadPostByRoom(roomID: Int) async throws -> [Post]? {
         let request = RoomEndPoint
             .loadPostsByRoom(roomID: roomID)
