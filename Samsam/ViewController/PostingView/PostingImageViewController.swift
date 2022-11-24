@@ -232,17 +232,17 @@ class PostingImageViewController: UIViewController {
     private func resizeImage(image: UIImage, newWidth: CGFloat) -> UIImage {
         var scale = 0.0
         var newHeight = 0.0
+
         if newWidth < image.size.width {
             scale = newWidth / image.size.width
             newHeight = image.size.height * scale
-        } else {
-            newHeight = image.size.height
+            UIGraphicsBeginImageContext(CGSizeMake(newWidth, newHeight))
+            image.draw(in: CGRectMake(0, 0, newWidth, newHeight))
+            let newImage = UIGraphicsGetImageFromCurrentImageContext()
+            UIGraphicsEndImageContext()
+            return newImage!
         }
-        UIGraphicsBeginImageContext(CGSizeMake(newWidth, newHeight))
-        image.draw(in: CGRectMake(0, 0, newWidth, newHeight))
-        let newImage = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        return newImage!
+        return image
     }
 
     @objc func uploadPhoto() {
@@ -285,10 +285,10 @@ extension PostingImageViewController: PHPickerViewControllerDelegate {
                         guard let image = image as? UIImage else { return }
                         if self?.changeNUM == -1 {
                             self?.photoImages.insert(CellItem(image: image,
-                                                              path: self!.resizeImage(image: image, newWidth: UIScreen.main.bounds.width).jpegData(compressionQuality: 1.0)), at: 0)
+                                                              path: self!.resizeImage(image: image, newWidth: 800).jpegData(compressionQuality: 1.0)), at: 0)
                         } else {
                             self?.photoImages[self!.changeNUM] = CellItem(image: image,
-                                                                          path: self!.resizeImage(image: image, newWidth: UIScreen.main.bounds.width).jpegData(compressionQuality: 1.0))
+                                                                          path: self!.resizeImage(image: image, newWidth: 800).jpegData(compressionQuality: 1.0))
                         }
                         self?.imageCellView.reloadData()
                     }
