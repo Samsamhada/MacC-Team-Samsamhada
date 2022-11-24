@@ -11,22 +11,17 @@ class PostingCategoryViewController: UIViewController {
 
     // MARK: - Property
     
+    var roomID: Int?
+    private var categoryID: Int = 0
+    var roomCategoryID: [Int] = []
     var roomAPI: RoomAPI = RoomAPI(apiService: APIService())
-    var room: Room? {
-        didSet{
-            categoryView.reloadData()
-        }
-    }
+    var room: Room?
     
     var status: [Status]? {
         didSet {
             categoryView.reloadData()
         }
     }
-    
-    var roomID: Int?
-    private var categoryID: Int = 0
-    var roomCategoryID: [Int] = []
 
     // MARK: - View
 
@@ -109,8 +104,8 @@ class PostingCategoryViewController: UIViewController {
 
     @objc func tapNextBtn(_sender: UIButton) {
         let postingImageViewController = PostingImageViewController()
-//        postingImageViewController.roomID = roomID
-//        postingImageViewController.categoryID = roomCategoryID[categoryID]
+        postingImageViewController.room = room
+        postingImageViewController.categoryID = categoryID
         navigationController?.pushViewController(postingImageViewController, animated: true)
     }
 
