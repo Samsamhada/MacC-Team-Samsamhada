@@ -12,6 +12,7 @@ class SettingRoomViewController: UIViewController {
     // MARK: - Property
  
     private var invitecode: String?
+    var room: Room?
     
     // MARK: - View
     
@@ -38,6 +39,9 @@ class SettingRoomViewController: UIViewController {
 
     private func attribute() {
         view.backgroundColor = .white
+        
+        setupNavigationTitle()
+        
         self.tableView.dataSource = self
         self.tableView.delegate = self
     }
@@ -53,6 +57,12 @@ class SettingRoomViewController: UIViewController {
         )
     }
     
+    private func setupNavigationTitle() {
+        navigationItem.title = "방 설정"
+        navigationController?.navigationBar.prefersLargeTitles = false
+        navigationController?.setNavigationBarHidden(false, animated: true)
+    }
+    
     private func shareInvitecode() {
         var shareItems = [String]()
         if let invitecode = invitecode {
@@ -62,6 +72,13 @@ class SettingRoomViewController: UIViewController {
         let activityViewController = UIActivityViewController(activityItems: shareItems, applicationActivities: nil)
         activityViewController.popoverPresentationController?.sourceView = self.view
         self.present(activityViewController, animated: true, completion: nil)
+    }
+    
+    private func tapRoomModification() {
+        let roomCreationView = RoomCreationViewController()
+        roomCreationView.roomCreation = false
+        roomCreationView.modalPresentationStyle = .fullScreen
+        present(roomCreationView, animated:  true, completion: nil)
     }
 }
 
@@ -92,8 +109,7 @@ extension SettingRoomViewController: UITableViewDataSource, UITableViewDelegate 
         case [0,0]:
             self.shareInvitecode()
         case [1,0]:
-            // TODO: - 추후 수정 예정
-            print("방 정보 수정")
+            self.tapRoomModification()
         default:
             break
         }

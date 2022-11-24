@@ -161,10 +161,13 @@ class SegmentedControlViewController: UIViewController {
         let rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "gearshape"), style: .plain, target: self, action: #selector(tapSettingButton))
         rightBarButtonItem.tintColor = .black
         navigationItem.rightBarButtonItem = rightBarButtonItem
+        let backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
+        navigationItem.backBarButtonItem = backBarButtonItem
     }
 
     @objc func tapSettingButton() {
-        let settingViewController = ViewController()
+        let settingViewController = SettingRoomViewController()
+        settingViewController.room = room
         navigationController?.pushViewController(settingViewController, animated: true)
     }
 
