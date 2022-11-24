@@ -26,6 +26,7 @@ class RoomCreationViewController: UIViewController{
                 nextButton.isEnabled = false
                 nextButton.addTarget(self, action: #selector(tapNextButton), for: .touchUpInside)
             } else {
+                loadRoomImformation()
                 navigationItem.title = "방 정보 수정"
                 nextButton.setTitle("수정 완료", for: .normal)
                 nextButton.isEnabled = true
@@ -199,6 +200,7 @@ class RoomCreationViewController: UIViewController{
     
     @objc private func tapModificationDoneButton() {
         // 여기에서 정보 취합
+        updateRoomImformation()
     }
 
     @objc private func tapCloseButton() {
@@ -234,6 +236,15 @@ class RoomCreationViewController: UIViewController{
                          CellData(sectionData: roomCreationViewWarrantyCell)
         ]
     }
+    
+    private func updateRoomImformation() {
+        // API 통신 필요
+    }
+    
+    private func loadRoomImformation() {
+        customerTextField.text = room?.clientName
+        print(room!.warrantyTime)
+        roomCategoryViewController.warrantyTime = room!.warrantyTime
 }
 
 extension RoomCreationViewController: UITableViewDelegate, UITableViewDataSource {
