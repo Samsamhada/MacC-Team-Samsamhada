@@ -46,7 +46,7 @@ class PostingCategoryViewController: UIViewController {
         super.viewDidLoad()
         attribute()
         layout()
-        loadStatusesByRoom(roomID: room?.roomID ?? 1)
+        loadStatusesByRoomID(roomID: room?.roomID ?? 1)
     }
 
     // MARK: - Method
@@ -109,9 +109,9 @@ class PostingCategoryViewController: UIViewController {
         navigationController?.pushViewController(postingImageViewController, animated: true)
     }
 
-    func loadStatusesByRoom(roomID: Int) {
+    func loadStatusesByRoomID(roomID: Int) {
         Task {
-            let response = try await self.roomAPI.loadStatusesByRoom(roomID: room!.roomID)
+            let response = try await self.roomAPI.loadStatusesByRoomID(roomID: room!.roomID)
             guard let data = response else {
                 return 
             }

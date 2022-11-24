@@ -187,10 +187,10 @@ class SegmentedControlViewController: UIViewController {
         present(navigationController, animated:  true, completion: nil)
     }
     
-    private func loadPostByRoom(roomID: Int) {
+    private func loadPostByRoomID(roomID: Int) {
         Task {
             do {
-                let response = try await self.roomAPI.loadPostByRoom(roomID: roomID)
+                let response = try await self.roomAPI.loadPostByRoomID(roomID: roomID)
                 guard let data = response else {
                     return
                 }
