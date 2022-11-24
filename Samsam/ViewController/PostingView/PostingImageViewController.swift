@@ -228,6 +228,16 @@ class PostingImageViewController: UIViewController {
 
         present(alert, animated: true, completion: nil)
     }
+    
+    private func resizeImage(image: UIImage, newWidth: CGFloat) -> UIImage {
+        let scale = newWidth / image.size.width
+        let newHeight = image.size.height * scale
+        UIGraphicsBeginImageContext(CGSizeMake(newWidth, newHeight))
+        image.draw(in: CGRectMake(0, 0, newWidth, newHeight))
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return newImage!
+    }
 
     @objc func uploadPhoto() {
         changeNUM = -1
@@ -268,9 +278,11 @@ extension PostingImageViewController: PHPickerViewControllerDelegate {
                     DispatchQueue.main.async {
                         guard let image = image as? UIImage else { return }
                         if self?.changeNUM == -1 {
-                            self?.photoImages.insert(CellItem(image: image, path: image.pngData()), at: 0)
+                            self?.photoImages.insert(CellItem(image: image,
+                                                              path: self!.resizeImage(image: image, newWidth: UIScreen.main.bounds.width).jpegData(compressionQuality: 1.0)), at: 0)
                         } else {
-                            self?.photoImages[self!.changeNUM] = CellItem(image: image, path: image.pngData())
+                            self?.photoImages[self!.changeNUM] = CellItem(image: image,
+                                                                          path: self!.resizeImage(image: image, newWidth: UIScreen.main.bounds.width).jpegData(compressionQuality: 1.0))
                         }
                         self?.imageCellView.reloadData()
                     }
