@@ -18,6 +18,8 @@ class PostingImageViewController: UIViewController {
 
     var roomID: Int?
     var categoryID: Int?
+    var room: Room?
+    var status: [Status]?
 
     private var photoImages: [CellItem] = []
     private var changeNUM: Int = -1

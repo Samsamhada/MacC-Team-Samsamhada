@@ -10,10 +10,18 @@ import UIKit
 class PostingCategoryViewController: UIViewController {
 
     // MARK: - Property
-
+    
     var roomID: Int?
     private var categoryID: Int = 0
     var roomCategoryID: [Int] = []
+    var roomAPI: RoomAPI = RoomAPI(apiService: APIService())
+    var room: Room?
+    
+    var status: [Status]? {
+        didSet {
+            categoryView.reloadData()
+        }
+    }
 
     // MARK: - View
 
@@ -38,6 +46,7 @@ class PostingCategoryViewController: UIViewController {
         super.viewDidLoad()
         attribute()
         layout()
+        loadStatusesByRoomID(roomID: room?.roomID ?? 1)
     }
 
     // MARK: - Method
@@ -95,30 +104,39 @@ class PostingCategoryViewController: UIViewController {
 
     @objc func tapNextBtn(_sender: UIButton) {
         let postingImageViewController = PostingImageViewController()
-        postingImageViewController.roomID = roomID
-        postingImageViewController.categoryID = roomCategoryID[categoryID]
+        postingImageViewController.room = room
+        postingImageViewController.categoryID = categoryID
         navigationController?.pushViewController(postingImageViewController, animated: true)
+    }
+
+    func loadStatusesByRoomID(roomID: Int) {
+        Task {
+            let response = try await self.roomAPI.loadStatusesByRoomID(roomID: room!.roomID)
+            guard let data = response else {
+                return 
+            }
+            status = data
+        }
     }
 }
 
 // MARK: - UICollectionViewDelegate, DataSourse, DelegateFlowLayout
 
-extension PostingCategoryViewController:  UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+extension PostingCategoryViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return roomCategoryID.count
+        return status?.count ?? 0
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CategoryCell.identifier, for: indexPath) as! CategoryCell
-
+        
         if indexPath.item == categoryID {
             cell.categoryImage.image = UIImage(named: CategoryCell.ImageLiteral.Check)
         } else {
             cell.categoryImage.image = UIImage(named: CategoryCell.ImageLiteral.noCheck)
         }
 
-        let category: Category = Category(rawValue: roomCategoryID[indexPath.row])!
+        let category: Category = Category(rawValue: status![indexPath.item].category)!
         cell.categoryTitle.text = "\(category.categoryName())"
         return cell
     }
