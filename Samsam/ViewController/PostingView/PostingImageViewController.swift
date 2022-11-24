@@ -230,8 +230,15 @@ class PostingImageViewController: UIViewController {
     }
     
     private func resizeImage(image: UIImage, newWidth: CGFloat) -> UIImage {
-        let scale = newWidth / image.size.width
-        let newHeight = image.size.height * scale
+        var scale = 0.0
+        var newHeight = 0.0
+        if newWidth < image.size.width {
+            scale = newWidth / image.size.width
+            newHeight = image.size.height * scale
+        } else {
+            scale = 1.0
+            newHeight = image.size.height * scale
+        }
         UIGraphicsBeginImageContext(CGSizeMake(newWidth, newHeight))
         image.draw(in: CGRectMake(0, 0, newWidth, newHeight))
         let newImage = UIGraphicsGetImageFromCurrentImageContext()
