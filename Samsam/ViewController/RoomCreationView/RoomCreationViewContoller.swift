@@ -17,6 +17,7 @@ class RoomCreationViewController: UIViewController{
 
     // MARK: - Property
 
+    var roomCreation: Bool?
     var workerID = 0
     private var tableViewData = [CellData]()
     private let roomCategoryViewController = RoomCategoryViewController()
