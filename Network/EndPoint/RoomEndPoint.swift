@@ -10,6 +10,7 @@ import Foundation
 enum RoomEndPoint: EndPointable {
     case startAppleLogin(body: LoginDTO)
     case createRoom(body: RoomDTO)
+    case modifyRoom(roomID: Int, body: RoomDTO)
     case loadRoomByWorkerID(workerID: Int)
     case createStatus(body: StatusDTO)
     case loadPostsByRoom(roomID: Int)
@@ -24,6 +25,8 @@ enum RoomEndPoint: EndPointable {
             return .post
         case .loadRoomByWorkerID, .loadPostsByRoom:
             return .get
+        case .modifyRoom:
+            return .put
         }
     }
 
@@ -32,6 +35,8 @@ enum RoomEndPoint: EndPointable {
         case .startAppleLogin(let body):
             return body.encode()
         case .createRoom(let body):
+            return body.encode()
+        case .modifyRoom(_, let body):
             return body.encode()
         case .createStatus(let body):
             return body.encode()
@@ -46,6 +51,8 @@ enum RoomEndPoint: EndPointable {
             return "\(APIEnvironment.workersURL)"
         case .createRoom:
             return "\(APIEnvironment.roomsURL)"
+        case .modifyRoom(let roomID, _):
+            return "\(APIEnvironment.roomsURL)/\(roomID)"
         case .loadRoomByWorkerID(let workerID):
             return "\(APIEnvironment.roomsURL)/worker/\(workerID)"
         case .createStatus:
