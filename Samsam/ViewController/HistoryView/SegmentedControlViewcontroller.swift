@@ -85,23 +85,11 @@ class SegmentedControlViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-//        setRoomCategoryID()
-        // TODO: - 작업상태 로드를 위한 코드
-        
-//        coreDataManager.loadWorkingStatusData(roomID: roomID!))
         loadPostByRoom(roomID: room!.roomID)
     }
 
     // MARK: - Method
 
-    // TODO: - 카테고리 설정을 위한 코드
-
-    private func setRoomCategoryID() {
-//        roomCategoryID = []
-//        coreDataManager.workingStatuses.forEach {
-//            roomCategoryID.append(Int($0.categoryID))
-//        }
-    }
 
     private func attribute() {
         view.backgroundColor = .white
@@ -193,9 +181,6 @@ class SegmentedControlViewController: UIViewController {
 
     @objc func tapWritingButton() {
         let postingCategoryViewController = PostingCategoryViewController()
-        
-        // TODO: - 시공상황작성하기 버튼 클릭 시, PostingCategoryView 작업에 필요한 내용.
-
         postingCategoryViewController.room = room
         let navigationController = UINavigationController(rootViewController: postingCategoryViewController)
         navigationController.modalPresentationStyle = .fullScreen
