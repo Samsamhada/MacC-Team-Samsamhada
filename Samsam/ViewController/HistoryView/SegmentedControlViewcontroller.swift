@@ -85,7 +85,7 @@ class SegmentedControlViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        loadPostByRoom(roomID: room!.roomID)
+        loadPostByRoomID(roomID: room!.roomID)
     }
 
     // MARK: - Method

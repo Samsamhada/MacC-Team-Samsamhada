@@ -79,7 +79,7 @@
 		98C0D07228FD02E400E0E439 /* WorkingHistoryViewContentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98C0D07128FD02E400E0E439 /* WorkingHistoryViewContentCell.swift */; };
 		98C2448B28FD3EDA0006A01B /* WorkingHistoryViewTopHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98C2448A28FD3EDA0006A01B /* WorkingHistoryViewTopHeader.swift */; };
 		98CFE3122910FC8E004B2FA1 /* InquiryHistoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98CFE3112910FC8E004B2FA1 /* InquiryHistoryViewController.swift */; };
-		98E1700D2906EFEB00F71D41 /* hideKeyboard+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E1700C2906EFEB00F71D41 /* hideKeyboard+.swift */; };
+		98E1700D2906EFEB00F71D41 /* HideKeyboard+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E1700C2906EFEB00F71D41 /* HideKeyboard+.swift */; };
 		98E1700F29080C9100F71D41 /* ImageDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E1700E29080C9100F71D41 /* ImageDetailViewController.swift */; };
 		98E899BA290FCAAB001245C4 /* WorkingHistoryViewContentHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E899B9290FCAAB001245C4 /* WorkingHistoryViewContentHeader.swift */; };
 		98E899BC290FD00C001245C4 /* WorkingHistoryViewTopCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E899BB290FD00C001245C4 /* WorkingHistoryViewTopCell.swift */; };
@@ -161,7 +161,7 @@
 		98C0D07128FD02E400E0E439 /* WorkingHistoryViewContentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkingHistoryViewContentCell.swift; sourceTree = "<group>"; };
 		98C2448A28FD3EDA0006A01B /* WorkingHistoryViewTopHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkingHistoryViewTopHeader.swift; sourceTree = "<group>"; };
 		98CFE3112910FC8E004B2FA1 /* InquiryHistoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InquiryHistoryViewController.swift; sourceTree = "<group>"; };
-		98E1700C2906EFEB00F71D41 /* hideKeyboard+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "hideKeyboard+.swift"; sourceTree = "<group>"; };
+		98E1700C2906EFEB00F71D41 /* HideKeyboard+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HideKeyboard+.swift"; sourceTree = "<group>"; };
 		98E1700E29080C9100F71D41 /* ImageDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDetailViewController.swift; sourceTree = "<group>"; };
 		98E899B9290FCAAB001245C4 /* WorkingHistoryViewContentHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkingHistoryViewContentHeader.swift; sourceTree = "<group>"; };
 		98E899BB290FD00C001245C4 /* WorkingHistoryViewTopCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkingHistoryViewTopCell.swift; sourceTree = "<group>"; };
@@ -377,7 +377,7 @@
 			isa = PBXGroup;
 			children = (
 				98C0D05F28FCE8EB00E0E439 /* AutoLayout+.swift */,
-				98E1700C2906EFEB00F71D41 /* hideKeyboard+.swift */,
+				98E1700C2906EFEB00F71D41 /* HideKeyboard+.swift */,
 				98B08A5F290AC8C900401650 /* UIColor+.swift */,
 				9866F51529189AEE002D3589 /* PhoneNumberStyle+.swift */,
 			);
@@ -541,7 +541,7 @@
 				431F0778291DEBB7004FC4B6 /* Encodable.swift in Sources */,
 				431F0767291DEB90004FC4B6 /* LoginDTO.swift in Sources */,
 				431F0769291DEB9B004FC4B6 /* LoginEndPoint.swift in Sources */,
-				98E1700D2906EFEB00F71D41 /* hideKeyboard+.swift in Sources */,
+				98E1700D2906EFEB00F71D41 /* HideKeyboard+.swift in Sources */,
 				98C0D06C28FCF46500E0E439 /* WorkingHistoryViewController.swift in Sources */,
 				26FEC1E02902E6F2006C410B /* PhotoEntity+CoreDataProperties.swift in Sources */,
 				98C0D06728FCE9DC00E0E439 /* Model.swift in Sources */,

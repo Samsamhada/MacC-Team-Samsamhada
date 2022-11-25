@@ -228,6 +228,22 @@ class PostingImageViewController: UIViewController {
 
         present(alert, animated: true, completion: nil)
     }
+    
+    private func resizeImage(image: UIImage, newWidth: CGFloat) -> UIImage {
+        var scale = 0.0
+        var newHeight = 0.0
+
+        if newWidth < image.size.width {
+            scale = newWidth / image.size.width
+            newHeight = image.size.height * scale
+            UIGraphicsBeginImageContext(CGSizeMake(newWidth, newHeight))
+            image.draw(in: CGRectMake(0, 0, newWidth, newHeight))
+            let newImage = UIGraphicsGetImageFromCurrentImageContext()
+            UIGraphicsEndImageContext()
+            return newImage!
+        }
+        return image
+    }
 
     @objc func uploadPhoto() {
         changeNUM = -1
@@ -268,9 +284,11 @@ extension PostingImageViewController: PHPickerViewControllerDelegate {
                     DispatchQueue.main.async {
                         guard let image = image as? UIImage else { return }
                         if self?.changeNUM == -1 {
-                            self?.photoImages.insert(CellItem(image: image, path: image.pngData()), at: 0)
+                            self?.photoImages.insert(CellItem(image: image,
+                                                              path: self!.resizeImage(image: image, newWidth: 800).jpegData(compressionQuality: 1.0)), at: 0)
                         } else {
-                            self?.photoImages[self!.changeNUM] = CellItem(image: image, path: image.pngData())
+                            self?.photoImages[self!.changeNUM] = CellItem(image: image,
+                                                                          path: self!.resizeImage(image: image, newWidth: 800).jpegData(compressionQuality: 1.0))
                         }
                         self?.imageCellView.reloadData()
                     }
@@ -309,9 +327,9 @@ extension PostingImageViewController: UICollectionViewDataSource, UICollectionVi
             let buttonCell = collectionView.dequeueReusableCell(withReuseIdentifier: PostingImageButtonCell.identifier, for: indexPath) as! PostingImageButtonCell
             return buttonCell
         } else {
-            let imagecell = collectionView.dequeueReusableCell(withReuseIdentifier: PostingImageCell.identifier, for: indexPath) as! PostingImageCell
-            imagecell.preview.image = photoImages[indexPath.row].image
-            return imagecell
+            let imageCell = collectionView.dequeueReusableCell(withReuseIdentifier: PostingImageCell.identifier, for: indexPath) as! PostingImageCell
+            imageCell.preview.image = UIImage(data: photoImages[indexPath.row].path!)
+            return imageCell
         }
     }
 
@@ -324,12 +342,12 @@ extension PostingImageViewController: UICollectionViewDataSource, UICollectionVi
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let cellWidth =  310
-        let cellHeight = 235
+        let cellWidth = UIScreen.main.bounds.width - 32
+        let cellHeight = (UIScreen.main.bounds.width - 32) / 4 * 3
         return CGSize(width: cellWidth, height: cellHeight)
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 8, left: 8, bottom: 16, right: 8)
+        return UIEdgeInsets(top: 8, left: 8, bottom: 0, right: 8)
     }
 }

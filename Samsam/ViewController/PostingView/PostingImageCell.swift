@@ -12,11 +12,12 @@ class PostingImageCell: UICollectionViewCell {
     // MARK: - Property
 
     static let identifier = "PostingImageCell"
+    var previewData: Data = (UIImage(named: "GrayBox")?.jpegData(compressionQuality: 1.0))!
 
     // MARK: - View
 
-    var preview: UIImageView = {
-        $0.image = UIImage(named: "Test01")
+    lazy var preview: UIImageView = {
+        $0.image = UIImage(data: previewData)
         $0.clipsToBounds = true
         $0.contentMode = .scaleAspectFill
         $0.layer.cornerRadius = 16
