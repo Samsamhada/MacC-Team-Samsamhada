@@ -342,12 +342,12 @@ extension PostingImageViewController: UICollectionViewDataSource, UICollectionVi
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let cellWidth =  310
-        let cellHeight = 235
+        let cellWidth = UIScreen.main.bounds.width - 32
+        let cellHeight = (UIScreen.main.bounds.width - 32) / 4 * 3
         return CGSize(width: cellWidth, height: cellHeight)
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 8, left: 8, bottom: 16, right: 8)
+        return UIEdgeInsets(top: 8, left: 8, bottom: 0, right: 8)
     }
 }
