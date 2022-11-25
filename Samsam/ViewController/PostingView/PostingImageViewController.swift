@@ -327,9 +327,9 @@ extension PostingImageViewController: UICollectionViewDataSource, UICollectionVi
             let buttonCell = collectionView.dequeueReusableCell(withReuseIdentifier: PostingImageButtonCell.identifier, for: indexPath) as! PostingImageButtonCell
             return buttonCell
         } else {
-            let imagecell = collectionView.dequeueReusableCell(withReuseIdentifier: PostingImageCell.identifier, for: indexPath) as! PostingImageCell
-            imagecell.preview.image = photoImages[indexPath.row].image
-            return imagecell
+            let imageCell = collectionView.dequeueReusableCell(withReuseIdentifier: PostingImageCell.identifier, for: indexPath) as! PostingImageCell
+            imageCell.preview.image = UIImage(data: photoImages[indexPath.row].path!)
+            return imageCell
         }
     }
 
