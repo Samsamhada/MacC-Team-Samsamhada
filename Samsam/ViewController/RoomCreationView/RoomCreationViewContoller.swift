@@ -384,29 +384,17 @@ extension RoomCreationViewController: UITableViewDelegate, UITableViewDataSource
 extension RoomCreationViewController: RoomCreationViewDateFirstCellDelegate {
     func firstDateDidTap(date: Date) {
 
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yy. MM. d"
-        let strDate = dateFormatter.string(from: date)
-
-        startDate = strDate
+        startDate = date.toString(dateFormat: "yy-MM-dd")
         currentSelectedFirstDate = date
-
-        roomCategoryViewController.startDate = date
         tableView.reloadData()
     }
 }
 
 extension RoomCreationViewController: RoomCreationViewDateSecondCellDelegate {
     func secondDateDidTap(date: Date) {
-
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yy. MM. d"
-        let strDate = dateFormatter.string(from: date)
-
-        endDate = strDate
+    
+        endDate = date.toString(dateFormat: "yy-MM-dd")
         currentSelectedSecondDate = date
-
-        roomCategoryViewController.endDate = date
         tableView.reloadData()
     }
 }
@@ -414,5 +402,25 @@ extension RoomCreationViewController: RoomCreationViewDateSecondCellDelegate {
 extension RoomCreationViewController: RoomCreationViewWarrantyCellDelegate {
     func warrantyTimeChanged(warrantyTime: Int) {
         roomCategoryViewController.warrantyTime = warrantyTime
+    }
+}
+
+extension String {
+    func toDate(dateFormat: String) -> Date? {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = dateFormat
+        if let date = dateFormatter.date(from: self) {
+            return date
+        } else {
+            return nil
+        }
+    }
+}
+
+extension Date {
+    func toString(dateFormat: String) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = dateFormat
+        return dateFormatter.string(from: self)
     }
 }
