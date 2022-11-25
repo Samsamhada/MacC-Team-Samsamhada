@@ -22,15 +22,11 @@ class RoomCreationViewController: UIViewController{
         didSet {
             if roomCreation == true {
                 navigationItem.title = "방 생성"
-                nextButton.setTitle("다음", for: .normal)
-                nextButton.isEnabled = false
-                nextButton.addTarget(self, action: #selector(tapNextButton), for: .touchUpInside)
+                nextButton.isHidden = false
             } else {
                 loadRoomImformation()
                 navigationItem.title = "방 정보 수정"
-                nextButton.setTitle("수정 완료", for: .normal)
-                nextButton.isEnabled = true
-                nextButton.addTarget(self, action: #selector(tapModificationDoneButton), for: .touchUpInside)
+                modificationButton.isHidden = false
             }
         }
     }
@@ -80,12 +76,25 @@ class RoomCreationViewController: UIViewController{
         return $0
     }(UITableView())
 
-    private let nextButton: UIButton = {
+    private lazy var nextButton: UIButton = {
         $0.setTitle("다음", for: .normal)
         $0.setTitleColor(.white, for: .normal)
         $0.backgroundColor = AppColor.campanulaBlue
         $0.layer.cornerRadius = 16
         $0.backgroundColor = .gray
+        $0.isHidden = true
+        $0.addTarget(self, action: #selector(tapNextButton), for: .touchUpInside)
+        return $0
+    }(UIButton())
+    
+    private lazy var modificationButton: UIButton = {
+        $0.setTitle("수정 완료", for: .normal)
+        $0.setTitleColor(.white, for: .normal)
+        $0.backgroundColor = AppColor.campanulaBlue
+        $0.layer.cornerRadius = 16
+        $0.backgroundColor = .gray
+        $0.isHidden = true
+        $0.addTarget(self, action: #selector(tapModificationButton), for: .touchUpInside)
         return $0
     }(UIButton())
 
@@ -128,6 +137,8 @@ class RoomCreationViewController: UIViewController{
         uiView.addSubview(textUnderLine)
         uiView.addSubview(tableView)
         uiView.addSubview(nextButton)
+        uiView.addSubview(modificationButton)
+        
 
         uiView.anchor(
             top: view.safeAreaLayoutGuide.topAnchor,
@@ -172,6 +183,13 @@ class RoomCreationViewController: UIViewController{
         )
 
         nextButton.anchor(
+            left: uiView.leftAnchor,
+            bottom: uiView.bottomAnchor,
+            right: uiView.rightAnchor,
+            height: 50
+        )
+        
+        modificationButton.anchor(
             left: uiView.leftAnchor,
             bottom: uiView.bottomAnchor,
             right: uiView.rightAnchor,
@@ -237,14 +255,35 @@ class RoomCreationViewController: UIViewController{
         ]
     }
     
-    private func updateRoomImformation() {
-        // API 통신 필요
+    private func updateRoomImformation(RoomDTO: RoomDTO) {
+        Task{
+            do {
+                let response = try await self.roomAPI.createRoom(RoomDTO: RoomDTO)
+                if let data = response {
+                    self.room = data
+                }
+            } catch NetworkError.serverError {
+            } catch NetworkError.encodingError {
+            } catch NetworkError.clientError(_) {
+            }
+        }
     }
     
     private func loadRoomImformation() {
         customerTextField.text = room?.clientName
-        print(room!.warrantyTime)
         roomCategoryViewController.warrantyTime = room!.warrantyTime
+        print("")
+//        let dateFormatter = DateFormatter()
+//        dateFormatter.dateFormat = "yy. MM. d"
+//        let strDate = checkText(textField: room!.startDate)
+    }
+    
+//    private func checkText(date: String) -> String {
+//        let endIndex = date.index(date.startIndex, offsetBy: 10)
+//        let fixedText = date[date.startIndex..<endIndex]
+//        return String(fixedText)
+//    }
+    
 }
 
 extension RoomCreationViewController: UITableViewDelegate, UITableViewDataSource {
