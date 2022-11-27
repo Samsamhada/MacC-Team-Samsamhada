@@ -64,6 +64,7 @@
 		9802007C2914F83400E193E6 /* BezierCurveConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9802007B2914F83400E193E6 /* BezierCurveConfiguration.swift */; };
 		980D900E28FE671B003CC2DA /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980D900D28FE671B003CC2DA /* DetailViewController.swift */; };
 		98366F8D29019A5300E81E27 /* RoomCreationViewContoller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98366F8C29019A5300E81E27 /* RoomCreationViewContoller.swift */; };
+		983679D52933481800668F89 /* PostDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 983679D42933481800668F89 /* PostDTO.swift */; };
 		9866F51629189AEE002D3589 /* PhoneNumberStyle+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9866F51529189AEE002D3589 /* PhoneNumberStyle+.swift */; };
 		9866F518291960CE002D3589 /* RoomCreationViewDateFirstCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9866F517291960CE002D3589 /* RoomCreationViewDateFirstCell.swift */; };
 		9866F51A291960E0002D3589 /* RoomCreationViewDateHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9866F519291960E0002D3589 /* RoomCreationViewDateHeader.swift */; };
@@ -146,6 +147,7 @@
 		9802007B2914F83400E193E6 /* BezierCurveConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BezierCurveConfiguration.swift; sourceTree = "<group>"; };
 		980D900D28FE671B003CC2DA /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		98366F8C29019A5300E81E27 /* RoomCreationViewContoller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomCreationViewContoller.swift; sourceTree = "<group>"; };
+		983679D42933481800668F89 /* PostDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDTO.swift; sourceTree = "<group>"; };
 		9866F51529189AEE002D3589 /* PhoneNumberStyle+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PhoneNumberStyle+.swift"; sourceTree = "<group>"; };
 		9866F517291960CE002D3589 /* RoomCreationViewDateFirstCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomCreationViewDateFirstCell.swift; sourceTree = "<group>"; };
 		9866F519291960E0002D3589 /* RoomCreationViewDateHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomCreationViewDateHeader.swift; sourceTree = "<group>"; };
@@ -305,6 +307,7 @@
 				431F0766291DEB90004FC4B6 /* LoginDTO.swift */,
 				26664F70292B705400C2D4F0 /* RoomDTO.swift */,
 				26664F72292B95A500C2D4F0 /* StatusDTO.swift */,
+				983679D42933481800668F89 /* PostDTO.swift */,
 			);
 			path = Request;
 			sourceTree = "<group>";
@@ -545,6 +548,7 @@
 				98C0D06C28FCF46500E0E439 /* WorkingHistoryViewController.swift in Sources */,
 				26FEC1E02902E6F2006C410B /* PhotoEntity+CoreDataProperties.swift in Sources */,
 				98C0D06728FCE9DC00E0E439 /* Model.swift in Sources */,
+				983679D52933481800668F89 /* PostDTO.swift in Sources */,
 				98C2448B28FD3EDA0006A01B /* WorkingHistoryViewTopHeader.swift in Sources */,
 				98CFE3122910FC8E004B2FA1 /* InquiryHistoryViewController.swift in Sources */,
 				98E899BC290FD00C001245C4 /* WorkingHistoryViewTopCell.swift in Sources */,
