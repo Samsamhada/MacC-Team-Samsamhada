@@ -13,13 +13,11 @@ struct PostDTO: Encodable {
     let category: Int
     let type: Int
     let description: String
-    let photos: [Photo]
 
-    init(roomID: Int, category: Int, type: Int, description: String, photos: [Photo]) {
+    init(roomID: Int, category: Int, type: Int, description: String) {
         self.roomID = roomID
         self.category = category
         self.type = type
         self.description = description
-        self.photos = photos
     }
 }
