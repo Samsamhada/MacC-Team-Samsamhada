@@ -8,7 +8,6 @@
 import Foundation
 
 struct PostDTO: Encodable {
-    
     let roomID: Int
     let category: Int
     let type: Int
