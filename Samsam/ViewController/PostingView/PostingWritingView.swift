@@ -11,6 +11,7 @@ class PostingWritingView: UIViewController {
 
     // MARK: - Property
 
+    var room: Room?
     var roomID: Int?
     var categoryID: Int?
     var photoImages: [CellItem]?
