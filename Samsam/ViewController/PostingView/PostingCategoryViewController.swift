@@ -130,7 +130,7 @@ extension PostingCategoryViewController: UICollectionViewDelegate, UICollectionV
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CategoryCell.identifier, for: indexPath) as! CategoryCell
         
-        if indexPath.item == categoryID {
+        if status![indexPath.item].category == categoryID {
             cell.categoryImage.image = UIImage(named: CategoryCell.ImageLiteral.Check)
         } else {
             cell.categoryImage.image = UIImage(named: CategoryCell.ImageLiteral.noCheck)
@@ -142,7 +142,7 @@ extension PostingCategoryViewController: UICollectionViewDelegate, UICollectionV
     }
 
     func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
-        categoryID = indexPath.item
+        categoryID = status![indexPath.item].category
         collectionView.reloadData()
         return true
     }
