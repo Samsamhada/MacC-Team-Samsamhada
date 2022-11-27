@@ -12,8 +12,9 @@ class PostingWritingView: UIViewController {
     // MARK: - Property
 
     var room: Room?
-    var roomID: Int?
-    var categoryID: Int?
+    var roomAPI: RoomAPI = RoomAPI(apiService: APIService())
+    var post: Post?
+    var categoryID: Int = 0
     var photoImages: [CellItem]?
     private let textViewPlaceHolder = "텍스트를 입력하세요"
 
@@ -135,10 +136,14 @@ class PostingWritingView: UIViewController {
     }
 
     @objc func tapNextBTN() {
-        coreDataManager.createPostingData(roomID: roomID!, categoryID: categoryID!, explanation: textContent.text!)
-        photoImages?.forEach {
-            coreDataManager.createPhotoData(postingID: coreDataManager.countData(dataType: "posting"), photoPath: $0.path!)
-        }
+//        photoImages?.forEach {
+//            coreDataManager.createPhotoData(postingID: coreDataManager.countData(dataType: "posting"), photoPath: $0.path!)
+//        }
+        let postDTO: PostDTO = PostDTO(roomID: room?.roomID ?? 1, category: categoryID, type: 0, description: textContent.text!)
+        createPost(PostDTO: postDTO)
+        
+        
+
         self.dismiss(animated: true)
     }
 
@@ -154,6 +159,21 @@ class PostingWritingView: UIViewController {
         UIView.animate(withDuration: 0.2, animations: {
             self.finalBTN.transform = .identity
         })
+    }
+    
+    private func createPost(PostDTO: PostDTO) {
+        Task{
+            do {
+                let response = try await self.roomAPI.createPost(PostDTO: PostDTO)
+                guard let data = response else {
+                    return
+                }
+                self.post = data
+            } catch NetworkError.serverError {
+            } catch NetworkError.encodingError {
+            } catch NetworkError.clientError(_) {
+            }
+        }
     }
 }
 
