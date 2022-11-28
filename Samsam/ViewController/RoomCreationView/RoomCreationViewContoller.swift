@@ -16,11 +16,13 @@ struct CellData {
 class RoomCreationViewController: UIViewController{
 
     // MARK: - Property
-
+    
+    private let roomAPI: RoomAPI = RoomAPI(apiService: APIService())
     var room: Room?
     var roomCreation: Bool? {
         didSet {
             if roomCreation == true {
+                loadDateImformation()
                 navigationItem.title = "방 생성"
                 nextButton.isHidden = false
             } else {
@@ -39,8 +41,8 @@ class RoomCreationViewController: UIViewController{
     private let roomCreationViewDateSecondCell = RoomCreationViewDateSecondCell()
     private let roomCreationViewWarrantyCell = RoomCreationViewWarrantyCell()
 
-    private var startDate = "\(Date.now)"
-    private var endDate = "\(Date.now)"
+    private var startDate = ""
+    private var endDate = ""
 
     private var currentSelectedFirstDate: Date?
     private var currentSelectedSecondDate: Date?
@@ -102,7 +104,6 @@ class RoomCreationViewController: UIViewController{
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         attribute()
         layout()
     }
@@ -110,13 +111,6 @@ class RoomCreationViewController: UIViewController{
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         tableView.reloadData()
-
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yy. MM. d"
-        let strDate = dateFormatter.string(from: Date.now)
-
-        startDate = strDate
-        endDate = strDate
     }
 
     // MARK: - Method
@@ -212,19 +206,12 @@ class RoomCreationViewController: UIViewController{
     @objc private func tapNextButton() {
         roomCategoryViewController.workerID = workerID
         roomCategoryViewController.clientName = customerTextField.text ?? ""
-
+        roomCategoryViewController.startDate = startDate
+        roomCategoryViewController.endDate = endDate
+        
         navigationController?.pushViewController(roomCategoryViewController, animated: true)
     }
     
-    @objc private func tapModificationDoneButton() {
-        // 여기에서 정보 취합
-        updateRoomImformation()
-    }
-
-    @objc private func tapCloseButton() {
-        self.dismiss(animated: true)
-    }
-
     @objc private func buttonAttributeChanged() {
         if (customerTextField.text!.count) >= 1 {
             nextButton.backgroundColor = .blue
@@ -233,6 +220,15 @@ class RoomCreationViewController: UIViewController{
             nextButton.backgroundColor = .gray
             nextButton.isEnabled = false
         }
+    }
+    
+    @objc private func tapModificationButton() {
+        let roomDTO: RoomDTO = RoomDTO(workerID: room!.workerID, clientName: customerTextField.text!, startDate: startDate, endDate: endDate, warrantyTime: roomCategoryViewController.warrantyTime)
+        updateRoomImformation(RoomDTO: roomDTO)
+    }
+
+    @objc private func tapCloseButton() {
+        self.dismiss(animated: true)
     }
 
     private func setTableView()  {
@@ -269,22 +265,22 @@ class RoomCreationViewController: UIViewController{
         }
     }
     
+    private func loadDateImformation() {
+        startDate = Date.now.toString(dateFormat:  "yyyy-MM-dd HH:mm:ss.SSS")
+        endDate = Date.now.toString(dateFormat:  "yyyy-MM-dd HH:mm:ss.SSS")
+    }
+    
     private func loadRoomImformation() {
         customerTextField.text = room?.clientName
         roomCategoryViewController.warrantyTime = room!.warrantyTime
-        print("")
-//        let dateFormatter = DateFormatter()
-//        dateFormatter.dateFormat = "yy. MM. d"
-//        let strDate = checkText(textField: room!.startDate)
+        startDate = String(room!.startDate.dropLast(1))
+        currentSelectedFirstDate = String(startDate.dropLast(4)).replacingOccurrences(of: "T", with: " ").toDate(dateFormat: "yyyy-MM-dd HH:mm:ss")
+        endDate = String(room!.endDate.dropLast(1))
+        currentSelectedSecondDate = String(endDate.dropLast(4)).replacingOccurrences(of: "T", with: " ").toDate(dateFormat: "yyyy-MM-dd HH:mm:ss")
     }
-    
-//    private func checkText(date: String) -> String {
-//        let endIndex = date.index(date.startIndex, offsetBy: 10)
-//        let fixedText = date[date.startIndex..<endIndex]
-//        return String(fixedText)
-//    }
-    
 }
+
+
 
 extension RoomCreationViewController: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -332,11 +328,11 @@ extension RoomCreationViewController: UITableViewDelegate, UITableViewDataSource
             
             if indexPath.section == 0 {
                 header.dateLabel.text = "시공일"
-                header.dateButton.text = startDate
+                header.dateButton.text = String(startDate.dropLast(13))
             }
             if indexPath.section == 1 {
                 header.dateLabel.text = "준공일"
-                header.dateButton.text = endDate
+                header.dateButton.text = String(endDate.dropLast(13))
             }
 
             return header
@@ -384,17 +380,19 @@ extension RoomCreationViewController: UITableViewDelegate, UITableViewDataSource
 extension RoomCreationViewController: RoomCreationViewDateFirstCellDelegate {
     func firstDateDidTap(date: Date) {
 
-        startDate = date.toString(dateFormat: "yy-MM-dd")
         currentSelectedFirstDate = date
+        startDate = date.toString(dateFormat: "yyyy-MM-dd HH:mm:ss.SSS", local: "ko_KR")
+ 
         tableView.reloadData()
     }
 }
 
 extension RoomCreationViewController: RoomCreationViewDateSecondCellDelegate {
     func secondDateDidTap(date: Date) {
-    
-        endDate = date.toString(dateFormat: "yy-MM-dd")
+
         currentSelectedSecondDate = date
+        endDate = date.toString(dateFormat: "yyyy-MM-dd HH:mm:ss.SSS", local: "ko_KR")
+        
         tableView.reloadData()
     }
 }
@@ -418,9 +416,14 @@ extension String {
 }
 
 extension Date {
-    func toString(dateFormat: String) -> String {
+    func toString(dateFormat: String, local: String? = nil) -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = dateFormat
+        
+        if let local = local {
+            dateFormatter.locale = Locale(identifier: local)
+        }
+        
         return dateFormatter.string(from: self)
     }
 }
