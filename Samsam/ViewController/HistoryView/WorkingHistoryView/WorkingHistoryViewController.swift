@@ -13,6 +13,8 @@ class WorkingHistoryViewController: UIViewController {
     
     var postDate = Set<String>()
     var room: Room?
+    var roomID: Int?
+
     var posts = [Post]() {
         didSet {
             workingHistoryView.reloadData()
@@ -21,7 +23,6 @@ class WorkingHistoryViewController: UIViewController {
             }
         }
     }
-    var roomID: Int?
 
     // MARK: - View
 
@@ -117,7 +118,7 @@ extension WorkingHistoryViewController: UICollectionViewDataSource, UICollection
             contentCell.workType.text = Category.categoryName(Category(rawValue: posts[indexPath.item].category)!)()
             
             DispatchQueue.global().async {
-                let data = try? Data(contentsOf: URL(string: self.posts[indexPath.item].photos[0].photoPath)!)
+                let data = try? Data(contentsOf: URL(string: self.posts[indexPath.item].photos![0].photoPath)!)
                 DispatchQueue.main.async {
                     contentCell.uiImageView.image = UIImage(data: data!)
                 }

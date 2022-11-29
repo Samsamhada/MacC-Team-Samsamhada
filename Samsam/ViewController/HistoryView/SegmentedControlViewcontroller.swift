@@ -91,7 +91,6 @@ class SegmentedControlViewController: UIViewController {
 
     // MARK: - Method
 
-
     private func attribute() {
         view.backgroundColor = .white
 

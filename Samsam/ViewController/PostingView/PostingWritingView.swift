@@ -11,8 +11,6 @@ class PostingWritingView: UIViewController {
 
     // MARK: - Property
 
-    var room: Room?
-    var roomAPI: RoomAPI = RoomAPI(apiService: APIService())
     var post: Post? {
         didSet {
             photoImages?.forEach {
@@ -20,12 +18,12 @@ class PostingWritingView: UIViewController {
             }
         }
     }
-    var photo: Photo?
+    
+    var room: Room?
+    var roomAPI: RoomAPI = RoomAPI(apiService: APIService())
     var categoryID: Int = 0
     var photoImages: [CellItem]?
     private let textViewPlaceHolder = "텍스트를 입력하세요"
-
-    let uiImage = UIImage(named: "TestImage")
     
     // MARK: - View
 
@@ -147,7 +145,6 @@ class PostingWritingView: UIViewController {
     @objc func tapNextBTN() {
         let postDTO: PostDTO = PostDTO(roomID: room?.roomID ?? 1, category: categoryID, type: 0, description: textContent.text!)
         createPost(PostDTO: postDTO)
-
         self.dismiss(animated: true)
     }
 
@@ -206,11 +203,8 @@ class PostingWritingView: UIViewController {
         session.uploadTask(with: urlRequest, from: data, completionHandler: { responseData, response, error in
             if error == nil {
                 let jsonData = try? JSONSerialization.jsonObject(with: responseData!, options: .fragmentsAllowed)
-                if let json = jsonData as? [String: Any] {
-                }
             }
         }).resume()
-        
     }
 }
 
