@@ -14,10 +14,13 @@ class PostingWritingView: UIViewController {
     var room: Room?
     var roomAPI: RoomAPI = RoomAPI(apiService: APIService())
     var post: Post?
+    var photo: Photo?
     var categoryID: Int = 0
     var photoImages: [CellItem]?
     private let textViewPlaceHolder = "텍스트를 입력하세요"
 
+    let uiImage = UIImage(named: "TestImage")
+    
     // MARK: - View
 
     private var textTitle: UILabel = {
@@ -136,13 +139,12 @@ class PostingWritingView: UIViewController {
     }
 
     @objc func tapNextBTN() {
-//        photoImages?.forEach {
-//            coreDataManager.createPhotoData(postingID: coreDataManager.countData(dataType: "posting"), photoPath: $0.path!)
-//        }
         let postDTO: PostDTO = PostDTO(roomID: room?.roomID ?? 1, category: categoryID, type: 0, description: textContent.text!)
         createPost(PostDTO: postDTO)
         
-        
+        uploadImage(paramName: "photo", fileName: "TestImage.jpeg", PhotoDTO: PhotoDTO(postID: 64, photo: (uiImage?.jpegData(compressionQuality: 1.0))!))
+//                    photo: photoImages![0].image!, postID: 64)
+//                    PhotoDTO: PhotoDTO(postID: count, photo: (uiImage?.jpegData(compressionQuality: 1.0))!))
 
         self.dismiss(animated: true)
     }
@@ -174,6 +176,44 @@ class PostingWritingView: UIViewController {
             } catch NetworkError.clientError(_) {
             }
         }
+    }
+    
+    func uploadImage(paramName: String, fileName: String, PhotoDTO: PhotoDTO) {
+        let boundary = UUID().uuidString
+        
+        let session = URLSession.shared
+
+        var urlRequest = URLRequest(url: URL(string: APIEnvironment.photosURL)!)
+        urlRequest.httpMethod = "POST"
+        urlRequest.setValue(APIEnvironment.apiKey, forHTTPHeaderField: "API-Key")
+        urlRequest.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
+        
+
+        var data = Data()
+        
+        data.append("\r\n--\(boundary)\r\n".data(using: .utf8)!)
+        data.append("Content-Disposition: form-data; name=\"photo\"; filename=\"\(fileName)\"\r\n".data(using: .utf8)!)
+        data.append("Content-Type: photo/jpeg\r\n\r\n".data(using: .utf8)!)
+        data.append(PhotoDTO.photo)
+        
+        data.append("\r\n--\(boundary)\r\n".data(using: .utf8)!)
+        data.append("Content-Disposition: form-data; name=\"postID\"\r\n".data(using: .utf8)!)
+        data.append("Content-Type: text/plain\r\n\r\n".data(using: .utf8)!)
+        data.append(String(PhotoDTO.postID).data(using: .utf8)!)
+        data.append("\r\n--\(boundary)--\r\n".data(using: .utf8)!)
+        
+        session.uploadTask(with: urlRequest, from: data, completionHandler: { responseData, response, error in
+            print(responseData)
+            print(response)
+            print(error)
+            if error == nil {
+                let jsonData = try? JSONSerialization.jsonObject(with: responseData!, options: .fragmentsAllowed)
+                if let json = jsonData as? [String: Any] {
+                    print(json)
+                }
+            }
+        }).resume()
+        
     }
 }
 
