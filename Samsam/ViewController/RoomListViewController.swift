@@ -15,6 +15,7 @@ class RoomListViewController: UIViewController {
     let roomAPI: RoomAPI = RoomAPI(apiService: APIService())
     var rooms = [Room]() {
         didSet {
+            rooms.sort(by: {$0.roomID < $1.roomID})
             collectionView.reloadData()
         }
     }
