@@ -239,15 +239,6 @@ class RoomCreationViewController: UIViewController{
         navigationController?.navigationBar.prefersLargeTitles = false
         navigationController?.setNavigationBarHidden(false, animated: true)
     }
-
-    @objc private func tapNextButton() {
-        roomCategoryViewController.workerID = workerID
-        roomCategoryViewController.clientName = customerTextField.text ?? ""
-        roomCategoryViewController.startDate = startDate
-        roomCategoryViewController.endDate = endDate
-        roomCategoryViewController.warrantyTime = warrantyTime
-        navigationController?.pushViewController(roomCategoryViewController, animated: true)
-    }
     
     @objc private func buttonAttributeChanged() {
         if roomCreation! {
@@ -267,6 +258,15 @@ class RoomCreationViewController: UIViewController{
                 modificationButton.isEnabled = false
             }
         }
+    }
+
+    @objc private func tapNextButton() {
+        roomCategoryViewController.workerID = workerID
+        roomCategoryViewController.clientName = customerTextField.text ?? ""
+        roomCategoryViewController.startDate = startDate
+        roomCategoryViewController.endDate = endDate
+        roomCategoryViewController.warrantyTime = warrantyTime
+        navigationController?.pushViewController(roomCategoryViewController, animated: true)
     }
     
     @objc private func tapModificationButton() {
