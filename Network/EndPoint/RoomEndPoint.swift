@@ -12,6 +12,7 @@ enum RoomEndPoint: EndPointable {
     case createRoom(body: RoomDTO)
     case modifyRoom(roomID: Int, body: RoomDTO)
     case loadRoomByWorkerID(workerID: Int)
+    case loadRoomByRoomID(roomID: Int)
     case createStatus(body: StatusDTO)
     case loadPostsByRoom(roomID: Int)
 
@@ -23,7 +24,7 @@ enum RoomEndPoint: EndPointable {
         switch self {
         case .startAppleLogin, .createRoom, .createStatus:
             return .post
-        case .loadRoomByWorkerID, .loadPostsByRoom:
+        case .loadRoomByWorkerID, .loadRoomByRoomID, .loadPostsByRoom:
             return .get
         case .modifyRoom:
             return .put
@@ -55,6 +56,8 @@ enum RoomEndPoint: EndPointable {
             return "\(APIEnvironment.roomsURL)/\(roomID)"
         case .loadRoomByWorkerID(let workerID):
             return "\(APIEnvironment.roomsURL)/worker/\(workerID)"
+        case .loadRoomByRoomID(let roomID):
+            return "\(APIEnvironment.roomsURL)/\(roomID)"
         case .createStatus:
             return "\(APIEnvironment.statusesURL)"
         case .loadPostsByRoom(let roomID):

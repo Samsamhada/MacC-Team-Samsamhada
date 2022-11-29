@@ -57,12 +57,13 @@ class SegmentedControlViewController: UIViewController {
     }(UIPageViewController(transitionStyle: .scroll,
                           navigationOrientation: .horizontal))
 
-    private let writingButton: UIButton = {
+    private lazy var writingButton: UIButton = {
         $0.backgroundColor = AppColor.campanulaBlue
         $0.setTitle("시공상황 작성하기", for: .normal)
         $0.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
         $0.setTitleColor(.white, for: .normal)
         $0.layer.cornerRadius = 16
+        $0.addTarget(self, action: #selector(tapWritingButton), for: .touchDown)
         return $0
     }(UIButton())
 
@@ -77,8 +78,6 @@ class SegmentedControlViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        setNavigationBar()
-
         attribute()
         layout()
     }
@@ -90,6 +89,7 @@ class SegmentedControlViewController: UIViewController {
         
 //        coreDataManager.loadWorkingStatusData(roomID: roomID!))
         loadPostByRoom(roomID: room!.roomID)
+        loadRoomByRoomID(roomID: room!.roomID)
     }
 
     // MARK: - Method
@@ -107,6 +107,7 @@ class SegmentedControlViewController: UIViewController {
         view.backgroundColor = .white
 
         setSegmentedControl()
+        setNavigationBar()
 
         pageViewController.delegate = self
         pageViewController.dataSource = self
@@ -214,6 +215,21 @@ class SegmentedControlViewController: UIViewController {
                     return
                 }
                 posts = data
+            } catch NetworkError.serverError {
+            } catch NetworkError.encodingError {
+            } catch NetworkError.clientError(_) {
+            }
+        }
+    }
+    
+    private func loadRoomByRoomID(roomID: Int) {
+        Task {
+            do {
+                let response = try await self.roomAPI.loadRoomByRoomID(roomID: roomID)
+                if let data = response {
+                    room = data
+                    setNavigationBar()
+                }
             } catch NetworkError.serverError {
             } catch NetworkError.encodingError {
             } catch NetworkError.clientError(_) {

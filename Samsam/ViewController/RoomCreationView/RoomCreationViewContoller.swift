@@ -272,7 +272,6 @@ class RoomCreationViewController: UIViewController{
     @objc private func tapModificationButton() {
         let roomDTO: RoomDTO = RoomDTO(workerID: room!.workerID, clientName: customerTextField.text!, startDate: startDate, endDate: endDate, warrantyTime: warrantyTime)
         updateRoomImformation(RoomDTO: roomDTO)
-        self.dismiss(animated: true)
     }
 
     @objc private func tapCloseButton() {
@@ -303,6 +302,9 @@ class RoomCreationViewController: UIViewController{
         Task{
             do {
                 let response = try await self.roomAPI.modifyRoom(roomID: room!.roomID, RoomDTO: RoomDTO)
+                if let data = response {
+                    self.dismiss(animated: true)
+                }
             } catch NetworkError.serverError {
             } catch NetworkError.encodingError {
             } catch NetworkError.clientError(_) {
