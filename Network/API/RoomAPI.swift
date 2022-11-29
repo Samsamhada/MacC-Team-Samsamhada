@@ -28,7 +28,7 @@ struct RoomAPI {
         return try await apiService.request(request)
     }
     
-    func modifyRoom(roomID: Int, RoomDTO: RoomDTO) async throws -> Room? {
+    func modifyRoom(roomID: Int, RoomDTO: RoomDTO) async throws -> Message? {
         let request = RoomEndPoint
             .modifyRoom(roomID: roomID, body: RoomDTO)
             .createRequest()

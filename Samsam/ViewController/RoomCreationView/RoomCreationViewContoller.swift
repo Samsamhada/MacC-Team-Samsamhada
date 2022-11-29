@@ -33,6 +33,20 @@ class RoomCreationViewController: UIViewController{
         }
     }
     
+    var warrantyTime: Int = 12 {
+        didSet {
+            if !roomCreation! {
+                if warrantyTime != room!.warrantyTime {
+                    modificationButton.backgroundColor = AppColor.campanulaBlue
+                    modificationButton.isEnabled = true
+                } else {
+                    modificationButton.backgroundColor = .gray
+                    modificationButton.isEnabled = false
+                }
+            }
+        }
+    }
+    
     var workerID = 0
     private var tableViewData = [CellData]()
     private let roomCategoryViewController = RoomCategoryViewController()
@@ -41,8 +55,32 @@ class RoomCreationViewController: UIViewController{
     private let roomCreationViewDateSecondCell = RoomCreationViewDateSecondCell()
     private let roomCreationViewWarrantyCell = RoomCreationViewWarrantyCell()
 
-    private var startDate = ""
-    private var endDate = ""
+    private var startDate = "" {
+        didSet {
+            if !roomCreation! {
+                if String(startDate.dropLast(13)) != String(room!.startDate.dropLast(14)) {
+                    modificationButton.backgroundColor = AppColor.campanulaBlue
+                    modificationButton.isEnabled = true
+                } else {
+                    modificationButton.backgroundColor = .gray
+                    modificationButton.isEnabled = false
+                }
+            }
+        }
+    }
+    private var endDate = "" {
+        didSet {
+            if !roomCreation! {
+                if String(endDate.dropLast(13)) != String(room!.endDate.dropLast(14)) {
+                    modificationButton.backgroundColor = AppColor.campanulaBlue
+                    modificationButton.isEnabled = true
+                } else {
+                    modificationButton.backgroundColor = .gray
+                    modificationButton.isEnabled = false
+                }
+            }
+        }
+    }
 
     private var currentSelectedFirstDate: Date?
     private var currentSelectedSecondDate: Date?
@@ -92,7 +130,6 @@ class RoomCreationViewController: UIViewController{
     private lazy var modificationButton: UIButton = {
         $0.setTitle("수정 완료", for: .normal)
         $0.setTitleColor(.white, for: .normal)
-        $0.backgroundColor = AppColor.campanulaBlue
         $0.layer.cornerRadius = 16
         $0.backgroundColor = .gray
         $0.isHidden = true
@@ -208,22 +245,32 @@ class RoomCreationViewController: UIViewController{
         roomCategoryViewController.clientName = customerTextField.text ?? ""
         roomCategoryViewController.startDate = startDate
         roomCategoryViewController.endDate = endDate
-        
+        roomCategoryViewController.warrantyTime = warrantyTime
         navigationController?.pushViewController(roomCategoryViewController, animated: true)
     }
     
     @objc private func buttonAttributeChanged() {
-        if (customerTextField.text!.count) >= 1 {
-            nextButton.backgroundColor = .blue
-            nextButton.isEnabled = true
+        if roomCreation! {
+            if (customerTextField.text!.count) >= 1 {
+                nextButton.backgroundColor = .blue
+                nextButton.isEnabled = true
+            } else {
+                nextButton.backgroundColor = .gray
+                nextButton.isEnabled = false
+            }
         } else {
-            nextButton.backgroundColor = .gray
-            nextButton.isEnabled = false
+            if customerTextField.text! != room!.clientName {
+                modificationButton.backgroundColor = AppColor.campanulaBlue
+                modificationButton.isEnabled = true
+            } else {
+                modificationButton.backgroundColor = .gray
+                modificationButton.isEnabled = false
+            }
         }
     }
     
     @objc private func tapModificationButton() {
-        let roomDTO: RoomDTO = RoomDTO(workerID: room!.workerID, clientName: customerTextField.text!, startDate: startDate, endDate: endDate, warrantyTime: roomCategoryViewController.warrantyTime)
+        let roomDTO: RoomDTO = RoomDTO(workerID: room!.workerID, clientName: customerTextField.text!, startDate: startDate, endDate: endDate, warrantyTime: warrantyTime)
         updateRoomImformation(RoomDTO: roomDTO)
         self.dismiss(animated: true)
     }
@@ -256,9 +303,6 @@ class RoomCreationViewController: UIViewController{
         Task{
             do {
                 let response = try await self.roomAPI.modifyRoom(roomID: room!.roomID, RoomDTO: RoomDTO)
-                if let data = response {
-                    self.room = data
-                }
             } catch NetworkError.serverError {
             } catch NetworkError.encodingError {
             } catch NetworkError.clientError(_) {
@@ -273,7 +317,7 @@ class RoomCreationViewController: UIViewController{
     
     private func loadRoomImformation() {
         customerTextField.text = room?.clientName
-        roomCategoryViewController.warrantyTime = room!.warrantyTime
+        warrantyTime = room!.warrantyTime
         startDate = String(room!.startDate.dropLast(1))
         currentSelectedFirstDate = String(startDate.dropLast(4)).replacingOccurrences(of: "T", with: " ").toDate(dateFormat: "yyyy-MM-dd HH:mm:ss")
         endDate = String(room!.endDate.dropLast(1))
@@ -318,7 +362,8 @@ extension RoomCreationViewController: UITableViewDelegate, UITableViewDataSource
         if indexPath.section == 2 {
             warrantyCell.warrantyTimeDelegate = self
             setCell(UITableViewCell: warrantyCell, UIView: warrantyCell.warrantyView)
-
+            warrantyCell.warrantyStepper.value = Double(warrantyTime)
+            warrantyCell.warrantyText.text = "\(warrantyTime)개월"
             return warrantyCell
         }
 
@@ -400,7 +445,7 @@ extension RoomCreationViewController: RoomCreationViewDateSecondCellDelegate {
 
 extension RoomCreationViewController: RoomCreationViewWarrantyCellDelegate {
     func warrantyTimeChanged(warrantyTime: Int) {
-        roomCategoryViewController.warrantyTime = warrantyTime
+        self.warrantyTime = warrantyTime
     }
 }
 
