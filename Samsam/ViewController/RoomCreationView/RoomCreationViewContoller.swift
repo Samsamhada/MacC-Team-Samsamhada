@@ -105,6 +105,13 @@ class RoomCreationViewController: UIViewController{
         $0.addTarget(self, action: #selector(buttonAttributeChanged), for: .editingChanged)
         return $0
     }(UITextField())
+    
+    private lazy var customerTextLimit : UILabel = {
+        $0.text = "0/\(10)"
+        $0.font = UIFont.systemFont(ofSize: 16, weight: .regular)
+        $0.textColor = .gray
+        return $0
+    }(UILabel())
 
     private let textUnderLine: UIView = {
         $0.backgroundColor = AppColor.mainBlack
@@ -165,11 +172,11 @@ class RoomCreationViewController: UIViewController{
 
         uiView.addSubview(customerTitle)
         uiView.addSubview(customerTextField)
+        uiView.addSubview(customerTextLimit)
         uiView.addSubview(textUnderLine)
         uiView.addSubview(tableView)
         uiView.addSubview(nextButton)
         uiView.addSubview(modificationButton)
-        
 
         uiView.anchor(
             top: view.safeAreaLayoutGuide.topAnchor,
@@ -193,10 +200,19 @@ class RoomCreationViewController: UIViewController{
             top: customerTitle.bottomAnchor,
             left: uiView.leftAnchor,
             bottom: textUnderLine.topAnchor,
-            right: uiView.rightAnchor,
+            right: customerTextLimit.leftAnchor,
             paddingTop: 15,
             paddingLeft: 4,
             paddingBottom: 4
+        )
+
+        customerTextLimit.anchor(
+            top: customerTitle.bottomAnchor,
+            bottom: textUnderLine.topAnchor,
+            right: uiView.rightAnchor,
+            paddingTop: 15,
+            paddingBottom: 4,
+            paddingRight: 4
         )
 
         textUnderLine.anchor(
@@ -241,6 +257,9 @@ class RoomCreationViewController: UIViewController{
     }
     
     @objc private func buttonAttributeChanged() {
+        setCounter(count: customerTextField.text!.count)
+        checkMaxLength(textField: customerTextField)
+        
         if roomCreation! {
             if (customerTextField.text!.count) >= 1 {
                 nextButton.backgroundColor = .blue
@@ -256,6 +275,25 @@ class RoomCreationViewController: UIViewController{
             } else {
                 modificationButton.backgroundColor = .gray
                 modificationButton.isEnabled = false
+            }
+        }
+    }
+
+    private func setCounter(count: Int) {
+        if count <= 10 {
+            customerTextLimit.text = "\(count)/\(10)"
+        } else {
+            customerTextLimit.text = "\(10)/\(10)"
+        }
+    }
+    
+    private func checkMaxLength(textField: UITextField) {
+        if let text = textField.text {
+            if text.count > 10 {
+                let endIndex = text.index(text.startIndex, offsetBy: 10)
+                let fixedText = text[text.startIndex..<endIndex]
+                textField.text = fixedText + " "
+                customerTextField.text = String(fixedText)
             }
         }
     }
