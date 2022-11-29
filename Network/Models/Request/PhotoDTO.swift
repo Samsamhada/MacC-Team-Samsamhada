@@ -8,9 +8,11 @@
 import Foundation
 
 struct PhotoDTO: Encodable {
-    let photoPath: String
+    let postID: Int
+    let photo: Data
     
-    init(photoPath: String) {
-        self.photoPath = photoPath
+    init(postID: Int, photo: Data) {
+        self.postID = postID
+        self.photo = photo
     }
 }
