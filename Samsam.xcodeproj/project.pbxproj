@@ -67,7 +67,7 @@
 		9802007A2914F82100E193E6 /* MetroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980200792914F82100E193E6 /* MetroViewController.swift */; };
 		9802007C2914F83400E193E6 /* BezierCurveConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9802007B2914F83400E193E6 /* BezierCurveConfiguration.swift */; };
 		980D900E28FE671B003CC2DA /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 980D900D28FE671B003CC2DA /* DetailViewController.swift */; };
-		98366F8D29019A5300E81E27 /* RoomCreationViewContoller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98366F8C29019A5300E81E27 /* RoomCreationViewContoller.swift */; };
+		98366F8D29019A5300E81E27 /* RoomCreationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98366F8C29019A5300E81E27 /* RoomCreationViewController.swift */; };
 		9866F51629189AEE002D3589 /* PhoneNumberStyle+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9866F51529189AEE002D3589 /* PhoneNumberStyle+.swift */; };
 		9866F518291960CE002D3589 /* RoomCreationViewDateFirstCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9866F517291960CE002D3589 /* RoomCreationViewDateFirstCell.swift */; };
 		9866F51A291960E0002D3589 /* RoomCreationViewDateHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9866F519291960E0002D3589 /* RoomCreationViewDateHeader.swift */; };
@@ -153,7 +153,7 @@
 		980200792914F82100E193E6 /* MetroViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetroViewController.swift; sourceTree = "<group>"; };
 		9802007B2914F83400E193E6 /* BezierCurveConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BezierCurveConfiguration.swift; sourceTree = "<group>"; };
 		980D900D28FE671B003CC2DA /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
-		98366F8C29019A5300E81E27 /* RoomCreationViewContoller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomCreationViewContoller.swift; sourceTree = "<group>"; };
+		98366F8C29019A5300E81E27 /* RoomCreationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomCreationViewController.swift; sourceTree = "<group>"; };
 		9866F51529189AEE002D3589 /* PhoneNumberStyle+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PhoneNumberStyle+.swift"; sourceTree = "<group>"; };
 		9866F517291960CE002D3589 /* RoomCreationViewDateFirstCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomCreationViewDateFirstCell.swift; sourceTree = "<group>"; };
 		9866F519291960E0002D3589 /* RoomCreationViewDateHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomCreationViewDateHeader.swift; sourceTree = "<group>"; };
@@ -363,7 +363,7 @@
 		98366F8B29019A3100E81E27 /* RoomCreationView */ = {
 			isa = PBXGroup;
 			children = (
-				98366F8C29019A5300E81E27 /* RoomCreationViewContoller.swift */,
+				98366F8C29019A5300E81E27 /* RoomCreationViewController.swift */,
 				4386FB012901353B00314936 /* RoomCategoryViewController.swift */,
 				43BD591929028BD70063EB4F /* RoomCodeViewController.swift */,
 				9866F51F29196191002D3589 /* UIComponent */,
@@ -604,7 +604,7 @@
 				26FEC1DE2902E6F2006C410B /* WorkingStatusEntity+CoreDataProperties.swift in Sources */,
 				98B08A60290AC8C900401650 /* UIColor+.swift in Sources */,
 				26E3748428FCDC0000997DA7 /* SceneDelegate.swift in Sources */,
-				98366F8D29019A5300E81E27 /* RoomCreationViewContoller.swift in Sources */,
+				98366F8D29019A5300E81E27 /* RoomCreationViewController.swift in Sources */,
 				26664F6B292B043B00C2D4F0 /* Room.swift in Sources */,
 				4386FB022901353B00314936 /* RoomCategoryViewController.swift in Sources */,
 				43BD591A29028BD70063EB4F /* RoomCodeViewController.swift in Sources */,
@@ -772,7 +772,7 @@
 				CODE_SIGN_ENTITLEMENTS = Samsam/Samsam.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = N6LML762WM;
+				DEVELOPMENT_TEAM = UDCS6NMGF8;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Samsam/Info.plist;
 				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "사진 저장을 위해 라이브러리 접근권한이 필요합니다.";
@@ -787,7 +787,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.Eddy.Samsam;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Dinner2.Samsam;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -806,7 +806,7 @@
 				CODE_SIGN_ENTITLEMENTS = Samsam/Samsam.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = N6LML762WM;
+				DEVELOPMENT_TEAM = UDCS6NMGF8;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Samsam/Info.plist;
 				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "사진 저장을 위해 라이브러리 접근권한이 필요합니다.";
@@ -821,7 +821,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.Eddy.Samsam;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Dinner2.Samsam;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
