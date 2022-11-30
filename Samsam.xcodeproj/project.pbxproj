@@ -49,6 +49,8 @@
 		431F0778291DEBB7004FC4B6 /* Encodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 431F0771291DEBB7004FC4B6 /* Encodable.swift */; };
 		431F0779291DEBB7004FC4B6 /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 431F0772291DEBB7004FC4B6 /* HTTPMethod.swift */; };
 		431F077D291DF130004FC4B6 /* APIEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 431F077C291DF130004FC4B6 /* APIEnvironment.swift */; };
+		431F906C2936EDAF002F99C5 /* WorkerAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 431F906B2936EDAF002F99C5 /* WorkerAPI.swift */; };
+		431F906E2936EDDF002F99C5 /* WorkerEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 431F906D2936EDDF002F99C5 /* WorkerEndPoint.swift */; };
 		4330CE9B2906275D001FC8E7 /* PostingImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4330CE9A2906275D001FC8E7 /* PostingImageCell.swift */; };
 		4369690C28FE422100DEA89F /* PostingImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4369690B28FE422100DEA89F /* PostingImageViewController.swift */; };
 		436E81C02918BA3D002A2641 /* ChipViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 436E81BF2918BA3D002A2641 /* ChipViewController.swift */; };
@@ -135,6 +137,8 @@
 		431F0771291DEBB7004FC4B6 /* Encodable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Encodable.swift; sourceTree = "<group>"; };
 		431F0772291DEBB7004FC4B6 /* HTTPMethod.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
 		431F077C291DF130004FC4B6 /* APIEnvironment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIEnvironment.swift; sourceTree = "<group>"; };
+		431F906B2936EDAF002F99C5 /* WorkerAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkerAPI.swift; sourceTree = "<group>"; };
+		431F906D2936EDDF002F99C5 /* WorkerEndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkerEndPoint.swift; sourceTree = "<group>"; };
 		4330CE9A2906275D001FC8E7 /* PostingImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostingImageCell.swift; sourceTree = "<group>"; };
 		4369690B28FE422100DEA89F /* PostingImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostingImageViewController.swift; sourceTree = "<group>"; };
 		436E81BF2918BA3D002A2641 /* ChipViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChipViewController.swift; sourceTree = "<group>"; };
@@ -271,6 +275,7 @@
 			children = (
 				431F0768291DEB9B004FC4B6 /* LoginEndPoint.swift */,
 				26664F68292A7DB400C2D4F0 /* RoomEndPoint.swift */,
+				431F906D2936EDDF002F99C5 /* WorkerEndPoint.swift */,
 			);
 			path = EndPoint;
 			sourceTree = "<group>";
@@ -280,6 +285,7 @@
 			children = (
 				431F076A291DEBA9004FC4B6 /* LoginAPI.swift */,
 				26664F6C292B04D400C2D4F0 /* RoomAPI.swift */,
+				431F906B2936EDAF002F99C5 /* WorkerAPI.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -606,6 +612,7 @@
 				26E3748428FCDC0000997DA7 /* SceneDelegate.swift in Sources */,
 				98366F8D29019A5300E81E27 /* RoomCreationViewContoller.swift in Sources */,
 				26664F6B292B043B00C2D4F0 /* Room.swift in Sources */,
+				431F906E2936EDDF002F99C5 /* WorkerEndPoint.swift in Sources */,
 				4386FB022901353B00314936 /* RoomCategoryViewController.swift in Sources */,
 				43BD591A29028BD70063EB4F /* RoomCodeViewController.swift in Sources */,
 				26FEC1DD2902E6F2006C410B /* WorkingStatusEntity+CoreDataClass.swift in Sources */,
@@ -618,6 +625,7 @@
 				26FEC1B628FFF52D006C410B /* RoomCreationCell.swift in Sources */,
 				43C2110F28FCFAB500E8F6DD /* PostingCategoryViewController.swift in Sources */,
 				26664F73292B95A500C2D4F0 /* StatusDTO.swift in Sources */,
+				431F906C2936EDAF002F99C5 /* WorkerAPI.swift in Sources */,
 				26FEC1D92902E6F2006C410B /* CategoryEntity+CoreDataClass.swift in Sources */,
 				4369690C28FE422100DEA89F /* PostingImageViewController.swift in Sources */,
 				26FEC1DF2902E6F2006C410B /* PhotoEntity+CoreDataClass.swift in Sources */,
@@ -772,7 +780,7 @@
 				CODE_SIGN_ENTITLEMENTS = Samsam/Samsam.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = N6LML762WM;
+				DEVELOPMENT_TEAM = UDCS6NMGF8;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Samsam/Info.plist;
 				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "사진 저장을 위해 라이브러리 접근권한이 필요합니다.";
@@ -787,7 +795,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.Eddy.Samsam;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Dinner2.Samsam;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -806,7 +814,7 @@
 				CODE_SIGN_ENTITLEMENTS = Samsam/Samsam.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = N6LML762WM;
+				DEVELOPMENT_TEAM = UDCS6NMGF8;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Samsam/Info.plist;
 				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "사진 저장을 위해 라이브러리 접근권한이 필요합니다.";
@@ -821,7 +829,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.Eddy.Samsam;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Dinner2.Samsam;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;

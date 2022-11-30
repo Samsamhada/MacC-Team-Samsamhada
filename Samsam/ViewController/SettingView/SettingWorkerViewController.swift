@@ -10,6 +10,12 @@ import UIKit
 
 class SettingWorkerViewController: UIViewController {
     
+    // MARK: - Property
+
+    var workerID: Int?
+    private var workerData: Login?
+    private let workerService: WorkerAPI = WorkerAPI(apiService: APIService())
+    
     // MARK: - View
 
     private let tableView = UITableView(frame: .zero, style: .insetGrouped)
@@ -24,13 +30,21 @@ class SettingWorkerViewController: UIViewController {
         attribute()
         layout()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        loadWorkerData(workerID: workerID!)
+    }
 
     // MARK: - Method
 
     private func attribute() {
         view.backgroundColor = .white
+
         self.tableView.dataSource = self
         self.tableView.delegate = self
+
+        setupNavigationTitle()
     }
 
     private func layout() {
@@ -42,6 +56,27 @@ class SettingWorkerViewController: UIViewController {
             bottom: view.safeAreaLayoutGuide.bottomAnchor,
             right: view.safeAreaLayoutGuide.rightAnchor
         )
+    }
+    
+    private func setupNavigationTitle() {
+        navigationItem.title = "설정"
+        navigationController?.navigationBar.prefersLargeTitles = false
+        navigationController?.setNavigationBarHidden(false, animated: true)
+    }
+    
+    private func loadWorkerData(workerID: Int) {
+        Task{
+            do {
+                let response = try await self.workerService.loadWorkerDataByWorkerID(workerID: workerID)
+                if let data = response {
+                    workerData = data
+                    print(data)
+                }
+            } catch NetworkError.serverError {
+            } catch NetworkError.encodingError {
+            } catch NetworkError.clientError(_) {
+            }
+        }
     }
 }
 
@@ -102,12 +137,15 @@ extension SettingWorkerViewController: MFMailComposeViewControllerDelegate {
         if MFMailComposeViewController.canSendMail() {
             let composeVC = MFMailComposeViewController()
             let Email = "samsamhada0915@gmail.com"
+            guard let number = workerData?.number,
+                  let name = workerData?.name
+            else {return}
             let messageBody = """
                               
                               -----------------------------
                               
-                              - 성함:
-                              - 전화번호:
+                              - 성함: \(name)
+                              - 전화번호: \(number)
                               - 문의 메시지 제목 한줄 요약:
                               - 문의 날짜: \(Date())
                               

@@ -61,11 +61,20 @@ class RoomListViewController: UIViewController {
     private func setupNavigationTitle() {
         let backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
         navigationItem.backBarButtonItem = backBarButtonItem
+        let rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "gearshape"), style: .plain, target: self, action: #selector(tapSettingButton))
+        rightBarButtonItem.tintColor = .black
+        navigationItem.rightBarButtonItem = rightBarButtonItem
         navigationItem.title = "기와집"
         navigationController?.navigationBar.prefersLargeTitles = false
         navigationController?.setNavigationBarHidden(false, animated: true)
     }
 
+    @objc func tapSettingButton() {
+        let settingViewController = SettingWorkerViewController()
+        settingViewController.workerID = workerID
+        navigationController?.pushViewController(settingViewController, animated: true)
+    }
+    
     private func setupCollectionView() {
         collectionView.register(RoomCreationCell.self, forCellWithReuseIdentifier: RoomCreationCell.identifier)
         collectionView.register(RoomListCell.self, forCellWithReuseIdentifier: RoomListCell.identifier)
