@@ -15,7 +15,7 @@ class DetailViewController: UIViewController, UIScrollViewDelegate {
 
     private var naviTitle = "화장실"
     var images: [Photo] = []
-    private var imageArray: [UIImage] = []
+    private var sharingItems: [Any] = []
 
     // MARK: - View
 
@@ -92,7 +92,7 @@ class DetailViewController: UIViewController, UIScrollViewDelegate {
 
         scrollView.delegate = self
         pageControl.addTarget(self, action: #selector(pageDidChange(sender: )), for: .valueChanged)
-        sharingButton.addTarget(self, action: #selector(tapShareButton), for: .touchUpInside)        
+        sharingButton.addTarget(self, action: #selector(tapShareButton), for: .touchUpInside)
     }
 
     private func layout() {
@@ -161,30 +161,28 @@ class DetailViewController: UIViewController, UIScrollViewDelegate {
     }
 
     @objc private func tapShareButton() {
-        imageArray = []
-        
+        sharingItems = []
         DispatchQueue.global().async {
-            self.images.forEach {
-                let imageData = try? Data(contentsOf: URL(string: $0.photoPath)!)
-                
-                DispatchQueue.main.sync {
-                    self.appendImage(imageData: imageData!)
-                }
-                
-                DispatchQueue.main.sync {
-                    self.shareImage()
-                }
+            self.appendImage()
+            DispatchQueue.main.sync {
+                self.sharingItems.append(self.descriptionLBL.text!)
+                self.shareitems()
             }
         }
     }
 
-    func appendImage(imageData: Data) {
-        guard let image = UIImage(data: imageData) else { return }
-        self.imageArray.append(image)
+    func appendImage() {
+        images.forEach {
+            let imageData = try? Data(contentsOf: URL(string: $0.photoPath)!)
+            DispatchQueue.main.sync {
+                guard let image = UIImage(data: imageData!) else { return }
+                self.sharingItems.append(image)
+            }
+        }
     }
     
-    func shareImage() {
-        let vc = UIActivityViewController(activityItems: self.imageArray, applicationActivities: [])
+    func shareitems() {
+        let vc = UIActivityViewController(activityItems: self.sharingItems, applicationActivities: [])
         self.present(vc, animated: true)
     }
     
