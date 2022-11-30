@@ -12,12 +12,12 @@ class PostingCategoryViewController: UIViewController {
     // MARK: - Property
     
     var roomID: Int?
-    private var categoryID: Int = 0
-    var roomCategoryID: [Int] = []
-    var roomAPI: RoomAPI = RoomAPI(apiService: APIService())
     var room: Room?
+    var roomCategoryID: [Int] = []
+    private var roomAPI: RoomAPI = RoomAPI(apiService: APIService())
+    private var categoryID: Int = 0
     
-    var status: [Status]? {
+    private var status: [Status]? {
         didSet {
             categoryView.reloadData()
         }
@@ -25,7 +25,7 @@ class PostingCategoryViewController: UIViewController {
 
     // MARK: - View
 
-    let categoryView: UICollectionView = {
+    private let categoryView: UICollectionView = {
         return $0
     }(UICollectionView(
         frame: .zero, collectionViewLayout: UICollectionViewFlowLayout()))

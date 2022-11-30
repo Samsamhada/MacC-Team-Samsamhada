@@ -11,9 +11,6 @@ class WorkingHistoryViewController: UIViewController {
 
     // MARK: - Property
     
-    var postDate = Set<String>()
-    var room: Room?
-
     var posts = [Post]() {
         didSet {
             workingHistoryView.reloadData()
@@ -22,10 +19,13 @@ class WorkingHistoryViewController: UIViewController {
             }
         }
     }
-
+    
+    var room: Room?
+    private var postDate = Set<String>()
+    
     // MARK: - View
 
-    let workingHistoryView: UICollectionView = {
+    private let workingHistoryView: UICollectionView = {
         return $0
     }(UICollectionView(
         frame: .zero, collectionViewLayout: UICollectionViewFlowLayout()))

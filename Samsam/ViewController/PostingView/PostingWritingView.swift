@@ -11,14 +11,14 @@ class PostingWritingView: UIViewController {
 
     // MARK: - Property
 
-    var post: Post? {
+    private var post: Post? {
         didSet {
             photoImages?.forEach {
                 uploadImage(fileName: "photo.jpeg", photo: $0.path!, postID: post!.postID)
             }
         }
     }
-    var photoCount: Int = 0 {
+    private var photoCount: Int = 0 {
         didSet {
             if photoCount == photoImages!.count {
                 DispatchQueue.main.sync {
@@ -29,9 +29,9 @@ class PostingWritingView: UIViewController {
     }
 
     var room: Room?
-    var roomAPI: RoomAPI = RoomAPI(apiService: APIService())
     var categoryID: Int = 0
     var photoImages: [CellItem]?
+    private var roomAPI: RoomAPI = RoomAPI(apiService: APIService())
     private let textViewPlaceHolder = "텍스트를 입력하세요"
     
     // MARK: - View
@@ -156,7 +156,7 @@ class PostingWritingView: UIViewController {
         createPost(PostDTO: postDTO)
     }
 
-    @objc private func keyboardWillShow(notification: NSNotification) {
+    @objc func keyboardWillShow(notification: NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
             UIView.animate(withDuration: 0.2, animations: {
                 self.finalBTN.transform = CGAffineTransform(translationX: 0, y: -keyboardSize.height + 25)
@@ -164,7 +164,7 @@ class PostingWritingView: UIViewController {
         }
     }
 
-    @objc private func keyboardWillHide(notification:NSNotification) {
+    @objc func keyboardWillHide(notification:NSNotification) {
         UIView.animate(withDuration: 0.2, animations: {
             self.finalBTN.transform = .identity
         })
@@ -185,7 +185,7 @@ class PostingWritingView: UIViewController {
         }
     }
     
-    func uploadImage(fileName: String, photo: Data, postID: Int) {
+    private func uploadImage(fileName: String, photo: Data, postID: Int) {
         let boundary = UUID().uuidString
         
         let session = URLSession.shared
