@@ -148,19 +148,19 @@ class DetailViewController: UIViewController, UIScrollViewDelegate {
         pageControl.currentPage = Int(scrollView.contentOffset.x / screenWidth)
     }
 
-    @objc private func pageDidChange(sender: UIPageControl){
+    @objc func pageDidChange(sender: UIPageControl){
         let offsetX = screenWidth * CGFloat(pageControl.currentPage)
         scrollView.setContentOffset(CGPoint(x: offsetX, y: 0), animated: true)
     }
 
     // TODO: - 수정화면 생성되면 수정예정.
 
-    @objc private func tapEditButton() {
+    @objc func tapEditButton() {
         let editViewController = ViewController()
         navigationController?.pushViewController(editViewController, animated: true)
     }
 
-    @objc private func tapShareButton() {
+    @objc func tapShareButton() {
         sharingItems = []
         DispatchQueue.global().async {
             self.appendImage()
@@ -171,7 +171,7 @@ class DetailViewController: UIViewController, UIScrollViewDelegate {
         }
     }
 
-    func appendImage() {
+    private func appendImage() {
         images.forEach {
             let imageData = try? Data(contentsOf: URL(string: $0.photoPath)!)
             DispatchQueue.main.sync {
@@ -181,7 +181,7 @@ class DetailViewController: UIViewController, UIScrollViewDelegate {
         }
     }
     
-    func shareitems() {
+    private func shareitems() {
         let vc = UIActivityViewController(activityItems: self.sharingItems, applicationActivities: [])
         self.present(vc, animated: true)
     }
