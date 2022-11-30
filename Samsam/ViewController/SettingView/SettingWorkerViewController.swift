@@ -78,11 +78,11 @@ extension SettingWorkerViewController: UITableViewDataSource, UITableViewDelegat
             self.sendReportMail()
         case [2,0]:
             if let url = URL(string: "https://giwazip.notion.site/c9ce45548c834d6d9ab91a139c489a2c") {
-                UIApplication.shared.open(url, options: [:])
+                UIApplication.shared.open(url)
             }
         case [2,1]:
             if let url = URL(string: "https://giwazip.notion.site/c9ce45548c834d6d9ab91a139c489a2c") {
-                UIApplication.shared.open(url, options: [:])
+                UIApplication.shared.open(url)
             }
         case [2,2]:
             self.navigationController?.pushViewController(DeveloperViewController(), animated: true)
