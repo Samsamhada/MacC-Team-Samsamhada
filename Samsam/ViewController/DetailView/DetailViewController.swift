@@ -14,7 +14,7 @@ class DetailViewController: UIViewController, UIScrollViewDelegate {
     let screenWidth = UIScreen.main.bounds.width - 32
 
     private var naviTitle = "화장실"
-    var images: [PhotoEntity] = []
+    var images: [Photo] = []
     private var imageArray: [UIImage] = []
 
     // MARK: - View
@@ -92,7 +92,7 @@ class DetailViewController: UIViewController, UIScrollViewDelegate {
 
         scrollView.delegate = self
         pageControl.addTarget(self, action: #selector(pageDidChange(sender: )), for: .valueChanged)
-        sharingButton.addTarget(self, action: #selector(tapShareButton), for: .touchUpInside)
+//        sharingButton.addTarget(self, action: #selector(tapShareButton), for: .touchUpInside)
     }
 
     private func layout() {
@@ -160,17 +160,17 @@ class DetailViewController: UIViewController, UIScrollViewDelegate {
         navigationController?.pushViewController(editViewController, animated: true)
     }
 
-    @objc private func tapShareButton() {
-        for imgName in images {
-            guard let img = UIImage(data: imgName.photoPath!) else { return }
-            imageArray.append(img)
-        }
-
-        let vc = UIActivityViewController(activityItems: imageArray, applicationActivities: [])
-        if !imageArray.isEmpty {
-            present(vc, animated: true)
-        }
-    }
+//    @objc private func tapShareButton() {
+//        for imgName in images {
+//            guard let img = UIImage(data: imgName.photoPath!) else { return }
+//            imageArray.append(img)
+//        }
+//
+//        let vc = UIActivityViewController(activityItems: imageArray, applicationActivities: [])
+//        if !imageArray.isEmpty {
+//            present(vc, animated: true)
+//        }
+//    }
 }
 
 // MARK: - configuratingScrollView
@@ -199,7 +199,12 @@ extension DetailViewController {
         )
 
         for num in 0..<images.count {
-            addImageView(img: images[num].photoPath!, position: CGFloat(num))
+            DispatchQueue.global().async {
+                let imageData = try? Data(contentsOf: URL(string: self.images[num].photoPath)!)
+                DispatchQueue.main.async {
+                    self.addImageView(img: imageData!, position: CGFloat(num))
+                }
+            }
         }
     }
 

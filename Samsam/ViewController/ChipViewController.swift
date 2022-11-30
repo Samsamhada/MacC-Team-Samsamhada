@@ -221,7 +221,7 @@ extension ChipViewController: UICollectionViewDataSource, UICollectionViewDelega
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let detailViewController = DetailViewController()
         coreDataManager.loadPhotoData(postingID: Int(coreDataManager.postings[indexPath.item].postingID))
-        detailViewController.images = coreDataManager.photos
+//        detailViewController.images = coreDataManager.photos
         coreDataManager.postings.forEach {
             if $0 == coreDataManager.postings[indexPath.item] {
                 detailViewController.descriptionLBL.text = $0.explanation

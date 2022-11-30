@@ -143,16 +143,11 @@ extension WorkingHistoryViewController: UICollectionViewDataSource, UICollection
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if indexPath.section > 0 {
             let detailViewController = DetailViewController()
+            detailViewController.descriptionLBL.text = posts[indexPath.item].description
             
-            // TODO: - 이미지 및 설명 클릭 시 데이터 바인딩
-            
-//            coreDataManager.loadPhotoData(postingID: Int(coreDataManager.postings[indexPath.item].postingID))
-//            detailViewController.images = coreDataManager.photos
-//            coreDataManager.postings.forEach {
-//                if $0 == coreDataManager.postings[indexPath.item] {
-//                    detailViewController.descriptionLBL.text = $0.explanation
-//                }
-//            }
+            posts[indexPath.item].photos!.forEach {
+                detailViewController.images.append($0)
+            }
             navigationController?.pushViewController(detailViewController, animated: true)
         }
     }
