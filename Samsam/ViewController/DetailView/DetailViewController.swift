@@ -92,7 +92,7 @@ class DetailViewController: UIViewController, UIScrollViewDelegate {
 
         scrollView.delegate = self
         pageControl.addTarget(self, action: #selector(pageDidChange(sender: )), for: .valueChanged)
-//        sharingButton.addTarget(self, action: #selector(tapShareButton), for: .touchUpInside)
+        sharingButton.addTarget(self, action: #selector(tapShareButton), for: .touchUpInside)        
     }
 
     private func layout() {
@@ -160,17 +160,34 @@ class DetailViewController: UIViewController, UIScrollViewDelegate {
         navigationController?.pushViewController(editViewController, animated: true)
     }
 
-//    @objc private func tapShareButton() {
-//        for imgName in images {
-//            guard let img = UIImage(data: imgName.photoPath!) else { return }
-//            imageArray.append(img)
-//        }
-//
-//        let vc = UIActivityViewController(activityItems: imageArray, applicationActivities: [])
-//        if !imageArray.isEmpty {
-//            present(vc, animated: true)
-//        }
-//    }
+    @objc private func tapShareButton() {
+        imageArray = []
+        
+        DispatchQueue.global().async {
+            self.images.forEach {
+                let imageData = try? Data(contentsOf: URL(string: $0.photoPath)!)
+                
+                DispatchQueue.main.sync {
+                    self.appendImage(imageData: imageData!)
+                }
+                
+                DispatchQueue.main.sync {
+                    self.shareImage()
+                }
+            }
+        }
+    }
+
+    func appendImage(imageData: Data) {
+        guard let image = UIImage(data: imageData) else { return }
+        self.imageArray.append(image)
+    }
+    
+    func shareImage() {
+        let vc = UIActivityViewController(activityItems: self.imageArray, applicationActivities: [])
+        self.present(vc, animated: true)
+    }
+    
 }
 
 // MARK: - configuratingScrollView
