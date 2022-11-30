@@ -17,8 +17,7 @@ class SettingRoomViewController: UIViewController {
     // MARK: - View
     
     private let tableView = UITableView(frame: .zero, style: .insetGrouped)
-    
-    private let header = ["",""]
+
     private let data = [["초대 코드 공유"],["방 정보 수정"]]
 
     // MARK: - LifeCycle
@@ -86,7 +85,7 @@ class SettingRoomViewController: UIViewController {
 
 extension SettingRoomViewController: UITableViewDataSource, UITableViewDelegate {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return header.count
+        return 2
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

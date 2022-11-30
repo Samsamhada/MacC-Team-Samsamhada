@@ -14,7 +14,6 @@ class SettingWorkerViewController: UIViewController {
 
     private let tableView = UITableView(frame: .zero, style: .insetGrouped)
     
-    private let header = ["","","",""]
     private let data = [["개인 정보 수정"],["고객 센터 문의하기"],["이용 약관","개인정보 처리방침","개발자 정보","버전 정보"],["로그 아웃","회원 탈퇴"]]
 
     // MARK: - LifeCycle
@@ -48,7 +47,7 @@ class SettingWorkerViewController: UIViewController {
 
 extension SettingWorkerViewController: UITableViewDataSource, UITableViewDelegate {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return header.count
+        return 4
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
