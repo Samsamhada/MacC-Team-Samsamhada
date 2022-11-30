@@ -13,7 +13,6 @@ class WorkingHistoryViewController: UIViewController {
     
     var postDate = Set<String>()
     var room: Room?
-    var roomID: Int?
 
     var posts = [Post]() {
         didSet {
@@ -160,7 +159,7 @@ extension WorkingHistoryViewController: UICollectionViewDataSource, UICollection
 
     @objc func tapAllView() {
         let chipViewController = ChipViewController()
-        chipViewController.roomID = roomID
+        chipViewController.room = room
         navigationController?.pushViewController(chipViewController , animated: true)
     }
 }

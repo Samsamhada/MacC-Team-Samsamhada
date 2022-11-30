@@ -11,6 +11,7 @@ class ChipViewController: UIViewController {
 
     // MARK: - Property
 
+    var room: Room?
     var roomID: Int?
     private var chips: [UIButton] = []
     private var categoryID: [Int] = []
