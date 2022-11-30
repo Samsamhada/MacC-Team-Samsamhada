@@ -22,7 +22,6 @@ class RoomCreationViewController: UIViewController{
     var roomCreation: Bool? {
         didSet {
             if roomCreation == true {
-                loadDateImformation()
                 navigationItem.title = "방 생성"
                 nextButton.isHidden = false
             } else {
@@ -55,7 +54,7 @@ class RoomCreationViewController: UIViewController{
     private let roomCreationViewDateSecondCell = RoomCreationViewDateSecondCell()
     private let roomCreationViewWarrantyCell = RoomCreationViewWarrantyCell()
 
-    private var startDate = "" {
+    private var startDate = Date.now.toString(dateFormat:  "yyyy-MM-dd HH:mm:ss.SSS") {
         didSet {
             if !roomCreation! {
                 if String(startDate.dropLast(13)) != String(room!.startDate.dropLast(14)) {
@@ -68,7 +67,7 @@ class RoomCreationViewController: UIViewController{
             }
         }
     }
-    private var endDate = "" {
+    private var endDate = Date.now.toString(dateFormat:  "yyyy-MM-dd HH:mm:ss.SSS") {
         didSet {
             if !roomCreation! {
                 if String(endDate.dropLast(13)) != String(room!.endDate.dropLast(14)) {
@@ -344,11 +343,6 @@ class RoomCreationViewController: UIViewController{
             } catch NetworkError.clientError(_) {
             }
         }
-    }
-    
-    private func loadDateImformation() {
-        startDate = Date.now.toString(dateFormat:  "yyyy-MM-dd HH:mm:ss.SSS")
-        endDate = Date.now.toString(dateFormat:  "yyyy-MM-dd HH:mm:ss.SSS")
     }
     
     private func loadRoomImformation() {
