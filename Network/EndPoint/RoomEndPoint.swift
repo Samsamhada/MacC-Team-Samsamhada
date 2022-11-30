@@ -50,17 +50,17 @@ enum RoomEndPoint: EndPointable {
     func getURL(baseURL: String) -> String {
         switch self {
         case .startAppleLogin:
-            return "\(APIEnvironment.workersURL)"
+            return APIEnvironment.workersURL
         case .createRoom:
-            return "\(APIEnvironment.roomsURL)"
+            return APIEnvironment.roomsURL
         case .loadRoomByWorkerID(let workerID):
             return "\(APIEnvironment.roomsURL)/worker/\(workerID)"
         case .createStatus:
-            return "\(APIEnvironment.statusesURL)"
+            return APIEnvironment.statusesURL
         case .loadStatusesByRoomID(let roomID):
             return "\(APIEnvironment.statusesURL)/room/\(roomID)"
         case .createPost:
-            return "\(APIEnvironment.postsURL)"
+            return APIEnvironment.postsURL
         case .loadPostsByRoomID(let roomID):
             return "\(APIEnvironment.postsURL)/photo/room/\(roomID)"
         case .createPhoto:
