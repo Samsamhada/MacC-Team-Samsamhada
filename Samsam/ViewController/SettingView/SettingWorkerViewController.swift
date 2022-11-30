@@ -135,10 +135,10 @@ extension SettingWorkerViewController: MFMailComposeViewControllerDelegate {
             (action) in
         }
         sendMailErrorAlert.addAction(confirmAction)
-        self.present(sendMailErrorAlert, animated: true, completion: nil)
+        self.present(sendMailErrorAlert, animated: true)
     }
     
     func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
-        controller.dismiss(animated: true, completion: nil)
+        controller.dismiss(animated: true)
     }
 }
