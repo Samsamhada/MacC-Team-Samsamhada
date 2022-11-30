@@ -18,7 +18,16 @@ class PostingWritingView: UIViewController {
             }
         }
     }
-    
+    var photoCount: Int = 0 {
+        didSet {
+            if photoCount == photoImages!.count {
+                DispatchQueue.main.sync {
+                    self.dismiss(animated: true)
+                }
+            }
+        }
+    }
+
     var room: Room?
     var roomAPI: RoomAPI = RoomAPI(apiService: APIService())
     var categoryID: Int = 0
@@ -145,7 +154,6 @@ class PostingWritingView: UIViewController {
     @objc func tapNextBTN() {
         let postDTO: PostDTO = PostDTO(roomID: room?.roomID ?? 1, category: categoryID, type: 0, description: textContent.text!)
         createPost(PostDTO: postDTO)
-        self.dismiss(animated: true)
     }
 
     @objc private func keyboardWillShow(notification: NSNotification) {
@@ -202,7 +210,7 @@ class PostingWritingView: UIViewController {
         
         session.uploadTask(with: urlRequest, from: data, completionHandler: { responseData, response, error in
             if error == nil {
-                let jsonData = try? JSONSerialization.jsonObject(with: responseData!, options: .fragmentsAllowed)
+                self.photoCount += 1
             }
         }).resume()
     }
