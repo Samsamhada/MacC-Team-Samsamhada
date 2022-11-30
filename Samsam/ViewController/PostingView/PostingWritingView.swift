@@ -191,7 +191,7 @@ class PostingWritingView: UIViewController {
         let session = URLSession.shared
 
         var urlRequest = URLRequest(url: URL(string: APIEnvironment.photosURL)!)
-        urlRequest.httpMethod = "POST"
+        urlRequest.httpMethod = HTTPMethod.post.rawValue
         urlRequest.setValue(APIEnvironment.apiKey, forHTTPHeaderField: "API-Key")
         urlRequest.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
         
