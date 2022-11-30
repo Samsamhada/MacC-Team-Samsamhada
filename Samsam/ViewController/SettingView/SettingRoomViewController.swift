@@ -85,7 +85,7 @@ class SettingRoomViewController: UIViewController {
 
 extension SettingRoomViewController: UITableViewDataSource, UITableViewDelegate {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return data.count
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

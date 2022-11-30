@@ -82,7 +82,7 @@ class SettingWorkerViewController: UIViewController {
 
 extension SettingWorkerViewController: UITableViewDataSource, UITableViewDelegate {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 4
+        return data.count
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
