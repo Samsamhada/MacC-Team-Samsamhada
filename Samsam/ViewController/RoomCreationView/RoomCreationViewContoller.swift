@@ -107,7 +107,7 @@ class RoomCreationViewController: UIViewController{
     }(UITextField())
     
     private lazy var customerTextLimit : UILabel = {
-        $0.text = "0/\(10)"
+        $0.text = "0/10"
         $0.font = UIFont.systemFont(ofSize: 16, weight: .regular)
         $0.textColor = .gray
         return $0
@@ -257,8 +257,8 @@ class RoomCreationViewController: UIViewController{
     }
     
     @objc private func buttonAttributeChanged() {
-        setCounter(count: customerTextField.text!.count)
         checkMaxLength(textField: customerTextField)
+        setCounter(count: customerTextField.text!.count)
         
         if roomCreation! {
             if (customerTextField.text!.count) >= 1 {
@@ -280,11 +280,7 @@ class RoomCreationViewController: UIViewController{
     }
 
     private func setCounter(count: Int) {
-        if count <= 10 {
-            customerTextLimit.text = "\(count)/\(10)"
-        } else {
-            customerTextLimit.text = "\(10)/\(10)"
-        }
+        customerTextLimit.text = "\(count)/10"
     }
     
     private func checkMaxLength(textField: UITextField) {
@@ -362,6 +358,7 @@ class RoomCreationViewController: UIViewController{
         currentSelectedFirstDate = String(startDate.dropLast(4)).replacingOccurrences(of: "T", with: " ").toDate(dateFormat: "yyyy-MM-dd HH:mm:ss")
         endDate = String(room!.endDate.dropLast(1))
         currentSelectedSecondDate = String(endDate.dropLast(4)).replacingOccurrences(of: "T", with: " ").toDate(dateFormat: "yyyy-MM-dd HH:mm:ss")
+        setCounter(count: customerTextField.text!.count)
     }
 }
 
