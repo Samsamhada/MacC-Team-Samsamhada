@@ -225,7 +225,7 @@ class SegmentedControlViewController: UIViewController {
     private func loadRoomByRoomID(roomID: Int) {
         Task {
             do {
-                let response = try await self.roomAPI.loadRoomByRoomID(roomID: roomID)
+                let response = try await self.roomAPI.loadRoom(roomID: roomID)
                 if let data = response {
                     room = data
                     setNavigationBar()
