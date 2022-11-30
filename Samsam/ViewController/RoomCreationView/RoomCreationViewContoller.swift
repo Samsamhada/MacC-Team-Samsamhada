@@ -304,7 +304,7 @@ class RoomCreationViewController: UIViewController{
     
     @objc private func tapModificationButton() {
         let roomDTO: RoomDTO = RoomDTO(workerID: room!.workerID, clientName: customerTextField.text!, startDate: startDate, endDate: endDate, warrantyTime: warrantyTime)
-        updateRoomImformation(RoomDTO: roomDTO)
+        updateRoomInformation(RoomDTO: roomDTO)
     }
 
     @objc private func tapCloseButton() {
@@ -331,7 +331,7 @@ class RoomCreationViewController: UIViewController{
         ]
     }
     
-    private func updateRoomImformation(RoomDTO: RoomDTO) {
+    private func updateRoomInformation(RoomDTO: RoomDTO) {
         Task{
             do {
                 let response = try await self.roomAPI.modifyRoom(roomID: room!.roomID, RoomDTO: RoomDTO)
