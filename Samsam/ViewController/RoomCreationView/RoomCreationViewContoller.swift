@@ -21,7 +21,7 @@ class RoomCreationViewController: UIViewController{
     var room: Room?
     var roomCreation: Bool? {
         didSet {
-            if roomCreation == true {
+            if roomCreation! {
                 navigationItem.title = "방 생성"
                 nextButton.isHidden = false
             } else {
