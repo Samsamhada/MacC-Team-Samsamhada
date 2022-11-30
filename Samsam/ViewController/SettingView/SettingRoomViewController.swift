@@ -11,7 +11,6 @@ class SettingRoomViewController: UIViewController {
     
     // MARK: - Property
  
-    private var invitecode: String?
     var room: Room?
     
     // MARK: - View
@@ -27,11 +26,6 @@ class SettingRoomViewController: UIViewController {
 
         attribute()
         layout()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        // TODO: - 추후 수정 예정
-        invitecode = "asdf"
     }
 
     // MARK: - Method
@@ -62,9 +56,9 @@ class SettingRoomViewController: UIViewController {
         navigationController?.setNavigationBarHidden(false, animated: true)
     }
     
-    private func shareInvitecode() {
+    private func shareInviteCode() {
         var shareItems = [String]()
-        if let invitecode = invitecode {
+        if let invitecode = room?.inviteCode {
             shareItems.append("초대 코드: \(invitecode)")
         }
         
@@ -98,7 +92,7 @@ extension SettingRoomViewController: UITableViewDataSource, UITableViewDelegate 
         cell.selectionStyle = .none
         
         if indexPath == [0,0] {
-            cell.detailTextLabel?.text = invitecode
+            cell.detailTextLabel?.text = room?.inviteCode
             cell.detailTextLabel?.textColor = AppColor.campanulaBlue
         }
         return cell
@@ -108,7 +102,7 @@ extension SettingRoomViewController: UITableViewDataSource, UITableViewDelegate 
         switch indexPath
         {
         case [0,0]:
-            self.shareInvitecode()
+            self.shareInviteCode()
         case [1,0]:
             self.tapRoomModification()
         default:
