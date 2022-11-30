@@ -49,9 +49,23 @@ struct RoomAPI {
         return try await apiService.request(request)
     }
     
+    func createPost(PostDTO: PostDTO) async throws -> Post? {
+        let request = RoomEndPoint
+            .createPost(body: PostDTO)
+            .createRequest()
+        return try await apiService.request(request)
+    }
+    
     func loadPostByRoomID(roomID: Int) async throws -> [Post]? {
         let request = RoomEndPoint
             .loadPostsByRoomID(roomID: roomID)
+            .createRequest()
+        return try await apiService.request(request)
+    }
+    
+    func createPhoto(PhotoDTO: PhotoDTO) async throws -> Photo? {
+        let request = RoomEndPoint
+            .createPhoto(body: PhotoDTO)
             .createRequest()
         return try await apiService.request(request)
     }

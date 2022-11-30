@@ -19,11 +19,9 @@ class PostingImageViewController: UIViewController {
     var roomID: Int?
     var categoryID: Int?
     var room: Room?
-    var status: [Status]?
 
     private var photoImages: [CellItem] = []
     private var changeNUM: Int = -1
-    private var plusBool: Bool = true
 
     // MARK: - View
 
@@ -128,14 +126,14 @@ class PostingImageViewController: UIViewController {
 
     @objc func tapNextBTN() {
         let postingWritingView = PostingWritingView()
-        postingWritingView.roomID = roomID
-        postingWritingView.categoryID = categoryID
+        postingWritingView.room = room
+        postingWritingView.categoryID = categoryID ?? 0
 
         if photoImages.count == 0 {
             makeAlert(title: "", message: "사진을 한 장 이상 선택해야 합니다")
         } else {
-            postingWritingView.roomID = roomID
-            postingWritingView.categoryID = categoryID
+            postingWritingView.room = room
+            postingWritingView.categoryID = categoryID ?? 0
             postingWritingView.photoImages = photoImages
             navigationController?.pushViewController(postingWritingView, animated: true)
         }

@@ -11,11 +11,29 @@ class PostingWritingView: UIViewController {
 
     // MARK: - Property
 
-    var roomID: Int?
-    var categoryID: Int?
-    var photoImages: [CellItem]?
-    private let textViewPlaceHolder = "텍스트를 입력하세요"
+    private var post: Post? {
+        didSet {
+            photoImages?.forEach {
+                uploadImage(fileName: "photo.jpeg", photo: $0.path!, postID: post!.postID)
+            }
+        }
+    }
+    private var photoCount: Int = 0 {
+        didSet {
+            if photoCount == photoImages!.count {
+                DispatchQueue.main.sync {
+                    self.dismiss(animated: true)
+                }
+            }
+        }
+    }
 
+    var room: Room?
+    var categoryID: Int = 0
+    var photoImages: [CellItem]?
+    private var roomAPI: RoomAPI = RoomAPI(apiService: APIService())
+    private let textViewPlaceHolder = "텍스트를 입력하세요"
+    
     // MARK: - View
 
     private var textTitle: UILabel = {
@@ -134,14 +152,11 @@ class PostingWritingView: UIViewController {
     }
 
     @objc func tapNextBTN() {
-        coreDataManager.createPostingData(roomID: roomID!, categoryID: categoryID!, explanation: textContent.text!)
-        photoImages?.forEach {
-            coreDataManager.createPhotoData(postingID: coreDataManager.countData(dataType: "posting"), photoPath: $0.path!)
-        }
-        self.dismiss(animated: true)
+        let postDTO: PostDTO = PostDTO(roomID: room?.roomID ?? 1, category: categoryID, type: 0, description: textContent.text!)
+        createPost(PostDTO: postDTO)
     }
 
-    @objc private func keyboardWillShow(notification: NSNotification) {
+    @objc func keyboardWillShow(notification: NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
             UIView.animate(withDuration: 0.2, animations: {
                 self.finalBTN.transform = CGAffineTransform(translationX: 0, y: -keyboardSize.height + 25)
@@ -149,10 +164,55 @@ class PostingWritingView: UIViewController {
         }
     }
 
-    @objc private func keyboardWillHide(notification:NSNotification) {
+    @objc func keyboardWillHide(notification:NSNotification) {
         UIView.animate(withDuration: 0.2, animations: {
             self.finalBTN.transform = .identity
         })
+    }
+    
+    private func createPost(PostDTO: PostDTO) {
+        Task{
+            do {
+                let response = try await self.roomAPI.createPost(PostDTO: PostDTO)
+                guard let data = response else {
+                    return
+                }
+                self.post = data
+            } catch NetworkError.serverError {
+            } catch NetworkError.encodingError {
+            } catch NetworkError.clientError(_) {
+            }
+        }
+    }
+    
+    private func uploadImage(fileName: String, photo: Data, postID: Int) {
+        let boundary = UUID().uuidString
+        
+        let session = URLSession.shared
+
+        var urlRequest = URLRequest(url: URL(string: APIEnvironment.photosURL)!)
+        urlRequest.httpMethod = HTTPMethod.post.rawValue
+        urlRequest.setValue(APIEnvironment.apiKey, forHTTPHeaderField: "API-Key")
+        urlRequest.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
+        
+        var data = Data()
+        
+        data.append("\r\n--\(boundary)\r\n".data(using: .utf8)!)
+        data.append("Content-Disposition: form-data; name=\"photo\"; filename=\"\(fileName)\"\r\n".data(using: .utf8)!)
+        data.append("Content-Type: photo/jpeg\r\n\r\n".data(using: .utf8)!)
+        data.append(photo)
+        
+        data.append("\r\n--\(boundary)\r\n".data(using: .utf8)!)
+        data.append("Content-Disposition: form-data; name=\"postID\"\r\n".data(using: .utf8)!)
+        data.append("Content-Type: text/plain\r\n\r\n".data(using: .utf8)!)
+        data.append(String(postID).data(using: .utf8)!)
+        data.append("\r\n--\(boundary)--\r\n".data(using: .utf8)!)
+        
+        session.uploadTask(with: urlRequest, from: data, completionHandler: { responseData, response, error in
+            if error == nil {
+                self.photoCount += 1
+            }
+        }).resume()
     }
 }
 

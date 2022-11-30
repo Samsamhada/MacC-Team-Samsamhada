@@ -15,6 +15,7 @@ class SegmentedControlViewController: UIViewController {
     var room: Room?
     var posts = [Post]() {
         didSet {
+            workingHistoryView.posts = []
             posts.sort(by: {$0.postID > $1.postID})
             posts.forEach {
                 if $0.type == 0 {
@@ -89,7 +90,6 @@ class SegmentedControlViewController: UIViewController {
     }
 
     // MARK: - Method
-
 
     private func attribute() {
         view.backgroundColor = .white

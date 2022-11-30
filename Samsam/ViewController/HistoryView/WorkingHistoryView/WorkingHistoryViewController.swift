@@ -11,8 +11,6 @@ class WorkingHistoryViewController: UIViewController {
 
     // MARK: - Property
     
-    var postDate = Set<String>()
-    var room: Room?
     var posts = [Post]() {
         didSet {
             workingHistoryView.reloadData()
@@ -21,11 +19,13 @@ class WorkingHistoryViewController: UIViewController {
             }
         }
     }
-    var roomID: Int?
-
+    
+    var room: Room?
+    private var postDate = Set<String>()
+    
     // MARK: - View
 
-    let workingHistoryView: UICollectionView = {
+    private let workingHistoryView: UICollectionView = {
         return $0
     }(UICollectionView(
         frame: .zero, collectionViewLayout: UICollectionViewFlowLayout()))
@@ -117,7 +117,7 @@ extension WorkingHistoryViewController: UICollectionViewDataSource, UICollection
             contentCell.workType.text = Category.categoryName(Category(rawValue: posts[indexPath.item].category)!)()
             
             DispatchQueue.global().async {
-                let data = try? Data(contentsOf: URL(string: self.posts[indexPath.item].photos[0].photoPath)!)
+                let data = try? Data(contentsOf: URL(string: self.posts[indexPath.item].photos![0].photoPath)!)
                 DispatchQueue.main.async {
                     contentCell.uiImageView.image = UIImage(data: data!)
                 }
@@ -159,7 +159,7 @@ extension WorkingHistoryViewController: UICollectionViewDataSource, UICollection
 
     @objc func tapAllView() {
         let chipViewController = ChipViewController()
-        chipViewController.roomID = roomID
+        chipViewController.room = room
         navigationController?.pushViewController(chipViewController , animated: true)
     }
 }

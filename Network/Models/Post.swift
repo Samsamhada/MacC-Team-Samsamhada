@@ -15,5 +15,5 @@ struct Photo: Codable {
 struct Post: Codable {
     let postID, roomID, category, type: Int
     let description, createDate: String
-    let photos: [Photo]
+    let photos: [Photo]?
 }
