@@ -14,8 +14,8 @@ class DetailViewController: UIViewController, UIScrollViewDelegate {
     let screenWidth = UIScreen.main.bounds.width - 32
 
     private var naviTitle = "화장실"
-    var images: [PhotoEntity] = []
-    private var imageArray: [UIImage] = []
+    var images: [Photo] = []
+    private var sharingItems: [Any] = []
 
     // MARK: - View
 
@@ -89,9 +89,10 @@ class DetailViewController: UIViewController, UIScrollViewDelegate {
     private func attribute() {
         view.backgroundColor = .white
         setNavigationBar()
+        sharingItems.append(self.descriptionLBL.text!)
 
         scrollView.delegate = self
-        pageControl.addTarget(self, action: #selector(pageDidChange(sender: )), for: .valueChanged)
+        pageControl.addTarget(self, action: #selector(pageDidChange), for: .valueChanged)
         sharingButton.addTarget(self, action: #selector(tapShareButton), for: .touchUpInside)
     }
 
@@ -148,28 +149,21 @@ class DetailViewController: UIViewController, UIScrollViewDelegate {
         pageControl.currentPage = Int(scrollView.contentOffset.x / screenWidth)
     }
 
-    @objc private func pageDidChange(sender: UIPageControl){
+    @objc func pageDidChange(sender: UIPageControl){
         let offsetX = screenWidth * CGFloat(pageControl.currentPage)
         scrollView.setContentOffset(CGPoint(x: offsetX, y: 0), animated: true)
     }
 
     // TODO: - 수정화면 생성되면 수정예정.
 
-    @objc private func tapEditButton() {
+    @objc func tapEditButton() {
         let editViewController = ViewController()
         navigationController?.pushViewController(editViewController, animated: true)
     }
 
-    @objc private func tapShareButton() {
-        for imgName in images {
-            guard let img = UIImage(data: imgName.photoPath!) else { return }
-            imageArray.append(img)
-        }
-
-        let vc = UIActivityViewController(activityItems: imageArray, applicationActivities: [])
-        if !imageArray.isEmpty {
-            present(vc, animated: true)
-        }
+    @objc func tapShareButton() {
+        let vc = UIActivityViewController(activityItems: self.sharingItems, applicationActivities: [])
+        self.present(vc, animated: true)
     }
 }
 
@@ -199,7 +193,16 @@ extension DetailViewController {
         )
 
         for num in 0..<images.count {
-            addImageView(img: images[num].photoPath!, position: CGFloat(num))
+            DispatchQueue.global().async {
+                let imageData = try? Data(contentsOf: URL(string: self.images[num].photoPath)!)
+                
+                DispatchQueue.main.async {
+                    self.addImageView(img: imageData!, position: CGFloat(num))
+                    
+                    guard let image = UIImage(data: imageData!) else { return }
+                    self.sharingItems.append(image)
+                }
+            }
         }
     }
 
