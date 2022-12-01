@@ -58,12 +58,13 @@ class SegmentedControlViewController: UIViewController {
     }(UIPageViewController(transitionStyle: .scroll,
                           navigationOrientation: .horizontal))
 
-    private let writingButton: UIButton = {
+    private lazy bar writingButton: UIButton = {
         $0.backgroundColor = AppColor.campanulaBlue
         $0.setTitle("시공상황 작성하기", for: .normal)
         $0.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
         $0.setTitleColor(.white, for: .normal)
         $0.layer.cornerRadius = 16
+        $0.addTarget(self, action: #selector(tapWritingButton), for: .touchDown)
         return $0
     }(UIButton())
 
@@ -78,7 +79,6 @@ class SegmentedControlViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        setNavigationBar()
 
         attribute()
         layout()
@@ -87,6 +87,7 @@ class SegmentedControlViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         loadPostByRoomID(roomID: room!.roomID)
+        loadRoomByRoomID(roomID: room!.roomID)
     }
 
     // MARK: - Method
@@ -95,6 +96,7 @@ class SegmentedControlViewController: UIViewController {
         view.backgroundColor = .white
 
         setSegmentedControl()
+        setNavigationBar()
 
         pageViewController.delegate = self
         pageViewController.dataSource = self
@@ -149,10 +151,13 @@ class SegmentedControlViewController: UIViewController {
         let rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "gearshape"), style: .plain, target: self, action: #selector(tapSettingButton))
         rightBarButtonItem.tintColor = .black
         navigationItem.rightBarButtonItem = rightBarButtonItem
+        let backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
+        navigationItem.backBarButtonItem = backBarButtonItem
     }
 
     @objc func tapSettingButton() {
-        let settingViewController = ViewController()
+        let settingViewController = SettingRoomViewController()
+        settingViewController.room = room
         navigationController?.pushViewController(settingViewController, animated: true)
     }
 
@@ -195,6 +200,21 @@ class SegmentedControlViewController: UIViewController {
                     return
                 }
                 posts = data
+            } catch NetworkError.serverError {
+            } catch NetworkError.encodingError {
+            } catch NetworkError.clientError(_) {
+            }
+        }
+    }
+
+    private func loadRoomByRoomID(roomID: Int) {
+        Task {
+            do {
+                let response = try await self.roomAPI.loadRoom(roomID: roomID)
+                if let data = response {
+                    room = data
+                    setNavigationBar()
+                }
             } catch NetworkError.serverError {
             } catch NetworkError.encodingError {
             } catch NetworkError.clientError(_) {
