@@ -53,6 +53,12 @@ class ImageDetailViewController: UIViewController {
 
     private func attribute() {
         view.backgroundColor = .white
+        navigationItem.leftBarButtonItem = UIBarButtonItem(
+            image: UIImage(systemName: "xmark"),
+            style: .plain,
+            target: self,
+            action: #selector(tapCloseButton)
+        )
 
         scrollView.delegate = self
         scrollView.zoomScale = 1.0
