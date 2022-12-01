@@ -60,7 +60,7 @@ class ImageDetailViewController: UIViewController {
             bottom: scrollView.contentLayoutGuide.bottomAnchor,
             right: scrollView.contentLayoutGuide.rightAnchor
         )
-        detailImage.centerX(inView: scrollView)
+        detailImage.centerX(inView: scrollView) 
     }
 
     private func attribute() {
@@ -102,7 +102,6 @@ extension ImageDetailViewController: UIScrollViewDelegate {
     
     func scrollViewDidZoom(_ scrollView: UIScrollView) {
         if let image = detailImage.image {
-
             view.backgroundColor = .black
             
             let changedWidth = detailImage.frame.width
