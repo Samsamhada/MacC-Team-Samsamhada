@@ -380,11 +380,11 @@ extension RoomCreationViewController: UITableViewDelegate, UITableViewDataSource
             
             if indexPath.section == 0 {
                 header.dateLabel.text = "시공일"
-                header.dateButton.text = String(startDate.dropLast(13))
+                header.dateButton.text = String(startDate.dropFirst(2).dropLast(13)).replacingOccurrences(of: "-", with: ".")
             }
             if indexPath.section == 1 {
                 header.dateLabel.text = "준공일"
-                header.dateButton.text = String(endDate.dropLast(13))
+                header.dateButton.text = String(endDate.dropFirst(2).dropLast(13)).replacingOccurrences(of: "-", with: ".")
             }
 
             return header

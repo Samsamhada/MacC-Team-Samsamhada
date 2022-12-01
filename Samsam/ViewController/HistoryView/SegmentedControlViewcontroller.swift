@@ -168,6 +168,7 @@ class SegmentedControlViewController: UIViewController {
 
     @objc func tapSettingButton() {
         let settingViewController = SettingRoomViewController()
+        settingViewController.room = room
         navigationController?.pushViewController(settingViewController, animated: true)
     }
 
