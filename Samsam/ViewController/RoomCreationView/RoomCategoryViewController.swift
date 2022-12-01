@@ -15,7 +15,7 @@ class RoomCategoryViewController: UIViewController {
     var clientName: String = ""
     lazy var startDate: String = ""
     lazy var endDate: String = ""
-    var warrantyTime: Int?
+    var warrantyTime: Int = 12
     var selectedCellArray: [Int] = []
     let roomAPI: RoomAPI = RoomAPI(apiService: APIService())
     var room: Room? {
@@ -155,7 +155,7 @@ class RoomCategoryViewController: UIViewController {
     @objc func tapNextBTN() {
         selectedCellArray.sort()
 
-        let roomDTO: RoomDTO = RoomDTO(workerID: workerID, clientName: clientName, startDate: startDate, endDate: endDate, warrantyTime: warrantyTime!)
+        let roomDTO: RoomDTO = RoomDTO(workerID: workerID, clientName: clientName, startDate: startDate, endDate: endDate, warrantyTime: warrantyTime)
 
         createRoom(RoomDTO: roomDTO)
     }
