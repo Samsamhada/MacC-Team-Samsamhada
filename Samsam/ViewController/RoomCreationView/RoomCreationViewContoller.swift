@@ -36,7 +36,7 @@ class RoomCreationViewController: UIViewController{
         didSet {
             if !roomCreation! {
                 modificationButton.backgroundColor = (warrantyTime != room!.warrantyTime) ? AppColor.campanulaBlue : .gray
-                modificationButton.isEnabled.toggle()
+                modificationButton.isEnabled = (warrantyTime != room!.warrantyTime) ? true : false
             }
         }
     }
@@ -53,7 +53,7 @@ class RoomCreationViewController: UIViewController{
         didSet {
             if !roomCreation! {
                 modificationButton.backgroundColor = (String(startDate.dropLast(13)) != String(room!.startDate.dropLast(14))) ? AppColor.campanulaBlue : .gray
-                modificationButton.isEnabled.toggle()
+                modificationButton.isEnabled = (String(startDate.dropLast(13)) != String(room!.startDate.dropLast(14))) ? true : false
             }
         }
     }
@@ -61,7 +61,7 @@ class RoomCreationViewController: UIViewController{
         didSet {
             if !roomCreation! {
                 modificationButton.backgroundColor = (String(endDate.dropLast(13)) != String(room!.endDate.dropLast(14))) ? AppColor.campanulaBlue : .gray
-                modificationButton.isEnabled.toggle()
+                modificationButton.isEnabled = (String(endDate.dropLast(13)) != String(room!.endDate.dropLast(14))) ? true : false
             }
         }
     }
@@ -246,10 +246,10 @@ class RoomCreationViewController: UIViewController{
         
         if roomCreation! {
             nextButton.backgroundColor = (customerTextField.text!.count >= 1) ? AppColor.campanulaBlue : .gray
-            nextButton.isEnabled.toggle()
+            nextButton.isEnabled = (customerTextField.text!.count >= 1) ? true : false
         } else {
             modificationButton.backgroundColor = (customerTextField.text! != room!.clientName) ? AppColor.campanulaBlue : .gray
-            modificationButton.isEnabled.toggle()
+            modificationButton.isEnabled = (customerTextField.text! != room!.clientName) ? true : false
         }
     }
 
