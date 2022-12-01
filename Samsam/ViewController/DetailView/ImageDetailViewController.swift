@@ -60,11 +60,11 @@ class ImageDetailViewController: UIViewController {
             bottom: scrollView.contentLayoutGuide.bottomAnchor,
             right: scrollView.contentLayoutGuide.rightAnchor
         )
-        detailImage.centerX(inView: scrollView) 
+        detailImage.centerX(inView: scrollView)
     }
 
     private func attribute() {
-        view.backgroundColor = .white
+        view.backgroundColor = .black
         navigationItem.leftBarButtonItem = UIBarButtonItem(
             image: UIImage(systemName: "chevron.left"),
             style: .plain,
