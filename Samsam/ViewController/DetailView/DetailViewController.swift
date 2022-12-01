@@ -210,7 +210,8 @@ extension DetailViewController {
         let constructionImage = UIImageView()
         constructionImage.image = UIImage(data: img)
 
-        let changedView = UITapGestureRecognizer(target: self, action: #selector(changedView))
+        let changedView = NavigationTapRecognizer(target: self, action: #selector(changedView))
+        changedView.image = constructionImage.image
         constructionImage.addGestureRecognizer(changedView)
         constructionImage.isUserInteractionEnabled = true
 
@@ -224,8 +225,13 @@ extension DetailViewController {
         )
     }
 
-    @objc func changedView() {
+    @objc func changedView(_ sender: NavigationTapRecognizer) {
         let imageDetailViewController = ImageDetailViewController()
+        imageDetailViewController.detailImage.image = sender.image
         navigationController?.pushViewController(imageDetailViewController, animated: true)
     }
+}
+
+class NavigationTapRecognizer: UITapGestureRecognizer {
+    var image: UIImage?
 }
