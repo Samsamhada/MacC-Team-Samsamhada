@@ -70,7 +70,6 @@ class SettingWorkerViewController: UIViewController {
                 let response = try await self.workerService.loadWorkerDataByWorkerID(workerID: workerID)
                 if let data = response {
                     workerData = data
-                    print(data)
                 }
             } catch NetworkError.serverError {
             } catch NetworkError.encodingError {
