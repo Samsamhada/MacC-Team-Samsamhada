@@ -35,13 +35,8 @@ class RoomCreationViewController: UIViewController{
     var warrantyTime: Int = 12 {
         didSet {
             if !roomCreation! {
-                if warrantyTime != room!.warrantyTime {
-                    modificationButton.backgroundColor = AppColor.campanulaBlue
-                    modificationButton.isEnabled = true
-                } else {
-                    modificationButton.backgroundColor = .gray
-                    modificationButton.isEnabled = false
-                }
+                modificationButton.backgroundColor = (warrantyTime != room!.warrantyTime) ? AppColor.campanulaBlue : .gray
+                modificationButton.isEnabled.toggle()
             }
         }
     }
@@ -57,26 +52,16 @@ class RoomCreationViewController: UIViewController{
     private var startDate = Date.now.toString(dateFormat:  "yyyy-MM-dd HH:mm:ss.SSS") {
         didSet {
             if !roomCreation! {
-                if String(startDate.dropLast(13)) != String(room!.startDate.dropLast(14)) {
-                    modificationButton.backgroundColor = AppColor.campanulaBlue
-                    modificationButton.isEnabled = true
-                } else {
-                    modificationButton.backgroundColor = .gray
-                    modificationButton.isEnabled = false
-                }
+                modificationButton.backgroundColor = (String(startDate.dropLast(13)) != String(room!.startDate.dropLast(14))) ? AppColor.campanulaBlue : .gray
+                modificationButton.isEnabled.toggle()
             }
         }
     }
     private var endDate = Date.now.toString(dateFormat:  "yyyy-MM-dd HH:mm:ss.SSS") {
         didSet {
             if !roomCreation! {
-                if String(endDate.dropLast(13)) != String(room!.endDate.dropLast(14)) {
-                    modificationButton.backgroundColor = AppColor.campanulaBlue
-                    modificationButton.isEnabled = true
-                } else {
-                    modificationButton.backgroundColor = .gray
-                    modificationButton.isEnabled = false
-                }
+                modificationButton.backgroundColor = (String(endDate.dropLast(13)) != String(room!.endDate.dropLast(14))) ? AppColor.campanulaBlue : .gray
+                modificationButton.isEnabled.toggle()
             }
         }
     }
@@ -263,7 +248,6 @@ class RoomCreationViewController: UIViewController{
             nextButton.backgroundColor = (customerTextField.text!.count >= 1) ? AppColor.campanulaBlue : .gray
             nextButton.isEnabled.toggle()
         } else {
-            
             modificationButton.backgroundColor = (customerTextField.text! != room!.clientName) ? AppColor.campanulaBlue : .gray
             modificationButton.isEnabled.toggle()
         }
