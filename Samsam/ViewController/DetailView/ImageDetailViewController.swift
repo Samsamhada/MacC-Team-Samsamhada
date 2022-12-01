@@ -51,7 +51,6 @@ class ImageDetailViewController: UIViewController {
 
     private func attribute() {
         view.backgroundColor = .white
-        navigationItem.title = "화장실"
 
         scrollView.delegate = self
         scrollView.zoomScale = 1.0
