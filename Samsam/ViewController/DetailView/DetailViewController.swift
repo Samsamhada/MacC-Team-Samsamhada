@@ -92,7 +92,7 @@ class DetailViewController: UIViewController, UIScrollViewDelegate {
         sharingItems.append(self.descriptionLBL.text!)
 
         scrollView.delegate = self
-        pageControl.addTarget(self, action: #selector(pageDidChange(sender: )), for: .valueChanged)
+        pageControl.addTarget(self, action: #selector(pageDidChange), for: .valueChanged)
         sharingButton.addTarget(self, action: #selector(tapShareButton), for: .touchUpInside)
     }
 
