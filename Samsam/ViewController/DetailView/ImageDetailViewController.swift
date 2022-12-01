@@ -9,6 +9,18 @@ import UIKit
 
 class ImageDetailViewController: UIViewController {
 
+    // MARK: - Property
+    
+    var isCheckColor = true {
+        didSet {
+            if isCheckColor {
+                view.backgroundColor = .black
+            } else {
+                view.backgroundColor = .white
+            }
+        }
+    }
+    
     // MARK: - View
 
     private let scrollView: UIScrollView = {
@@ -48,17 +60,20 @@ class ImageDetailViewController: UIViewController {
             bottom: scrollView.contentLayoutGuide.bottomAnchor,
             right: scrollView.contentLayoutGuide.rightAnchor
         )
-        detailImage.centerX(inView: scrollView) 
+        detailImage.centerX(inView: scrollView)
     }
 
     private func attribute() {
-        view.backgroundColor = .white
+        view.backgroundColor = .black
         navigationItem.leftBarButtonItem = UIBarButtonItem(
             image: UIImage(systemName: "xmark"),
             style: .plain,
             target: self,
             action: #selector(tapCloseButton)
         )
+        
+        let changedViewColorGesture = UITapGestureRecognizer(target: self, action: #selector(changedViewColor))
+        scrollView.addGestureRecognizer(changedViewColorGesture)
 
         scrollView.delegate = self
         scrollView.zoomScale = 1.0
@@ -70,6 +85,14 @@ class ImageDetailViewController: UIViewController {
         
         detailImage.isUserInteractionEnabled = true
     }
+    
+    @objc func tapCloseButton() {
+        self.dismiss(animated: true)
+    }
+    
+    @objc func changedViewColor() {
+        isCheckColor.toggle()
+    }
 }
 
 extension ImageDetailViewController: UIScrollViewDelegate {
@@ -79,6 +102,8 @@ extension ImageDetailViewController: UIScrollViewDelegate {
     
     func scrollViewDidZoom(_ scrollView: UIScrollView) {
         if let image = detailImage.image {
+
+            view.backgroundColor = .black
             
             let changedWidth = detailImage.frame.width
             let fixedWidth = image.size.width
