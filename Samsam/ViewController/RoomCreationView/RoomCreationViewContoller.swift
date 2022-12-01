@@ -260,21 +260,12 @@ class RoomCreationViewController: UIViewController{
         setCounter(count: customerTextField.text!.count)
         
         if roomCreation! {
-            if (customerTextField.text!.count) >= 1 {
-                nextButton.backgroundColor = .blue
-                nextButton.isEnabled = true
-            } else {
-                nextButton.backgroundColor = .gray
-                nextButton.isEnabled = false
-            }
+            nextButton.backgroundColor = (customerTextField.text!.count >= 1) ? AppColor.campanulaBlue : .gray
+            nextButton.isEnabled.toggle()
         } else {
-            if customerTextField.text! != room!.clientName {
-                modificationButton.backgroundColor = AppColor.campanulaBlue
-                modificationButton.isEnabled = true
-            } else {
-                modificationButton.backgroundColor = .gray
-                modificationButton.isEnabled = false
-            }
+            
+            modificationButton.backgroundColor = (customerTextField.text! != room!.clientName) ? AppColor.campanulaBlue : .gray
+            modificationButton.isEnabled.toggle()
         }
     }
 
