@@ -228,7 +228,7 @@ extension DetailViewController {
     @objc func changedView(_ sender: ModalTapRecognizer) {
         let imageDetailViewController = ImageDetailViewController()
         imageDetailViewController.detailImage.image = sender.image
-        
+
         let navigationController = UINavigationController(rootViewController: imageDetailViewController)
         navigationController.modalPresentationStyle = .fullScreen
         
