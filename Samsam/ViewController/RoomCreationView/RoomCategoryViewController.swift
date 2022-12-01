@@ -16,7 +16,6 @@ class RoomCategoryViewController: UIViewController {
     lazy var startDate: String = ""
     lazy var endDate: String = ""
     var warrantyTime: Int = 12
-    var warrantyTime = 12
     var selectedCellArray: [Int] = []
     let roomAPI: RoomAPI = RoomAPI(apiService: APIService())
     var room: Room? {

@@ -58,7 +58,7 @@ class SegmentedControlViewController: UIViewController {
     }(UIPageViewController(transitionStyle: .scroll,
                           navigationOrientation: .horizontal))
 
-    private lazy bar writingButton: UIButton = {
+    private lazy var writingButton: UIButton = {
         $0.backgroundColor = AppColor.campanulaBlue
         $0.setTitle("시공상황 작성하기", for: .normal)
         $0.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
