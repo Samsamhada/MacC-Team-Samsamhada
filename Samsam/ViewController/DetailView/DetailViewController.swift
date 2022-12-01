@@ -228,7 +228,10 @@ extension DetailViewController {
     @objc func changedView(_ sender: NavigationTapRecognizer) {
         let imageDetailViewController = ImageDetailViewController()
         imageDetailViewController.detailImage.image = sender.image
-        navigationController?.pushViewController(imageDetailViewController, animated: true)
+        let navigationController = UINavigationController(rootViewController: imageDetailViewController)
+        navigationController.modalPresentationStyle = .fullScreen
+        
+        present(navigationController, animated: false)
     }
 }
 
