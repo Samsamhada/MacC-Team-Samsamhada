@@ -89,6 +89,7 @@ class DetailViewController: UIViewController, UIScrollViewDelegate {
     private func attribute() {
         view.backgroundColor = .white
         setNavigationBar()
+        sharingItems.append(self.descriptionLBL.text!)
 
         scrollView.delegate = self
         pageControl.addTarget(self, action: #selector(pageDidChange(sender: )), for: .valueChanged)
@@ -161,31 +162,9 @@ class DetailViewController: UIViewController, UIScrollViewDelegate {
     }
 
     @objc func tapShareButton() {
-        sharingItems = []
-        DispatchQueue.global().async {
-            self.appendImage()
-            DispatchQueue.main.sync {
-                self.sharingItems.append(self.descriptionLBL.text!)
-                self.shareitems()
-            }
-        }
-    }
-
-    private func appendImage() {
-        images.forEach {
-            let imageData = try? Data(contentsOf: URL(string: $0.photoPath)!)
-            DispatchQueue.main.sync {
-                guard let image = UIImage(data: imageData!) else { return }
-                self.sharingItems.append(image)
-            }
-        }
-    }
-    
-    private func shareitems() {
         let vc = UIActivityViewController(activityItems: self.sharingItems, applicationActivities: [])
         self.present(vc, animated: true)
     }
-    
 }
 
 // MARK: - configuratingScrollView
@@ -216,8 +195,12 @@ extension DetailViewController {
         for num in 0..<images.count {
             DispatchQueue.global().async {
                 let imageData = try? Data(contentsOf: URL(string: self.images[num].photoPath)!)
+                
                 DispatchQueue.main.async {
                     self.addImageView(img: imageData!, position: CGFloat(num))
+                    
+                    guard let image = UIImage(data: imageData!) else { return }
+                    self.sharingItems.append(image)
                 }
             }
         }
