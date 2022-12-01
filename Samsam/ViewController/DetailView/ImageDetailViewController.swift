@@ -15,8 +15,8 @@ class ImageDetailViewController: UIViewController {
         return $0
     }(UIScrollView())
 
-    let detailImage: UIImageView = {
-        $0.image = UIImage(named: "TestImage")
+    var detailImage: UIImageView = {
+        $0.image = UIImage(named: "GrayBox")
         $0.contentMode = .scaleAspectFit
         return $0
     }(UIImageView())
