@@ -10,7 +10,8 @@ import UIKit
 class SettingRoomViewController: UIViewController {
     
     // MARK: - Property
- 
+    
+    private let roomAPI: RoomAPI = RoomAPI(apiService: APIService())
     var room: Room?
     
     // MARK: - View
@@ -26,6 +27,11 @@ class SettingRoomViewController: UIViewController {
 
         attribute()
         layout()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        loadRoomByRoomID(roomID: room!.roomID)
     }
 
     // MARK: - Method
@@ -74,6 +80,20 @@ class SettingRoomViewController: UIViewController {
         let navigationController = UINavigationController(rootViewController: roomCreationView)
         navigationController.modalPresentationStyle = .fullScreen
         present(navigationController, animated:  true, completion: nil)
+    }
+    
+    private func loadRoomByRoomID(roomID: Int) {
+        Task {
+            do {
+                let response = try await self.roomAPI.loadRoom(roomID: roomID)
+                if let data = response {
+                    room = data
+                }
+            } catch NetworkError.serverError {
+            } catch NetworkError.encodingError {
+            } catch NetworkError.clientError(_) {
+            }
+        }
     }
 }
 
