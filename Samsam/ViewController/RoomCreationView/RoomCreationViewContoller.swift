@@ -19,9 +19,9 @@ class RoomCreationViewController: UIViewController{
     
     private let roomAPI: RoomAPI = RoomAPI(apiService: APIService())
     var room: Room?
-    var roomCreation: Bool? {
+    var roomCreation: Bool = true {
         didSet {
-            if roomCreation! {
+            if roomCreation {
                 navigationItem.title = "방 생성"
                 nextButton.isHidden = false
             } else {
@@ -33,7 +33,7 @@ class RoomCreationViewController: UIViewController{
     }
     var warrantyTime: Int = 12 {
         didSet {
-            if !roomCreation! {
+            if !roomCreation {
                 modificationButton.backgroundColor = (warrantyTime != room!.warrantyTime) ? AppColor.campanulaBlue : .gray
                 modificationButton.isEnabled = (warrantyTime != room!.warrantyTime) ? true : false
             }
@@ -50,7 +50,7 @@ class RoomCreationViewController: UIViewController{
 
     private var startDate = Date.now.toString(dateFormat:  "yyyy-MM-dd HH:mm:ss.SSS") {
         didSet {
-            if !roomCreation! {
+            if !roomCreation {
                 modificationButton.backgroundColor = (String(startDate.dropLast(13)) != String(room!.startDate.dropLast(14))) ? AppColor.campanulaBlue : .gray
                 modificationButton.isEnabled = (String(startDate.dropLast(13)) != String(room!.startDate.dropLast(14))) ? true : false
             }
@@ -58,7 +58,7 @@ class RoomCreationViewController: UIViewController{
     }
     private var endDate = Date.now.toString(dateFormat:  "yyyy-MM-dd HH:mm:ss.SSS") {
         didSet {
-            if !roomCreation! {
+            if !roomCreation {
                 modificationButton.backgroundColor = (String(endDate.dropLast(13)) != String(room!.endDate.dropLast(14))) ? AppColor.campanulaBlue : .gray
                 modificationButton.isEnabled = (String(endDate.dropLast(13)) != String(room!.endDate.dropLast(14))) ? true : false
             }
@@ -244,7 +244,7 @@ class RoomCreationViewController: UIViewController{
         checkMaxLength(textField: customerTextField)
         setCounter(count: customerTextField.text!.count)
         
-        if roomCreation! {
+        if roomCreation {
             nextButton.backgroundColor = (customerTextField.text!.count >= 1) ? AppColor.campanulaBlue : .gray
             nextButton.isEnabled = (customerTextField.text!.count >= 1) ? true : false
         } else {
