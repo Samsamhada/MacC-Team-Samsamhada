@@ -71,9 +71,7 @@ enum RoomEndPoint: EndPointable {
             return "\(APIEnvironment.postsURL)/photo/room/\(roomID)"
         case .createPhoto:
             return APIEnvironment.photosURL
-        case .modifyRoom(let roomID, _):
-            return "\(APIEnvironment.roomsURL)/\(roomID)"
-        case .loadRoom(let roomID):
+        case .modifyRoom(let roomID, _), .loadRoom(let roomID):
             return "\(APIEnvironment.roomsURL)/\(roomID)"
         }
     }
