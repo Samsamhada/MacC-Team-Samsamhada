@@ -70,7 +70,7 @@ class SettingRoomViewController: UIViewController {
         
         let activityViewController = UIActivityViewController(activityItems: shareItems, applicationActivities: nil)
         activityViewController.popoverPresentationController?.sourceView = self.view
-        self.present(activityViewController, animated: true, completion: nil)
+        self.present(activityViewController, animated: true)
     }
     
     private func tapRoomModification() {
@@ -79,7 +79,7 @@ class SettingRoomViewController: UIViewController {
         roomCreationView.roomCreation = false
         let navigationController = UINavigationController(rootViewController: roomCreationView)
         navigationController.modalPresentationStyle = .fullScreen
-        present(navigationController, animated:  true, completion: nil)
+        present(navigationController, animated:  true)
     }
     
     private func loadRoomByRoomID(roomID: Int) {

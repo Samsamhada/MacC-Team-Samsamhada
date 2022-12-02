@@ -159,7 +159,7 @@ extension SettingWorkerViewController: MFMailComposeViewControllerDelegate {
             composeVC.setSubject("[문의 사항]")
             composeVC.setMessageBody(messageBody, isHTML: false)
             
-            self.present(composeVC, animated: true, completion: nil)
+            self.present(composeVC, animated: true)
         }
         else {
             self.showSendMailErrorAlert()
