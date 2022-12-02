@@ -64,8 +64,8 @@ class SettingRoomViewController: UIViewController {
     
     private func shareInviteCode() {
         var shareItems = [String]()
-        if let invitecode = room?.inviteCode {
-            shareItems.append("초대 코드: \(invitecode)")
+        if let inviteCode = room?.inviteCode {
+            shareItems.append("초대 코드: \(inviteCode)")
         }
         
         let activityViewController = UIActivityViewController(activityItems: shareItems, applicationActivities: nil)
