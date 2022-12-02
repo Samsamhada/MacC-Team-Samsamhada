@@ -13,9 +13,9 @@ class RoomCategoryViewController: UIViewController {
 
     var workerID: Int = 0
     var clientName: String = ""
-    lazy var startDate: Date = Date.now
-    lazy var endDate: Date = Date.now
-    var warrantyTime = 12
+    lazy var startDate: String = ""
+    lazy var endDate: String = ""
+    var warrantyTime: Int = 12
     var selectedCellArray: [Int] = []
     let roomAPI: RoomAPI = RoomAPI(apiService: APIService())
     var room: Room? {
@@ -154,12 +154,7 @@ class RoomCategoryViewController: UIViewController {
 
     @objc func tapNextBTN() {
         selectedCellArray.sort()
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss.SSS"
-        dateFormatter.locale = Locale(identifier: "ko_KR")
-
-        let roomDTO: RoomDTO = RoomDTO(workerID: workerID, clientName: clientName, startDate: dateFormatter.string(from: startDate), endDate: dateFormatter.string(from: endDate), warrantyTime: warrantyTime)
-
+        let roomDTO: RoomDTO = RoomDTO(workerID: workerID, clientName: clientName, startDate: startDate, endDate: endDate, warrantyTime: warrantyTime)
         createRoom(RoomDTO: roomDTO)
     }
 }

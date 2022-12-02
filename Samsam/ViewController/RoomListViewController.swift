@@ -15,6 +15,7 @@ class RoomListViewController: UIViewController {
     let roomAPI: RoomAPI = RoomAPI(apiService: APIService())
     var rooms = [Room]() {
         didSet {
+            rooms.sort(by: {$0.roomID < $1.roomID})
             collectionView.reloadData()
         }
     }
@@ -60,9 +61,18 @@ class RoomListViewController: UIViewController {
     private func setupNavigationTitle() {
         let backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
         navigationItem.backBarButtonItem = backBarButtonItem
+        let rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "gearshape"), style: .plain, target: self, action: #selector(tapSettingButton))
+        rightBarButtonItem.tintColor = .black
+        navigationItem.rightBarButtonItem = rightBarButtonItem
         navigationItem.title = "기와집"
         navigationController?.navigationBar.prefersLargeTitles = false
         navigationController?.setNavigationBarHidden(false, animated: true)
+    }
+
+    @objc func tapSettingButton() {
+        let settingViewController = SettingWorkerViewController()
+        settingViewController.workerID = workerID
+        navigationController?.pushViewController(settingViewController, animated: true)
     }
 
     private func setupCollectionView() {
@@ -145,6 +155,7 @@ extension RoomListViewController: UICollectionViewDataSource, UICollectionViewDe
     @objc func tapRoomCreationButton() {
         let roomCreationView = RoomCreationViewController()
         roomCreationView.workerID = workerID
+        roomCreationView.roomCreation = true
         let roomCreationViewController = UINavigationController(rootViewController:  roomCreationView)
         roomCreationViewController.modalPresentationStyle = .fullScreen
         present(roomCreationViewController, animated:  true, completion: nil)

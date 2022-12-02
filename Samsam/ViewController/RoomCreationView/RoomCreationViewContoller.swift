@@ -16,6 +16,29 @@ struct CellData {
 class RoomCreationViewController: UIViewController{
 
     // MARK: - Property
+    
+    private let roomAPI: RoomAPI = RoomAPI(apiService: APIService())
+    var room: Room?
+    var roomCreation: Bool = true {
+        didSet {
+            if roomCreation {
+                navigationItem.title = "방 생성"
+                nextButton.isHidden = false
+            } else {
+                loadRoomImformation()
+                navigationItem.title = "방 정보 수정"
+                modificationButton.isHidden = false
+            }
+        }
+    }
+    var warrantyTime: Int = 12 {
+        didSet {
+            if !roomCreation {
+                modificationButton.backgroundColor = (warrantyTime != room!.warrantyTime) ? AppColor.campanulaBlue : .gray
+                modificationButton.isEnabled = (warrantyTime != room!.warrantyTime) ? true : false
+            }
+        }
+    }
 
     var workerID = 0
     private var tableViewData = [CellData]()
@@ -25,8 +48,22 @@ class RoomCreationViewController: UIViewController{
     private let roomCreationViewDateSecondCell = RoomCreationViewDateSecondCell()
     private let roomCreationViewWarrantyCell = RoomCreationViewWarrantyCell()
 
-    private var startDate = "\(Date.now)"
-    private var endDate = "\(Date.now)"
+    private var startDate = Date.now.toString(dateFormat:  "yyyy-MM-dd HH:mm:ss.SSS") {
+        didSet {
+            if !roomCreation {
+                modificationButton.backgroundColor = (String(startDate.dropLast(13)) != String(room!.startDate.dropLast(14))) ? AppColor.campanulaBlue : .gray
+                modificationButton.isEnabled = (String(startDate.dropLast(13)) != String(room!.startDate.dropLast(14))) ? true : false
+            }
+        }
+    }
+    private var endDate = Date.now.toString(dateFormat:  "yyyy-MM-dd HH:mm:ss.SSS") {
+        didSet {
+            if !roomCreation {
+                modificationButton.backgroundColor = (String(endDate.dropLast(13)) != String(room!.endDate.dropLast(14))) ? AppColor.campanulaBlue : .gray
+                modificationButton.isEnabled = (String(endDate.dropLast(13)) != String(room!.endDate.dropLast(14))) ? true : false
+            }
+        }
+    }
 
     private var currentSelectedFirstDate: Date?
     private var currentSelectedSecondDate: Date?
@@ -52,6 +89,13 @@ class RoomCreationViewController: UIViewController{
         return $0
     }(UITextField())
 
+    private lazy var customerTextLimit : UILabel = {
+        $0.text = "0/10"
+        $0.font = UIFont.systemFont(ofSize: 16, weight: .regular)
+        $0.textColor = .gray
+        return $0
+    }(UILabel())
+
     private let textUnderLine: UIView = {
         $0.backgroundColor = AppColor.mainBlack
         $0.setHeight(height: 1)
@@ -62,14 +106,24 @@ class RoomCreationViewController: UIViewController{
         return $0
     }(UITableView())
 
-    private let nextButton: UIButton = {
+    private lazy var nextButton: UIButton = {
         $0.setTitle("다음", for: .normal)
         $0.setTitleColor(.white, for: .normal)
         $0.backgroundColor = AppColor.campanulaBlue
         $0.layer.cornerRadius = 16
         $0.backgroundColor = .gray
-        $0.isEnabled = false
+        $0.isHidden = true
         $0.addTarget(self, action: #selector(tapNextButton), for: .touchUpInside)
+        return $0
+    }(UIButton())
+
+    private lazy var modificationButton: UIButton = {
+        $0.setTitle("수정 완료", for: .normal)
+        $0.setTitleColor(.white, for: .normal)
+        $0.layer.cornerRadius = 16
+        $0.backgroundColor = .gray
+        $0.isHidden = true
+        $0.addTarget(self, action: #selector(tapModificationButton), for: .touchUpInside)
         return $0
     }(UIButton())
 
@@ -77,7 +131,7 @@ class RoomCreationViewController: UIViewController{
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         attribute()
         layout()
     }
@@ -85,13 +139,6 @@ class RoomCreationViewController: UIViewController{
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         tableView.reloadData()
-
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yy. MM. d"
-        let strDate = dateFormatter.string(from: Date.now)
-
-        startDate = strDate
-        endDate = strDate
     }
 
     // MARK: - Method
@@ -109,9 +156,11 @@ class RoomCreationViewController: UIViewController{
 
         uiView.addSubview(customerTitle)
         uiView.addSubview(customerTextField)
+        uiView.addSubview(customerTextLimit)
         uiView.addSubview(textUnderLine)
         uiView.addSubview(tableView)
         uiView.addSubview(nextButton)
+        uiView.addSubview(modificationButton)
 
         uiView.anchor(
             top: view.safeAreaLayoutGuide.topAnchor,
@@ -135,10 +184,19 @@ class RoomCreationViewController: UIViewController{
             top: customerTitle.bottomAnchor,
             left: uiView.leftAnchor,
             bottom: textUnderLine.topAnchor,
-            right: uiView.rightAnchor,
+            right: customerTextLimit.leftAnchor,
             paddingTop: 15,
             paddingLeft: 4,
             paddingBottom: 4
+        )
+
+        customerTextLimit.anchor(
+            top: customerTitle.bottomAnchor,
+            bottom: textUnderLine.topAnchor,
+            right: uiView.rightAnchor,
+            paddingTop: 15,
+            paddingBottom: 4,
+            paddingRight: 4
         )
 
         textUnderLine.anchor(
@@ -161,10 +219,16 @@ class RoomCreationViewController: UIViewController{
             right: uiView.rightAnchor,
             height: 50
         )
+
+        modificationButton.anchor(
+            left: uiView.leftAnchor,
+            bottom: uiView.bottomAnchor,
+            right: uiView.rightAnchor,
+            height: 50
+        )
     }
 
     private func setNavigation() {
-        navigationItem.title = "방 생성"
         navigationItem.leftBarButtonItem = UIBarButtonItem(
             image: UIImage(systemName: "xmark"),
             style: .plain,
@@ -176,25 +240,50 @@ class RoomCreationViewController: UIViewController{
         navigationController?.setNavigationBarHidden(false, animated: true)
     }
 
+    @objc private func buttonAttributeChanged() {
+        checkMaxLength(textField: customerTextField)
+        setCounter(count: customerTextField.text!.count)
+        
+        if roomCreation {
+            nextButton.backgroundColor = (customerTextField.text!.count >= 1) ? AppColor.campanulaBlue : .gray
+            nextButton.isEnabled = (customerTextField.text!.count >= 1) ? true : false
+        } else {
+            modificationButton.backgroundColor = (customerTextField.text! != room!.clientName) ? AppColor.campanulaBlue : .gray
+            modificationButton.isEnabled = (customerTextField.text! != room!.clientName) ? true : false
+        }
+    }
+
+    private func setCounter(count: Int) {
+        customerTextLimit.text = "\(count)/10"
+    }
+    
+    private func checkMaxLength(textField: UITextField) {
+        if let text = textField.text {
+            if text.count > 10 {
+                let endIndex = text.index(text.startIndex, offsetBy: 10)
+                let fixedText = text[text.startIndex..<endIndex]
+                textField.text = fixedText + " "
+                customerTextField.text = String(fixedText)
+            }
+        }
+    }
+
     @objc private func tapNextButton() {
         roomCategoryViewController.workerID = workerID
         roomCategoryViewController.clientName = customerTextField.text ?? ""
-
+        roomCategoryViewController.startDate = startDate
+        roomCategoryViewController.endDate = endDate
+        roomCategoryViewController.warrantyTime = warrantyTime
         navigationController?.pushViewController(roomCategoryViewController, animated: true)
+    }
+    
+    @objc private func tapModificationButton() {
+        let roomDTO: RoomDTO = RoomDTO(workerID: room!.workerID, clientName: customerTextField.text!, startDate: startDate, endDate: endDate, warrantyTime: warrantyTime)
+        updateRoomInformation(RoomDTO: roomDTO)
     }
 
     @objc private func tapCloseButton() {
         self.dismiss(animated: true)
-    }
-
-    @objc private func buttonAttributeChanged() {
-        if (customerTextField.text!.count) >= 1 {
-            nextButton.backgroundColor = .blue
-            nextButton.isEnabled = true
-        } else {
-            nextButton.backgroundColor = .gray
-            nextButton.isEnabled = false
-        }
     }
 
     private func setTableView()  {
@@ -215,6 +304,30 @@ class RoomCreationViewController: UIViewController{
                                   sectionData: roomCreationViewDateSecondCell.datePicker),
                          CellData(sectionData: roomCreationViewWarrantyCell)
         ]
+    }
+    
+    private func updateRoomInformation(RoomDTO: RoomDTO) {
+        Task{
+            do {
+                let response = try await self.roomAPI.modifyRoom(roomID: room!.roomID, RoomDTO: RoomDTO)
+                if let data = response {
+                    self.dismiss(animated: true)
+                }
+            } catch NetworkError.serverError {
+            } catch NetworkError.encodingError {
+            } catch NetworkError.clientError(_) {
+            }
+        }
+    }
+    
+    private func loadRoomImformation() {
+        customerTextField.text = room?.clientName
+        warrantyTime = room!.warrantyTime
+        startDate = String(room!.startDate.dropLast(1))
+        currentSelectedFirstDate = String(startDate.dropLast(4)).replacingOccurrences(of: "T", with: " ").toDate(dateFormat: "yyyy-MM-dd HH:mm:ss")
+        endDate = String(room!.endDate.dropLast(1))
+        currentSelectedSecondDate = String(endDate.dropLast(4)).replacingOccurrences(of: "T", with: " ").toDate(dateFormat: "yyyy-MM-dd HH:mm:ss")
+        setCounter(count: customerTextField.text!.count)
     }
 }
 
@@ -253,7 +366,8 @@ extension RoomCreationViewController: UITableViewDelegate, UITableViewDataSource
         if indexPath.section == 2 {
             warrantyCell.warrantyTimeDelegate = self
             setCell(UITableViewCell: warrantyCell, UIView: warrantyCell.warrantyView)
-
+            warrantyCell.warrantyStepper.value = Double(warrantyTime)
+            warrantyCell.warrantyText.text = "\(warrantyTime)개월"
             return warrantyCell
         }
 
@@ -261,14 +375,14 @@ extension RoomCreationViewController: UITableViewDelegate, UITableViewDataSource
 
         if indexPath.row == 0 {
             setCell(UITableViewCell: header, UIView: header.dateView)
-
+            
             if indexPath.section == 0 {
                 header.dateLabel.text = "시공일"
-                header.dateButton.text = startDate
+                header.dateButton.text = String(startDate.dropFirst(2).dropLast(13)).replacingOccurrences(of: "-", with: ".")
             }
             if indexPath.section == 1 {
                 header.dateLabel.text = "준공일"
-                header.dateButton.text = endDate
+                header.dateButton.text = String(endDate.dropFirst(2).dropLast(13)).replacingOccurrences(of: "-", with: ".")
             }
 
             return header
@@ -316,14 +430,9 @@ extension RoomCreationViewController: UITableViewDelegate, UITableViewDataSource
 extension RoomCreationViewController: RoomCreationViewDateFirstCellDelegate {
     func firstDateDidTap(date: Date) {
 
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yy. MM. d"
-        let strDate = dateFormatter.string(from: date)
-
-        startDate = strDate
         currentSelectedFirstDate = date
-
-        roomCategoryViewController.startDate = date
+        startDate = date.toString(dateFormat: "yyyy-MM-dd HH:mm:ss.SSS", local: "ko_KR")
+ 
         tableView.reloadData()
     }
 }
@@ -331,20 +440,40 @@ extension RoomCreationViewController: RoomCreationViewDateFirstCellDelegate {
 extension RoomCreationViewController: RoomCreationViewDateSecondCellDelegate {
     func secondDateDidTap(date: Date) {
 
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yy. MM. d"
-        let strDate = dateFormatter.string(from: date)
-
-        endDate = strDate
         currentSelectedSecondDate = date
-
-        roomCategoryViewController.endDate = date
+        endDate = date.toString(dateFormat: "yyyy-MM-dd HH:mm:ss.SSS", local: "ko_KR")
+        
         tableView.reloadData()
     }
 }
 
 extension RoomCreationViewController: RoomCreationViewWarrantyCellDelegate {
     func warrantyTimeChanged(warrantyTime: Int) {
-        roomCategoryViewController.warrantyTime = warrantyTime
+        self.warrantyTime = warrantyTime
+    }
+}
+
+extension String {
+    func toDate(dateFormat: String) -> Date? {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = dateFormat
+        if let date = dateFormatter.date(from: self) {
+            return date
+        } else {
+            return nil
+        }
+    }
+}
+
+extension Date {
+    func toString(dateFormat: String, local: String? = nil) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = dateFormat
+        
+        if let local = local {
+            dateFormatter.locale = Locale(identifier: local)
+        }
+        
+        return dateFormatter.string(from: self)
     }
 }

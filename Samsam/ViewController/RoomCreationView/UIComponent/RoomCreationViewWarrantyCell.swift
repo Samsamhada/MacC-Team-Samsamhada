@@ -17,7 +17,6 @@ class RoomCreationViewWarrantyCell: UITableViewCell {
 
     weak var warrantyTimeDelegate: RoomCreationViewWarrantyCellDelegate?
     static let identifier = "roomCreationViewWarrantyCell"
-    var warrantyCount = 12
 
     // MARK: - View
 
@@ -33,13 +32,13 @@ class RoomCreationViewWarrantyCell: UITableViewCell {
         return $0
     }(UILabel())
 
-    private var warrantyText: UILabel = {
+    let warrantyText: UILabel = {
         $0.text = "12개월"
         $0.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
         return $0
     }(UILabel())
 
-    private let warrantyStepper: UIStepper = {
+    let warrantyStepper: UIStepper = {
         $0.value = 12
         $0.maximumValue = 24
         $0.minimumValue = 0
@@ -109,8 +108,7 @@ class RoomCreationViewWarrantyCell: UITableViewCell {
     }
 
     @objc private func tapStepper() {
-        warrantyCount = Int(warrantyStepper.value)
-        warrantyText.text = "\(warrantyCount)개월"
+        warrantyText.text = "\(Int(warrantyStepper.value))개월"
     }
     
     @objc private func changeWarrantyTime() {
