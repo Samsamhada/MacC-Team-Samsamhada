@@ -66,7 +66,7 @@ class ImageDetailViewController: UIViewController {
     private func attribute() {
         view.backgroundColor = .black
         navigationItem.leftBarButtonItem = UIBarButtonItem(
-            image: UIImage(systemName: "xmark"),
+            image: UIImage(systemName: "chevron.left"),
             style: .plain,
             target: self,
             action: #selector(tapCloseButton)
