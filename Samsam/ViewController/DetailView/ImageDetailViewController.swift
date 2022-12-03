@@ -64,7 +64,7 @@ class ImageDetailViewController: UIViewController {
     }
 
     private func attribute() {
-        view.backgroundColor = .black
+        view.backgroundColor = .white
         navigationItem.leftBarButtonItem = UIBarButtonItem(
             image: UIImage(systemName: "chevron.left"),
             style: .plain,
