@@ -105,8 +105,7 @@ extension SettingWorkerViewController: UITableViewDataSource, UITableViewDelegat
         switch indexPath
         {
         case [0,0]:
-            // TODO: - 추후 수정 예정
-            print("개인 정보 수정")
+            self.navigationController?.pushViewController(ModificationWorkerViewController(), animated: true)
         case [1,0]:
             self.sendReportMail()
         case [2,0]:
