@@ -14,9 +14,9 @@ class ImageDetailViewController: UIViewController {
     var isCheckColor = true {
         didSet {
             if isCheckColor {
-                view.backgroundColor = .black
-            } else {
                 view.backgroundColor = .white
+            } else {
+                view.backgroundColor = .black
             }
         }
     }
@@ -64,7 +64,7 @@ class ImageDetailViewController: UIViewController {
     }
 
     private func attribute() {
-        view.backgroundColor = .black
+        view.backgroundColor = .white
         navigationItem.leftBarButtonItem = UIBarButtonItem(
             image: UIImage(systemName: "chevron.left"),
             style: .plain,
