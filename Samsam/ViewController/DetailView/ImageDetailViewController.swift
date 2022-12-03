@@ -106,16 +106,16 @@ extension ImageDetailViewController: UIScrollViewDelegate {
             view.backgroundColor = .black
             
             let changedWidth = detailImage.frame.width
-            let fixedWidth = image.size.width
             let changedHeight = detailImage.frame.height
+            let fixedWidth = image.size.width
             let fixedHeight = image.size.height
             
             let ratioWidth = changedWidth / fixedWidth
             let ratioHeight = changedHeight / fixedHeight
             let ratio = (ratioWidth < ratioHeight) ? ratioWidth : ratioHeight
             
-            let newWidth = image.size.width * ratio
-            let newHeight = image.size.height * ratio
+            let newWidth = fixedWidth * ratio
+            let newHeight = fixedHeight * ratio
             
             let horizontalSide = 0.5 * (newWidth * scrollView.zoomScale > changedWidth ? (newWidth - changedWidth) : (scrollView.frame.width - scrollView.contentSize.width))
             let verticalSide = 0.5 * (newHeight * scrollView.zoomScale > changedHeight ? (newHeight - changedHeight) : (scrollView.frame.height - scrollView.contentSize.height))
