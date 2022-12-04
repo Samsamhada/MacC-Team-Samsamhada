@@ -11,6 +11,8 @@ class WorkingHistoryViewController: UIViewController {
 
     // MARK: - Property
     
+    let roomAPI: RoomAPI = RoomAPI(apiService: APIService())
+    var statuses: [Status]?
     var posts = [Post]() {
         didSet {
             workingHistoryView.reloadData()
@@ -36,6 +38,7 @@ class WorkingHistoryViewController: UIViewController {
         super.viewDidLoad()
         attribute()
         layout()
+        loadStatusesByRoomID(roomID: room!.roomID)
     }
 
     // MARK: - Method
@@ -61,6 +64,16 @@ class WorkingHistoryViewController: UIViewController {
             bottom: view.bottomAnchor,
             right: view.rightAnchor
         )
+    }
+    
+    func loadStatusesByRoomID(roomID: Int) {
+        Task {
+            let response = try await self.roomAPI.loadStatusesByRoomID(roomID: room!.roomID)
+            guard let data = response else {
+                return
+            }
+            statuses = data
+        }
     }
 }
 
