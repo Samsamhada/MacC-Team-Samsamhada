@@ -105,7 +105,9 @@ extension SettingWorkerViewController: UITableViewDataSource, UITableViewDelegat
         switch indexPath
         {
         case [0,0]:
-            self.navigationController?.pushViewController(ModificationWorkerViewController(), animated: true)
+            let modificationWorkerViewController = ModificationWorkerViewController()
+            modificationWorkerViewController.workerData = workerData
+            self.navigationController?.pushViewController(modificationWorkerViewController, animated: true)
         case [1,0]:
             self.sendReportMail()
         case [2,0]:
