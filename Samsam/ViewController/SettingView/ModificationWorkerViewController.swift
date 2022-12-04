@@ -13,6 +13,7 @@ class ModificationWorkerViewController: UIViewController {
 
     private var phoneNum = ""
     private var name = ""
+    var workerData: Login?
     
     // MARK: - View
 
@@ -27,6 +28,34 @@ class ModificationWorkerViewController: UIViewController {
     private let nameUiView: UIView = {
         return $0
     }(UIView())
+    
+    private let customerTitle: UILabel = {
+        $0.text = "성함"
+        $0.textAlignment = .left
+        $0.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
+        $0.textColor = AppColor.mainBlack
+        return $0
+    }(UILabel())
+
+    private lazy var customerTextField: UITextField = {
+        $0.placeholder = "성함을 입력해주세요."
+        $0.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
+        $0.addTarget(self, action: #selector(buttonAttributeChanged), for: .editingChanged)
+        return $0
+    }(UITextField())
+
+    private lazy var customerTextLimit : UILabel = {
+        $0.text = "0/10"
+        $0.font = UIFont.systemFont(ofSize: 16, weight: .regular)
+        $0.textColor = .gray
+        return $0
+    }(UILabel())
+
+    private let textUnderLine: UIView = {
+        $0.backgroundColor = AppColor.mainBlack
+        $0.setHeight(height: 1)
+        return $0
+    }(UITextField())
     
     private let numberLabel: UILabel = {
         $0.text = "연락처"
@@ -51,7 +80,7 @@ class ModificationWorkerViewController: UIViewController {
         $0.placeholder = "1234 - 5678"
         $0.font = UIFont.systemFont(ofSize: 16)
         $0.keyboardType = .numberPad
-//        $0.addTarget(self, action: #selector(buttonAttributeChanged), for: .editingChanged)
+        $0.addTarget(self, action: #selector(buttonAttributeChanged), for: .editingChanged)
         return $0
     }(CustomUITextField())
 
@@ -60,34 +89,6 @@ class ModificationWorkerViewController: UIViewController {
         $0.setHeight(height: 1)
         return $0
     }(UIView())
-    
-    private let customerTitle: UILabel = {
-        $0.text = "고객명/주소"
-        $0.textAlignment = .left
-        $0.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
-        $0.textColor = AppColor.mainBlack
-        return $0
-    }(UILabel())
-
-    private let customerTextField: UITextField = {
-        $0.placeholder = "고객의 별칭을 작성해주세요."
-        $0.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
-//        $0.addTarget(self, action: #selector(buttonAttributeChanged), for: .editingChanged)
-        return $0
-    }(UITextField())
-
-    private lazy var customerTextLimit : UILabel = {
-        $0.text = "0/10"
-        $0.font = UIFont.systemFont(ofSize: 16, weight: .regular)
-        $0.textColor = .gray
-        return $0
-    }(UILabel())
-
-    private let textUnderLine: UIView = {
-        $0.backgroundColor = AppColor.mainBlack
-        $0.setHeight(height: 1)
-        return $0
-    }(UITextField())
     
     private lazy var modificationButton: UIButton = {
         $0.setTitle("수정 완료", for: .normal)
@@ -112,7 +113,10 @@ class ModificationWorkerViewController: UIViewController {
 
     private func attribute() {
         view.backgroundColor = .white
+        customerTextField.text = workerData?.name
+        numberInput.text = workerData?.number
     }
+    
     private func layout() {
         view.addSubview(uiView)
         uiView.addSubview(nameUiView)
@@ -123,11 +127,11 @@ class ModificationWorkerViewController: UIViewController {
         nameUiView.addSubview(customerTextLimit)
         nameUiView.addSubview(textUnderLine)
         
-        nameUiView.addSubview(numberLabel)
-        nameUiView.addSubview(hStack)
+        numberUiView.addSubview(numberLabel)
+        numberUiView.addSubview(hStack)
         hStack.addArrangedSubview(startNumber)
         hStack.addArrangedSubview(numberInput)
-        nameUiView.addSubview(numberUnderLine)
+        numberUiView.addSubview(numberUnderLine)
         
         uiView.addSubview(modificationButton)
         
@@ -145,8 +149,16 @@ class ModificationWorkerViewController: UIViewController {
             left: uiView.leftAnchor,
             bottom: uiView.centerYAnchor,
             right: uiView.rightAnchor,
-            paddingBottom: 45,
-            height: 30
+            paddingBottom: 5,
+            height: 80
+        )
+        
+        numberUiView.anchor(
+            top: uiView.centerYAnchor,
+            left: uiView.leftAnchor,
+            right: uiView.rightAnchor,
+            paddingTop: 5,
+            height: 80
         )
         
         customerTitle.anchor(
@@ -158,33 +170,23 @@ class ModificationWorkerViewController: UIViewController {
         customerTextField.anchor(
             top: customerTitle.bottomAnchor,
             left: nameUiView.leftAnchor,
-            bottom: textUnderLine.topAnchor,
             right: customerTextLimit.leftAnchor,
             paddingTop: 15,
-            paddingLeft: 4,
-            paddingBottom: 4
+            paddingLeft: 4
         )
 
         customerTextLimit.anchor(
             top: customerTitle.bottomAnchor,
-            bottom: textUnderLine.topAnchor,
             right: nameUiView.rightAnchor,
             paddingTop: 15,
-            paddingBottom: 4,
             paddingRight: 4
         )
 
         textUnderLine.anchor(
+            top: customerTextField.bottomAnchor,
             left: nameUiView.leftAnchor,
-            right: nameUiView.rightAnchor
-        )
-        
-        numberUiView.anchor(
-            top: uiView.centerYAnchor,
-            left: uiView.leftAnchor,
-            right: uiView.rightAnchor,
-            paddingTop: 45,
-            height: 30
+            right: nameUiView.rightAnchor,
+            paddingTop: 4
         )
         
         numberLabel.anchor(
@@ -225,5 +227,8 @@ class ModificationWorkerViewController: UIViewController {
             right: uiView.rightAnchor,
             height: 50
         )
+    }
+    
+    @objc private func buttonAttributeChanged() {
     }
 }
