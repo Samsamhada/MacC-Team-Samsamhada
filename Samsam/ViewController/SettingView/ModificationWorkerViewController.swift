@@ -40,7 +40,7 @@ class ModificationWorkerViewController: UIViewController {
     private lazy var customerTextField: UITextField = {
         $0.placeholder = "성함을 입력해주세요."
         $0.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
-        $0.addTarget(self, action: #selector(buttonAttributeChanged), for: .editingChanged)
+        $0.addTarget(self, action: #selector(nameAttributeChanged), for: .editingChanged)
         return $0
     }(UITextField())
 
@@ -80,7 +80,7 @@ class ModificationWorkerViewController: UIViewController {
         $0.placeholder = "1234 - 5678"
         $0.font = UIFont.systemFont(ofSize: 16)
         $0.keyboardType = .numberPad
-        $0.addTarget(self, action: #selector(buttonAttributeChanged), for: .editingChanged)
+        $0.addTarget(self, action: #selector(numberAttributeChanged), for: .editingChanged)
         return $0
     }(CustomUITextField())
 
@@ -95,6 +95,7 @@ class ModificationWorkerViewController: UIViewController {
         $0.setTitleColor(.white, for: .normal)
         $0.layer.cornerRadius = 16
         $0.backgroundColor = .gray
+        $0.isEnabled = false
 //        $0.addTarget(self, action: #selector(tapModificationButton), for: .touchUpInside)
         return $0
     }(UIButton())
@@ -113,8 +114,15 @@ class ModificationWorkerViewController: UIViewController {
 
     private func attribute() {
         view.backgroundColor = .white
+        
         customerTextField.text = workerData?.name
-        numberInput.text = workerData?.number
+        numberInput.text = String((workerData?.number)!.dropFirst(6))
+
+        checkMaxLength(textField: customerTextField)
+        setCounter(count: customerTextField.text!.count)
+        
+        phoneNum = (numberInput.text?.replacingOccurrences(of: " - ", with: ""))!
+        checkText(textField: numberInput, phoneNum: phoneNum)
     }
     
     private func layout() {
@@ -229,6 +237,49 @@ class ModificationWorkerViewController: UIViewController {
         )
     }
     
-    @objc private func buttonAttributeChanged() {
+    private func setCounter(count: Int) {
+        customerTextLimit.text = "\(count)/20"
+    }
+    
+    private func checkMaxLength(textField: UITextField) {
+        if let text = textField.text {
+            if text.count > 20 {
+                let endIndex = text.index(text.startIndex, offsetBy: 20)
+                let fixedText = text[text.startIndex..<endIndex]
+                textField.text = fixedText + " "
+                customerTextField.text = String(fixedText)
+            }
+        }
+    }
+    
+    @objc private func nameAttributeChanged() {
+        checkMaxLength(textField: customerTextField)
+        setCounter(count: customerTextField.text!.count)
+        if customerTextField.text != workerData?.name {
+            modificationButton.isEnabled = true
+            modificationButton.backgroundColor = AppColor.campanulaBlue
+        } else {
+            modificationButton.isEnabled = false
+            modificationButton.backgroundColor = .gray
+        }
+    }
+    
+    @objc private func numberAttributeChanged() {
+        phoneNum = (numberInput.text?.replacingOccurrences(of: " - ", with: ""))!
+        if phoneNum.count >= 8 && phoneNum != String((workerData?.number)!.dropFirst(6)).replacingOccurrences(of: " - ", with: "")  {
+            modificationButton.isEnabled = true
+            modificationButton.backgroundColor = AppColor.campanulaBlue
+            checkText(textField: numberInput, phoneNum: phoneNum)
+        } else {
+            modificationButton.isEnabled = false
+            modificationButton.backgroundColor = .gray
+        }
+    }
+    
+    private func checkText(textField: UITextField, phoneNum: String) {
+            let endIndex = phoneNum.index(phoneNum.startIndex, offsetBy: 8)
+            let fixedText = phoneNum[phoneNum.startIndex..<endIndex]
+            self.phoneNum = String(fixedText)
+            textField.text = String(fixedText).phoneNumberStyle()
     }
 }
