@@ -209,7 +209,7 @@ extension ChipViewController: UICollectionViewDataSource, UICollectionViewDelega
 
         let contentCell = collectionView.dequeueReusableCell(withReuseIdentifier: WorkingHistoryViewContentCell.identifier, for: indexPath) as! WorkingHistoryViewContentCell
         
-        if self.selectedID == 0 {
+        if selectedID == 0 {
             DispatchQueue.global().async {
                 let data = try? Data(contentsOf: URL(string: self.posts[indexPath.item].photos![0].photoPath)!)
                 
@@ -241,20 +241,22 @@ extension ChipViewController: UICollectionViewDataSource, UICollectionViewDelega
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//        let detailViewController = DetailViewController()
-//        detailViewController.images = posts![indexPath.item].photos!
-//        posts?.forEach {
-//            if $0 == posts![indexPath.item] {
-//                detailViewController.descriptionLBL.text = $0.description
-//            }
-//        }
-//        coreDataManager.loadPhotoData(postingID: Int(coreDataManager.postings[indexPath.item].postingID))
-//        detailViewController.images = coreDataManager.photos
-//        coreDataManager.postings.forEach {
-//            if $0 == coreDataManager.postings[indexPath.item] {
-//                detailViewController.descriptionLBL.text = $0.explanation
-//            }
-//        }
-//        navigationController?.pushViewController(detailViewController, animated: true)
+        let detailViewController = DetailViewController()
+        
+        if selectedID == 0 {
+            detailViewController.descriptionLBL.text = posts[indexPath.item].description
+            
+            posts[indexPath.item].photos!.forEach {
+                detailViewController.images.append($0)
+            }
+        } else {
+            detailViewController.descriptionLBL.text = selectedPosts[indexPath.item].description
+            
+            selectedPosts[indexPath.item].photos!.forEach {
+                detailViewController.images.append($0)
+            }
+        }
+        
+        navigationController?.pushViewController(detailViewController, animated: true)
     }
 }
