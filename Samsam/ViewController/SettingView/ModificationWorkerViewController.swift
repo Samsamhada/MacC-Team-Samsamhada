@@ -14,6 +14,7 @@ class ModificationWorkerViewController: UIViewController {
     private var phoneNum = ""
     private var name = ""
     var workerData: Login?
+    private let workerService: WorkerAPI = WorkerAPI(apiService: APIService())
     
     // MARK: - View
 
@@ -96,7 +97,7 @@ class ModificationWorkerViewController: UIViewController {
         $0.layer.cornerRadius = 16
         $0.backgroundColor = .gray
         $0.isEnabled = false
-//        $0.addTarget(self, action: #selector(tapModificationButton), for: .touchUpInside)
+        $0.addTarget(self, action: #selector(tapModificationButton), for: .touchUpInside)
         return $0
     }(UIButton())
 
@@ -108,6 +109,7 @@ class ModificationWorkerViewController: UIViewController {
         hidekeyboardWhenTappedAround()
         attribute()
         layout()
+        print(workerData)
     }
     
     // MARK: - Method
@@ -237,6 +239,18 @@ class ModificationWorkerViewController: UIViewController {
         )
     }
     
+    @objc private func nameAttributeChanged() {
+        checkMaxLength(textField: customerTextField)
+        setCounter(count: customerTextField.text!.count)
+        if customerTextField.text != workerData?.name {
+            modificationButton.isEnabled = true
+            modificationButton.backgroundColor = AppColor.campanulaBlue
+        } else {
+            modificationButton.isEnabled = false
+            modificationButton.backgroundColor = .gray
+        }
+    }
+    
     private func setCounter(count: Int) {
         customerTextLimit.text = "\(count)/20"
     }
@@ -249,18 +263,6 @@ class ModificationWorkerViewController: UIViewController {
                 textField.text = fixedText + " "
                 customerTextField.text = String(fixedText)
             }
-        }
-    }
-    
-    @objc private func nameAttributeChanged() {
-        checkMaxLength(textField: customerTextField)
-        setCounter(count: customerTextField.text!.count)
-        if customerTextField.text != workerData?.name {
-            modificationButton.isEnabled = true
-            modificationButton.backgroundColor = AppColor.campanulaBlue
-        } else {
-            modificationButton.isEnabled = false
-            modificationButton.backgroundColor = .gray
         }
     }
     
@@ -281,5 +283,25 @@ class ModificationWorkerViewController: UIViewController {
             let fixedText = phoneNum[phoneNum.startIndex..<endIndex]
             self.phoneNum = String(fixedText)
             textField.text = String(fixedText).phoneNumberStyle()
+    }
+    
+    @objc private func tapModificationButton() {
+        let number = "+82010" + phoneNum
+        let workerDTO = WorkerDTO(userIdentifier: (workerData?.userIdentifier)!, name: customerTextField.text, number: number)
+        requestPut(workerID: (workerData?.workerID)!, workerDTO: workerDTO)
+    }
+    
+    private func requestPut(workerID: Int , workerDTO: WorkerDTO) {
+        Task{
+            do {
+                let response = try await self.workerService.modifyWorkerData(workerID: workerID, workerDTO: workerDTO)
+                if let data = response {
+                    self.navigationController?.popViewController(animated: true)
+                }
+            } catch NetworkError.serverError {
+            } catch NetworkError.encodingError {
+            } catch NetworkError.clientError(_) {
+            }
+        }
     }
 }
