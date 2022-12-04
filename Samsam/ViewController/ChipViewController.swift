@@ -14,15 +14,12 @@ class ChipViewController: UIViewController {
     var room: Room?
     var posts: [Post] = []
     var statuses: [Status]?
-
     var selectedPosts: [Post] = []
     
-    var roomID: Int?
     private var chips: [UIButton] = []
     var categoryID: Int = 0
     private var categoryArray: [Int] = []
     private var selectedID: Int = 0
-    private var selectedCategoryItem: [PostingEntity] = []
 
     // MARK: - View
 
@@ -64,12 +61,7 @@ class ChipViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        // TODO: - 칩뷰 데이터(이미지, 설명, 칩 정보) 로드
-        
-//        coreDataManager.loadOneRoomData(roomID: roomID!)
-//        coreDataManager.loadPostingData(roomID: roomID!)
-//        coreDataManager.loadWorkingStatusData(roomID: roomID!)
+
         historyView.reloadData()
     }
 
@@ -170,7 +162,6 @@ class ChipViewController: UIViewController {
             unselectedButton(UIButton: chips[selectedID])
             selectedID = sender.tag
             selectedButton(UIButton: chips[selectedID])
-            selectedCategoryItem = []
             historyView.reloadData()
         }
     }
