@@ -210,7 +210,8 @@ extension DetailViewController {
         let constructionImage = UIImageView()
         constructionImage.image = UIImage(data: img)
 
-        let changedView = UITapGestureRecognizer(target: self, action: #selector(changedView))
+        let changedView = ModalTapRecognizer(target: self, action: #selector(changedView))
+        changedView.image = constructionImage.image
         constructionImage.addGestureRecognizer(changedView)
         constructionImage.isUserInteractionEnabled = true
 
@@ -224,8 +225,17 @@ extension DetailViewController {
         )
     }
 
-    @objc func changedView() {
+    @objc func changedView(_ sender: ModalTapRecognizer) {
         let imageDetailViewController = ImageDetailViewController()
-        navigationController?.pushViewController(imageDetailViewController, animated: true)
+        imageDetailViewController.detailImage.image = sender.image
+
+        let navigationController = UINavigationController(rootViewController: imageDetailViewController)
+        navigationController.modalPresentationStyle = .fullScreen
+        
+        present(navigationController, animated: false)
     }
+}
+
+class ModalTapRecognizer: UITapGestureRecognizer {
+    var image: UIImage?
 }
