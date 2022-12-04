@@ -20,5 +20,12 @@ struct WorkerAPI {
             .createRequest()
         return try await apiService.request(request)
     }
+    
+    func modifyWorkerData(workerID: Int, workerDTO: WorkerDTO) async throws -> Message? {
+        let request = WorkerEndPoint
+            .modifyWorkerData(workerID: workerID, workerDTO: workerDTO)
+            .createRequest()
+        return try await apiService.request(request)
+    }
 }
 
