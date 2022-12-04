@@ -200,27 +200,18 @@ extension ChipViewController: UICollectionViewDataSource, UICollectionViewDelega
 
         let contentCell = collectionView.dequeueReusableCell(withReuseIdentifier: WorkingHistoryViewContentCell.identifier, for: indexPath) as! WorkingHistoryViewContentCell
         
-        if selectedID == 0 {
-            DispatchQueue.global().async {
-                let data = try? Data(contentsOf: URL(string: self.posts[indexPath.item].photos![0].photoPath)!)
-                
-                DispatchQueue.main.async {
-                    contentCell.uiImageView.image = UIImage(data: data!)
-                    contentCell.imageDescription.text = self.posts[indexPath.item].description
-                    contentCell.workType.text = Category(rawValue: Int(self.posts[indexPath.item].category))?.categoryName()
-                }
-            }
-        } else {
-            DispatchQueue.global().async {
-                let data = try? Data(contentsOf: URL(string: self.selectedPosts[indexPath.item].photos![0].photoPath)!)
-                
-                DispatchQueue.main.async {
-                    contentCell.uiImageView.image = UIImage(data: data!)
-                    contentCell.imageDescription.text = self.selectedPosts[indexPath.item].description
-                    contentCell.workType.text = Category(rawValue: Int(self.selectedPosts[indexPath.item].category))?.categoryName()
-                }
+        let selectedArray = (selectedID == 0 ? posts : selectedPosts)
+        
+        DispatchQueue.global().async {
+            let data = try? Data(contentsOf: URL(string: selectedArray[indexPath.item].photos![0].photoPath)!)
+            
+            DispatchQueue.main.async {
+                contentCell.uiImageView.image = UIImage(data: data!)
+                contentCell.imageDescription.text = selectedArray[indexPath.item].description
+                contentCell.workType.text = Category(rawValue: Int(selectedArray[indexPath.item].category))?.categoryName()
             }
         }
+        
         return contentCell
     }
 
@@ -233,19 +224,13 @@ extension ChipViewController: UICollectionViewDataSource, UICollectionViewDelega
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let detailViewController = DetailViewController()
+
+        let selectedArray = (selectedID == 0 ? posts : selectedPosts)
         
-        if selectedID == 0 {
-            detailViewController.descriptionLBL.text = posts[indexPath.item].description
-            
-            posts[indexPath.item].photos!.forEach {
-                detailViewController.images.append($0)
-            }
-        } else {
-            detailViewController.descriptionLBL.text = selectedPosts[indexPath.item].description
-            
-            selectedPosts[indexPath.item].photos!.forEach {
-                detailViewController.images.append($0)
-            }
+        detailViewController.descriptionLBL.text = selectedArray[indexPath.item].description
+        
+        selectedArray[indexPath.item].photos!.forEach {
+            detailViewController.images.append($0)
         }
         
         navigationController?.pushViewController(detailViewController, animated: true)
