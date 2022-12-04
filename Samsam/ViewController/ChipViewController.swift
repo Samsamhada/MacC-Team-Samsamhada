@@ -219,7 +219,6 @@ extension ChipViewController: UICollectionViewDataSource, UICollectionViewDelega
                     contentCell.workType.text = Category(rawValue: Int(self.posts[indexPath.item].category))?.categoryName()
                 }
             }
-            return contentCell
         } else {
             DispatchQueue.global().async {
                 let data = try? Data(contentsOf: URL(string: self.selectedPosts[indexPath.item].photos![0].photoPath)!)
@@ -230,7 +229,6 @@ extension ChipViewController: UICollectionViewDataSource, UICollectionViewDelega
                     contentCell.workType.text = Category(rawValue: Int(self.selectedPosts[indexPath.item].category))?.categoryName()
                 }
             }
-            return contentCell
         }
         return contentCell
     }
