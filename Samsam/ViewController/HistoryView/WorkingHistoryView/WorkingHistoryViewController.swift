@@ -168,6 +168,8 @@ extension WorkingHistoryViewController: UICollectionViewDataSource, UICollection
     @objc func tapAllView() {
         let chipViewController = ChipViewController()
         chipViewController.room = room
+        chipViewController.posts = posts
+        chipViewController.statuses = statuses
         navigationController?.pushViewController(chipViewController , animated: true)
     }
 }
