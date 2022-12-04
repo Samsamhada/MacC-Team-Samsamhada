@@ -132,11 +132,11 @@ extension RoomListViewController: UICollectionViewDataSource, UICollectionViewDe
         cell.endDate.text = convertDate(dateString: rooms[indexPath.row].endDate)
         return cell
     }
-
+    
     func convertDate(dateString: String) -> String {
-        let year = dateString.dropFirst(2).dropLast(20)
-        let month = dateString.dropFirst(5).dropLast(17)
-        let day = dateString.dropFirst(8).dropLast(14)
+        let year = dateString.dropText(first: 2, last: 20)
+        let month = dateString.dropText(first: 5, last: 17)
+        let day = dateString.dropText(first: 8, last: 14)
 
         return "\(year).\(month).\(day)"
     }
@@ -170,4 +170,10 @@ extension RoomListViewController: UICollectionViewDataSource, UICollectionViewDe
 
 class CustomTapGestureRecognizer: UITapGestureRecognizer {
     var rooms: Room?
+}
+
+extension String {
+    func dropText(first: Int, last: Int) -> Substring {
+        self.dropFirst(first).dropLast(last)
+    }
 }
