@@ -193,7 +193,7 @@ extension ChipViewController: UICollectionViewDataSource, UICollectionViewDelega
             }
             return selectedPosts.count
         }
-        return 1
+        return 0
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
