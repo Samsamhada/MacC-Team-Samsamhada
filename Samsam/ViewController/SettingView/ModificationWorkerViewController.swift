@@ -117,6 +117,8 @@ class ModificationWorkerViewController: UIViewController {
     private func attribute() {
         view.backgroundColor = .white
         
+        setupNotificationCenter()
+        
         customerTextField.text = workerData?.name
         numberInput.text = String((workerData?.number)!.dropFirst(6))
 
@@ -150,24 +152,17 @@ class ModificationWorkerViewController: UIViewController {
             left: view.safeAreaLayoutGuide.leftAnchor,
             bottom: view.safeAreaLayoutGuide.bottomAnchor,
             right: view.safeAreaLayoutGuide.rightAnchor,
+            paddingTop: 16,
             paddingLeft: 16,
             paddingBottom: 16,
             paddingRight: 16
         )
         
         nameUiView.anchor(
-            left: uiView.leftAnchor,
-            bottom: uiView.centerYAnchor,
-            right: uiView.rightAnchor,
-            paddingBottom: 5,
-            height: 80
-        )
-        
-        numberUiView.anchor(
-            top: uiView.centerYAnchor,
+            top: uiView.topAnchor,
             left: uiView.leftAnchor,
             right: uiView.rightAnchor,
-            paddingTop: 5,
+            paddingTop: 10,
             height: 80
         )
         
@@ -197,6 +192,14 @@ class ModificationWorkerViewController: UIViewController {
             left: nameUiView.leftAnchor,
             right: nameUiView.rightAnchor,
             paddingTop: 4
+        )
+        
+        numberUiView.anchor(
+            top: nameUiView.bottomAnchor,
+            left: uiView.leftAnchor,
+            right: uiView.rightAnchor,
+            paddingTop: 10,
+            height: 80
         )
         
         numberLabel.anchor(
@@ -283,6 +286,25 @@ class ModificationWorkerViewController: UIViewController {
             let fixedText = phoneNum[phoneNum.startIndex..<endIndex]
             self.phoneNum = String(fixedText)
             textField.text = String(fixedText).phoneNumberStyle()
+    }
+    
+    private func setupNotificationCenter() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+    
+    @objc func keyboardWillShow(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+            UIView.animate(withDuration: 0.2, animations: {
+                self.modificationButton.transform = CGAffineTransform(translationX: 0, y: -keyboardSize.height + 25)
+            })
+        }
+    }
+
+    @objc func keyboardWillHide(notification:NSNotification) {
+        UIView.animate(withDuration: 0.2, animations: {
+            self.modificationButton.transform = .identity
+        })
     }
     
     @objc private func tapModificationButton() {
