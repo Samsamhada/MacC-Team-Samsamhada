@@ -58,12 +58,12 @@ class ModificationWorkerViewController: UIViewController {
         $0.textColor = AppColor.mainBlack
         return $0
     }(UILabel())
-    
+
     private let hStack: UIStackView = {
         $0.axis = .horizontal
         return $0
     }(UIStackView())
-    
+
     private let startNumber: UILabel = {
         $0.text = "010 - "
         $0.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
@@ -93,7 +93,6 @@ class ModificationWorkerViewController: UIViewController {
         $0.addTarget(self, action: #selector(tapModificationButton), for: .touchUpInside)
         return $0
     }(UIButton())
-
     
     // MARK: - LifeCycle
     
@@ -104,7 +103,7 @@ class ModificationWorkerViewController: UIViewController {
     }
     
     // MARK: - Method
-
+    
     private func attribute() {
         view.backgroundColor = .white
         
@@ -160,7 +159,7 @@ class ModificationWorkerViewController: UIViewController {
             left: nameUiView.leftAnchor,
             right: nameUiView.rightAnchor
         )
-
+        
         customerTextField.anchor(
             top: customerTitle.bottomAnchor,
             left: nameUiView.leftAnchor,
@@ -168,7 +167,7 @@ class ModificationWorkerViewController: UIViewController {
             paddingTop: 15,
             paddingLeft: 4
         )
-
+        
         textUnderLine.anchor(
             top: customerTextField.bottomAnchor,
             left: nameUiView.leftAnchor,
@@ -234,7 +233,7 @@ class ModificationWorkerViewController: UIViewController {
         phoneNum = (numberInput.text?.replacingOccurrences(of: " - ", with: ""))!
         checkText(textField: numberInput, phoneNum: phoneNum)
         if customerTextField.text != workerData?.name && (phoneNum.count >= 8)
-        || phoneNum.count >= 8 && phoneNum != String((workerData?.number)!.dropFirst(6)).replacingOccurrences(of: " - ", with: "") {
+            || phoneNum.count >= 8 && phoneNum != String((workerData?.number)!.dropFirst(6)).replacingOccurrences(of: " - ", with: "") {
             modificationButton.isEnabled = true
             modificationButton.backgroundColor = AppColor.campanulaBlue
         } else {
