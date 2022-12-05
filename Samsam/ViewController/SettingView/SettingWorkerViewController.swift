@@ -59,6 +59,8 @@ class SettingWorkerViewController: UIViewController {
     }
     
     private func setupNavigationTitle() {
+        let backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
+        navigationItem.backBarButtonItem = backBarButtonItem
         navigationItem.title = "설정"
         navigationController?.navigationBar.prefersLargeTitles = false
         navigationController?.setNavigationBarHidden(false, animated: true)

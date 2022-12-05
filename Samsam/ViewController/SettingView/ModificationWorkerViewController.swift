@@ -45,13 +45,6 @@ class ModificationWorkerViewController: UIViewController {
         return $0
     }(UITextField())
 
-    private lazy var customerTextLimit : UILabel = {
-        $0.text = "0/10"
-        $0.font = UIFont.systemFont(ofSize: 16, weight: .regular)
-        $0.textColor = .gray
-        return $0
-    }(UILabel())
-
     private let textUnderLine: UIView = {
         $0.backgroundColor = AppColor.mainBlack
         $0.setHeight(height: 1)
@@ -118,13 +111,11 @@ class ModificationWorkerViewController: UIViewController {
         view.backgroundColor = .white
         
         setupNotificationCenter()
+        setupNavigationTitle()
         
         customerTextField.text = workerData?.name
-        numberInput.text = String((workerData?.number)!.dropFirst(6))
-
-        checkMaxLength(textField: customerTextField)
-        setCounter(count: customerTextField.text!.count)
         
+        numberInput.text = String((workerData?.number)!.dropFirst(6))
         phoneNum = (numberInput.text?.replacingOccurrences(of: " - ", with: ""))!
         checkText(textField: numberInput, phoneNum: phoneNum)
     }
@@ -136,7 +127,6 @@ class ModificationWorkerViewController: UIViewController {
         
         nameUiView.addSubview(customerTitle)
         nameUiView.addSubview(customerTextField)
-        nameUiView.addSubview(customerTextLimit)
         nameUiView.addSubview(textUnderLine)
         
         numberUiView.addSubview(numberLabel)
@@ -175,16 +165,9 @@ class ModificationWorkerViewController: UIViewController {
         customerTextField.anchor(
             top: customerTitle.bottomAnchor,
             left: nameUiView.leftAnchor,
-            right: customerTextLimit.leftAnchor,
-            paddingTop: 15,
-            paddingLeft: 4
-        )
-
-        customerTextLimit.anchor(
-            top: customerTitle.bottomAnchor,
             right: nameUiView.rightAnchor,
             paddingTop: 15,
-            paddingRight: 4
+            paddingLeft: 4
         )
 
         textUnderLine.anchor(
@@ -242,30 +225,19 @@ class ModificationWorkerViewController: UIViewController {
         )
     }
     
+    private func setupNavigationTitle() {
+        navigationItem.title = "개인 정보 수정"
+        navigationController?.navigationBar.prefersLargeTitles = false
+        navigationController?.setNavigationBarHidden(false, animated: true)
+    }
+    
     @objc private func nameAttributeChanged() {
-        checkMaxLength(textField: customerTextField)
-        setCounter(count: customerTextField.text!.count)
         if customerTextField.text != workerData?.name {
             modificationButton.isEnabled = true
             modificationButton.backgroundColor = AppColor.campanulaBlue
         } else {
             modificationButton.isEnabled = false
             modificationButton.backgroundColor = .gray
-        }
-    }
-    
-    private func setCounter(count: Int) {
-        customerTextLimit.text = "\(count)/20"
-    }
-    
-    private func checkMaxLength(textField: UITextField) {
-        if let text = textField.text {
-            if text.count > 20 {
-                let endIndex = text.index(text.startIndex, offsetBy: 20)
-                let fixedText = text[text.startIndex..<endIndex]
-                textField.text = fixedText + " "
-                customerTextField.text = String(fixedText)
-            }
         }
     }
     
