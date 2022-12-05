@@ -41,7 +41,7 @@ class ModificationWorkerViewController: UIViewController {
     private lazy var customerTextField: UITextField = {
         $0.placeholder = "성함을 입력해주세요."
         $0.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
-        $0.addTarget(self, action: #selector(nameAttributeChanged), for: .editingChanged)
+        $0.addTarget(self, action: #selector(buttonAttributeChanged), for: .editingChanged)
         return $0
     }(UITextField())
 
@@ -74,7 +74,7 @@ class ModificationWorkerViewController: UIViewController {
         $0.placeholder = "1234 - 5678"
         $0.font = UIFont.systemFont(ofSize: 16)
         $0.keyboardType = .numberPad
-        $0.addTarget(self, action: #selector(numberAttributeChanged), for: .editingChanged)
+        $0.addTarget(self, action: #selector(buttonAttributeChanged), for: .editingChanged)
         return $0
     }(CustomUITextField())
 
@@ -99,10 +99,8 @@ class ModificationWorkerViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        hidekeyboardWhenTappedAround()
         attribute()
         layout()
-        print(workerData)
     }
     
     // MARK: - Method
@@ -112,6 +110,7 @@ class ModificationWorkerViewController: UIViewController {
         
         setupNotificationCenter()
         setupNavigationTitle()
+        hidekeyboardWhenTappedAround()
         
         customerTextField.text = workerData?.name
         
@@ -231,22 +230,13 @@ class ModificationWorkerViewController: UIViewController {
         navigationController?.setNavigationBarHidden(false, animated: true)
     }
     
-    @objc private func nameAttributeChanged() {
-        if customerTextField.text != workerData?.name {
-            modificationButton.isEnabled = true
-            modificationButton.backgroundColor = AppColor.campanulaBlue
-        } else {
-            modificationButton.isEnabled = false
-            modificationButton.backgroundColor = .gray
-        }
-    }
-    
-    @objc private func numberAttributeChanged() {
+    @objc private func buttonAttributeChanged() {
         phoneNum = (numberInput.text?.replacingOccurrences(of: " - ", with: ""))!
-        if phoneNum.count >= 8 && phoneNum != String((workerData?.number)!.dropFirst(6)).replacingOccurrences(of: " - ", with: "")  {
+        checkText(textField: numberInput, phoneNum: phoneNum)
+        if customerTextField.text != workerData?.name && (phoneNum.count >= 8)
+        || phoneNum.count >= 8 && phoneNum != String((workerData?.number)!.dropFirst(6)).replacingOccurrences(of: " - ", with: "") {
             modificationButton.isEnabled = true
             modificationButton.backgroundColor = AppColor.campanulaBlue
-            checkText(textField: numberInput, phoneNum: phoneNum)
         } else {
             modificationButton.isEnabled = false
             modificationButton.backgroundColor = .gray
@@ -254,10 +244,12 @@ class ModificationWorkerViewController: UIViewController {
     }
     
     private func checkText(textField: UITextField, phoneNum: String) {
+        if phoneNum.count >= 8 {
             let endIndex = phoneNum.index(phoneNum.startIndex, offsetBy: 8)
             let fixedText = phoneNum[phoneNum.startIndex..<endIndex]
             self.phoneNum = String(fixedText)
             textField.text = String(fixedText).phoneNumberStyle()
+        }
     }
     
     private func setupNotificationCenter() {
