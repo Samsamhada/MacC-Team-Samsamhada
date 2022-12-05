@@ -12,11 +12,13 @@ class ChipViewController: UIViewController {
     // MARK: - Property
 
     var room: Room?
-    var roomID: Int?
+    var posts: [Post] = []
+    var statuses: [Status]?
+    var selectedPosts: [Post] = []
+    
     private var chips: [UIButton] = []
-    private var categoryID: [Int] = []
+    var categoryID: Int = 0
     private var selectedID: Int = 0
-    private var selectedCategoryItem: [PostingEntity] = []
 
     // MARK: - View
 
@@ -58,12 +60,7 @@ class ChipViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
-        // TODO: - 칩뷰 데이터(이미지, 설명, 칩 정보) 로드
-        
-//        coreDataManager.loadOneRoomData(roomID: roomID!)
-//        coreDataManager.loadPostingData(roomID: roomID!)
-//        coreDataManager.loadWorkingStatusData(roomID: roomID!)
+
         historyView.reloadData()
     }
 
@@ -121,20 +118,19 @@ class ChipViewController: UIViewController {
 
     @objc func tapWritingButton() {
         let postingCategoryViewController = PostingCategoryViewController()
-        postingCategoryViewController.roomID = roomID
-        postingCategoryViewController.roomCategoryID = categoryID
+        postingCategoryViewController.room = room
+        postingCategoryViewController.categoryID = categoryID
+
         let navigationController = UINavigationController(rootViewController: postingCategoryViewController)
         navigationController.modalPresentationStyle = .fullScreen
-        present(navigationController, animated:  true, completion: nil)
+        present(navigationController, animated: true, completion: nil)
     }
 
     private func setChip() {
         chips.append(makeButton(title: "  전체  ", tag: 0))
 
-        for i in stride(from: 1, to: coreDataManager.workingStatuses.count + 1, by: 1) {
-            chips.append(makeButton(title: "  "+Category(rawValue: Int(coreDataManager.workingStatuses[i-1].categoryID))!.categoryName()+"  ", tag: i))
-            categoryID.append(Int(coreDataManager.workingStatuses[i-1].categoryID))
-        }
+        for i in stride(from: 1, to: statuses!.count + 1, by: 1) {
+            chips.append(makeButton(title: "  " + (Category(rawValue: Int(statuses![i-1].category))?.categoryName())! + "  ", tag: i))        }
 
         chips.forEach {
             chipContentView.addArrangedSubview($0)
@@ -163,7 +159,6 @@ class ChipViewController: UIViewController {
             unselectedButton(UIButton: chips[selectedID])
             selectedID = sender.tag
             selectedButton(UIButton: chips[selectedID])
-            selectedCategoryItem = []
             historyView.reloadData()
         }
     }
@@ -182,32 +177,38 @@ class ChipViewController: UIViewController {
 extension ChipViewController: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if selectedID == 0 {
-            return coreDataManager.postings.count
-        } else {
-            coreDataManager.postings.forEach {
-                if $0.categoryID == categoryID[selectedID-1] {
-                    selectedCategoryItem.append($0)
+            return posts.count
+        }
+        
+        if selectedID > 0 {
+            selectedPosts = []
+            
+            posts.forEach {
+                if $0.category == statuses![selectedID - 1].category{
+                    selectedPosts.append($0)
                 }
             }
-            return selectedCategoryItem.count
+            return selectedPosts.count
         }
+        return 0
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 
         let contentCell = collectionView.dequeueReusableCell(withReuseIdentifier: WorkingHistoryViewContentCell.identifier, for: indexPath) as! WorkingHistoryViewContentCell
-
-        if selectedID == 0 {
-            coreDataManager.loadPhotoData(postingID: Int(coreDataManager.postings[indexPath.item].postingID))
-            contentCell.uiImageView.image = UIImage(data: coreDataManager.photos[0].photoPath!)
-            contentCell.imageDescription.text = coreDataManager.postings[indexPath.item].explanation
-            contentCell.workType.text = Category.categoryName(Category(rawValue: Int(coreDataManager.postings[indexPath.item].categoryID))!)()
-        } else {
-            coreDataManager.loadPhotoData(postingID: Int(selectedCategoryItem[indexPath.item].postingID))
-            contentCell.uiImageView.image = UIImage(data: coreDataManager.photos[0].photoPath!)
-            contentCell.imageDescription.text = selectedCategoryItem[indexPath.item].explanation
-            contentCell.workType.text = Category.categoryName(Category(rawValue: Int(selectedCategoryItem[indexPath.item].categoryID))!)()
+        
+        let selectedArray = (selectedID == 0 ? posts : selectedPosts)
+        
+        DispatchQueue.global().async {
+            let data = try? Data(contentsOf: URL(string: selectedArray[indexPath.item].photos![0].photoPath)!)
+            
+            DispatchQueue.main.async {
+                contentCell.uiImageView.image = UIImage(data: data!)
+                contentCell.imageDescription.text = selectedArray[indexPath.item].description
+                contentCell.workType.text = Category(rawValue: Int(selectedArray[indexPath.item].category))?.categoryName()
+            }
         }
+        
         return contentCell
     }
 
@@ -220,13 +221,15 @@ extension ChipViewController: UICollectionViewDataSource, UICollectionViewDelega
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let detailViewController = DetailViewController()
-        coreDataManager.loadPhotoData(postingID: Int(coreDataManager.postings[indexPath.item].postingID))
-//        detailViewController.images = coreDataManager.photos
-        coreDataManager.postings.forEach {
-            if $0 == coreDataManager.postings[indexPath.item] {
-                detailViewController.descriptionLBL.text = $0.explanation
-            }
+
+        let selectedArray = (selectedID == 0 ? posts : selectedPosts)
+        
+        detailViewController.descriptionLBL.text = selectedArray[indexPath.item].description
+        
+        selectedArray[indexPath.item].photos!.forEach {
+            detailViewController.images.append($0)
         }
+        
         navigationController?.pushViewController(detailViewController, animated: true)
     }
 }

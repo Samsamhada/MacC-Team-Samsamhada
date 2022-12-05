@@ -13,9 +13,8 @@ class PostingCategoryViewController: UIViewController {
     
     var roomID: Int?
     var room: Room?
-    var roomCategoryID: [Int] = []
     private var roomAPI: RoomAPI = RoomAPI(apiService: APIService())
-    private var categoryID: Int = 0
+    var categoryID: Int = 0
     
     private var status: [Status]? {
         didSet {
@@ -113,7 +112,7 @@ class PostingCategoryViewController: UIViewController {
         Task {
             let response = try await self.roomAPI.loadStatusesByRoomID(roomID: room!.roomID)
             guard let data = response else {
-                return 
+                return
             }
             status = data
         }
