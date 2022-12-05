@@ -18,7 +18,6 @@ class ChipViewController: UIViewController {
     
     private var chips: [UIButton] = []
     var categoryID: Int = 0
-    private var categoryArray: [Int] = []
     private var selectedID: Int = 0
 
     // MARK: - View
@@ -131,9 +130,7 @@ class ChipViewController: UIViewController {
         chips.append(makeButton(title: "  전체  ", tag: 0))
 
         for i in stride(from: 1, to: statuses!.count + 1, by: 1) {
-            chips.append(makeButton(title: "  " + (Category(rawValue: Int(statuses![i-1].category))?.categoryName())! + "  ", tag: i))
-            categoryArray.append(Int(statuses![i-1].category))
-        }
+            chips.append(makeButton(title: "  " + (Category(rawValue: Int(statuses![i-1].category))?.categoryName())! + "  ", tag: i))        }
 
         chips.forEach {
             chipContentView.addArrangedSubview($0)
@@ -187,7 +184,7 @@ extension ChipViewController: UICollectionViewDataSource, UICollectionViewDelega
             selectedPosts = []
             
             posts.forEach {
-                if $0.category == categoryArray[selectedID - 1] {
+                if $0.category == statuses![selectedID - 1].category{
                     selectedPosts.append($0)
                 }
             }
