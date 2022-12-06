@@ -13,6 +13,11 @@ class SegmentedControlViewController: UIViewController {
     
     let roomAPI: RoomAPI = RoomAPI(apiService: APIService())
     var room: Room?
+    var statuses: [Status]? {
+        didSet {
+            workingHistoryView.statuses = statuses
+        }
+    }
     var posts = [Post]() {
         didSet {
             workingHistoryView.posts = []
@@ -22,7 +27,7 @@ class SegmentedControlViewController: UIViewController {
                     workingHistoryView.posts.append($0)
                 }
                 if $0.type == 1 {
-                    print("문의내역으로 보내져야함!")
+                    inquiryHistoryView.posts.append($0)
                 }
             }
         }
@@ -44,9 +49,9 @@ class SegmentedControlViewController: UIViewController {
         return $0
     }(WorkingHistoryViewController())
 
-    private let inquiryHistoryView: InquiryHistoryViewController = {
+    private let inquiryHistoryView: WorkingHistoryViewController = {
         return $0
-    }(InquiryHistoryViewController())
+    }(WorkingHistoryViewController())
 
     private lazy var dataViewControllers: [UIViewController] = [workingHistoryView, inquiryHistoryView]
 
@@ -71,7 +76,7 @@ class SegmentedControlViewController: UIViewController {
     private var currentViewNumber: Int = 0 {
         didSet {
             let direction: UIPageViewController.NavigationDirection = (oldValue <= currentViewNumber ? .forward : .reverse)
-            pageViewController.setViewControllers([dataViewControllers[self.currentViewNumber]], direction: direction, animated: true)
+            pageViewController.setViewControllers([dataViewControllers[currentViewNumber]], direction: direction, animated: true)
         }
     }
 
@@ -82,6 +87,8 @@ class SegmentedControlViewController: UIViewController {
 
         attribute()
         layout()
+        loadStatusesByRoomID(roomID: room!.roomID)
+        loadInquiryView()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -166,10 +173,11 @@ class SegmentedControlViewController: UIViewController {
 
         self.segmentedControl.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.gray, .font: UIFont.systemFont(ofSize: 20, weight: .bold)], for: .normal)
         self.segmentedControl.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.black, .font: UIFont.systemFont(ofSize: 20, weight: .bold)], for: .selected)
+        
         self.segmentedControl.selectedSegmentIndex = 0
         self.segmentedControl.addTarget(self, action: #selector(changeValue), for: .valueChanged)
 
-        self.changeValue(control: self.segmentedControl)
+        self.changeValue(control: segmentedControl)
     }
 
     private func removeBackgroundAndDivider() {
@@ -187,6 +195,7 @@ class SegmentedControlViewController: UIViewController {
     @objc func tapWritingButton() {
         let postingCategoryViewController = PostingCategoryViewController()
         postingCategoryViewController.room = room
+        
         let navigationController = UINavigationController(rootViewController: postingCategoryViewController)
         navigationController.modalPresentationStyle = .fullScreen
         present(navigationController, animated:  true, completion: nil)
@@ -221,6 +230,20 @@ class SegmentedControlViewController: UIViewController {
             }
         }
     }
+    
+    func loadStatusesByRoomID(roomID: Int) {
+        Task {
+            let response = try await self.roomAPI.loadStatusesByRoomID(roomID: room!.roomID)
+            guard let data = response else {
+                return
+            }
+            statuses = data
+        }
+    }
+    
+    private func loadInquiryView() {
+        inquiryHistoryView.room = room
+    }
 }
 
 extension SegmentedControlViewController: UIPageViewControllerDelegate, UIPageViewControllerDataSource {
@@ -237,9 +260,9 @@ extension SegmentedControlViewController: UIPageViewControllerDelegate, UIPageVi
     func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
         guard
             let vc = pageViewController.viewControllers?[0],
-            let index = self.dataViewControllers.firstIndex(of: vc)
+            let index = dataViewControllers.firstIndex(of: vc)
         else { return }
-        self.currentViewNumber = index
-        self.segmentedControl.selectedSegmentIndex = index
+        currentViewNumber = index
+        segmentedControl.selectedSegmentIndex = index
     }
 }
