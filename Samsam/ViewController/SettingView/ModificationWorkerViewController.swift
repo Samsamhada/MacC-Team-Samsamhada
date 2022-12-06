@@ -233,7 +233,7 @@ class ModificationWorkerViewController: UIViewController {
         phoneNum = (numberInput.text?.replacingOccurrences(of: " - ", with: ""))!
         checkText(textField: numberInput, phoneNum: phoneNum)
         if (workerTextField.text != workerData?.name && (phoneNum.count >= 8))
-            || phoneNum.count >= 8 && phoneNum != String((workerData?.number)!.dropFirst(6)).replacingOccurrences(of: " - ", with: "") {
+            || (phoneNum.count >= 8 && phoneNum != String((workerData?.number)!.dropFirst(6)).replacingOccurrences(of: " - ", with: "")) {
             modificationButton.isEnabled = true
             modificationButton.backgroundColor = AppColor.campanulaBlue
         } else {
