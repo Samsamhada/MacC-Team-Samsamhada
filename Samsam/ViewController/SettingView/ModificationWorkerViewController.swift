@@ -22,15 +22,15 @@ class ModificationWorkerViewController: UIViewController {
         return $0
     }(UIView())
     
-    private let numberUiView: UIView = {
+    private let numberUIView: UIView = {
         return $0
     }(UIView())
     
-    private let nameUiView: UIView = {
+    private let nameUIView: UIView = {
         return $0
     }(UIView())
     
-    private let customerTitle: UILabel = {
+    private let workerTitle: UILabel = {
         $0.text = "성함"
         $0.textAlignment = .left
         $0.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
@@ -38,7 +38,7 @@ class ModificationWorkerViewController: UIViewController {
         return $0
     }(UILabel())
 
-    private lazy var customerTextField: UITextField = {
+    private lazy var workerTextField: UITextField = {
         $0.placeholder = "성함을 입력해주세요."
         $0.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
         $0.addTarget(self, action: #selector(buttonAttributeChanged), for: .editingChanged)
@@ -111,7 +111,7 @@ class ModificationWorkerViewController: UIViewController {
         setupNavigationTitle()
         hidekeyboardWhenTappedAround()
         
-        customerTextField.text = workerData?.name
+        workerTextField.text = workerData?.name
         
         numberInput.text = String((workerData?.number)!.dropFirst(6))
         phoneNum = (numberInput.text?.replacingOccurrences(of: " - ", with: ""))!
@@ -120,18 +120,18 @@ class ModificationWorkerViewController: UIViewController {
     
     private func layout() {
         view.addSubview(uiView)
-        uiView.addSubview(nameUiView)
-        uiView.addSubview(numberUiView)
+        uiView.addSubview(nameUIView)
+        uiView.addSubview(numberUIView)
         
-        nameUiView.addSubview(customerTitle)
-        nameUiView.addSubview(customerTextField)
-        nameUiView.addSubview(textUnderLine)
+        nameUIView.addSubview(workerTitle)
+        nameUIView.addSubview(workerTextField)
+        nameUIView.addSubview(textUnderLine)
         
-        numberUiView.addSubview(numberLabel)
-        numberUiView.addSubview(hStack)
+        numberUIView.addSubview(numberLabel)
+        numberUIView.addSubview(hStack)
         hStack.addArrangedSubview(startNumber)
         hStack.addArrangedSubview(numberInput)
-        numberUiView.addSubview(numberUnderLine)
+        numberUIView.addSubview(numberUnderLine)
         
         uiView.addSubview(modificationButton)
         
@@ -146,7 +146,7 @@ class ModificationWorkerViewController: UIViewController {
             paddingRight: 16
         )
         
-        nameUiView.anchor(
+        nameUIView.anchor(
             top: uiView.topAnchor,
             left: uiView.leftAnchor,
             right: uiView.rightAnchor,
@@ -154,29 +154,29 @@ class ModificationWorkerViewController: UIViewController {
             height: 80
         )
         
-        customerTitle.anchor(
-            top: nameUiView.topAnchor,
-            left: nameUiView.leftAnchor,
-            right: nameUiView.rightAnchor
+        workerTitle.anchor(
+            top: nameUIView.topAnchor,
+            left: nameUIView.leftAnchor,
+            right: nameUIView.rightAnchor
         )
         
-        customerTextField.anchor(
-            top: customerTitle.bottomAnchor,
-            left: nameUiView.leftAnchor,
-            right: nameUiView.rightAnchor,
+        workerTextField.anchor(
+            top: workerTitle.bottomAnchor,
+            left: nameUIView.leftAnchor,
+            right: nameUIView.rightAnchor,
             paddingTop: 15,
             paddingLeft: 4
         )
         
         textUnderLine.anchor(
-            top: customerTextField.bottomAnchor,
-            left: nameUiView.leftAnchor,
-            right: nameUiView.rightAnchor,
+            top: workerTextField.bottomAnchor,
+            left: nameUIView.leftAnchor,
+            right: nameUIView.rightAnchor,
             paddingTop: 4
         )
         
-        numberUiView.anchor(
-            top: nameUiView.bottomAnchor,
+        numberUIView.anchor(
+            top: nameUIView.bottomAnchor,
             left: uiView.leftAnchor,
             right: uiView.rightAnchor,
             paddingTop: 10,
@@ -191,9 +191,9 @@ class ModificationWorkerViewController: UIViewController {
         )
 
         hStack.anchor(
-            left: numberUiView.leftAnchor,
+            left: numberUIView.leftAnchor,
             bottom: numberUnderLine.topAnchor,
-            right: numberUiView.rightAnchor
+            right: numberUIView.rightAnchor
         )
 
         startNumber.anchor(
@@ -210,9 +210,9 @@ class ModificationWorkerViewController: UIViewController {
         )
 
         numberUnderLine.anchor(
-            left: numberUiView.leftAnchor,
-            bottom: numberUiView.bottomAnchor,
-            right: numberUiView.rightAnchor
+            left: numberUIView.leftAnchor,
+            bottom: numberUIView.bottomAnchor,
+            right: numberUIView.rightAnchor
         )
         
         modificationButton.anchor(
@@ -232,7 +232,7 @@ class ModificationWorkerViewController: UIViewController {
     @objc private func buttonAttributeChanged() {
         phoneNum = (numberInput.text?.replacingOccurrences(of: " - ", with: ""))!
         checkText(textField: numberInput, phoneNum: phoneNum)
-        if customerTextField.text != workerData?.name && (phoneNum.count >= 8)
+        if workerTextField.text != workerData?.name && (phoneNum.count >= 8)
             || phoneNum.count >= 8 && phoneNum != String((workerData?.number)!.dropFirst(6)).replacingOccurrences(of: " - ", with: "") {
             modificationButton.isEnabled = true
             modificationButton.backgroundColor = AppColor.campanulaBlue
@@ -270,13 +270,13 @@ class ModificationWorkerViewController: UIViewController {
         })
     }
     
-    @objc private func tapModificationButton() {
+    @objc func tapModificationButton() {
         let number = "+82010" + phoneNum
-        let workerDTO = WorkerDTO(userIdentifier: (workerData?.userIdentifier)!, name: customerTextField.text, number: number)
-        requestPut(workerID: (workerData?.workerID)!, workerDTO: workerDTO)
+        let workerDTO = WorkerDTO(userIdentifier: (workerData?.userIdentifier)!, name: workerTextField.text, number: number)
+        requestPutWorkerData(workerID: (workerData?.workerID)!, workerDTO: workerDTO)
     }
     
-    private func requestPut(workerID: Int , workerDTO: WorkerDTO) {
+    private func requestPutWorkerData(workerID: Int , workerDTO: WorkerDTO) {
         Task{
             do {
                 let response = try await self.workerService.modifyWorkerData(workerID: workerID, workerDTO: workerDTO)
