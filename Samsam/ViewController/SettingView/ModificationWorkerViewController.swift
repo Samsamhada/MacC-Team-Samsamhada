@@ -229,7 +229,7 @@ class ModificationWorkerViewController: UIViewController {
         navigationController?.setNavigationBarHidden(false, animated: true)
     }
     
-    @objc private func buttonAttributeChanged() {
+    @objc func buttonAttributeChanged() {
         phoneNum = (numberInput.text?.replacingOccurrences(of: " - ", with: ""))!
         checkText(textField: numberInput, phoneNum: phoneNum)
         if workerTextField.text != workerData?.name && (phoneNum.count >= 8)
