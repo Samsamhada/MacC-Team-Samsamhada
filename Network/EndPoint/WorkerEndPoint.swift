@@ -9,6 +9,7 @@ import Foundation
 
 enum WorkerEndPoint: EndPointable {
     case loadWorkerDataByWorkerID(workerID: Int)
+    case modifyWorkerData(workerID: Int, workerDTO: WorkerDTO)
     
     var requestTimeOut: Float {
         return 10
@@ -18,11 +19,15 @@ enum WorkerEndPoint: EndPointable {
         switch self {
         case .loadWorkerDataByWorkerID:
             return .get
+        case .modifyWorkerData:
+            return .put
         }
     }
     
     var requestBody: Data? {
         switch self {
+        case .modifyWorkerData(_, let body):
+            return body.encode()
         default:
             return nil
         }
@@ -30,7 +35,7 @@ enum WorkerEndPoint: EndPointable {
     
     func getURL(baseURL: String) -> String {
         switch self {
-        case .loadWorkerDataByWorkerID(let workerID):
+        case .loadWorkerDataByWorkerID(let workerID), .modifyWorkerData(let workerID, _):
             return "\(APIEnvironment.workersURL)/\(workerID)"
         }
     }

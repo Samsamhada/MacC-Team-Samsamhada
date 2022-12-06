@@ -59,6 +59,8 @@ class SettingWorkerViewController: UIViewController {
     }
     
     private func setupNavigationTitle() {
+        let backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
+        navigationItem.backBarButtonItem = backBarButtonItem
         navigationItem.title = "설정"
         navigationController?.navigationBar.prefersLargeTitles = false
         navigationController?.setNavigationBarHidden(false, animated: true)
@@ -105,8 +107,9 @@ extension SettingWorkerViewController: UITableViewDataSource, UITableViewDelegat
         switch indexPath
         {
         case [0,0]:
-            // TODO: - 추후 수정 예정
-            print("개인 정보 수정")
+            let modificationWorkerViewController = ModificationWorkerViewController()
+            modificationWorkerViewController.workerData = workerData
+            self.navigationController?.pushViewController(modificationWorkerViewController, animated: true)
         case [1,0]:
             self.sendReportMail()
         case [2,0]:
