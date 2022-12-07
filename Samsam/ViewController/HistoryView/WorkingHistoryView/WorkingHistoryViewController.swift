@@ -20,11 +20,13 @@ class WorkingHistoryViewController: UIViewController {
             posts.forEach {
                 postDate.insert(String($0.createDate.dropLast(14)))
             }
+            dateArray = postDate.sorted(by: {$0 > $1})
             workingHistoryView.reloadData()
         }
     }
     
     var isChangedSegment: Bool = true
+    var dateArray: [String] = []
     var room: Room?
     private var postDate = Set<String>()
     
@@ -124,9 +126,15 @@ extension WorkingHistoryViewController: UICollectionViewDataSource, UICollection
             return topHeader
         } else {
             let contentHeader = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: WorkingHistoryViewContentHeader.identifier, for: indexPath) as! WorkingHistoryViewContentHeader
-            
-            contentHeader.uploadDate.text = "12월 10일"
 
+            var createDates = dateArray[indexPath.section - 1]
+            createDates.insert("년", at: createDates.index(createDates.startIndex, offsetBy: 4))
+            createDates.insert("월", at: createDates.index(createDates.startIndex, offsetBy: 8))
+            createDates.insert("일", at: createDates.index(createDates.startIndex, offsetBy: 12))
+            createDates = createDates.dropFirst(2).replacingOccurrences(of: "-", with: " ")
+
+            contentHeader.uploadDate.text = createDates
+            
             return contentHeader
         }
     }
