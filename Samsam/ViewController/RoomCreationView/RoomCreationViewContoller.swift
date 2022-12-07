@@ -148,6 +148,7 @@ class RoomCreationViewController: UIViewController{
 
         setTableView()
         setNavigation()
+        setupNotificationCenter()
         hidekeyboardWhenTappedAround()
     }
 
@@ -238,6 +239,27 @@ class RoomCreationViewController: UIViewController{
         navigationItem.leftBarButtonItem?.tintColor = .black
         navigationController?.navigationBar.prefersLargeTitles = false
         navigationController?.setNavigationBarHidden(false, animated: true)
+    }
+
+    private func setupNotificationCenter() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+
+    @objc func keyboardWillShow(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+            UIView.animate(withDuration: 0.2, animations: {
+                self.modificationButton.transform = CGAffineTransform(translationX: 0, y: -keyboardSize.height + 25)
+                self.nextButton.transform = CGAffineTransform(translationX: 0, y: -keyboardSize.height + 25)
+            })
+        }
+    }
+
+    @objc func keyboardWillHide(notification:NSNotification) {
+        UIView.animate(withDuration: 0.2, animations: {
+            self.modificationButton.transform = .identity
+            self.nextButton.transform = .identity
+        })
     }
 
     @objc private func buttonAttributeChanged() {
