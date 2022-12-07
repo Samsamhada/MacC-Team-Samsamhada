@@ -17,7 +17,8 @@ class LoginViewController: UIViewController {
     // MARK: - View
     
     private let appLogo: UIImageView = {
-        $0.image = UIImage(named: "")
+        $0.image = UIImage(named: "AppIcon")
+        $0.contentMode = .scaleAspectFit
         return $0
     }(UIImageView())
 
@@ -42,7 +43,16 @@ class LoginViewController: UIViewController {
     }
 
     private func layout() {
+        self.view.addSubview(appLogo)
         self.view.addSubview(authorizationButton)
+        
+        appLogo.anchor(
+            top: view.safeAreaLayoutGuide.topAnchor,
+            left: view.safeAreaLayoutGuide.leftAnchor,
+            right: view.safeAreaLayoutGuide.rightAnchor,
+            paddingTop: 50,
+            height: UIScreen.main.bounds.width
+        )
 
         authorizationButton.anchor(
             left: view.safeAreaLayoutGuide.leftAnchor,
