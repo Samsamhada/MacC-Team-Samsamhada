@@ -39,7 +39,7 @@ class WorkingHistoryViewController: UIViewController {
     }(UICollectionView(
         frame: .zero, collectionViewLayout: UICollectionViewFlowLayout()))
     
-    let pleaseWriteLabel: UILabel = {
+    private let pleaseWriteLabel: UILabel = {
         $0.text = """
                   작성된 작업내용이 없어요
                   시공 내용을 작성해주세요!
