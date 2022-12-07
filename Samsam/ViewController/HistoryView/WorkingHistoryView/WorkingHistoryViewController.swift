@@ -213,7 +213,6 @@ extension WorkingHistoryViewController: UICollectionViewDataSource, UICollection
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if indexPath.section > 0 {
             let detailViewController = DetailViewController()
-            
             detailViewController.descriptionLBL.text = everyDayPosts[indexPath.item].description
             
             everyDayPosts[indexPath.item].photos!.forEach {
