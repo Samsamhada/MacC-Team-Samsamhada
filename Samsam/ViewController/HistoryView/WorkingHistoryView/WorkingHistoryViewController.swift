@@ -118,8 +118,8 @@ extension WorkingHistoryViewController: UICollectionViewDataSource, UICollection
 
         if indexPath.section == 0 {
             let topHeader = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: WorkingHistoryViewTopHeader.identifier, for: indexPath) as! WorkingHistoryViewTopHeader
-
-            topHeader.progressDuration.text = "진행상황(10.11 ~ 11.12)"
+            
+            topHeader.progressDuration.text = "진행상황(\(String((room?.startDate.dropText(first: 2, last: 14).replacingOccurrences(of: "-", with: "."))!)) ~ \(String((room?.endDate.dropText(first: 2, last: 14).replacingOccurrences(of: "-", with: "."))!)))"
 
             return topHeader
         } else {
