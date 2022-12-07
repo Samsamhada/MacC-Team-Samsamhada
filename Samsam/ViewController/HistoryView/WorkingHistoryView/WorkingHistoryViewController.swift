@@ -37,9 +37,9 @@ class WorkingHistoryViewController: UIViewController {
     }(UICollectionView(
         frame: .zero, collectionViewLayout: UICollectionViewFlowLayout()))
     
-    private let pleaseWriteLabel: UILabel = {
+    let pleaseWriteLabel: UILabel = {
         $0.text = """
-                  아직 작업내용이 없어요
+                  작성된 작업내용이 없어요
                   시공 내용을 작성해주세요!
                   """
         $0.numberOfLines = 2
