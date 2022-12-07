@@ -15,10 +15,12 @@ class WorkingHistoryViewController: UIViewController {
     var statuses: [Status]?
     var posts = [Post]() {
         didSet {
-            workingHistoryView.reloadData()
+            pleaseWriteLabel.isHidden = (!posts.isEmpty ? true : false)
+
             posts.forEach {
                 postDate.insert(String($0.createDate.dropLast(14)))
             }
+            workingHistoryView.reloadData()
         }
     }
     
@@ -31,6 +33,17 @@ class WorkingHistoryViewController: UIViewController {
         return $0
     }(UICollectionView(
         frame: .zero, collectionViewLayout: UICollectionViewFlowLayout()))
+    
+    let pleaseWriteLabel: UILabel = {
+        $0.text = """
+                  아직 작업내용이 없어요
+                  시공 내용을 작성해주세요!
+                  """
+        $0.numberOfLines = 2
+        $0.textColor = .gray
+        $0.textAlignment = .center
+        return $0
+    }(UILabel())
 
     // MARK: - LifeCycle
 
@@ -57,6 +70,7 @@ class WorkingHistoryViewController: UIViewController {
 
     private func layout() {
         view.addSubview(workingHistoryView)
+        view.addSubview(pleaseWriteLabel)
 
         workingHistoryView.anchor(
             top: view.topAnchor,
@@ -74,6 +88,13 @@ class WorkingHistoryViewController: UIViewController {
             }
             statuses = data
         }
+
+        pleaseWriteLabel.anchor(
+            top: view.topAnchor,
+            left: view.leftAnchor,
+            bottom: view.bottomAnchor,
+            right: view.rightAnchor
+        )
     }
 }
 
