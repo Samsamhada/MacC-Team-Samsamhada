@@ -50,7 +50,7 @@ class LoginViewController: UIViewController {
             top: view.safeAreaLayoutGuide.topAnchor,
             left: view.safeAreaLayoutGuide.leftAnchor,
             right: view.safeAreaLayoutGuide.rightAnchor,
-            paddingTop: 50,
+            paddingTop: UIScreen.main.bounds.height * 0.06,
             height: UIScreen.main.bounds.width
         )
 
