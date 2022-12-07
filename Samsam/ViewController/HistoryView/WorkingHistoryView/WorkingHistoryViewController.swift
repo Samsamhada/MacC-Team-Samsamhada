@@ -15,7 +15,7 @@ class WorkingHistoryViewController: UIViewController {
     var statuses: [Status]?
     var posts = [Post]() {
         didSet {
-            pleaseWriteLabel.isHidden = (!posts.isEmpty ? true : false)
+            pleaseWriteLabel.isHidden = !posts.isEmpty
 
             posts.forEach {
                 postDate.insert(String($0.createDate.dropLast(14)))
