@@ -15,6 +15,11 @@ class LoginViewController: UIViewController {
     private let loginService: LoginAPI = LoginAPI(apiService: APIService())
     
     // MARK: - View
+    
+    private let appLogo: UIImageView = {
+        $0.image = UIImage(named: "")
+        return $0
+    }(UIImageView())
 
     private lazy var authorizationButton: ASAuthorizationAppleIDButton = {
         $0.addTarget(self, action: #selector(tapAppleLoginButton), for: .touchUpInside)
@@ -33,7 +38,7 @@ class LoginViewController: UIViewController {
     // MARK: - Method
 
     private func attribute() {
-        view.backgroundColor = .white
+        view.backgroundColor = AppColor.giwazipBlue
     }
 
     private func layout() {
