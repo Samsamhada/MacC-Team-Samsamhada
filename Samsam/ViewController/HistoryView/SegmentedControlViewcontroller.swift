@@ -46,10 +46,12 @@ class SegmentedControlViewController: UIViewController {
 
     private lazy var workingHistoryView: WorkingHistoryViewController = {
         $0.room = room
+        $0.isChangedSegment = true
         return $0
     }(WorkingHistoryViewController())
 
     private let inquiryHistoryView: WorkingHistoryViewController = {
+        $0.isChangedSegment = false
         return $0
     }(WorkingHistoryViewController())
 
