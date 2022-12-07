@@ -36,7 +36,7 @@ enum LoginEndPoint: EndPointable {
     func getURL(baseURL: String) -> String {
         switch self {
         case .startAppleLogin:
-            return "\(baseURL)/workers"
+            return "\(baseURL)/apple_auth"
         case .addPhoneNumber(let workerID, _):
             return "\(baseURL)/workers/\(workerID)"
         }

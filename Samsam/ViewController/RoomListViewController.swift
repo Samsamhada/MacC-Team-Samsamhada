@@ -11,7 +11,7 @@ class RoomListViewController: UIViewController {
 
     // MARK: - Property
 
-    var workerID = 5
+    var workerID = UserDefaults.standard.integer(forKey: "workerID")
     let roomAPI: RoomAPI = RoomAPI(apiService: APIService())
     var rooms = [Room]() {
         didSet {
@@ -35,7 +35,7 @@ class RoomListViewController: UIViewController {
     }
 
     override func viewWillAppear(_ animated: Bool) {
-        loadRoomByWorkerID(workerID: 5)
+        loadRoomByWorkerID(workerID: workerID)
     }
 
     // MARK: - Method
@@ -67,6 +67,7 @@ class RoomListViewController: UIViewController {
         navigationItem.title = "기와집"
         navigationController?.navigationBar.prefersLargeTitles = false
         navigationController?.setNavigationBarHidden(false, animated: true)
+        navigationItem.hidesBackButton = true
     }
 
     @objc func tapSettingButton() {
