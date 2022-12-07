@@ -37,7 +37,7 @@ class WorkingHistoryViewController: UIViewController {
     }(UICollectionView(
         frame: .zero, collectionViewLayout: UICollectionViewFlowLayout()))
     
-    let pleaseWriteLabel: UILabel = {
+    var pleaseWriteLabel: UILabel = {
         $0.text = """
                   작성된 작업내용이 없어요
                   시공 내용을 작성해주세요!
@@ -136,7 +136,7 @@ extension WorkingHistoryViewController: UICollectionViewDataSource, UICollection
         }
 
         var everyDayPosts: [Post] = []
-        
+
         posts.forEach {
             if dateArray[section - 1] == $0.createDate.dropLast(14) {
                 everyDayPosts.append($0)
