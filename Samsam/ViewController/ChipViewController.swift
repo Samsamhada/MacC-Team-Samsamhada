@@ -92,7 +92,7 @@ class ChipViewController: UIViewController {
         historyView.anchor(
             top:chipScrollView.bottomAnchor,
             left: view.safeAreaLayoutGuide.leftAnchor,
-            bottom: view.safeAreaLayoutGuide.bottomAnchor,
+            bottom: view.bottomAnchor,
             right: view.safeAreaLayoutGuide.rightAnchor
         )
 
