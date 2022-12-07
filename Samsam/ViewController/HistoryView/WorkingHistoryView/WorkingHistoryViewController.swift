@@ -213,9 +213,17 @@ extension WorkingHistoryViewController: UICollectionViewDataSource, UICollection
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if indexPath.section > 0 {
             let detailViewController = DetailViewController()
-            detailViewController.descriptionLBL.text = posts[indexPath.item].description
+            var everyDayPosts: [Post] = []
             
-            posts[indexPath.item].photos!.forEach {
+            posts.forEach {
+                if dateArray[indexPath.section - 1] == $0.createDate.dropLast(14) {
+                    everyDayPosts.append($0)
+                }
+            }
+            
+            detailViewController.descriptionLBL.text = everyDayPosts[indexPath.item].description
+            
+            everyDayPosts[indexPath.item].photos!.forEach {
                 detailViewController.images.append($0)
             }
             navigationController?.pushViewController(detailViewController, animated: true)
