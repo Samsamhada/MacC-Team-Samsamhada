@@ -26,6 +26,7 @@ class WorkingHistoryViewController: UIViewController {
     }
 
     var isChangedSegment: Bool = true
+    var dateArray: [String] = []
     var room: Room?
     private var dateArray: [String] = []
     private var postDate = Set<String>()
