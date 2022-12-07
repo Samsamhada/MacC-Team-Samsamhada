@@ -27,7 +27,6 @@ class WorkingHistoryViewController: UIViewController {
 
     var isChangedSegment: Bool = true
     var room: Room?
-    private var everyDayPosts: [Post] = []
     private var dateArray: [String] = []
     private var postDate = Set<String>()
 
@@ -136,8 +135,8 @@ extension WorkingHistoryViewController: UICollectionViewDataSource, UICollection
             return 1
         }
 
-        everyDayPosts = []
-
+        var everyDayPosts: [Post] = []
+        
         posts.forEach {
             if dateArray[section - 1] == $0.createDate.dropLast(14) {
                 everyDayPosts.append($0)
@@ -161,8 +160,8 @@ extension WorkingHistoryViewController: UICollectionViewDataSource, UICollection
             
             let contentCell = collectionView.dequeueReusableCell(withReuseIdentifier: WorkingHistoryViewContentCell.identifier, for: indexPath) as! WorkingHistoryViewContentCell
 
-            everyDayPosts = []
-            
+            var everyDayPosts: [Post] = []
+
             posts.forEach {
                 if dateArray[indexPath.section - 1] == $0.createDate.dropLast(14) {
                     everyDayPosts.append($0)
@@ -178,7 +177,7 @@ extension WorkingHistoryViewController: UICollectionViewDataSource, UICollection
             }
             
             DispatchQueue.global().async {
-                let data = try? Data(contentsOf: URL(string: self.everyDayPosts[indexPath.item].photos![0].photoPath)!)
+                let data = try? Data(contentsOf: URL(string: everyDayPosts[indexPath.item].photos![0].photoPath)!)
                 DispatchQueue.main.async {
                     contentCell.uiImageView.image = UIImage(data: data!)
                 }
@@ -212,7 +211,14 @@ extension WorkingHistoryViewController: UICollectionViewDataSource, UICollection
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if indexPath.section > 0 {
             let detailViewController = DetailViewController()
-
+            var everyDayPosts: [Post] = []
+            
+            posts.forEach {
+                if dateArray[indexPath.section - 1] == $0.createDate.dropLast(14) {
+                    everyDayPosts.append($0)
+                }
+            }
+            
             detailViewController.descriptionLBL.text = everyDayPosts[indexPath.item].description
             
             everyDayPosts[indexPath.item].photos!.forEach {
