@@ -28,8 +28,8 @@ class WorkingHistoryViewController: UIViewController {
     var isChangedSegment: Bool = true
     var dateArray: [String] = []
     var room: Room?
-    private var postDate = Set<String>()
-    
+    var postDate = Set<String>()
+
     // MARK: - View
 
     private let workingHistoryView: UICollectionView = {
@@ -37,7 +37,7 @@ class WorkingHistoryViewController: UIViewController {
     }(UICollectionView(
         frame: .zero, collectionViewLayout: UICollectionViewFlowLayout()))
     
-    let pleaseWriteLabel: UILabel = {
+    private let pleaseWriteLabel: UILabel = {
         $0.text = """
                   아직 작업내용이 없어요
                   시공 내용을 작성해주세요!

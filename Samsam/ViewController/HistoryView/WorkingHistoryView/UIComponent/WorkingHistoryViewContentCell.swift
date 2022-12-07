@@ -32,7 +32,7 @@ class WorkingHistoryViewContentCell: UICollectionViewCell {
         return $0
     }(UILabel())
 
-    private let workTypeView: UIView = {
+    let workTypeView: UIView = {
         $0.backgroundColor = .white
         $0.layer.borderColor = AppColor.campanulaBlue?.cgColor
         $0.layer.borderWidth = 2
