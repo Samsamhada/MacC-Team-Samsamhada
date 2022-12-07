@@ -75,6 +75,7 @@ class PhoneNumViewController: UIViewController {
 
     private func attribute() {
         view.backgroundColor = .white
+        navigationItem.hidesBackButton = true
     }
 
     private func layout() {

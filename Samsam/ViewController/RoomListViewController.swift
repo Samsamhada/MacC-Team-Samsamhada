@@ -67,6 +67,7 @@ class RoomListViewController: UIViewController {
         navigationItem.title = "기와집"
         navigationController?.navigationBar.prefersLargeTitles = false
         navigationController?.setNavigationBarHidden(false, animated: true)
+        navigationItem.hidesBackButton = true
     }
 
     @objc func tapSettingButton() {
