@@ -211,8 +211,8 @@ extension WorkingHistoryViewController: UICollectionViewDataSource, UICollection
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if indexPath.section > 0 {
             let detailViewController = DetailViewController()
-            var everyDayPosts: [Post] = []
             
+            var everyDayPosts: [Post] = []
             posts.forEach {
                 if dateArray[indexPath.section - 1] == $0.createDate.dropLast(14) {
                     everyDayPosts.append($0)
