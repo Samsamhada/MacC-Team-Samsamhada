@@ -12,6 +12,7 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        // TODO: - [설정] - [Apple ID] - [암호 및 보안] - [내 Apple ID를 사용하는 앱]에서 Apple ID 사용 중단한 후 앱으로 돌아왔을 때 처리 (로그인 페이지로 이동)
         return true
     }
 

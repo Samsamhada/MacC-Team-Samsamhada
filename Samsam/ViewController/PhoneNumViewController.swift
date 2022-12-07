@@ -159,8 +159,6 @@ class PhoneNumViewController: UIViewController {
 
     @objc private func tapSubmitButton() {
         let number = "+82010" + phoneNum
-        let loginDTO = LoginDTO(userIdentifier: UserDefaults.standard.string(forKey: "userIdentifier")!, number: number)
-        requestPutPhoneNumber(workerID: Int(UserDefaults.standard.string(forKey: "workerID")!)!, LoginDTO: loginDTO)
         let roomListViewController = RoomListViewController()
         navigationController?.pushViewController(roomListViewController, animated: true)
     }

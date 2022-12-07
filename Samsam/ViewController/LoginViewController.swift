@@ -17,7 +17,7 @@ class LoginViewController: UIViewController {
     // MARK: - View
 
     private lazy var authorizationButton: ASAuthorizationAppleIDButton = {
-        $0.addTarget(self, action: #selector(login), for: .touchUpInside)
+        $0.addTarget(self, action: #selector(tapAppleLoginButton), for: .touchUpInside)
         return $0
     }(ASAuthorizationAppleIDButton(authorizationButtonType: .signIn, authorizationButtonStyle: .whiteOutline))
 
@@ -50,7 +50,7 @@ class LoginViewController: UIViewController {
         )
     }
 
-    @objc private func login() {
+    @objc private func tapAppleLoginButton() {
         let provider = ASAuthorizationAppleIDProvider()
         let request = provider.createRequest()
         request.requestedScopes = [.fullName, .email]
@@ -84,27 +84,34 @@ class LoginViewController: UIViewController {
 extension LoginViewController: ASAuthorizationControllerDelegate {
     func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
         if let appleIDCredential = authorization.credential as? ASAuthorizationAppleIDCredential {
+            let personNameComponentsFormatter = PersonNameComponentsFormatter()
 
             let userIdentifier = appleIDCredential.user
-            let userFirstName = appleIDCredential.fullName?.givenName
-            let userLastName = appleIDCredential.fullName?.familyName
+            let name = personNameComponentsFormatter.string(from: appleIDCredential.fullName!)
             let userEmail = appleIDCredential.email
+            let token = appleIDCredential.identityToken
+            let code = appleIDCredential.authorizationCode
             
             let appleIDProvider = ASAuthorizationAppleIDProvider()
+            
             appleIDProvider.getCredentialState(forUserID: userIdentifier) { (credentialState, error) in
                 switch credentialState {
                 case .authorized:
                     DispatchQueue.main.async {
-                        let loginDTO = LoginDTO(userIdentifier: userIdentifier,
-                                                lastName:userLastName ?? nil,
-                                                firstName: userFirstName ?? nil,
-                                                email: userEmail ?? nil)
+                        let loginDTO = LoginDTO(code: code,
+                                                token: token,
+                                                name: name
+                        )
                         self.requestLogin(LoginDTO: loginDTO)
+
+                        UserDefaults.standard.setValue(token, forKey: "idToken")
                     }
                     break
                 case .revoked:
+                    // TODO: - UserIdentifier와 앱의 연결이 취소 되었을 때 처리
                     break
                 case .notFound:
+                    // TODO: - UserIdentifier와 앱의 연결을 찾을 수 없을 때 처리
                     break
                 default:
                     break
@@ -114,6 +121,7 @@ extension LoginViewController: ASAuthorizationControllerDelegate {
     }
 
     func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
+        // TODO: - Error Handling
     }
 }
 

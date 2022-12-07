@@ -8,21 +8,18 @@
 import Foundation
 
 struct LoginDTO: Encodable {
-    var userIdentifier: String
-    var lastName: String?
-    var firstName: String?
-    var email: String?
+    var code: Data?
+    var token: Data?
+    var name: String?
     var number: String?
     
-    init(userIdentifier: String,
-         lastName: String? = nil,
-         firstName: String? = nil,
-         email: String? = nil,
+    init(code: Data? = nil,
+         token: Data? = nil,
+         name: String? = nil,
          number: String? = nil) {
-        self.userIdentifier = userIdentifier
-        self.lastName = lastName
-        self.firstName = firstName
-        self.email = email
+        self.code = code
+        self.token = token
+        self.name = name
         self.number = number
     }
 }
