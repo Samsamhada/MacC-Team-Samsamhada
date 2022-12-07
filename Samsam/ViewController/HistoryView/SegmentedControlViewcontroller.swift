@@ -234,7 +234,7 @@ class SegmentedControlViewController: UIViewController {
         }
     }
     
-    func loadStatusesByRoomID(roomID: Int) {
+    private func loadStatusesByRoomID(roomID: Int) {
         Task {
             let response = try await self.roomAPI.loadStatusesByRoomID(roomID: room!.roomID)
             guard let data = response else {
