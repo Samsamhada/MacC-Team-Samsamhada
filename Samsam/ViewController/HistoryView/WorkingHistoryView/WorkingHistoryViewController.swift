@@ -160,7 +160,7 @@ extension WorkingHistoryViewController: UICollectionViewDataSource, UICollection
         } else {
             
             let contentCell = collectionView.dequeueReusableCell(withReuseIdentifier: WorkingHistoryViewContentCell.identifier, for: indexPath) as! WorkingHistoryViewContentCell
-            
+
             everyDayPosts = []
             
             posts.forEach {
