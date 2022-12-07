@@ -95,7 +95,6 @@ class LoginViewController: UIViewController {
                 } else {
                     self.navigationController?.pushViewController(RoomListViewController(), animated: true)
                 }
-                print(UserDefaults.standard.string(forKey: "number"))
             } catch NetworkError.serverError {
             } catch NetworkError.encodingError {
             } catch NetworkError.clientError(_) {
