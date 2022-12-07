@@ -24,6 +24,7 @@ class WorkingHistoryViewController: UIViewController {
         }
     }
     
+    var isChangedSegment: Bool = true
     var room: Room?
     private var postDate = Set<String>()
     
@@ -142,13 +143,25 @@ extension WorkingHistoryViewController: UICollectionViewDataSource, UICollection
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if indexPath.section == 0 {
             let topCell = collectionView.dequeueReusableCell(withReuseIdentifier: WorkingHistoryViewTopCell.identifier, for: indexPath) as! WorkingHistoryViewTopCell
-            topCell.viewAll.addTarget(self, action: #selector(tapAllView), for: .touchUpInside)
+
+            if isChangedSegment {
+                topCell.viewAll.addTarget(self, action: #selector(tapAllView), for: .touchUpInside)
+            } else {
+                topCell.isHidden = true
+            }
+
             return topCell
         } else {
             let contentCell = collectionView.dequeueReusableCell(withReuseIdentifier: WorkingHistoryViewContentCell.identifier, for: indexPath) as! WorkingHistoryViewContentCell
 
             contentCell.imageDescription.text = posts[indexPath.item].description
             contentCell.workType.text = Category.categoryName(Category(rawValue: posts[indexPath.item].category)!)()
+            if isChangedSegment {
+                contentCell.workType.text = Category.categoryName(Category(rawValue: everyDayPosts[indexPath.item].category)!)()
+            } else {
+                contentCell.workType.text = ""
+                contentCell.workTypeView.isHidden = true
+            }
             
             DispatchQueue.global().async {
                 let data = try? Data(contentsOf: URL(string: self.posts[indexPath.item].photos![0].photoPath)!)
@@ -164,7 +177,15 @@ extension WorkingHistoryViewController: UICollectionViewDataSource, UICollection
 
         if indexPath.section == 0 {
             let width = UIScreen.main.bounds.width
-            let cellHeight = 30
+            var cellHeight = 30
+            
+            if !isChangedSegment {
+                
+                // FIXME: - cellHeight값이 0이면, 게시물이 보이지 않는 문제 식별
+                
+                cellHeight = 1
+            }
+            
             return CGSize(width: Int(width), height: cellHeight)
         } else {
             let width = UIScreen.main.bounds.width - 32
