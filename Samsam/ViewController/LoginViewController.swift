@@ -71,8 +71,16 @@ class LoginViewController: UIViewController {
                     else {return}
                     UserDefaults.standard.setValue(userIdentifier, forKey: "userIdentifier")
                     UserDefaults.standard.setValue(workerID, forKey: "workerID")
+                    if let number = data.number {
+                        UserDefaults.standard.setValue(number, forKey: "number")
+                    }
                 }
-                self.navigationController?.pushViewController(PhoneNumViewController(), animated: true)
+                if UserDefaults.standard.string(forKey: "number") == nil {
+                    self.navigationController?.pushViewController(PhoneNumViewController(), animated: true)
+                } else {
+                    self.navigationController?.pushViewController(RoomListViewController(), animated: true)
+                }
+                print(UserDefaults.standard.string(forKey: "number"))
             } catch NetworkError.serverError {
             } catch NetworkError.encodingError {
             } catch NetworkError.clientError(_) {
