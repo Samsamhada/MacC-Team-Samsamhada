@@ -168,7 +168,7 @@ extension WorkingHistoryViewController: UICollectionViewDataSource, UICollection
                 }
             }
             contentCell.imageDescription.text = everyDayPosts[indexPath.item].description
-            
+
             if isChangedSegment {
                 contentCell.workType.text = Category.categoryName(Category(rawValue: everyDayPosts[indexPath.item].category)!)()
             } else {
