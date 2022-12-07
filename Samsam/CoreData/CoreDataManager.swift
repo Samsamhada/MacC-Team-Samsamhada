@@ -30,37 +30,37 @@ enum Category: Int, CaseIterable {
     func categoryName() -> String {
         switch self {
         case .zero:
-            return "실측"
+            return "도면"
         case .one:
-            return "철거"
+            return "현관"
         case .two:
-            return "설비"
+            return "화장실"
         case .three:
-            return "새시"
+            return "배란다"
         case .four:
-            return "목공"
+            return "거실"
         case .five:
-            return "전기"
+            return "안방"
         case .six:
-            return "페인트"
+            return "큰방"
         case .seven:
-            return "필름"
+            return "작은방"
         case .eight:
-            return "타일"
+            return "부엌"
         case .nine:
-            return "욕실"
+            return "다용도실"
         case .ten:
-            return "마루"
-        case .eleven:
-            return "도배"
-        case .twelve:
-            return "주방"
-        case .thirteen:
-            return "폴딩도어"
-        case .fourteen:
-            return "조명"
-        case .fifteen:
             return "기타"
+        case .eleven:
+            return "a"
+        case .twelve:
+            return "b"
+        case .thirteen:
+            return "c"
+        case .fourteen:
+            return "d"
+        case .fifteen:
+            return "e"
         }
     }
 }
