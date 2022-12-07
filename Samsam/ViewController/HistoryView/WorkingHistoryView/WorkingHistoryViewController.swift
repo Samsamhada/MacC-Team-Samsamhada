@@ -134,7 +134,17 @@ extension WorkingHistoryViewController: UICollectionViewDataSource, UICollection
         if section == 0 {
             return 1
         }
-        return posts.count
+
+        // FIXME: - 카운트 바껴야함
+
+        var everyDayPosts: [Post] = []
+
+        posts.forEach {
+            if dateArray[section - 1] == $0.createDate.dropLast(14) {
+                everyDayPosts.append($0)
+            }
+        }
+        return everyDayPosts.count
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -149,10 +159,18 @@ extension WorkingHistoryViewController: UICollectionViewDataSource, UICollection
 
             return topCell
         } else {
+            
             let contentCell = collectionView.dequeueReusableCell(withReuseIdentifier: WorkingHistoryViewContentCell.identifier, for: indexPath) as! WorkingHistoryViewContentCell
-
-            contentCell.imageDescription.text = posts[indexPath.item].description
-            contentCell.workType.text = Category.categoryName(Category(rawValue: posts[indexPath.item].category)!)()
+            
+            var everyDayPosts: [Post] = []
+            
+            posts.forEach {
+                if dateArray[indexPath.section - 1] == $0.createDate.dropLast(14) {
+                    everyDayPosts.append($0)
+                }
+            }
+            contentCell.imageDescription.text = everyDayPosts[indexPath.item].description
+            
             if isChangedSegment {
                 contentCell.workType.text = Category.categoryName(Category(rawValue: everyDayPosts[indexPath.item].category)!)()
             } else {
@@ -161,7 +179,7 @@ extension WorkingHistoryViewController: UICollectionViewDataSource, UICollection
             }
             
             DispatchQueue.global().async {
-                let data = try? Data(contentsOf: URL(string: self.posts[indexPath.item].photos![0].photoPath)!)
+                let data = try? Data(contentsOf: URL(string: everyDayPosts[indexPath.item].photos![0].photoPath)!)
                 DispatchQueue.main.async {
                     contentCell.uiImageView.image = UIImage(data: data!)
                 }
