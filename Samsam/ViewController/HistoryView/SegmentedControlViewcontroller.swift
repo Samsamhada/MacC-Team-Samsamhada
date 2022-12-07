@@ -246,6 +246,7 @@ class SegmentedControlViewController: UIViewController {
     
     private func loadInquiryView() {
         inquiryHistoryView.room = room
+        inquiryHistoryView.pleaseWriteLabel.text = "아직 문의내역이 없어요"
     }
 }
 
