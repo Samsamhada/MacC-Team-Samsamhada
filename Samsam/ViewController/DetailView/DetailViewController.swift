@@ -13,7 +13,7 @@ class DetailViewController: UIViewController, UIScrollViewDelegate {
 
     let screenWidth = UIScreen.main.bounds.width - 32
 
-    private var naviTitle = "화장실"
+    private var naviTitle = ""
     var images: [Photo] = []
     private var sharingItems: [Any] = []
 
