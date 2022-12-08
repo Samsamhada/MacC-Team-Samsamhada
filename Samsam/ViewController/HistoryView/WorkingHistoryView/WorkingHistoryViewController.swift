@@ -203,7 +203,7 @@ extension WorkingHistoryViewController: UICollectionViewDataSource, UICollection
             return CGSize(width: Int(width), height: cellHeight)
         } else {
             let width = UIScreen.main.bounds.width - 32
-            let cellHeight = width / 4 * 3 + 30
+            let cellHeight = width / 4 * 3
 
             return CGSize(width: Int(width), height: Int(cellHeight))
         }
@@ -235,5 +235,9 @@ extension WorkingHistoryViewController: UICollectionViewDataSource, UICollection
         chipViewController.posts = posts
         chipViewController.statuses = statuses
         navigationController?.pushViewController(chipViewController , animated: true)
+    }
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 20
     }
 }
