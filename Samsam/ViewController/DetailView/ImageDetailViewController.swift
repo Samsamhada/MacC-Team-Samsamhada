@@ -102,6 +102,7 @@ extension ImageDetailViewController: UIScrollViewDelegate {
     }
     
     func scrollViewDidZoom(_ scrollView: UIScrollView) {
+        view.backgroundColor = .black
         self.scrollView.moveToCenter()
     }
 }
