@@ -170,7 +170,7 @@ class RoomCreationViewController: UIViewController{
             right: view.safeAreaLayoutGuide.rightAnchor,
             paddingTop: 10,
             paddingLeft: 16,
-            paddingBottom: 16,
+            paddingBottom: 8,
             paddingRight: 16
         )
 

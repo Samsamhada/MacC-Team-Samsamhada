@@ -123,7 +123,7 @@ class WorkingHistoryViewController: UIViewController {
             right: view.safeAreaLayoutGuide.rightAnchor,
             paddingTop: 16,
             paddingLeft: 16,
-            paddingBottom: 16,
+            paddingBottom: 8,
             paddingRight: 16,
             height: 50
         )
