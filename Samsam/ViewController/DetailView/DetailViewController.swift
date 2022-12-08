@@ -209,6 +209,7 @@ extension DetailViewController {
     private func addImageView(img: Data, position: CGFloat) {
         let constructionImage = UIImageView()
         constructionImage.image = UIImage(data: img)
+        constructionImage.contentMode = .scaleAspectFill
 
         let changedView = ModalTapRecognizer(target: self, action: #selector(changedView))
         changedView.image = constructionImage.image
