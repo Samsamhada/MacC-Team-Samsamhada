@@ -19,18 +19,9 @@ class WorkingHistoryViewContentCell: UICollectionViewCell {
         $0.image = UIImage(named: "GrayBox")
         $0.layer.masksToBounds = true
         $0.layer.cornerRadius = 16
-        $0.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
         $0.contentMode = .scaleAspectFill
         return $0
     }(UIImageView())
-
-    let imageDescription: UILabel = {
-        $0.text = "애플, 동아시아 최초 '디벨로퍼 아카데미' 한국서 운영"
-        $0.textAlignment = .left
-        $0.numberOfLines = 2
-        $0.font = UIFont.systemFont(ofSize: 16, weight: .regular)
-        return $0
-    }(UILabel())
 
     let workTypeView: UIView = {
         $0.backgroundColor = .white
@@ -48,21 +39,20 @@ class WorkingHistoryViewContentCell: UICollectionViewCell {
         return $0
     }(UILabel())
 
-    private let vStack: UIStackView = {
-        $0.backgroundColor = .white
-        $0.axis = .vertical
-        $0.layer.masksToBounds = false
-        $0.layer.cornerRadius = 16
-        $0.layer.shadowColor = UIColor.black.cgColor
-        $0.layer.shadowOpacity = 0.2
-        $0.layer.shadowRadius = 20
-        $0.layer.shadowOffset = CGSize(width: 4, height: 4)
-        return $0
-    }(UIStackView())
-
     private let descriptionCoverView: UIView = {
+        $0.backgroundColor = .black
+        $0.layer.opacity = 0.7
         return $0
     }(UIView())
+    
+    let imageDescription: UILabel = {
+        $0.text = ""
+        $0.textColor = .white
+        $0.textAlignment = .left
+        $0.numberOfLines = 2
+        $0.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
+        return $0
+    }(UILabel())
 
     // MARK: - Init
 
@@ -78,27 +68,18 @@ class WorkingHistoryViewContentCell: UICollectionViewCell {
     // MARK: - Method
 
     private func layout() {
-        addSubview(vStack)
-        vStack.addArrangedSubview(uiImageView)
+        addSubview(uiImageView)
         uiImageView.addSubview(workTypeView)
         workTypeView.addSubview(workType)
-        vStack.addArrangedSubview(descriptionCoverView)
-        descriptionCoverView.addSubview(imageDescription)
+        uiImageView.addSubview(descriptionCoverView)
+        uiImageView.addSubview(imageDescription)
 
-        vStack.anchor(
+        uiImageView.anchor(
             top: topAnchor,
             left: leftAnchor,
             bottom: bottomAnchor,
             right: rightAnchor
         )
-
-        uiImageView.anchor(
-            top: vStack.topAnchor,
-            left: vStack.leftAnchor,
-            right: vStack.rightAnchor
-        )
-
-        uiImageView.heightAnchor.constraint(lessThanOrEqualToConstant: (UIScreen.main.bounds.width - 32) / 4 * 3).isActive = true
 
         workTypeView.anchor(
             top: uiImageView.topAnchor,
@@ -119,10 +100,9 @@ class WorkingHistoryViewContentCell: UICollectionViewCell {
         )
 
         descriptionCoverView.anchor(
-            top: uiImageView.bottomAnchor,
-            left: vStack.leftAnchor,
-            bottom: vStack.bottomAnchor,
-            right: vStack.rightAnchor
+            left: uiImageView.leftAnchor,
+            bottom: uiImageView.bottomAnchor,
+            right: uiImageView.rightAnchor
         )
 
         imageDescription.anchor(
@@ -130,12 +110,10 @@ class WorkingHistoryViewContentCell: UICollectionViewCell {
             left: descriptionCoverView.leftAnchor,
             bottom: descriptionCoverView.bottomAnchor,
             right: descriptionCoverView.rightAnchor,
-            paddingTop: 6,
-            paddingLeft: 6,
-            paddingBottom: 6,
-            paddingRight: 6
+            paddingTop: 12,
+            paddingLeft: 12,
+            paddingBottom: 12,
+            paddingRight: 12
         )
-        descriptionCoverView.setContentCompressionResistancePriority(UILayoutPriority(751), for: .vertical)
-        imageDescription.setContentCompressionResistancePriority(UILayoutPriority(752), for: .vertical)
     }
 }
