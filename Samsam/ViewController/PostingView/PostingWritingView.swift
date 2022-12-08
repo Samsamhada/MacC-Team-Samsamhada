@@ -73,7 +73,7 @@ class PostingWritingView: UIViewController {
     }(UIView())
 
     private let finalBTN: UIButton = {
-        $0.backgroundColor = AppColor.campanulaBlue
+        $0.backgroundColor = AppColor.giwazipBlue
         $0.setTitle("작성 완료", for: .normal)
         $0.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
         $0.setTitleColor(.white, for: .normal)

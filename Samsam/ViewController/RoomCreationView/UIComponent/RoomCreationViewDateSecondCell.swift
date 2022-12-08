@@ -25,7 +25,7 @@ class RoomCreationViewDateSecondCell: UITableViewCell {
         $0.locale = Locale(identifier: "ko-KR")
         $0.timeZone = .autoupdatingCurrent
         $0.preferredDatePickerStyle = .inline
-        $0.tintColor = AppColor.campanulaBlue
+        $0.tintColor = AppColor.giwazipBlue
         $0.addTarget(self, action: #selector(check), for: .valueChanged)
         return $0
     }(UIDatePicker())

@@ -31,7 +31,7 @@ class PostingCategoryViewController: UIViewController {
         frame: .zero, collectionViewLayout: UICollectionViewFlowLayout()))
 
     private let nextBtn: UIButton = {
-        $0.backgroundColor = AppColor.campanulaBlue
+        $0.backgroundColor = AppColor.giwazipBlue
         $0.setTitle("다음", for: .normal)
         $0.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
         $0.setTitleColor(.white, for: .normal)

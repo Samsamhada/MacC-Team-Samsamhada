@@ -235,7 +235,7 @@ class ModificationWorkerViewController: UIViewController {
         if (workerTextField.text != workerData?.name && (phoneNum.count >= 8))
             || (phoneNum.count >= 8 && phoneNum != String((workerData?.number)!.dropFirst(6)).replacingOccurrences(of: " - ", with: "")) {
             modificationButton.isEnabled = true
-            modificationButton.backgroundColor = AppColor.campanulaBlue
+            modificationButton.backgroundColor = AppColor.giwazipBlue
         } else {
             modificationButton.isEnabled = false
             modificationButton.backgroundColor = .gray
