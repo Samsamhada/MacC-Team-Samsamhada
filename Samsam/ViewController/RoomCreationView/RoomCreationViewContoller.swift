@@ -103,6 +103,7 @@ class RoomCreationViewController: UIViewController{
     }(UITextField())
 
     private var tableView: UITableView = {
+        $0.backgroundColor = .clear
         return $0
     }(UITableView())
 
@@ -144,7 +145,7 @@ class RoomCreationViewController: UIViewController{
     // MARK: - Method
 
     private func attribute() {
-        view.backgroundColor = .white
+        view.backgroundColor = AppColor.backgroundGray
 
         setTableView()
         setNavigation()

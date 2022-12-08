@@ -41,7 +41,7 @@ class RoomListViewController: UIViewController {
     // MARK: - Method
 
     private func attribute() {
-        view.backgroundColor = .white
+        view.backgroundColor = AppColor.backgroundGray
 
         setupNavigationTitle()
         setupCollectionView()

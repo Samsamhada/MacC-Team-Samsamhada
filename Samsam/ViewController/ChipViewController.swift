@@ -36,6 +36,7 @@ class ChipViewController: UIViewController {
     }(UIStackView())
 
     private let historyView: UICollectionView = {
+        $0.backgroundColor = .clear
         return $0
     }(UICollectionView(
         frame: .zero, collectionViewLayout: UICollectionViewFlowLayout()))
@@ -123,9 +124,10 @@ class ChipViewController: UIViewController {
     }
 
     private func attribute() {
-        view.backgroundColor = .white
         historyView.contentInset.bottom = 80
         
+        view.backgroundColor = AppColor.backgroundGray
+
         setChip()
 
         historyView.delegate = self

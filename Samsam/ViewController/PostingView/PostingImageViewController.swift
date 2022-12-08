@@ -41,6 +41,7 @@ class PostingImageViewController: UIViewController {
     }(UIImageView())
 
     private let imageCellView: UICollectionView = {
+        $0.backgroundColor = .clear
         return $0
     }(UICollectionView(
         frame: .zero, collectionViewLayout: UICollectionViewFlowLayout()))
@@ -67,7 +68,7 @@ class PostingImageViewController: UIViewController {
     // MARK: - Method
 
     private func attribute() {
-        self.view.backgroundColor = .white
+        view.backgroundColor = AppColor.backgroundGray
         setNavigationTitle()
 
         imageCellView.delegate = self
@@ -76,7 +77,6 @@ class PostingImageViewController: UIViewController {
 
         imageCellView.register(PostingImageButtonCell.self, forCellWithReuseIdentifier: PostingImageButtonCell.identifier)
         imageCellView.register(PostingImageCell.self, forCellWithReuseIdentifier: PostingImageCell.identifier)
-        imageCellView.backgroundColor = .white
     }
 
     private func layout() {

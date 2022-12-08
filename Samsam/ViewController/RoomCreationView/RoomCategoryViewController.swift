@@ -56,6 +56,7 @@ class RoomCategoryViewController: UIViewController {
     }(UIButton())
 
     private let categoryView: UICollectionView = {
+        $0.backgroundColor = .clear
         return $0
     }(UICollectionView(
         frame: .zero, collectionViewLayout: UICollectionViewFlowLayout()))
@@ -71,7 +72,7 @@ class RoomCategoryViewController: UIViewController {
     // MARK: - Method
 
     private func attribute() {
-        self.view.backgroundColor = .white
+        view.backgroundColor = AppColor.backgroundGray
         setNavigationTitle()
         setTitleText()
 

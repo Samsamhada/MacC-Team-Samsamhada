@@ -93,7 +93,7 @@ class SegmentedControlViewController: UIViewController {
     // MARK: - Method
 
     private func attribute() {
-        view.backgroundColor = .white
+        view.backgroundColor = AppColor.backgroundGray
 
         setSegmentedControl()
         setNavigationBar()

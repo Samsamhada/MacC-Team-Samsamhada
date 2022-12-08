@@ -84,7 +84,7 @@ class DetailViewController: UIViewController, UIScrollViewDelegate {
     // MARK: - Method
 
     private func attribute() {
-        view.backgroundColor = .white
+        view.backgroundColor = AppColor.backgroundGray
         setNavigationBar()
         sharingItems.append(self.descriptionLBL.text!)
 

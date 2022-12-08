@@ -77,7 +77,7 @@ class RoomCodeViewController: UIViewController {
     // MARK: - Method
     
     private func attribute() {
-        self.view.backgroundColor = .white
+        view.backgroundColor = AppColor.backgroundGray
         setNavigationTitle()
     }
 

@@ -25,6 +25,7 @@ class PostingCategoryViewController: UIViewController {
     // MARK: - View
 
     private let categoryView: UICollectionView = {
+        $0.backgroundColor = .clear
         return $0
     }(UICollectionView(
         frame: .zero, collectionViewLayout: UICollectionViewFlowLayout()))
@@ -72,7 +73,7 @@ class PostingCategoryViewController: UIViewController {
     }
 
     private func attribute() {
-        self.view.backgroundColor = .white
+        view.backgroundColor = AppColor.backgroundGray
 
         setNavigationTitle()
 

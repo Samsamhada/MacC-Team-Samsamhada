@@ -34,6 +34,7 @@ class WorkingHistoryViewController: UIViewController {
     // MARK: - View
 
     private let workingHistoryView: UICollectionView = {
+        $0.backgroundColor = .clear
         return $0
     }(UICollectionView(
         frame: .zero, collectionViewLayout: UICollectionViewFlowLayout()))
@@ -76,7 +77,7 @@ class WorkingHistoryViewController: UIViewController {
     // MARK: - Method
 
     private func attribute() {
-        view.backgroundColor = .white
+        view.backgroundColor = AppColor.backgroundGray
 
         workingHistoryView.delegate = self
         workingHistoryView.dataSource = self

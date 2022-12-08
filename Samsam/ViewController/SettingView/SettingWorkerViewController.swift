@@ -39,7 +39,7 @@ class SettingWorkerViewController: UIViewController {
     // MARK: - Method
 
     private func attribute() {
-        view.backgroundColor = .white
+        view.backgroundColor = AppColor.backgroundGray
 
         self.tableView.dataSource = self
         self.tableView.delegate = self
