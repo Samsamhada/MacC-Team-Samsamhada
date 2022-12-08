@@ -61,6 +61,7 @@ class ImageDetailViewController: UIViewController {
             right: scrollView.contentLayoutGuide.rightAnchor
         )
         detailImage.centerX(inView: scrollView)
+        detailImage.centerY(inView: scrollView)
     }
 
     private func attribute() {
