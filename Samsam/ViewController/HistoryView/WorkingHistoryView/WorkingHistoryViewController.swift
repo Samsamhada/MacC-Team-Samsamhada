@@ -64,6 +64,7 @@ class WorkingHistoryViewController: UIViewController {
 
         workingHistoryView.delegate = self
         workingHistoryView.dataSource = self
+        workingHistoryView.contentInset.bottom = 80
 
         workingHistoryView.register(WorkingHistoryViewTopHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: WorkingHistoryViewTopHeader.identifier)
         workingHistoryView.register(WorkingHistoryViewContentHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: WorkingHistoryViewContentHeader.identifier)
