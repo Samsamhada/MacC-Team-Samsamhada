@@ -102,25 +102,23 @@ extension ImageDetailViewController: UIScrollViewDelegate {
     }
     
     func scrollViewDidZoom(_ scrollView: UIScrollView) {
-        if let image = detailImage.image {
-            view.backgroundColor = .black
-            
-            let changedWidth = detailImage.frame.width
-            let changedHeight = detailImage.frame.height
-            let fixedWidth = image.size.width
-            let fixedHeight = image.size.height
-            
-            let ratioWidth = changedWidth / fixedWidth
-            let ratioHeight = changedHeight / fixedHeight
-            let ratio = (ratioWidth < ratioHeight) ? ratioWidth : ratioHeight
-            
-            let newWidth = fixedWidth * ratio
-            let newHeight = fixedHeight * ratio
-            
-            let horizontalSide = 0.5 * (newWidth * scrollView.zoomScale > changedWidth ? (newWidth - changedWidth) : (scrollView.frame.width - scrollView.contentSize.width))
-            let verticalSide = 0.5 * (newHeight * scrollView.zoomScale > changedHeight ? (newHeight - changedHeight) : (scrollView.frame.height - scrollView.contentSize.height))
-            
-            scrollView.contentInset = UIEdgeInsets(top: verticalSide, left: horizontalSide, bottom: verticalSide, right: horizontalSide)
+        self.scrollView.moveToCenter()
+    }
+}
+
+extension UIScrollView {
+    func moveToCenter(){
+        let contentWidth = self.contentSize.width;
+        let x = self.bounds.width - contentWidth;
+        
+        let contentHeight = self.contentSize.height;
+        let y = self.bounds.height - contentHeight;
+        
+        guard x > 0 || y > 0 else{
+            self.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0);
+            return;
         }
+        
+        self.contentInset = UIEdgeInsets(top: y / 2, left: x / 2, bottom: 0, right: 0);
     }
 }
