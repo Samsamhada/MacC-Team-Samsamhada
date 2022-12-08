@@ -92,7 +92,7 @@ class WorkingHistoryViewController: UIViewController {
 
     private func layout() {
         view.addSubview(workingHistoryView)
-        view.addSubview(pleaseWriteLabel)
+        workingHistoryView.addSubview(pleaseWriteLabel)
         view.addSubview(buttonBackgroundView)
         view.addSubview(writingButton)
 
