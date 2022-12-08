@@ -11,7 +11,7 @@ class DetailViewController: UIViewController, UIScrollViewDelegate {
 
     // MARK: - Property
 
-    let screenWidth = UIScreen.main.bounds.width - 32
+    let screenWidth = UIScreen.main.bounds.width
 
     private var naviTitle = ""
     var images: [Photo] = []
@@ -30,7 +30,6 @@ class DetailViewController: UIViewController, UIScrollViewDelegate {
         $0.isScrollEnabled = true
         $0.showsHorizontalScrollIndicator = false
         $0.isPagingEnabled = true
-        $0.layer.cornerRadius = 16
         return $0
     }(UIScrollView())
 
@@ -51,8 +50,6 @@ class DetailViewController: UIViewController, UIScrollViewDelegate {
             width: screenWidth,
             height: screenWidth / 5 * 2
         )
-        $0.layer.cornerRadius = 16
-        $0.backgroundColor = .lightGray
         return $0
     }(UIScrollView())
 
@@ -178,8 +175,6 @@ extension DetailViewController {
             top: view.safeAreaLayoutGuide.topAnchor,
             left: view.safeAreaLayoutGuide.leftAnchor,
             right: view.safeAreaLayoutGuide.rightAnchor,
-            paddingLeft: 16,
-            paddingRight: 16,
             height: screenWidth / 4 * 3
         )
 
