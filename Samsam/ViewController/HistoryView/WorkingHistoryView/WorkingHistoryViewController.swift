@@ -48,7 +48,7 @@ class WorkingHistoryViewController: UIViewController {
         $0.textAlignment = .center
         return $0
     }(UILabel())
-    
+
     private let buttonBackgroundView: UIView = {
         $0.backgroundColor = .white
         $0.layer.opacity = 0.85
@@ -109,13 +109,13 @@ class WorkingHistoryViewController: UIViewController {
             bottom: view.bottomAnchor,
             right: view.rightAnchor
         )
-        
+
         buttonBackgroundView.anchor(
             left: view.leftAnchor,
             bottom: view.bottomAnchor,
             right: view.rightAnchor
         )
-        
+
         writingButton.anchor(
             top: buttonBackgroundView.topAnchor,
             left: view.safeAreaLayoutGuide.leftAnchor,
