@@ -101,6 +101,7 @@ class ChipViewController: UIViewController {
             bottom: view.safeAreaLayoutGuide.bottomAnchor,
             right: view.safeAreaLayoutGuide.rightAnchor,
             paddingLeft: 16,
+            paddingBottom: 16,
             paddingRight: 16,
             height: 50
         )
@@ -108,7 +109,8 @@ class ChipViewController: UIViewController {
 
     private func attribute() {
         view.backgroundColor = .white
-
+        historyView.contentInset.bottom = 80
+        
         setChip()
 
         historyView.delegate = self
