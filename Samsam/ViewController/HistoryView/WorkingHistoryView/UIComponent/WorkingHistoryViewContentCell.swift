@@ -72,7 +72,7 @@ class WorkingHistoryViewContentCell: UICollectionViewCell {
         uiImageView.addSubview(workTypeView)
         workTypeView.addSubview(workType)
         uiImageView.addSubview(descriptionCoverView)
-        addSubview(imageDescription)
+        uiImageView.addSubview(imageDescription)
 
         uiImageView.anchor(
             top: topAnchor,
