@@ -215,7 +215,7 @@ extension ChipViewController: UICollectionViewDataSource, UICollectionViewDelega
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
 
         let width = UIScreen.main.bounds.width - 32
-        let cellHeight = width / 4 * 3 + 30
+        let cellHeight = width / 4 * 3
         return CGSize(width: Int(width), height: Int(cellHeight))
     }
 
@@ -231,5 +231,9 @@ extension ChipViewController: UICollectionViewDataSource, UICollectionViewDelega
         }
         
         navigationController?.pushViewController(detailViewController, animated: true)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 20
     }
 }
