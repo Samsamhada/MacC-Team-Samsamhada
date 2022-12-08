@@ -49,6 +49,17 @@ class WorkingHistoryViewController: UIViewController {
         return $0
     }(UILabel())
 
+    
+    let writingButton: UIButton = {
+        $0.backgroundColor = AppColor.campanulaBlue
+        $0.setTitle("시공상황 작성하기", for: .normal)
+        $0.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
+        $0.setTitleColor(.white, for: .normal)
+        $0.layer.cornerRadius = 16
+        $0.addTarget(self, action: #selector(tapWritingButton), for: .touchDown)
+        return $0
+    }(UIButton())
+    
     // MARK: - LifeCycle
 
     override func viewDidLoad() {
@@ -70,11 +81,14 @@ class WorkingHistoryViewController: UIViewController {
         workingHistoryView.register(WorkingHistoryViewContentHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: WorkingHistoryViewContentHeader.identifier)
         workingHistoryView.register(WorkingHistoryViewTopCell.self, forCellWithReuseIdentifier: WorkingHistoryViewTopCell.identifier)
         workingHistoryView.register(WorkingHistoryViewContentCell.self, forCellWithReuseIdentifier: WorkingHistoryViewContentCell.identifier)
+        
+        writingButton.addTarget(self, action: #selector(tapWritingButton), for: .touchDown)
     }
 
     private func layout() {
         view.addSubview(workingHistoryView)
         view.addSubview(pleaseWriteLabel)
+        view.addSubview(writingButton)
 
         workingHistoryView.anchor(
             top: view.topAnchor,
@@ -89,6 +103,26 @@ class WorkingHistoryViewController: UIViewController {
             bottom: view.bottomAnchor,
             right: view.rightAnchor
         )
+        writingButton.anchor(
+            top: buttonBackgroundView.topAnchor,
+            left: view.safeAreaLayoutGuide.leftAnchor,
+            bottom: view.safeAreaLayoutGuide.bottomAnchor,
+            right: view.safeAreaLayoutGuide.rightAnchor,
+            paddingTop: 16,
+            paddingLeft: 16,
+            paddingBottom: 16,
+            paddingRight: 16,
+            height: 50
+        )
+    }
+    
+    @objc func tapWritingButton() {
+        let postingCategoryViewController = PostingCategoryViewController()
+        postingCategoryViewController.room = room
+        
+        let navigationController = UINavigationController(rootViewController: postingCategoryViewController)
+        navigationController.modalPresentationStyle = .fullScreen
+        present(navigationController, animated:  true, completion: nil)
     }
 }
 

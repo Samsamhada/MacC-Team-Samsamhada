@@ -65,17 +65,7 @@ class SegmentedControlViewController: UIViewController {
         return $0
     }(UIPageViewController(transitionStyle: .scroll,
                           navigationOrientation: .horizontal))
-
-    private lazy var writingButton: UIButton = {
-        $0.backgroundColor = AppColor.campanulaBlue
-        $0.setTitle("시공상황 작성하기", for: .normal)
-        $0.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
-        $0.setTitleColor(.white, for: .normal)
-        $0.layer.cornerRadius = 16
-        $0.addTarget(self, action: #selector(tapWritingButton), for: .touchDown)
-        return $0
-    }(UIButton())
-
+    
     private var currentViewNumber: Int = 0 {
         didSet {
             let direction: UIPageViewController.NavigationDirection = (oldValue <= currentViewNumber ? .forward : .reverse)
@@ -110,8 +100,6 @@ class SegmentedControlViewController: UIViewController {
 
         pageViewController.delegate = self
         pageViewController.dataSource = self
-
-        writingButton.addTarget(self, action: #selector(tapWritingButton), for: .touchDown)
     }
 
     private func layout() {
@@ -119,7 +107,6 @@ class SegmentedControlViewController: UIViewController {
         view.addSubview(pageControlBackgroundView)
         addChild(pageViewController)
         view.addSubview(pageViewController.view)
-        view.addSubview(writingButton)
 
         segmentedControl.anchor(
             top: view.safeAreaLayoutGuide.topAnchor,
@@ -136,7 +123,7 @@ class SegmentedControlViewController: UIViewController {
             bottom: view.bottomAnchor,
             right: view.rightAnchor
         )
-
+        
         pageViewController.view.anchor(
             top: pageControlBackgroundView.topAnchor,
             left: pageControlBackgroundView.leftAnchor,
@@ -144,15 +131,6 @@ class SegmentedControlViewController: UIViewController {
             right: pageControlBackgroundView.rightAnchor
         )
         pageViewController.didMove(toParent: self)
-
-        writingButton.anchor(
-            left: view.safeAreaLayoutGuide.leftAnchor,
-            bottom: view.safeAreaLayoutGuide.bottomAnchor,
-            right: view.safeAreaLayoutGuide.rightAnchor,
-            paddingLeft: 16,
-            paddingRight: 16,
-            height: 50
-        )
     }
 
     private func setNavigationBar() {
@@ -193,15 +171,6 @@ class SegmentedControlViewController: UIViewController {
 
     @objc func changeValue(control: UISegmentedControl) {
         self.currentViewNumber = control.selectedSegmentIndex
-    }
-
-    @objc func tapWritingButton() {
-        let postingCategoryViewController = PostingCategoryViewController()
-        postingCategoryViewController.room = room
-        
-        let navigationController = UINavigationController(rootViewController: postingCategoryViewController)
-        navigationController.modalPresentationStyle = .fullScreen
-        present(navigationController, animated:  true, completion: nil)
     }
     
     private func loadPostByRoomID(roomID: Int) {
@@ -247,6 +216,7 @@ class SegmentedControlViewController: UIViewController {
     private func loadInquiryView() {
         inquiryHistoryView.room = room
         inquiryHistoryView.pleaseWriteLabel.text = "아직 문의내역이 없어요"
+        inquiryHistoryView.writingButton.isHidden = true
     }
 }
 
