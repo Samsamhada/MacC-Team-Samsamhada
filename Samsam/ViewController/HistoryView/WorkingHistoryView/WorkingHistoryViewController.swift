@@ -135,7 +135,7 @@ class WorkingHistoryViewController: UIViewController {
         
         let navigationController = UINavigationController(rootViewController: postingCategoryViewController)
         navigationController.modalPresentationStyle = .fullScreen
-        present(navigationController, animated:  true, completion: nil)
+        present(navigationController, animated:  true)
     }
 }
 
