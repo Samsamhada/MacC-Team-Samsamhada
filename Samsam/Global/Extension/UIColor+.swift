@@ -16,4 +16,5 @@ enum AppColor {
     static var selectedGray = UIColor(named: "selectedGray")
     static var buttonGray = UIColor(named: "buttonGray")
     static var giwazipBlue = UIColor(named: "giwazipBlue")
+    static var backgroundGray = UIColor(named: "backgroundGray")
 }
