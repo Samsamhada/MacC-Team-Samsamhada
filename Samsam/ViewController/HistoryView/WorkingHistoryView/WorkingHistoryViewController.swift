@@ -49,6 +49,22 @@ class WorkingHistoryViewController: UIViewController {
         return $0
     }(UILabel())
 
+    private let buttonBackgroundView: UIView = {
+        $0.backgroundColor = .white
+        $0.layer.opacity = 0.85
+        return $0
+    }(UIView())
+    
+    let writingButton: UIButton = {
+        $0.backgroundColor = AppColor.campanulaBlue
+        $0.setTitle("시공상황 작성하기", for: .normal)
+        $0.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
+        $0.setTitleColor(.white, for: .normal)
+        $0.layer.cornerRadius = 16
+        $0.addTarget(self, action: #selector(tapWritingButton), for: .touchDown)
+        return $0
+    }(UIButton())
+    
     // MARK: - LifeCycle
 
     override func viewDidLoad() {
@@ -64,16 +80,21 @@ class WorkingHistoryViewController: UIViewController {
 
         workingHistoryView.delegate = self
         workingHistoryView.dataSource = self
+        workingHistoryView.contentInset.bottom = 80
 
         workingHistoryView.register(WorkingHistoryViewTopHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: WorkingHistoryViewTopHeader.identifier)
         workingHistoryView.register(WorkingHistoryViewContentHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: WorkingHistoryViewContentHeader.identifier)
         workingHistoryView.register(WorkingHistoryViewTopCell.self, forCellWithReuseIdentifier: WorkingHistoryViewTopCell.identifier)
         workingHistoryView.register(WorkingHistoryViewContentCell.self, forCellWithReuseIdentifier: WorkingHistoryViewContentCell.identifier)
+        
+        writingButton.addTarget(self, action: #selector(tapWritingButton), for: .touchDown)
     }
 
     private func layout() {
         view.addSubview(workingHistoryView)
-        view.addSubview(pleaseWriteLabel)
+        workingHistoryView.addSubview(pleaseWriteLabel)
+        view.addSubview(buttonBackgroundView)
+        view.addSubview(writingButton)
 
         workingHistoryView.anchor(
             top: view.topAnchor,
@@ -88,6 +109,33 @@ class WorkingHistoryViewController: UIViewController {
             bottom: view.bottomAnchor,
             right: view.rightAnchor
         )
+
+        buttonBackgroundView.anchor(
+            left: view.leftAnchor,
+            bottom: view.bottomAnchor,
+            right: view.rightAnchor
+        )
+
+        writingButton.anchor(
+            top: buttonBackgroundView.topAnchor,
+            left: view.safeAreaLayoutGuide.leftAnchor,
+            bottom: view.safeAreaLayoutGuide.bottomAnchor,
+            right: view.safeAreaLayoutGuide.rightAnchor,
+            paddingTop: 16,
+            paddingLeft: 16,
+            paddingBottom: 8,
+            paddingRight: 16,
+            height: 50
+        )
+    }
+    
+    @objc func tapWritingButton() {
+        let postingCategoryViewController = PostingCategoryViewController()
+        postingCategoryViewController.room = room
+        
+        let navigationController = UINavigationController(rootViewController: postingCategoryViewController)
+        navigationController.modalPresentationStyle = .fullScreen
+        present(navigationController, animated:  true)
     }
 }
 

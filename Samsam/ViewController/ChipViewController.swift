@@ -40,6 +40,12 @@ class ChipViewController: UIViewController {
     }(UICollectionView(
         frame: .zero, collectionViewLayout: UICollectionViewFlowLayout()))
 
+    private let buttonBackgroundView: UIView = {
+        $0.backgroundColor = .white
+        $0.layer.opacity = 0.85
+        return $0
+    }(UIView())
+    
     private lazy var writingButton: UIButton = {
         $0.backgroundColor = AppColor.campanulaBlue
         $0.setTitle("시공상황 작성하기", for: .normal)
@@ -70,6 +76,7 @@ class ChipViewController: UIViewController {
         view.addSubview(chipScrollView)
         chipScrollView.addSubview(chipContentView)
         view.addSubview(historyView)
+        view.addSubview(buttonBackgroundView)
         view.addSubview(writingButton)
 
         chipScrollView.anchor(
@@ -95,12 +102,21 @@ class ChipViewController: UIViewController {
             bottom: view.bottomAnchor,
             right: view.safeAreaLayoutGuide.rightAnchor
         )
+        
+        buttonBackgroundView.anchor(
+            left: view.leftAnchor,
+            bottom: view.bottomAnchor,
+            right: view.rightAnchor
+        )
 
         writingButton.anchor(
+            top: buttonBackgroundView.topAnchor,
             left: view.safeAreaLayoutGuide.leftAnchor,
             bottom: view.safeAreaLayoutGuide.bottomAnchor,
             right: view.safeAreaLayoutGuide.rightAnchor,
+            paddingTop: 16,
             paddingLeft: 16,
+            paddingBottom: 8,
             paddingRight: 16,
             height: 50
         )
@@ -108,7 +124,8 @@ class ChipViewController: UIViewController {
 
     private func attribute() {
         view.backgroundColor = .white
-
+        historyView.contentInset.bottom = 80
+        
         setChip()
 
         historyView.delegate = self
@@ -215,7 +232,7 @@ extension ChipViewController: UICollectionViewDataSource, UICollectionViewDelega
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
 
         let width = UIScreen.main.bounds.width - 32
-        let cellHeight = width / 4 * 3 + 30
+        let cellHeight = width / 4 * 3
         return CGSize(width: Int(width), height: Int(cellHeight))
     }
 
@@ -231,5 +248,9 @@ extension ChipViewController: UICollectionViewDataSource, UICollectionViewDelega
         }
         
         navigationController?.pushViewController(detailViewController, animated: true)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 20
     }
 }
