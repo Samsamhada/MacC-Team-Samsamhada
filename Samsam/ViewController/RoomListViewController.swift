@@ -23,6 +23,7 @@ class RoomListViewController: UIViewController {
     // MARK: - View
 
     private let collectionView: UICollectionView = {
+        $0.backgroundColor = .clear
         return $0
     }(UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout()))
 

@@ -43,6 +43,7 @@ class SettingRoomViewController: UIViewController {
         
         self.tableView.dataSource = self
         self.tableView.delegate = self
+        self.tableView.backgroundColor = .clear
     }
 
     private func layout() {
