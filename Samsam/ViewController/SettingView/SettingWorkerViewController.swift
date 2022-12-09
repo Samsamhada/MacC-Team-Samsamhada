@@ -86,7 +86,7 @@ class SettingWorkerViewController: UIViewController {
         if UserDefaults.standard.string(forKey: "number") != nil {
             UserDefaults.standard.removeObject(forKey: "number")
         }
-        self.navigationController?.pushViewController(LoginViewController(), animated: true)
+        navigationController?.pushViewController(LoginViewController(), animated: true)
     }
     
     private func modifyWorkerData(workerID: Int, WorkerDTO: WorkerDTO) {
