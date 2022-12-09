@@ -50,6 +50,7 @@
 		431F0779291DEBB7004FC4B6 /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 431F0772291DEBB7004FC4B6 /* HTTPMethod.swift */; };
 		431F077D291DF130004FC4B6 /* APIEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 431F077C291DF130004FC4B6 /* APIEnvironment.swift */; };
 		4330CE9B2906275D001FC8E7 /* PostingImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4330CE9A2906275D001FC8E7 /* PostingImageCell.swift */; };
+		4343C9A02941B6D100AF2233 /* RoomListHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4343C99F2941B6D100AF2233 /* RoomListHeader.swift */; };
 		435D8B57293864880097BF36 /* WorkerAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 435D8B56293864880097BF36 /* WorkerAPI.swift */; };
 		435D8B59293864900097BF36 /* WorkerEndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 435D8B58293864900097BF36 /* WorkerEndPoint.swift */; };
 		435D8B5F293869D80097BF36 /* SettingRoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 435D8B5B293869D80097BF36 /* SettingRoomViewController.swift */; };
@@ -142,6 +143,7 @@
 		431F0772291DEBB7004FC4B6 /* HTTPMethod.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
 		431F077C291DF130004FC4B6 /* APIEnvironment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIEnvironment.swift; sourceTree = "<group>"; };
 		4330CE9A2906275D001FC8E7 /* PostingImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostingImageCell.swift; sourceTree = "<group>"; };
+		4343C99F2941B6D100AF2233 /* RoomListHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomListHeader.swift; sourceTree = "<group>"; };
 		435D8B56293864880097BF36 /* WorkerAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkerAPI.swift; sourceTree = "<group>"; };
 		435D8B58293864900097BF36 /* WorkerEndPoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkerEndPoint.swift; sourceTree = "<group>"; };
 		435D8B5B293869D80097BF36 /* SettingRoomViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingRoomViewController.swift; sourceTree = "<group>"; };
@@ -430,6 +432,7 @@
 				26E3749528FCF56400997DA7 /* RoomListViewController.swift */,
 				26FEC1B528FFF52D006C410B /* RoomCreationCell.swift */,
 				26E3749728FD2D0700997DA7 /* RoomListCell.swift */,
+				4343C99F2941B6D100AF2233 /* RoomListHeader.swift */,
 				436E81BF2918BA3D002A2641 /* ChipViewController.swift */,
 				435D8B5A293869D80097BF36 /* SettingView */,
 				980200732912514700E193E6 /* HistoryView */,
@@ -623,6 +626,7 @@
 				26FEC1DC2902E6F2006C410B /* PostingEntity+CoreDataProperties.swift in Sources */,
 				26E3748228FCDC0000997DA7 /* AppDelegate.swift in Sources */,
 				431F0773291DEBB7004FC4B6 /* NetworkError.swift in Sources */,
+				4343C9A02941B6D100AF2233 /* RoomListHeader.swift in Sources */,
 				43C2111128FCFB3800E8F6DD /* CategoryCell.swift in Sources */,
 				26FEC1DE2902E6F2006C410B /* WorkingStatusEntity+CoreDataProperties.swift in Sources */,
 				98B08A60290AC8C900401650 /* UIColor+.swift in Sources */,
@@ -794,11 +798,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Samsam/Samsam.entitlements;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
-				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = N6LML762WM;
+				DEVELOPMENT_TEAM = UDCS6NMGF8;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Samsam/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "기와집";
@@ -814,10 +817,9 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = app.samsamhada.giwazip;
+				PRODUCT_BUNDLE_IDENTIFIER = app.samsamhada2.giwazip;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = Samsamhada;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
@@ -833,11 +835,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Samsam/Samsam.entitlements;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
-				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = N6LML762WM;
+				DEVELOPMENT_TEAM = UDCS6NMGF8;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Samsam/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "기와집";
@@ -853,10 +854,9 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = app.samsamhada.giwazip;
+				PRODUCT_BUNDLE_IDENTIFIER = app.samsamhada2.giwazip;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = Samsamhada;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
