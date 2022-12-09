@@ -165,7 +165,7 @@ extension RoomListViewController: UICollectionViewDataSource, UICollectionViewDe
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        return CGSize(width: UIScreen.main.bounds.width, height: 20)
+        return CGSize(width: UIScreen.main.bounds.width, height: 32)
     }
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
@@ -203,11 +203,13 @@ extension RoomListViewController: UICollectionViewDataSource, UICollectionViewDe
             cell.roomTitle.text = ingRooms[indexPath.row].clientName
             cell.startDate.text = convertDate(dateString: ingRooms[indexPath.row].startDate)
             cell.endDate.text = convertDate(dateString: ingRooms[indexPath.row].endDate)
+            cell.chipText.text = "\(cell.startDate.text!) ~ \(String(describing: cell.endDate.text!))"
         } else {
             tapRoomListButton.rooms = asRooms[indexPath.item]
             cell.roomTitle.text = asRooms[indexPath.row].clientName
             cell.startDate.text = convertDate(dateString: asRooms[indexPath.row].startDate)
             cell.endDate.text = convertDate(dateString: asRooms[indexPath.row].endDate)
+            cell.chipText.text = "\(cell.startDate.text!) ~ \(cell.endDate.text!)"
         }
         
         return cell
