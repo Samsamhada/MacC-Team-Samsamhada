@@ -135,10 +135,8 @@ extension SettingWorkerViewController: UITableViewDataSource, UITableViewDelegat
         case [2,3]:
             self.navigationController?.pushViewController(VersionViewController(), animated: true)
         case [3,0]:
-            print("로그 아웃")
             logout()
         case [3,1]:
-            print("회원 탈퇴")
         default:
             break
         }
