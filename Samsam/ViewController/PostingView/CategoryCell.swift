@@ -19,7 +19,7 @@ class CategoryCell: UICollectionViewCell {
         
         static var planDrawing = "Plan"
         static var homeEntrance = "HomeEntrance"
-        static var bathRoom = "Bathroom"
+        static var bathroom = "Bathroom"
         static var masterBedroom = "MasterBedroom"
         static var bigRoom = "BigRoom"
         static var smallRoom = "SmallRoom"
