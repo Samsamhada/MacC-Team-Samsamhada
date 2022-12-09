@@ -169,7 +169,6 @@ class PhoneNumViewController: UIViewController {
         Task{
             do {
                 let response = try await self.loginService.addPhoneNumber(workerID: workerID, LoginDTO: LoginDTO)
-                self.navigationController?.pushViewController(PhoneNumViewController(), animated: true)
             } catch NetworkError.serverError {
             } catch NetworkError.encodingError {
             } catch NetworkError.clientError(_) {
