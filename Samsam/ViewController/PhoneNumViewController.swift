@@ -160,6 +160,7 @@ class PhoneNumViewController: UIViewController {
 
     @objc private func tapSubmitButton() {
         let number = "+82010" + phoneNum
+        requestPutPhoneNumber(workerID: UserDefaults.standard.integer(forKey: "workerID"), LoginDTO: LoginDTO(number: number))
         let roomListViewController = RoomListViewController()
         navigationController?.pushViewController(roomListViewController, animated: true)
     }
@@ -168,7 +169,6 @@ class PhoneNumViewController: UIViewController {
         Task{
             do {
                 let response = try await self.loginService.addPhoneNumber(workerID: workerID, LoginDTO: LoginDTO)
-                self.navigationController?.pushViewController(PhoneNumViewController(), animated: true)
             } catch NetworkError.serverError {
             } catch NetworkError.encodingError {
             } catch NetworkError.clientError(_) {

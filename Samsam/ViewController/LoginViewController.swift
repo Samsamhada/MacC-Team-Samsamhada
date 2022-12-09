@@ -40,6 +40,7 @@ class LoginViewController: UIViewController {
 
     private func attribute() {
         view.backgroundColor = AppColor.giwazipBlue
+        navigationItem.hidesBackButton = true
     }
 
     private func layout() {

@@ -79,6 +79,26 @@ class SettingWorkerViewController: UIViewController {
             }
         }
     }
+    
+    private func logout() {
+        UserDefaults.standard.removeObject(forKey: "userIdentifier")
+        UserDefaults.standard.removeObject(forKey: "workerID")
+        if UserDefaults.standard.string(forKey: "number") != nil {
+            UserDefaults.standard.removeObject(forKey: "number")
+        }
+        navigationController?.pushViewController(LoginViewController(), animated: true)
+    }
+    
+    private func modifyWorkerData(workerID: Int, WorkerDTO: WorkerDTO) {
+        Task{
+            do {
+                let response = try await self.workerService.modifyWorkerData(workerID: workerID, workerDTO: WorkerDTO)
+            } catch NetworkError.serverError {
+            } catch NetworkError.encodingError {
+            } catch NetworkError.clientError(_) {
+            }
+        }
+    }
 }
 
 extension SettingWorkerViewController: UITableViewDataSource, UITableViewDelegate {
@@ -125,9 +145,17 @@ extension SettingWorkerViewController: UITableViewDataSource, UITableViewDelegat
         case [2,3]:
             self.navigationController?.pushViewController(VersionViewController(), animated: true)
         case [3,0]:
-            print("로그 아웃")
+            logout()
         case [3,1]:
-            print("회원 탈퇴")
+            let now = Date()
+
+            let date = DateFormatter()
+            date.locale = Locale(identifier: "ko-kr")
+            date.timeZone = TimeZone(abbreviation: "KST")
+            date.dateFormat = "yyyy-MM-dd HH:mm:ss.SSS"
+            let myDate = date.string(from: now) + ".withdrawn"
+            modifyWorkerData(workerID: UserDefaults.standard.integer(forKey: "workerID"), WorkerDTO: WorkerDTO(userIdentifier: myDate, name: "", email: "", number: ""))
+            logout()
         default:
             break
         }
