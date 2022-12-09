@@ -79,6 +79,16 @@ class SettingWorkerViewController: UIViewController {
             }
         }
     }
+    
+    private func logout() {
+        UserDefaults.standard.removeObject(forKey: "userIdentifier")
+        UserDefaults.standard.removeObject(forKey: "workerID")
+        if UserDefaults.standard.string(forKey: "number") != nil {
+            UserDefaults.standard.removeObject(forKey: "number")
+        }
+        self.navigationController?.pushViewController(LoginViewController(), animated: true)
+    }
+    
 }
 
 extension SettingWorkerViewController: UITableViewDataSource, UITableViewDelegate {
@@ -126,6 +136,7 @@ extension SettingWorkerViewController: UITableViewDataSource, UITableViewDelegat
             self.navigationController?.pushViewController(VersionViewController(), animated: true)
         case [3,0]:
             print("로그 아웃")
+            logout()
         case [3,1]:
             print("회원 탈퇴")
         default:
