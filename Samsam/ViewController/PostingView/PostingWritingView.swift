@@ -10,6 +10,7 @@ import UIKit
 class PostingWritingView: UIViewController {
 
     // MARK: - Property
+    var postID: Int?
     var sharingItems: [Any] = []
     
     var postCreation: Bool = true {
@@ -221,8 +222,8 @@ class PostingWritingView: UIViewController {
     }
     
     @objc func modifyPostBTN() {
-        let postDTO: PostDTO = PostDTO(roomID: room?.roomID ?? 1, category: categoryID, type: 0, description: textContent.text!)
-        createPost(PostDTO: postDTO)
+        let postDTO: PostDTO = PostDTO(description: textContent.text!)
+        modifyPost(PostDTO: postDTO, postID: postID!)
     }
 
     @objc func keyboardWillShow(notification: NSNotification) {
@@ -249,6 +250,20 @@ class PostingWritingView: UIViewController {
                     return
                 }
                 self.post = data
+            } catch NetworkError.serverError {
+            } catch NetworkError.encodingError {
+            } catch NetworkError.clientError(_) {
+            }
+        }
+    }
+    
+    private func modifyPost(PostDTO: PostDTO, postID: Int) {
+        Task{
+            do {
+                let response = try await self.roomAPI.modifyPost(PostDTO: PostDTO, postID: postID)
+                guard let data = response else { return }
+                let viewControllers : [UIViewController] = self.navigationController!.viewControllers as [UIViewController]
+                self.navigationController?.popToViewController(viewControllers[viewControllers.count - 3 ], animated: true)
             } catch NetworkError.serverError {
             } catch NetworkError.encodingError {
             } catch NetworkError.clientError(_) {

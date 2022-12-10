@@ -10,7 +10,7 @@ import UIKit
 class DetailViewController: UIViewController, UIScrollViewDelegate {
 
     // MARK: - Property
-
+    var postID: Int?
     let screenWidth = UIScreen.main.bounds.width
 
     private var naviTitle = ""
@@ -157,6 +157,7 @@ class DetailViewController: UIViewController, UIScrollViewDelegate {
     @objc func tapEditButton() {
         let editViewController = PostingWritingView()
         editViewController.sharingItems = sharingItems
+        editViewController.postID = postID
         editViewController.postCreation = false
         navigationController?.pushViewController(editViewController, animated: true)
     }

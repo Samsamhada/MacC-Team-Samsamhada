@@ -8,12 +8,12 @@
 import Foundation
 
 struct PostDTO: Encodable {
-    let roomID: Int
-    let category: Int
-    let type: Int
-    let description: String
+    let roomID: Int?
+    let category: Int?
+    let type: Int?
+    let description: String?
 
-    init(roomID: Int, category: Int, type: Int, description: String) {
+    init(roomID: Int? = nil, category: Int? = nil, type: Int? = nil, description: String? = nil) {
         self.roomID = roomID
         self.category = category
         self.type = type

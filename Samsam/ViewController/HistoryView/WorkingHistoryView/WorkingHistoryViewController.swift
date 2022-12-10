@@ -270,7 +270,7 @@ extension WorkingHistoryViewController: UICollectionViewDataSource, UICollection
             }
             
             detailViewController.descriptionLBL.text = everyDayPosts[indexPath.item].description
-            
+            detailViewController.postID = everyDayPosts[indexPath.item].postID
             everyDayPosts[indexPath.item].photos!.forEach {
                 detailViewController.images.append($0)
             }

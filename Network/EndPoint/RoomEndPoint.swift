@@ -13,6 +13,7 @@ enum RoomEndPoint: EndPointable {
     case loadRoomByWorkerID(workerID: Int)
     case createStatus(body: StatusDTO)
     case createPost(body: PostDTO)
+    case modifyPost(body: PostDTO, postID: Int)
     case loadPostsByRoomID(roomID: Int)
     case createPhoto(body: PhotoDTO)
     case loadStatusesByRoomID(roomID: Int)
@@ -29,7 +30,7 @@ enum RoomEndPoint: EndPointable {
             return .post
         case .loadRoomByWorkerID, .loadPostsByRoomID, .loadStatusesByRoomID, .loadRoom:
             return .get
-        case .modifyRoom:
+        case .modifyRoom, .modifyPost:
             return .put
         }
     }
@@ -41,6 +42,8 @@ enum RoomEndPoint: EndPointable {
         case .createRoom(let body):
             return body.encode()
         case .createPost(let body):
+            return body.encode()
+        case .modifyPost(let body, _):
             return body.encode()
         case .createPhoto(let body):
             return body.encode()
@@ -67,6 +70,8 @@ enum RoomEndPoint: EndPointable {
             return "\(APIEnvironment.statusesURL)/room/\(roomID)"
         case .createPost:
             return APIEnvironment.postsURL
+        case .modifyPost(_, let postID):
+            return "\(APIEnvironment.postsURL)/\(postID)"
         case .loadPostsByRoomID(let roomID):
             return "\(APIEnvironment.postsURL)/photo/room/\(roomID)"
         case .createPhoto:
