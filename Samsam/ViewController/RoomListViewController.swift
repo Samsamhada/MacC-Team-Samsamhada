@@ -100,7 +100,7 @@ class RoomListViewController: UIViewController {
         roomCreationView.roomCreation = true
         let roomCreationViewController = UINavigationController(rootViewController:  roomCreationView)
         roomCreationViewController.modalPresentationStyle = .fullScreen
-        present(roomCreationViewController, animated:  true, completion: nil)
+        present(roomCreationViewController, animated:  true)
     }
 
 
