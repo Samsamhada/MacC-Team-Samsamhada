@@ -47,7 +47,7 @@ class DeveloperViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .gray
+        view.backgroundColor = AppColor.backgroundGray
         layout()
     }
     
