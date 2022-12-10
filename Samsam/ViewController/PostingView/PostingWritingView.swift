@@ -14,13 +14,15 @@ class PostingWritingView: UIViewController {
     
     var postCreation: Bool = true {
         didSet {
-            if postCreation == true {
+            if postCreation {
                 textTitle.text = "작업내용을 작성해주세요"
                 textViewPlaceHolder = "고객을 위해 쉽고 자세하게 설명해주세요."
+                postBTN.isHidden = false
             } else {
                 textTitle.text = "작업내용을 수정해주세요"
                 textViewPlaceHolder = sharingItems[0] as! String
                 textContent.textColor = .black
+                modificationBTN.isHidden = false
             }
         }
     }
@@ -100,13 +102,25 @@ class PostingWritingView: UIViewController {
         return $0
     }(UIView())
 
-    private let finalBTN: UIButton = {
-        $0.backgroundColor = AppColor.giwazipBlue
+    private let postBTN: UIButton = {
+        $0.backgroundColor = .gray
         $0.setTitle("작성 완료", for: .normal)
         $0.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
         $0.setTitleColor(.white, for: .normal)
         $0.layer.cornerRadius = 16
-        $0.addTarget(self, action: #selector(tapNextBTN), for: .touchUpInside)
+        $0.isHidden = true
+        $0.addTarget(self, action: #selector(createPostBTN), for: .touchUpInside)
+        return $0
+    }(UIButton())
+    
+    private let modificationBTN: UIButton = {
+        $0.backgroundColor = .gray
+        $0.setTitle("수정 완료", for: .normal)
+        $0.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
+        $0.setTitleColor(.white, for: .normal)
+        $0.layer.cornerRadius = 16
+        $0.isHidden = true
+        $0.addTarget(self, action: #selector(modifyPostBTN), for: .touchUpInside)
         return $0
     }(UIButton())
 
@@ -132,7 +146,9 @@ class PostingWritingView: UIViewController {
         self.view.addSubview(exampleLabel)
         self.view.addSubview(shadowView)
         self.shadowView.addSubview(textContent)
-        self.view.addSubview(finalBTN)
+        self.view.addSubview(postBTN)
+        self.view.addSubview(modificationBTN)
+        
 
         textTitle.anchor(
             top: view.safeAreaLayoutGuide.topAnchor,
@@ -168,7 +184,16 @@ class PostingWritingView: UIViewController {
             height: 240
         )
 
-        finalBTN.anchor(
+        postBTN.anchor(
+            left: view.safeAreaLayoutGuide.leftAnchor,
+            bottom: view.safeAreaLayoutGuide.bottomAnchor,
+            right: view.safeAreaLayoutGuide.rightAnchor,
+            paddingLeft: 16,
+            paddingRight: 16,
+            height: 50
+        )
+        
+        modificationBTN.anchor(
             left: view.safeAreaLayoutGuide.leftAnchor,
             bottom: view.safeAreaLayoutGuide.bottomAnchor,
             right: view.safeAreaLayoutGuide.rightAnchor,
@@ -190,7 +215,12 @@ class PostingWritingView: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
 
-    @objc func tapNextBTN() {
+    @objc func createPostBTN() {
+        let postDTO: PostDTO = PostDTO(roomID: room?.roomID ?? 1, category: categoryID, type: 0, description: textContent.text!)
+        createPost(PostDTO: postDTO)
+    }
+    
+    @objc func modifyPostBTN() {
         let postDTO: PostDTO = PostDTO(roomID: room?.roomID ?? 1, category: categoryID, type: 0, description: textContent.text!)
         createPost(PostDTO: postDTO)
     }
@@ -198,14 +228,16 @@ class PostingWritingView: UIViewController {
     @objc func keyboardWillShow(notification: NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
             UIView.animate(withDuration: 0.2, animations: {
-                self.finalBTN.transform = CGAffineTransform(translationX: 0, y: -keyboardSize.height + 25)
+                self.postBTN.transform = CGAffineTransform(translationX: 0, y: -keyboardSize.height + 25)
+                self.modificationBTN.transform = CGAffineTransform(translationX: 0, y: -keyboardSize.height + 25)
             })
         }
     }
 
     @objc func keyboardWillHide(notification:NSNotification) {
         UIView.animate(withDuration: 0.2, animations: {
-            self.finalBTN.transform = .identity
+            self.postBTN.transform = .identity
+            self.modificationBTN.transform = .identity
         })
     }
     
@@ -257,16 +289,33 @@ class PostingWritingView: UIViewController {
 
 extension PostingWritingView: UITextViewDelegate {
     func textViewDidBeginEditing(_ textView: UITextView) {
-        if textView.text == textViewPlaceHolder {
+        if textView.text == textViewPlaceHolder && postCreation {
             textView.text = nil
             textView.textColor = .black
+        }
+    }
+    
+    func textViewDidChange(_ textView: UITextView) {
+        if (textView.text == textViewPlaceHolder) ||
+            (textView.text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)  {
+            postBTN.isEnabled = false
+            postBTN.backgroundColor = .gray
+            modificationBTN.isEnabled = false
+            modificationBTN.backgroundColor = .gray
+        } else {
+            postBTN.isEnabled = true
+            postBTN.backgroundColor = AppColor.giwazipBlue
+            modificationBTN.isEnabled = true
+            modificationBTN.backgroundColor = AppColor.giwazipBlue
         }
     }
 
     func textViewDidEndEditing(_ textView: UITextView) {
         if textView.text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
             textView.text = textViewPlaceHolder
-            textView.textColor = .lightGray
+            if postCreation {
+                textView.textColor = .lightGray
+            }
         }
     }
 }
