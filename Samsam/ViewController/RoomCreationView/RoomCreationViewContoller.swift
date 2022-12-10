@@ -34,7 +34,7 @@ class RoomCreationViewController: UIViewController{
     var warrantyTime: Int = 12 {
         didSet {
             if !roomCreation {
-                modificationButton.backgroundColor = (warrantyTime != room!.warrantyTime) ? AppColor.campanulaBlue : .gray
+                modificationButton.backgroundColor = (warrantyTime != room!.warrantyTime) ? AppColor.giwazipBlue : .gray
                 modificationButton.isEnabled = (warrantyTime != room!.warrantyTime) ? true : false
             }
         }
@@ -51,7 +51,7 @@ class RoomCreationViewController: UIViewController{
     private var startDate = Date.now.toString(dateFormat:  "yyyy-MM-dd HH:mm:ss.SSS") {
         didSet {
             if !roomCreation {
-                modificationButton.backgroundColor = (String(startDate.dropLast(13)) != String(room!.startDate.dropLast(14))) ? AppColor.campanulaBlue : .gray
+                modificationButton.backgroundColor = (String(startDate.dropLast(13)) != String(room!.startDate.dropLast(14))) ? AppColor.giwazipBlue : .gray
                 modificationButton.isEnabled = (String(startDate.dropLast(13)) != String(room!.startDate.dropLast(14))) ? true : false
             }
         }
@@ -59,7 +59,7 @@ class RoomCreationViewController: UIViewController{
     private var endDate = Date.now.toString(dateFormat:  "yyyy-MM-dd HH:mm:ss.SSS") {
         didSet {
             if !roomCreation {
-                modificationButton.backgroundColor = (String(endDate.dropLast(13)) != String(room!.endDate.dropLast(14))) ? AppColor.campanulaBlue : .gray
+                modificationButton.backgroundColor = (String(endDate.dropLast(13)) != String(room!.endDate.dropLast(14))) ? AppColor.giwazipBlue : .gray
                 modificationButton.isEnabled = (String(endDate.dropLast(13)) != String(room!.endDate.dropLast(14))) ? true : false
             }
         }
@@ -103,13 +103,14 @@ class RoomCreationViewController: UIViewController{
     }(UITextField())
 
     private var tableView: UITableView = {
+        $0.backgroundColor = .clear
         return $0
     }(UITableView())
 
     private lazy var nextButton: UIButton = {
         $0.setTitle("다음", for: .normal)
         $0.setTitleColor(.white, for: .normal)
-        $0.backgroundColor = AppColor.campanulaBlue
+        $0.backgroundColor = AppColor.giwazipBlue
         $0.layer.cornerRadius = 16
         $0.backgroundColor = .gray
         $0.isHidden = true
@@ -144,7 +145,7 @@ class RoomCreationViewController: UIViewController{
     // MARK: - Method
 
     private func attribute() {
-        view.backgroundColor = .white
+        view.backgroundColor = AppColor.backgroundGray
 
         setTableView()
         setNavigation()
@@ -267,10 +268,10 @@ class RoomCreationViewController: UIViewController{
         setCounter(count: customerTextField.text!.count)
         
         if roomCreation {
-            nextButton.backgroundColor = (customerTextField.text!.count >= 1) ? AppColor.campanulaBlue : .gray
+            nextButton.backgroundColor = (customerTextField.text!.count >= 1) ? AppColor.giwazipBlue : .gray
             nextButton.isEnabled = (customerTextField.text!.count >= 1) ? true : false
         } else {
-            modificationButton.backgroundColor = (customerTextField.text! != room!.clientName) ? AppColor.campanulaBlue : .gray
+            modificationButton.backgroundColor = (customerTextField.text! != room!.clientName) ? AppColor.giwazipBlue : .gray
             modificationButton.isEnabled = (customerTextField.text! != room!.clientName) ? true : false
         }
     }

@@ -25,12 +25,13 @@ class PostingCategoryViewController: UIViewController {
     // MARK: - View
 
     private let categoryView: UICollectionView = {
+        $0.backgroundColor = .clear
         return $0
     }(UICollectionView(
         frame: .zero, collectionViewLayout: UICollectionViewFlowLayout()))
 
     private let nextBtn: UIButton = {
-        $0.backgroundColor = AppColor.campanulaBlue
+        $0.backgroundColor = AppColor.giwazipBlue
         $0.setTitle("다음", for: .normal)
         $0.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
         $0.setTitleColor(.white, for: .normal)
@@ -72,7 +73,7 @@ class PostingCategoryViewController: UIViewController {
     }
 
     private func attribute() {
-        self.view.backgroundColor = .white
+        view.backgroundColor = AppColor.backgroundGray
 
         setNavigationTitle()
 

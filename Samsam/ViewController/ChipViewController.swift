@@ -36,6 +36,7 @@ class ChipViewController: UIViewController {
     }(UIStackView())
 
     private let historyView: UICollectionView = {
+        $0.backgroundColor = .clear
         return $0
     }(UICollectionView(
         frame: .zero, collectionViewLayout: UICollectionViewFlowLayout()))
@@ -47,8 +48,8 @@ class ChipViewController: UIViewController {
     }(UIView())
     
     private lazy var writingButton: UIButton = {
-        $0.backgroundColor = AppColor.campanulaBlue
-        $0.setTitle("시공상황 작성하기", for: .normal)
+        $0.backgroundColor = AppColor.giwazipBlue
+        $0.setTitle("시공 상황 작성하기", for: .normal)
         $0.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
         $0.setTitleColor(.white, for: .normal)
         $0.layer.cornerRadius = 16
@@ -123,9 +124,10 @@ class ChipViewController: UIViewController {
     }
 
     private func attribute() {
-        view.backgroundColor = .white
         historyView.contentInset.bottom = 80
         
+        view.backgroundColor = AppColor.backgroundGray
+
         setChip()
 
         historyView.delegate = self

@@ -57,10 +57,10 @@ class RoomCodeViewController: UIViewController {
     }(UILabel())
 
     private var finishBTN: UIButton = {
-        $0.backgroundColor = .blue
+        $0.backgroundColor = AppColor.giwazipBlue
         $0.setTitle("완료", for: .normal)
         $0.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
-        $0.setTitleColor(.black, for: .normal)
+        $0.setTitleColor(.white, for: .normal)
         $0.layer.cornerRadius = 16
         $0.addTarget(self, action: #selector(doneBTN), for: .touchUpInside)
         return $0
@@ -77,7 +77,7 @@ class RoomCodeViewController: UIViewController {
     // MARK: - Method
     
     private func attribute() {
-        self.view.backgroundColor = .white
+        view.backgroundColor = AppColor.backgroundGray
         setNavigationTitle()
     }
 
