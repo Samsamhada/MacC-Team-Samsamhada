@@ -10,7 +10,21 @@ import UIKit
 class PostingWritingView: UIViewController {
 
     // MARK: - Property
-
+    var sharingItems: [Any] = []
+    
+    var postCreation: Bool = true {
+        didSet {
+            if postCreation == true {
+                textTitle.text = "작업내용을 작성해주세요"
+                textViewPlaceHolder = "고객을 위해 쉽고 자세하게 설명해주세요."
+            } else {
+                textTitle.text = "작업내용을 수정해주세요"
+                textViewPlaceHolder = sharingItems[0] as! String
+                textContent.textColor = .black
+            }
+        }
+    }
+    
     private var post: Post? {
         didSet {
             photoImages?.forEach {
@@ -32,7 +46,7 @@ class PostingWritingView: UIViewController {
     var categoryID: Int = 0
     var photoImages: [CellItem]?
     private var roomAPI: RoomAPI = RoomAPI(apiService: APIService())
-    private let textViewPlaceHolder = "고객을 위해 쉽고 자세하게 설명해주세요."
+    private var textViewPlaceHolder = "고객을 위해 쉽고 자세하게 설명해주세요."
     
     // MARK: - View
 

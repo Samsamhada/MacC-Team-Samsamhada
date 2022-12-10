@@ -136,7 +136,7 @@ class DetailViewController: UIViewController, UIScrollViewDelegate {
     private func setNavigationBar() {
         navigationController?.navigationBar.topItem?.title = naviTitle
         navigationController?.navigationBar.prefersLargeTitles = false
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "수정",
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "설명 수정",
                                                             style: .plain,
                                                             target: self,
                                                             action: #selector(tapEditButton)
@@ -155,7 +155,9 @@ class DetailViewController: UIViewController, UIScrollViewDelegate {
     // TODO: - 수정화면 생성되면 수정예정.
 
     @objc func tapEditButton() {
-        let editViewController = ViewController()
+        let editViewController = PostingWritingView()
+        editViewController.sharingItems = sharingItems
+        editViewController.postCreation = false
         navigationController?.pushViewController(editViewController, animated: true)
     }
 
