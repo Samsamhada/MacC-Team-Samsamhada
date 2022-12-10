@@ -21,8 +21,8 @@ class RoomListViewController: UIViewController {
         }
     }
     
-    var ingRooms = [Room]()
-    var asRooms = [Room]()
+    var doingRooms = [Room]()
+    var doneRooms = [Room]()
 
     // MARK: - View
 
@@ -30,12 +30,12 @@ class RoomListViewController: UIViewController {
         return $0
     }(UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout()))
     
-    private let createBTN: UIButton = {
+    private lazy var createBTN: UIButton = {
         $0.backgroundColor = AppColor.giwazipBlue
-        $0.setTitle("방 생성하기", for: .normal)
+        $0.setTitle("+ 고객 추가하기", for: .normal)
         $0.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
         $0.setTitleColor(.white, for: .normal)
-        $0.layer.cornerRadius = 1
+        $0.layer.cornerRadius = 16
         $0.addTarget(self, action: #selector(tapRoomCreationButton), for: .touchUpInside)
         return $0
     }(UIButton())
@@ -55,7 +55,7 @@ class RoomListViewController: UIViewController {
     // MARK: - Method
 
     private func attribute() {
-        view.backgroundColor = .white
+        view.backgroundColor = AppColor.backgroundGray
 
         setupNavigationTitle()
         setupCollectionView()
@@ -116,6 +116,7 @@ class RoomListViewController: UIViewController {
         collectionView.register(RoomListHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: RoomListHeader.identifier)
         collectionView.delegate = self
         collectionView.dataSource = self
+        collectionView.backgroundColor = .clear
     }
     
     private func convertDate(dateString: String) -> String {
@@ -127,17 +128,17 @@ class RoomListViewController: UIViewController {
     }
     
     private func classifyRooms() {
-        ingRooms.removeAll()
-        asRooms.removeAll()
+        doingRooms.removeAll()
+        doneRooms.removeAll()
         
         let now = Date.now.toString(dateFormat: "yy.MM.dd")
         
         rooms.forEach {
             let roomDate = convertDate(dateString: $0.endDate)
             if now > roomDate {
-                asRooms.append($0)
+                doneRooms.append($0)
             } else {
-                ingRooms.append($0)
+                doingRooms.append($0)
             }
         }
     }
@@ -183,9 +184,9 @@ extension RoomListViewController: UICollectionViewDataSource, UICollectionViewDe
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if section == 0 {
-            return ingRooms.count
+            return doingRooms.count
         } else {
-            return asRooms.count
+            return doneRooms.count
         }
     }
 
@@ -199,16 +200,16 @@ extension RoomListViewController: UICollectionViewDataSource, UICollectionViewDe
         cell.roomStack.addGestureRecognizer(tapRoomListButton)
         
         if indexPath.section == 0 {
-            tapRoomListButton.rooms = ingRooms[indexPath.item]
-            cell.roomTitle.text = ingRooms[indexPath.row].clientName
-            cell.startDate.text = convertDate(dateString: ingRooms[indexPath.row].startDate)
-            cell.endDate.text = convertDate(dateString: ingRooms[indexPath.row].endDate)
+            tapRoomListButton.rooms = doingRooms[indexPath.item]
+            cell.roomTitle.text = doingRooms[indexPath.row].clientName
+            cell.startDate.text = convertDate(dateString: doingRooms[indexPath.row].startDate)
+            cell.endDate.text = convertDate(dateString: doingRooms[indexPath.row].endDate)
             cell.chipText.text = "\(cell.startDate.text!) ~ \(String(describing: cell.endDate.text!))"
         } else {
-            tapRoomListButton.rooms = asRooms[indexPath.item]
-            cell.roomTitle.text = asRooms[indexPath.row].clientName
-            cell.startDate.text = convertDate(dateString: asRooms[indexPath.row].startDate)
-            cell.endDate.text = convertDate(dateString: asRooms[indexPath.row].endDate)
+            tapRoomListButton.rooms = doneRooms[indexPath.item]
+            cell.roomTitle.text = doneRooms[indexPath.row].clientName
+            cell.startDate.text = convertDate(dateString: doneRooms[indexPath.row].startDate)
+            cell.endDate.text = convertDate(dateString: doneRooms[indexPath.row].endDate)
             cell.chipText.text = "\(cell.startDate.text!) ~ \(cell.endDate.text!)"
         }
         
