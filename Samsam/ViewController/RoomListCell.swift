@@ -24,10 +24,6 @@ class RoomListCell: UICollectionViewCell {
         $0.axis = .horizontal
         $0.backgroundColor = .white
         $0.layer.cornerRadius = 16
-        $0.layer.shadowColor = UIColor.black.cgColor
-        $0.layer.shadowOpacity = 0.25
-        $0.layer.shadowOffset = CGSize(width: 2, height: 2)
-        $0.layer.shadowRadius = 15
         return $0
     }(UIStackView())
 
@@ -45,8 +41,8 @@ class RoomListCell: UICollectionViewCell {
         return $0
     }(UIView())
 
-    var roomTitle: UILabel = {
-        $0.text = "방 이름"
+    let roomTitle: UILabel = {
+        $0.text = ""
         $0.font = UIFont.systemFont(ofSize: 20, weight: .bold)
         $0.textAlignment = .left
         return $0
