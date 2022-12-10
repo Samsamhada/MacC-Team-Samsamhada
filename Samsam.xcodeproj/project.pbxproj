@@ -361,6 +361,16 @@
 			path = PostingView;
 			sourceTree = "<group>";
 		};
+		4371978C29441A2400054D22 /* RoomListView */ = {
+			isa = PBXGroup;
+			children = (
+				26E3749528FCF56400997DA7 /* RoomListViewController.swift */,
+				26E3749728FD2D0700997DA7 /* RoomListCell.swift */,
+				437197892944133F00054D22 /* RoomListHeader.swift */,
+			);
+			path = RoomListView;
+			sourceTree = "<group>";
+		};
 		980200732912514700E193E6 /* HistoryView */ = {
 			isa = PBXGroup;
 			children = (
@@ -429,11 +439,9 @@
 				26E3748528FCDC0000997DA7 /* ViewController.swift */,
 				26E3749B28FE8E6F00997DA7 /* LoginViewController.swift */,
 				26E3749E28FE9DA300997DA7 /* PhoneNumViewController.swift */,
-				26E3749528FCF56400997DA7 /* RoomListViewController.swift */,
 				26FEC1B528FFF52D006C410B /* RoomCreationCell.swift */,
-				26E3749728FD2D0700997DA7 /* RoomListCell.swift */,
-				437197892944133F00054D22 /* RoomListHeader.swift */,
 				436E81BF2918BA3D002A2641 /* ChipViewController.swift */,
+				4371978C29441A2400054D22 /* RoomListView */,
 				435D8B5A293869D80097BF36 /* SettingView */,
 				980200732912514700E193E6 /* HistoryView */,
 				980D900C28FE6705003CC2DA /* DetailView */,
