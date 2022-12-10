@@ -32,15 +32,29 @@ class PostingWritingView: UIViewController {
     var categoryID: Int = 0
     var photoImages: [CellItem]?
     private var roomAPI: RoomAPI = RoomAPI(apiService: APIService())
-    private let textViewPlaceHolder = "텍스트를 입력하세요"
+    private let textViewPlaceHolder = "고객을 위해 쉽고 자세하게 설명해주세요."
     
     // MARK: - View
 
     private var textTitle: UILabel = {
-        $0.text = "시공 사진에 관하여 부가 설명을 써주세요"
-        $0.textAlignment = .center
+        $0.text = "작업내용을 작성해주세요"
+        $0.textAlignment = .left
         $0.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
         $0.textColor = .black
+        return $0
+    }(UILabel())
+    
+    private let exampleLabel: UILabel = {
+        $0.text = """
+                    예시)
+                    - 거실 바닥 장판 철거, PE폼 깔기
+                    - 강화마루 설치
+                    - 특이사항 없음
+                    - 작업인원 0명
+                    """
+        $0.numberOfLines = 0
+        $0.textColor = .gray
+        $0.font = UIFont.systemFont(ofSize: 15, weight: .regular)
         return $0
     }(UILabel())
 
@@ -63,12 +77,12 @@ class PostingWritingView: UIViewController {
     }(UITextView())
 
     private var shadowView: UIView = {
-        $0.backgroundColor = .gray
+        $0.backgroundColor = .white
         $0.layer.cornerRadius = 10
-        $0.layer.shadowColor = UIColor.black.cgColor
-        $0.layer.shadowOpacity = 0.25
-        $0.layer.shadowOffset = CGSize(width: 2, height: 2)
-        $0.layer.shadowRadius = 10
+//        $0.layer.shadowColor = UIColor.black.cgColor
+//        $0.layer.shadowOpacity = 0.25
+//        $0.layer.shadowOffset = CGSize(width: 2, height: 2)
+//        $0.layer.shadowRadius = 10
         return $0
     }(UIView())
 
@@ -101,6 +115,7 @@ class PostingWritingView: UIViewController {
 
     private func layout() {
         self.view.addSubview(textTitle)
+        self.view.addSubview(exampleLabel)
         self.view.addSubview(shadowView)
         self.shadowView.addSubview(textContent)
         self.view.addSubview(finalBTN)
@@ -110,13 +125,33 @@ class PostingWritingView: UIViewController {
             left: view.safeAreaLayoutGuide.leftAnchor,
             right: view.safeAreaLayoutGuide.rightAnchor,
             paddingTop: 20,
-            height: 20
+            paddingLeft: 16,
+            paddingRight: 16
+        )
+        
+        exampleLabel.anchor(
+            top: textTitle.bottomAnchor,
+            left: view.safeAreaLayoutGuide.leftAnchor,
+            right: view.safeAreaLayoutGuide.rightAnchor,
+            paddingTop: 10,
+            paddingLeft: 16,
+            paddingRight: 16
+        )
+        
+        shadowView.anchor(
+            top: exampleLabel.bottomAnchor,
+            left: view.safeAreaLayoutGuide.leftAnchor,
+            right: view.safeAreaLayoutGuide.rightAnchor,
+            paddingTop: 10,
+            paddingLeft: 16,
+            paddingRight: 16,
+            height: 240
         )
 
         textContent.anchor(
             left: shadowView.leftAnchor,
             right: shadowView.rightAnchor,
-            height: 280
+            height: 240
         )
 
         finalBTN.anchor(
@@ -126,16 +161,6 @@ class PostingWritingView: UIViewController {
             paddingLeft: 16,
             paddingRight: 16,
             height: 50
-        )
-
-        shadowView.anchor(
-            top: textTitle.bottomAnchor,
-            left: view.safeAreaLayoutGuide.leftAnchor,
-            right: view.safeAreaLayoutGuide.rightAnchor,
-            paddingTop: 20,
-            paddingLeft: 16,
-            paddingRight: 16,
-            height: 280
         )
     }
 
