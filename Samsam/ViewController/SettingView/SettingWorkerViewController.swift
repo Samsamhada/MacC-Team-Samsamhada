@@ -123,7 +123,8 @@ extension SettingWorkerViewController: UITableViewDataSource, UITableViewDelegat
         case [2,2]:
             self.navigationController?.pushViewController(DeveloperViewController(), animated: true)
         case [2,3]:
-            self.navigationController?.pushViewController(VersionViewController(), animated: true)
+//            self.navigationController?.pushViewController(VersionViewController(), animated: true)
+            print("버전 정보")
         case [3,0]:
             print("로그 아웃")
         case [3,1]:
