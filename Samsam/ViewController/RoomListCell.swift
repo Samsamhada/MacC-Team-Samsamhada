@@ -24,12 +24,6 @@ class RoomListCell: UICollectionViewCell {
         $0.axis = .horizontal
         $0.backgroundColor = .white
         $0.layer.cornerRadius = 16
-        $0.layer.shadowColor = UIColor.black.cgColor
-        $0.layer.shadowOpacity = 0.25
-        $0.layer.shadowOffset = CGSize(width: 2, height: 2)
-        $0.layer.shadowRadius = 15
-        $0.layer.borderColor = AppColor.campanulaPink?.cgColor
-        $0.layer.borderWidth = 2
         return $0
     }(UIStackView())
 
@@ -47,89 +41,37 @@ class RoomListCell: UICollectionViewCell {
         return $0
     }(UIView())
 
-    var roomTitle: UILabel = {
-        $0.text = "방 이름"
+    let roomTitle: UILabel = {
+        $0.text = ""
         $0.font = UIFont.systemFont(ofSize: 20, weight: .bold)
-        $0.textAlignment = .center
+        $0.textAlignment = .left
         return $0
     }(UILabel())
 
-    private let chipShape: UIView = {
-        $0.layer.cornerRadius = 8
-        $0.backgroundColor = AppColor.campanulaPink
-        return $0
-    }(UIView())
-
-    private lazy var chipText: UILabel = {
-        $0.text = "진행중"
-        $0.textColor = .black
+    let chipText: UILabel = {
+        $0.text = ""
         $0.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
+        $0.textAlignment = .left
         return $0
     }(UILabel())
-
-    private let dateStack: UIStackView = {
-        $0.axis = .vertical
-        return $0
-    }(UIStackView())
-
-    private let dateTopSpacer: UIView = {
-        $0.setHeight(height: 20)
-        return $0
-    }(UIView())
-
-    private let dateBottomSpacer: UIView = {
-        $0.setHeight(height: 20)
-        return $0
-    }(UIView())
-
-    private let dateCenterSpacer: UIView = {
-        $0.setWidth(width: 10)
-        return $0
-    }(UIView())
-
-    private let dateInfoStack: UIStackView = {
-        $0.axis = .horizontal
-        $0.setHeight(height: 50)
-        return $0
-    }(UIStackView())
-
-    private let dateTitleStack: UIStackView = {
-        $0.axis = .vertical
-        $0.distribution = .fillEqually
-        $0.alignment = .trailing
-        return $0
-    }(UIStackView())
-
-    private let dateContentStack: UIStackView = {
-        $0.axis = .vertical
-        $0.distribution = .fillEqually
-        $0.alignment = .trailing
-        return $0
-    }(UIStackView())
-
-    private let startDateTitle: UILabel = {
-        $0.text = "시공일자"
-        $0.font = UIFont.systemFont(ofSize: 16)
-        return $0
-    }(UILabel())
-
-    var startDate: UILabel = {
+    
+    let startDate: UILabel = {
         $0.text = "2022.10.17"
         $0.font = UIFont.systemFont(ofSize: 16)
         return $0
     }(UILabel())
-
-    private let endDateTitle: UILabel = {
-        $0.text = "준공예정"
-        $0.font = UIFont.systemFont(ofSize: 16)
-        return $0
-    }(UILabel())
-
-    var endDate: UILabel = {
+    
+    let endDate: UILabel = {
         $0.text = "2022.11.17"
         $0.font = UIFont.systemFont(ofSize: 16)
         return $0
     }(UILabel())
+    
+    private let arrowImage: UIImageView = {
+        let imageConfig = UIImage.SymbolConfiguration(pointSize: 10, weight: .regular)
+        $0.image = UIImage(systemName: "chevron.right", withConfiguration: imageConfig)?.withTintColor(.black, renderingMode: .alwaysOriginal)
+        return $0
+    }(UIImageView())
 
     // MARK: - Init
 
@@ -151,27 +93,11 @@ class RoomListCell: UICollectionViewCell {
 
         roomStack.addArrangedSubview(leftSpacer)
         roomStack.addArrangedSubview(titleView)
-        roomStack.addArrangedSubview(dateStack)
+        roomStack.addArrangedSubview(arrowImage)
         roomStack.addArrangedSubview(rightSpacer)
 
         titleView.addSubview(roomTitle)
-        titleView.addSubview(chipShape)
-
-        chipShape.addSubview(chipText)
-
-        dateStack.addArrangedSubview(dateTopSpacer)
-        dateStack.addArrangedSubview(dateInfoStack)
-        dateStack.addArrangedSubview(dateBottomSpacer)
-
-        dateInfoStack.addArrangedSubview(dateTitleStack)
-        dateInfoStack.addArrangedSubview(dateCenterSpacer)
-        dateInfoStack.addArrangedSubview(dateContentStack)
-
-        dateTitleStack.addArrangedSubview(startDateTitle)
-        dateTitleStack.addArrangedSubview(endDateTitle)
-
-        dateContentStack.addArrangedSubview(startDate)
-        dateContentStack.addArrangedSubview(endDate)
+        titleView.addSubview(chipText)
 
         cellStack.anchor(
             top: topAnchor,
@@ -193,85 +119,43 @@ class RoomListCell: UICollectionViewCell {
             bottom: roomStack.bottomAnchor,
             right: titleView.leftAnchor
         )
-
+        
         titleView.anchor(
             top: roomStack.topAnchor,
-            bottom: roomStack.bottomAnchor,
-            right: dateStack.leftAnchor
+            left: leftSpacer.rightAnchor,
+            bottom: roomStack.bottomAnchor
         )
-
-        roomTitle.anchor(
-            left: titleView.leftAnchor,
-            bottom: chipShape.topAnchor,
-            right: titleView.rightAnchor,
-            paddingBottom: 10
-        )
-
-        chipShape.anchor(
-            left: titleView.leftAnchor,
-            bottom: titleView.bottomAnchor,
-            paddingBottom: 10
-        )
-
-        chipShape.rightAnchor.constraint(lessThanOrEqualTo: titleView.rightAnchor, constant: 0).isActive = true
-
-        chipText.anchor(
-            top: chipShape.topAnchor,
-            left: chipShape.leftAnchor,
-            bottom: chipShape.bottomAnchor,
-            right: chipShape.rightAnchor,
-            paddingLeft: 10,
-            paddingRight: 10
-        )
-
-        dateStack.anchor(
+        
+        arrowImage.anchor(
             top: roomStack.topAnchor,
+            left: titleView.rightAnchor,
             bottom: roomStack.bottomAnchor,
-            right: rightSpacer.leftAnchor
+            paddingTop: 36,
+            paddingBottom: 36,
+            width: 10
         )
-
+        
         rightSpacer.anchor(
             top: roomStack.topAnchor,
+            left: arrowImage.rightAnchor,
             bottom: roomStack.bottomAnchor,
             right: roomStack.rightAnchor
         )
 
-        dateTopSpacer.anchor(
-            top: dateStack.topAnchor,
-            left: dateStack.leftAnchor,
-            bottom: dateInfoStack.topAnchor,
-            right: dateStack.rightAnchor
+        roomTitle.anchor(
+            left: titleView.leftAnchor,
+            bottom: chipText.topAnchor,
+            right: titleView.rightAnchor,
+            paddingBottom: 10
         )
 
-        dateInfoStack.anchor(
-            left: dateStack.leftAnchor,
-            bottom: dateBottomSpacer.topAnchor,
-            right: dateStack.rightAnchor
+        chipText.anchor(
+            left: titleView.leftAnchor,
+            bottom: titleView.bottomAnchor,
+            right: titleView.rightAnchor,
+            paddingBottom: 10
         )
 
-        dateBottomSpacer.anchor(
-            left: dateStack.leftAnchor,
-            bottom: dateStack.bottomAnchor,
-            right: dateStack.rightAnchor
-        )
-
-        dateTitleStack.anchor(
-            top: dateInfoStack.topAnchor,
-            left: dateInfoStack.leftAnchor,
-            bottom: dateInfoStack.bottomAnchor,
-            right: dateCenterSpacer.leftAnchor
-        )
-
-        dateCenterSpacer.anchor(
-            top: dateInfoStack.topAnchor,
-            bottom: dateInfoStack.bottomAnchor,
-            right: dateContentStack.leftAnchor
-        )
-
-        dateContentStack.anchor(
-            top: dateInfoStack.topAnchor,
-            bottom: dateInfoStack.bottomAnchor,
-            right: dateInfoStack.rightAnchor
-        )
+        chipText.rightAnchor.constraint(lessThanOrEqualTo: titleView.rightAnchor, constant: 0).isActive = true
     }
 }
