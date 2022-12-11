@@ -200,19 +200,13 @@ extension RoomListViewController: UICollectionViewDataSource, UICollectionViewDe
         cell.roomStack.isUserInteractionEnabled = true
         cell.roomStack.addGestureRecognizer(tapRoomListButton)
         
-        if indexPath.section == 0 {
-            tapRoomListButton.rooms = doingRooms[indexPath.item]
-            cell.roomTitle.text = doingRooms[indexPath.row].clientName
-            cell.startDate.text = convertDate(dateString: doingRooms[indexPath.row].startDate)
-            cell.endDate.text = convertDate(dateString: doingRooms[indexPath.row].endDate)
-            cell.chipText.text = "\(cell.startDate.text!) ~ \(String(describing: cell.endDate.text!))"
-        } else {
-            tapRoomListButton.rooms = doneRooms[indexPath.item]
-            cell.roomTitle.text = doneRooms[indexPath.row].clientName
-            cell.startDate.text = convertDate(dateString: doneRooms[indexPath.row].startDate)
-            cell.endDate.text = convertDate(dateString: doneRooms[indexPath.row].endDate)
-            cell.chipText.text = "\(cell.startDate.text!) ~ \(cell.endDate.text!)"
-        }
+        let newArray = indexPath.section == 0 ? doingRooms : doneRooms
+
+        tapRoomListButton.rooms = newArray[indexPath.row]
+        cell.roomTitle.text = newArray[indexPath.row].clientName
+        cell.startDate.text = convertDate(dateString: newArray[indexPath.row].startDate)
+        cell.endDate.text = convertDate(dateString: newArray[indexPath.row].endDate)
+        cell.chipText.text = "\(cell.startDate.text!) ~ \(String(describing: cell.endDate.text!))"
         
         return cell
     }
