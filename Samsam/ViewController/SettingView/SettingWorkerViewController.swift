@@ -160,15 +160,17 @@ extension SettingWorkerViewController: UITableViewDataSource, UITableViewDelegat
                 self.logout()
             }
         case [3,1]:
-            let now = Date()
+            twoSelectionAlertPresent(title: "회원탈퇴 하시겠습니까?", message: "회원님의 모든 정보가 삭제됩니다.\n탈퇴 후에는 복구할 수 없습니다.", yesString: "회원탈퇴") { _ in
+                let now = Date()
 
-            let date = DateFormatter()
-            date.locale = Locale(identifier: "ko-kr")
-            date.timeZone = TimeZone(abbreviation: "KST")
-            date.dateFormat = "yyyy-MM-dd HH:mm:ss.SSS"
-            let myDate = date.string(from: now) + ".withdrawn"
-            modifyWorkerData(workerID: UserDefaults.standard.integer(forKey: "workerID"), WorkerDTO: WorkerDTO(userIdentifier: myDate, name: "", email: "", number: ""))
-            logout()
+                let date = DateFormatter()
+                date.locale = Locale(identifier: "ko-kr")
+                date.timeZone = TimeZone(abbreviation: "KST")
+                date.dateFormat = "yyyy-MM-dd HH:mm:ss.SSS"
+                let myDate = date.string(from: now) + ".withdrawn"
+                self.modifyWorkerData(workerID: UserDefaults.standard.integer(forKey: "workerID"), WorkerDTO: WorkerDTO(userIdentifier: myDate, name: "", email: "", number: ""))
+                self.logout()
+            }
         default:
             break
         }
