@@ -190,12 +190,10 @@ class PostingWritingView: UIViewController {
         )
         
         modificationBTN.anchor(
-            left: view.safeAreaLayoutGuide.leftAnchor,
-            bottom: view.safeAreaLayoutGuide.bottomAnchor,
-            right: view.safeAreaLayoutGuide.rightAnchor,
-            paddingLeft: 16,
-            paddingRight: 16,
-            height: 50
+            left: view.leftAnchor,
+            bottom: view.bottomAnchor,
+            right: view.rightAnchor,
+            height: 90
         )
     }
 
