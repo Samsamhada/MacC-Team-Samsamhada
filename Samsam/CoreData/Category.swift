@@ -1,13 +1,11 @@
 //
-//  CoreDataManager.swift
+//  Category.swift
 //  Samsam
 //
-//  Created by 김민택 on 2022/10/23.
+//  Created by 지준용 on 2022/10/23.
 //
 
-import CoreData
 import Foundation
-import UIKit
 
 enum Category: Int, CaseIterable {
     case one
