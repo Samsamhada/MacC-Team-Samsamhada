@@ -225,9 +225,9 @@ class RoomCreationViewController: UIViewController{
         )
 
         modificationButton.anchor(
-            left: view.safeAreaLayoutGuide.leftAnchor,
+            left: view.leftAnchor,
             bottom: view.keyboardLayoutGuide.bottomAnchor,
-            right: view.safeAreaLayoutGuide.rightAnchor,
+            right: view.rightAnchor,
             height: 90
         )
     }

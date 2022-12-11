@@ -105,9 +105,9 @@ class WorkingHistoryViewController: UIViewController {
         )
 
         writingButton.anchor(
-            left: view.safeAreaLayoutGuide.leftAnchor,
+            left: view.leftAnchor,
             bottom: view.bottomAnchor,
-            right: view.safeAreaLayoutGuide.rightAnchor,
+            right: view.rightAnchor,
             height: 90
         )
     }

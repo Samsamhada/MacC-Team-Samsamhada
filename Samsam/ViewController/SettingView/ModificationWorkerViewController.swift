@@ -88,6 +88,7 @@ class ModificationWorkerViewController: UIViewController {
         $0.setTitle("수정 완료", for: .normal)
         $0.setTitleColor(.white, for: .normal)
         $0.contentEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 20, right: 0)
+        $0.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .bold)
         $0.backgroundColor = .gray
         $0.isEnabled = false
         $0.addTarget(self, action: #selector(tapModificationButton), for: .touchUpInside)
@@ -216,9 +217,9 @@ class ModificationWorkerViewController: UIViewController {
         )
         
         modificationButton.anchor(
-            left: view.safeAreaLayoutGuide.leftAnchor,
+            left: view.leftAnchor,
             bottom: view.bottomAnchor,
-            right: view.safeAreaLayoutGuide.rightAnchor,
+            right: view.rightAnchor,
             height: 90
         )
     }
