@@ -16,16 +16,29 @@ class RoomListViewController: UIViewController {
     var rooms = [Room]() {
         didSet {
             rooms.sort(by: {$0.roomID < $1.roomID})
+            classifyRooms()
             collectionView.reloadData()
         }
     }
+    
+    var doingRooms = [Room]()
+    var doneRooms = [Room]()
 
     // MARK: - View
 
     private let collectionView: UICollectionView = {
-        $0.backgroundColor = .clear
         return $0
     }(UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout()))
+    
+    private lazy var createBTN: UIButton = {
+        $0.backgroundColor = AppColor.giwazipBlue
+        $0.setTitle("+ 고객 추가하기", for: .normal)
+        $0.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
+        $0.setTitleColor(.white, for: .normal)
+        $0.layer.cornerRadius = 16
+        $0.addTarget(self, action: #selector(tapRoomCreationButton), for: .touchUpInside)
+        return $0
+    }(UIButton())
 
     // MARK: - LifeCycle
 
@@ -50,12 +63,23 @@ class RoomListViewController: UIViewController {
 
     private func layout() {
         view.addSubview(collectionView)
-
+        view.addSubview(createBTN)
+        
         collectionView.anchor(
             top: view.safeAreaLayoutGuide.topAnchor,
             left: view.safeAreaLayoutGuide.leftAnchor,
-            bottom: view.bottomAnchor,
-            right: view.safeAreaLayoutGuide.rightAnchor
+            bottom: createBTN.topAnchor,
+            right: view.safeAreaLayoutGuide.rightAnchor,
+            paddingBottom: 10
+        )
+        
+        createBTN.anchor(
+            left: view.safeAreaLayoutGuide.leftAnchor,
+            bottom: view.safeAreaLayoutGuide.bottomAnchor,
+            right: view.safeAreaLayoutGuide.rightAnchor,
+            paddingLeft: 16,
+            paddingRight: 16,
+            height: 50
         )
     }
 
@@ -70,6 +94,16 @@ class RoomListViewController: UIViewController {
         navigationController?.setNavigationBarHidden(false, animated: true)
         navigationItem.hidesBackButton = true
     }
+    
+    @objc func tapRoomCreationButton() {
+        let roomCreationView = RoomCreationViewController()
+        roomCreationView.workerID = workerID
+        roomCreationView.roomCreation = true
+        let roomCreationViewController = UINavigationController(rootViewController:  roomCreationView)
+        roomCreationViewController.modalPresentationStyle = .fullScreen
+        present(roomCreationViewController, animated:  true)
+    }
+
 
     @objc func tapSettingButton() {
         let settingViewController = SettingWorkerViewController()
@@ -80,9 +114,36 @@ class RoomListViewController: UIViewController {
     private func setupCollectionView() {
         collectionView.register(RoomCreationCell.self, forCellWithReuseIdentifier: RoomCreationCell.identifier)
         collectionView.register(RoomListCell.self, forCellWithReuseIdentifier: RoomListCell.identifier)
+        collectionView.register(RoomListHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: RoomListHeader.identifier)
         collectionView.delegate = self
         collectionView.dataSource = self
+        collectionView.backgroundColor = .clear
     }
+    
+    private func convertDate(dateString: String) -> String {
+        let year = dateString.dropText(first: 2, last: 20)
+        let month = dateString.dropText(first: 5, last: 17)
+        let day = dateString.dropText(first: 8, last: 14)
+        
+        return "\(year).\(month).\(day)"
+    }
+    
+    private func classifyRooms() {
+        doingRooms.removeAll()
+        doneRooms.removeAll()
+        
+        let now = Date.now.toString(dateFormat: "yy.MM.dd")
+        
+        rooms.forEach {
+            let roomDate = convertDate(dateString: $0.endDate)
+            if now > roomDate {
+                doneRooms.append($0)
+            } else {
+                doingRooms.append($0)
+            }
+        }
+    }
+    
 
     private func loadRoomByWorkerID(workerID: Int) {
         Task {
@@ -104,65 +165,60 @@ extension RoomListViewController: UICollectionViewDataSource, UICollectionViewDe
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 2
     }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        return CGSize(width: UIScreen.main.bounds.width, height: 20)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        
+        let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: RoomListHeader.identifier, for: indexPath) as! RoomListHeader
+        
+        if indexPath.section == 0 {
+            header.mainText.text = "시공 중인 고객"
+        } else {
+            header.mainText.text = "AS 관리 고객"
+        }
+        
+        return header
+    }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if section == 0 {
-            return 1
+            return doingRooms.count
+        } else {
+            return doneRooms.count
         }
-        return rooms.count
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if indexPath.section == 0 {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RoomCreationCell.identifier, for: indexPath) as! RoomCreationCell
-
-            cell.creationButton.addTarget(self, action: #selector(tapRoomCreationButton), for: .touchUpInside)
-            return cell
-        }
+        
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RoomListCell.identifier, for: indexPath) as! RoomListCell
 
         let tapRoomListButton = CustomTapGestureRecognizer(target: self, action: #selector(tapRoomListButton))
-        tapRoomListButton.rooms = rooms[indexPath.item]
-        cell.roomStack.isUserInteractionEnabled = true
-        cell.roomStack.addGestureRecognizer(tapRoomListButton)
+        
+        cell.isUserInteractionEnabled = true
+        cell.addGestureRecognizer(tapRoomListButton)
+        
+        let newArray = indexPath.section == 0 ? doingRooms : doneRooms
 
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yy.MM.dd"
-
-        cell.roomTitle.text = rooms[indexPath.row].clientName
-        cell.startDate.text = convertDate(dateString: rooms[indexPath.row].startDate)
-        cell.endDate.text = convertDate(dateString: rooms[indexPath.row].endDate)
+        tapRoomListButton.rooms = newArray[indexPath.row]
+        cell.roomTitle.text = newArray[indexPath.row].clientName
+        cell.startDate.text = convertDate(dateString: newArray[indexPath.row].startDate)
+        cell.endDate.text = convertDate(dateString: newArray[indexPath.row].endDate)
+        cell.chipText.text = "\(cell.startDate.text!) ~ \(String(describing: cell.endDate.text!))"
+        
         return cell
-    }
-    
-    func convertDate(dateString: String) -> String {
-        let year = dateString.dropText(first: 2, last: 20)
-        let month = dateString.dropText(first: 5, last: 17)
-        let day = dateString.dropText(first: 8, last: 14)
-
-        return "\(year).\(month).\(day)"
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        if indexPath.section == 0 {
-            return CGSize(width: UIScreen.main.bounds.width - 32, height: 50)
-        }
         return CGSize(width: UIScreen.main.bounds.width - 32, height: 90)
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 0)
+        return UIEdgeInsets(top: 16, left: 0, bottom: 24, right: 0)
     }
-
-    @objc func tapRoomCreationButton() {
-        let roomCreationView = RoomCreationViewController()
-        roomCreationView.workerID = workerID
-        roomCreationView.roomCreation = true
-        let roomCreationViewController = UINavigationController(rootViewController:  roomCreationView)
-        roomCreationViewController.modalPresentationStyle = .fullScreen
-        present(roomCreationViewController, animated:  true, completion: nil)
-    }
-
+    
     @objc func tapRoomListButton(sender: CustomTapGestureRecognizer) {
         let segmentedControlViewController = SegmentedControlViewController()
         segmentedControlViewController.room = sender.rooms!
