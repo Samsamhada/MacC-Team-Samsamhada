@@ -59,7 +59,8 @@ class PostingCategoryViewController: UIViewController {
             top: view.safeAreaLayoutGuide.topAnchor,
             left: view.safeAreaLayoutGuide.leftAnchor,
             bottom: nextBtn.topAnchor,
-            right: view.safeAreaLayoutGuide.rightAnchor
+            right: view.safeAreaLayoutGuide.rightAnchor,
+            paddingTop: 20
         )
 
         nextBtn.anchor(
@@ -146,13 +147,21 @@ extension PostingCategoryViewController: UICollectionViewDelegate, UICollectionV
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let cellWidth =  (view.frame.width - 48)/3
-        let cellHeight = 120
+        let cellWidth = (view.frame.width - 48)/3
+        let cellHeight = cellWidth * 1.21
         return CGSize(width: Int(cellWidth), height: Int(cellHeight))
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-         return UIEdgeInsets(top: 8, left: 8, bottom: 16, right: 8)
+        return UIEdgeInsets(top: 0, left: 16, bottom: 80, right: 16)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 12
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 8
     }
 
     @objc private func closeBTN() {
