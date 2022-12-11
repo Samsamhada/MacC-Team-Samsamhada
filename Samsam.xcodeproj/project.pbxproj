@@ -35,7 +35,7 @@
 		26FEC1E02902E6F2006C410B /* PhotoEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26FEC1D62902E6F2006C410B /* PhotoEntity+CoreDataProperties.swift */; };
 		26FEC1E12902E6F2006C410B /* RoomEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26FEC1D72902E6F2006C410B /* RoomEntity+CoreDataClass.swift */; };
 		26FEC1E22902E6F2006C410B /* RoomEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26FEC1D82902E6F2006C410B /* RoomEntity+CoreDataProperties.swift */; };
-		26FEC1E4290466F2006C410B /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26FEC1E3290466F2006C410B /* CoreDataManager.swift */; };
+		26FEC1E4290466F2006C410B /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26FEC1E3290466F2006C410B /* Category.swift */; };
 		431F075E291DEB36004FC4B6 /* LoginProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 431F075D291DEB36004FC4B6 /* LoginProtocol.swift */; };
 		431F0764291DEB81004FC4B6 /* Login.swift in Sources */ = {isa = PBXBuildFile; fileRef = 431F0763291DEB81004FC4B6 /* Login.swift */; };
 		431F0767291DEB90004FC4B6 /* LoginDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 431F0766291DEB90004FC4B6 /* LoginDTO.swift */; };
@@ -128,7 +128,7 @@
 		26FEC1D62902E6F2006C410B /* PhotoEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotoEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		26FEC1D72902E6F2006C410B /* RoomEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RoomEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
 		26FEC1D82902E6F2006C410B /* RoomEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RoomEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		26FEC1E3290466F2006C410B /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		26FEC1E3290466F2006C410B /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		431F075D291DEB36004FC4B6 /* LoginProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginProtocol.swift; sourceTree = "<group>"; };
 		431F0763291DEB81004FC4B6 /* Login.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Login.swift; sourceTree = "<group>"; };
 		431F0766291DEB90004FC4B6 /* LoginDTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginDTO.swift; sourceTree = "<group>"; };
@@ -249,7 +249,7 @@
 				26FEC1D72902E6F2006C410B /* RoomEntity+CoreDataClass.swift */,
 				26FEC1D82902E6F2006C410B /* RoomEntity+CoreDataProperties.swift */,
 				26FEC1B72902D85A006C410B /* DataTable.xcdatamodeld */,
-				26FEC1E3290466F2006C410B /* CoreDataManager.swift */,
+				26FEC1E3290466F2006C410B /* Category.swift */,
 			);
 			path = CoreData;
 			sourceTree = "<group>";
@@ -611,7 +611,7 @@
 				26E3749828FD2D0700997DA7 /* RoomListCell.swift in Sources */,
 				431F0774291DEBB7004FC4B6 /* NetworkRequest.swift in Sources */,
 				26FEC1B92902D85A006C410B /* DataTable.xcdatamodeld in Sources */,
-				26FEC1E4290466F2006C410B /* CoreDataManager.swift in Sources */,
+				26FEC1E4290466F2006C410B /* Category.swift in Sources */,
 				431F0775291DEBB7004FC4B6 /* APIService.swift in Sources */,
 				98C0D06428FCE99300E0E439 /* JSON.swift in Sources */,
 				435D8B5F293869D80097BF36 /* SettingRoomViewController.swift in Sources */,
