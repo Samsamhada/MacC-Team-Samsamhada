@@ -142,7 +142,7 @@ class PhoneNumViewController: UIViewController {
     @objc private func buttonAttributeChanged() {
         phoneNum = (numberInput.text?.replacingOccurrences(of: " - ", with: ""))!
         if phoneNum.count >= 8 {
-            submitButton.backgroundColor = .blue
+            submitButton.backgroundColor = AppColor.giwazipBlue
             submitButton.isEnabled = true
             checkText(textField: numberInput, phoneNum: phoneNum)
         } else {
