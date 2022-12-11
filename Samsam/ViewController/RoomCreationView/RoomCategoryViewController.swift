@@ -204,6 +204,9 @@ extension RoomCategoryViewController:  UICollectionViewDelegate, UICollectionVie
             cell?.isSelected = false
         }
         selectedCellArray.remove(at: selectedCellArray.firstIndex(of: indexPath.item)!)
+        if selectedCellArray.count == 0 {
+            nextBTN.backgroundColor = .gray
+        }
         return true
     }
 
