@@ -10,7 +10,26 @@ import UIKit
 class PostingWritingView: UIViewController {
 
     // MARK: - Property
-
+    var postID: Int?
+    var sharingItems: [Any] = []
+    
+    var postCreation: Bool = true {
+        didSet {
+            if postCreation {
+                navigationItem.title = "시공 상황 작성"
+                textTitle.text = "작업내용을 작성해주세요"
+                textViewPlaceHolder = "고객을 위해 쉽고 자세하게 설명해주세요."
+                postBTN.isHidden = false
+            } else {
+                navigationItem.title = "시공 상황 수정"
+                textTitle.text = "작업내용을 수정해주세요"
+                textViewPlaceHolder = sharingItems[0] as! String
+                textContent.textColor = .black
+                modificationBTN.isHidden = false
+            }
+        }
+    }
+    
     private var post: Post? {
         didSet {
             photoImages?.forEach {
@@ -32,15 +51,29 @@ class PostingWritingView: UIViewController {
     var categoryID: Int = 0
     var photoImages: [CellItem]?
     private var roomAPI: RoomAPI = RoomAPI(apiService: APIService())
-    private let textViewPlaceHolder = "텍스트를 입력하세요"
+    private var textViewPlaceHolder = "고객을 위해 쉽고 자세하게 설명해주세요."
     
     // MARK: - View
 
     private var textTitle: UILabel = {
-        $0.text = "시공 사진에 관하여 부가 설명을 써주세요"
-        $0.textAlignment = .center
+        $0.text = "작업내용을 작성해주세요"
+        $0.textAlignment = .left
         $0.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
         $0.textColor = .black
+        return $0
+    }(UILabel())
+    
+    private let exampleLabel: UILabel = {
+        $0.text = """
+                    예시)
+                    - 거실 바닥 장판 철거, PE폼 깔기
+                    - 강화마루 설치
+                    - 특이사항 없음
+                    - 작업인원 0명
+                    """
+        $0.numberOfLines = 0
+        $0.textColor = .gray
+        $0.font = UIFont.systemFont(ofSize: 15, weight: .regular)
         return $0
     }(UILabel())
 
@@ -63,22 +96,30 @@ class PostingWritingView: UIViewController {
     }(UITextView())
 
     private var shadowView: UIView = {
-        $0.backgroundColor = .gray
+        $0.backgroundColor = .white
         $0.layer.cornerRadius = 10
-        $0.layer.shadowColor = UIColor.black.cgColor
-        $0.layer.shadowOpacity = 0.25
-        $0.layer.shadowOffset = CGSize(width: 2, height: 2)
-        $0.layer.shadowRadius = 10
         return $0
     }(UIView())
 
-    private let finalBTN: UIButton = {
-        $0.backgroundColor = AppColor.giwazipBlue
+    private let postBTN: UIButton = {
+        $0.backgroundColor = .gray
         $0.setTitle("작성 완료", for: .normal)
         $0.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
         $0.setTitleColor(.white, for: .normal)
         $0.layer.cornerRadius = 16
-        $0.addTarget(self, action: #selector(tapNextBTN), for: .touchUpInside)
+        $0.isHidden = true
+        $0.addTarget(self, action: #selector(createPostBTN), for: .touchUpInside)
+        return $0
+    }(UIButton())
+    
+    private let modificationBTN: UIButton = {
+        $0.backgroundColor = .gray
+        $0.setTitle("수정 완료", for: .normal)
+        $0.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
+        $0.setTitleColor(.white, for: .normal)
+        $0.layer.cornerRadius = 16
+        $0.isHidden = true
+        $0.addTarget(self, action: #selector(modifyPostBTN), for: .touchUpInside)
         return $0
     }(UIButton())
 
@@ -101,25 +142,48 @@ class PostingWritingView: UIViewController {
 
     private func layout() {
         self.view.addSubview(textTitle)
+        self.view.addSubview(exampleLabel)
         self.view.addSubview(shadowView)
         self.shadowView.addSubview(textContent)
-        self.view.addSubview(finalBTN)
+        self.view.addSubview(postBTN)
+        self.view.addSubview(modificationBTN)
+        
 
         textTitle.anchor(
             top: view.safeAreaLayoutGuide.topAnchor,
             left: view.safeAreaLayoutGuide.leftAnchor,
             right: view.safeAreaLayoutGuide.rightAnchor,
             paddingTop: 20,
-            height: 20
+            paddingLeft: 16,
+            paddingRight: 16
+        )
+        
+        exampleLabel.anchor(
+            top: textTitle.bottomAnchor,
+            left: view.safeAreaLayoutGuide.leftAnchor,
+            right: view.safeAreaLayoutGuide.rightAnchor,
+            paddingTop: 10,
+            paddingLeft: 16,
+            paddingRight: 16
+        )
+        
+        shadowView.anchor(
+            top: exampleLabel.bottomAnchor,
+            left: view.safeAreaLayoutGuide.leftAnchor,
+            right: view.safeAreaLayoutGuide.rightAnchor,
+            paddingTop: 10,
+            paddingLeft: 16,
+            paddingRight: 16,
+            height: 240
         )
 
         textContent.anchor(
             left: shadowView.leftAnchor,
             right: shadowView.rightAnchor,
-            height: 280
+            height: 240
         )
 
-        finalBTN.anchor(
+        postBTN.anchor(
             left: view.safeAreaLayoutGuide.leftAnchor,
             bottom: view.safeAreaLayoutGuide.bottomAnchor,
             right: view.safeAreaLayoutGuide.rightAnchor,
@@ -127,21 +191,19 @@ class PostingWritingView: UIViewController {
             paddingRight: 16,
             height: 50
         )
-
-        shadowView.anchor(
-            top: textTitle.bottomAnchor,
+        
+        modificationBTN.anchor(
             left: view.safeAreaLayoutGuide.leftAnchor,
+            bottom: view.safeAreaLayoutGuide.bottomAnchor,
             right: view.safeAreaLayoutGuide.rightAnchor,
-            paddingTop: 20,
             paddingLeft: 16,
             paddingRight: 16,
-            height: 280
+            height: 50
         )
     }
 
     private func setupNavigationTitle() {
         navigationItem.title = "시공 상황 작성"
-        navigationController?.navigationBar.tintColor = .black
         navigationController?.navigationBar.prefersLargeTitles = false
         navigationController?.setNavigationBarHidden(false, animated: false)
     }
@@ -151,22 +213,29 @@ class PostingWritingView: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
 
-    @objc func tapNextBTN() {
+    @objc func createPostBTN() {
         let postDTO: PostDTO = PostDTO(roomID: room?.roomID ?? 1, category: categoryID, type: 0, description: textContent.text!)
         createPost(PostDTO: postDTO)
+    }
+    
+    @objc func modifyPostBTN() {
+        let postDTO: PostDTO = PostDTO(description: textContent.text!)
+        modifyPost(PostDTO: postDTO, postID: postID!)
     }
 
     @objc func keyboardWillShow(notification: NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
             UIView.animate(withDuration: 0.2, animations: {
-                self.finalBTN.transform = CGAffineTransform(translationX: 0, y: -keyboardSize.height + 25)
+                self.postBTN.transform = CGAffineTransform(translationX: 0, y: -keyboardSize.height + 25)
+                self.modificationBTN.transform = CGAffineTransform(translationX: 0, y: -keyboardSize.height + 25)
             })
         }
     }
 
     @objc func keyboardWillHide(notification:NSNotification) {
         UIView.animate(withDuration: 0.2, animations: {
-            self.finalBTN.transform = .identity
+            self.postBTN.transform = .identity
+            self.modificationBTN.transform = .identity
         })
     }
     
@@ -178,6 +247,20 @@ class PostingWritingView: UIViewController {
                     return
                 }
                 self.post = data
+            } catch NetworkError.serverError {
+            } catch NetworkError.encodingError {
+            } catch NetworkError.clientError(_) {
+            }
+        }
+    }
+    
+    private func modifyPost(PostDTO: PostDTO, postID: Int) {
+        Task{
+            do {
+                let response = try await self.roomAPI.modifyPost(PostDTO: PostDTO, postID: postID)
+                guard let data = response else { return }
+                let viewControllers : [UIViewController] = self.navigationController!.viewControllers as [UIViewController]
+                self.navigationController?.popToViewController(viewControllers[viewControllers.count - 3 ], animated: true)
             } catch NetworkError.serverError {
             } catch NetworkError.encodingError {
             } catch NetworkError.clientError(_) {
@@ -218,16 +301,33 @@ class PostingWritingView: UIViewController {
 
 extension PostingWritingView: UITextViewDelegate {
     func textViewDidBeginEditing(_ textView: UITextView) {
-        if textView.text == textViewPlaceHolder {
+        if (textView.text == textViewPlaceHolder) && postCreation {
             textView.text = nil
             textView.textColor = .black
+        }
+    }
+    
+    func textViewDidChange(_ textView: UITextView) {
+        if (textView.text == textViewPlaceHolder) ||
+            (textView.text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)  {
+            postBTN.isEnabled = false
+            postBTN.backgroundColor = .gray
+            modificationBTN.isEnabled = false
+            modificationBTN.backgroundColor = .gray
+        } else {
+            postBTN.isEnabled = true
+            postBTN.backgroundColor = AppColor.giwazipBlue
+            modificationBTN.isEnabled = true
+            modificationBTN.backgroundColor = AppColor.giwazipBlue
         }
     }
 
     func textViewDidEndEditing(_ textView: UITextView) {
         if textView.text.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
             textView.text = textViewPlaceHolder
-            textView.textColor = .lightGray
+            if postCreation {
+                textView.textColor = .lightGray
+            }
         }
     }
 }

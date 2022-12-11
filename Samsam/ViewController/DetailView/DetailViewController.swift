@@ -10,7 +10,8 @@ import UIKit
 class DetailViewController: UIViewController, UIScrollViewDelegate {
 
     // MARK: - Property
-
+    
+    var postID: Int?
     let screenWidth = UIScreen.main.bounds.width
 
     private var naviTitle = ""
@@ -136,11 +137,13 @@ class DetailViewController: UIViewController, UIScrollViewDelegate {
     private func setNavigationBar() {
         navigationController?.navigationBar.topItem?.title = naviTitle
         navigationController?.navigationBar.prefersLargeTitles = false
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "수정",
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "설명 수정",
                                                             style: .plain,
                                                             target: self,
                                                             action: #selector(tapEditButton)
         )
+        let backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
+        navigationItem.backBarButtonItem = backBarButtonItem
     }
 
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -155,7 +158,10 @@ class DetailViewController: UIViewController, UIScrollViewDelegate {
     // TODO: - 수정화면 생성되면 수정예정.
 
     @objc func tapEditButton() {
-        let editViewController = ViewController()
+        let editViewController = PostingWritingView()
+        editViewController.sharingItems = sharingItems
+        editViewController.postID = postID
+        editViewController.postCreation = false
         navigationController?.pushViewController(editViewController, animated: true)
     }
 

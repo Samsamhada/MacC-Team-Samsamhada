@@ -135,6 +135,7 @@ class PostingImageViewController: UIViewController {
             postingWritingView.room = room
             postingWritingView.categoryID = categoryID ?? 0
             postingWritingView.photoImages = photoImages
+            postingWritingView.postCreation = true
             navigationController?.pushViewController(postingWritingView, animated: true)
         }
     }
