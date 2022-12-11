@@ -16,7 +16,11 @@ class RoomCategoryViewController: UIViewController {
     lazy var startDate: String = ""
     lazy var endDate: String = ""
     var warrantyTime: Int = 12
-    var selectedCellArray: [Int] = []
+    var selectedCellArray: [Int] = [] {
+        didSet {
+            nextBTN.backgroundColor = (selectedCellArray.count == 0 ? .gray : AppColor.giwazipBlue)
+        }
+    }
     let roomAPI: RoomAPI = RoomAPI(apiService: APIService())
     var room: Room? {
         didSet {
@@ -38,19 +42,19 @@ class RoomCategoryViewController: UIViewController {
     // MARK: - View
 
     private var titleText: UILabel = {
-        $0.text = ""
-        $0.textAlignment = .center
+        $0.text = "시공 항목을 모두 선택해주세요"
+        $0.textAlignment = .left
         $0.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
         $0.textColor = .black
         return $0
     }(UILabel())
 
     private let nextBTN: UIButton = {
-        $0.backgroundColor = AppColor.giwazipBlue
+        $0.backgroundColor = .gray
         $0.setTitle("방 생성하기", for: .normal)
-        $0.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
+        $0.contentEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 20, right: 0)
+        $0.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .bold)
         $0.setTitleColor(.white, for: .normal)
-        $0.layer.cornerRadius = 16
         $0.addTarget(self, action: #selector(tapNextBTN), for: .touchUpInside)
         return $0
     }(UIButton())
@@ -73,8 +77,12 @@ class RoomCategoryViewController: UIViewController {
 
     private func attribute() {
         view.backgroundColor = AppColor.backgroundGray
+
+        // FIXME: - 카테고리 스크롤 시 선택된 frame배경이 사라지는 문제로, scroll 임시로 false함.
+
+        categoryView.isScrollEnabled = false
+        
         setNavigationTitle()
-        setTitleText()
 
         categoryView.delegate = self
         categoryView.dataSource = self
@@ -84,33 +92,32 @@ class RoomCategoryViewController: UIViewController {
 
     private func layout() {
         view.addSubview(titleText)
-        view.addSubview(nextBTN)
         view.addSubview(categoryView)
+        view.addSubview(nextBTN)
 
         titleText.anchor(
             top: view.safeAreaLayoutGuide.topAnchor,
             left: view.safeAreaLayoutGuide.leftAnchor,
             right: view.safeAreaLayoutGuide.rightAnchor,
             paddingTop: 30,
+            paddingLeft: 16,
+            paddingRight: 16,
             height: 20
         )
 
         categoryView.anchor(
             top: titleText.bottomAnchor,
             left: view.safeAreaLayoutGuide.leftAnchor,
-            bottom: nextBTN.topAnchor,
+            bottom: view.bottomAnchor,
             right: view.safeAreaLayoutGuide.rightAnchor,
-            paddingTop: 20
+            paddingTop: 16
         )
 
         nextBTN.anchor(
-            left: view.safeAreaLayoutGuide.leftAnchor,
-            bottom: view.safeAreaLayoutGuide.bottomAnchor,
-            right: view.safeAreaLayoutGuide.rightAnchor,
-            paddingLeft: 16,
-            paddingBottom: 8,
-            paddingRight: 16,
-            height: 50
+            left: view.leftAnchor,
+            bottom: view.bottomAnchor,
+            right: view.rightAnchor,
+            height: 90
         )
     }
 
@@ -118,12 +125,6 @@ class RoomCategoryViewController: UIViewController {
         navigationItem.title = "방 생성"
         navigationController?.navigationBar.prefersLargeTitles = false
         navigationController?.setNavigationBarHidden(false, animated: true)
-    }
-
-    private func setTitleText() {
-        let statement = "시공 과정을 모두 선택해주세요".getColoredText("모두", .red)
-        titleText.text = ""
-        titleText.attributedText = statement
     }
 
     private func createRoom(RoomDTO: RoomDTO) {
@@ -168,15 +169,6 @@ extension NSMutableAttributedString {
     }
 }
 
-extension String {
-    func getColoredText(_ text: String, _ color: UIColor) -> NSMutableAttributedString {
-        let nsString = NSMutableAttributedString(string: self)
-        nsString.setColorForText(textToFind: self, withColor: UIColor.black)
-        nsString.setColorForText(textToFind: text, withColor: color)
-        return nsString
-    }
-}
-
 // MARK: - UICollectionViewDelegate, DataSourse, DelegateFlowLayout
 
 extension RoomCategoryViewController:  UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
@@ -186,11 +178,14 @@ extension RoomCategoryViewController:  UICollectionViewDelegate, UICollectionVie
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CategoryCell.identifier, for: indexPath) as! CategoryCell
-        cell.categoryImage.image = UIImage(named: CategoryCell.ImageLiteral.noCheck)
+
+        let imageLiteral = Category(rawValue: indexPath.row)
+        cell.categoryImage.image = UIImage(named: imageLiteral!.categoryImage())
+
         let category: Category = Category(rawValue: indexPath.row)!
-        cell.categoryTitle.text = "\(category.categoryName())"
+        cell.categoryName.text = "\(category.categoryName())"
+
         return cell
     }
 
@@ -200,7 +195,6 @@ extension RoomCategoryViewController:  UICollectionViewDelegate, UICollectionVie
             cell?.isSelected = true
         }
         selectedCellArray.append(indexPath.item)
-
         return true
     }
 
@@ -214,12 +208,20 @@ extension RoomCategoryViewController:  UICollectionViewDelegate, UICollectionVie
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let cellWidth =  (view.frame.width - 48)/3
-        let cellHeight = 120
-        return CGSize(width: Int(cellWidth), height: cellHeight)
+        let cellWidth = (view.frame.width - 48)/3
+        let cellHeight = cellWidth * 1.21
+        return CGSize(width: Int(cellWidth), height: Int(cellHeight))
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 8, left: 8, bottom: 16, right: 8)
+        return UIEdgeInsets(top: 0, left: 16, bottom: 80, right: 16)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 12
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 8
     }
 }

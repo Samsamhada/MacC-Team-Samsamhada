@@ -15,9 +15,9 @@ class PostingCategoryViewController: UIViewController {
     var room: Room?
     private var roomAPI: RoomAPI = RoomAPI(apiService: APIService())
     var categoryID: Int = 0
-    
     private var status: [Status]? {
         didSet {
+            status = status!.sorted(by: {$0.category < $1.category})
             categoryView.reloadData()
         }
     }
@@ -33,9 +33,9 @@ class PostingCategoryViewController: UIViewController {
     private let nextBtn: UIButton = {
         $0.backgroundColor = AppColor.giwazipBlue
         $0.setTitle("다음", for: .normal)
-        $0.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
+        $0.contentEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 20, right: 0)
+        $0.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .bold)
         $0.setTitleColor(.white, for: .normal)
-        $0.layer.cornerRadius = 16
         $0.addTarget(self, action: #selector(tapNextBtn), for: .touchUpInside)
         return $0
     }(UIButton())
@@ -59,16 +59,15 @@ class PostingCategoryViewController: UIViewController {
             top: view.safeAreaLayoutGuide.topAnchor,
             left: view.safeAreaLayoutGuide.leftAnchor,
             bottom: nextBtn.topAnchor,
-            right: view.safeAreaLayoutGuide.rightAnchor
+            right: view.safeAreaLayoutGuide.rightAnchor,
+            paddingTop: 20
         )
 
         nextBtn.anchor(
-            left: view.safeAreaLayoutGuide.leftAnchor,
-            bottom: view.safeAreaLayoutGuide.bottomAnchor,
-            right: view.safeAreaLayoutGuide.rightAnchor,
-            paddingLeft: 16,
-            paddingRight: 16,
-            height: 50
+            left: view.leftAnchor,
+            bottom: view.bottomAnchor,
+            right: view.rightAnchor,
+            height: 90
         )
     }
 
@@ -129,15 +128,10 @@ extension PostingCategoryViewController: UICollectionViewDelegate, UICollectionV
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CategoryCell.identifier, for: indexPath) as! CategoryCell
-        
-        if status![indexPath.item].category == categoryID {
-            cell.categoryImage.image = UIImage(named: CategoryCell.ImageLiteral.Check)
-        } else {
-            cell.categoryImage.image = UIImage(named: CategoryCell.ImageLiteral.noCheck)
-        }
 
         let category: Category = Category(rawValue: status![indexPath.item].category)!
-        cell.categoryTitle.text = "\(category.categoryName())"
+        cell.categoryImage.image = UIImage(named: category.categoryImage())
+        cell.categoryName.text = "\(category.categoryName())"
         return cell
     }
 
@@ -148,13 +142,21 @@ extension PostingCategoryViewController: UICollectionViewDelegate, UICollectionV
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let cellWidth =  (view.frame.width - 48)/3
-        let cellHeight = 120
+        let cellWidth = (view.frame.width - 48)/3
+        let cellHeight = cellWidth * 1.21
         return CGSize(width: Int(cellWidth), height: Int(cellHeight))
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-         return UIEdgeInsets(top: 8, left: 8, bottom: 16, right: 8)
+        return UIEdgeInsets(top: 0, left: 16, bottom: 80, right: 16)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 12
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 8
     }
 
     @objc private func closeBTN() {

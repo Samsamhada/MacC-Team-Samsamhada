@@ -41,18 +41,12 @@ class ChipViewController: UIViewController {
     }(UICollectionView(
         frame: .zero, collectionViewLayout: UICollectionViewFlowLayout()))
 
-    private let buttonBackgroundView: UIView = {
-        $0.backgroundColor = .white
-        $0.layer.opacity = 0.85
-        return $0
-    }(UIView())
-    
     private lazy var writingButton: UIButton = {
         $0.backgroundColor = AppColor.giwazipBlue
-        $0.setTitle("시공 상황 작성하기", for: .normal)
+        $0.setTitle("시공상황 작성하기", for: .normal)
+        $0.contentEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 20, right: 0)
         $0.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
         $0.setTitleColor(.white, for: .normal)
-        $0.layer.cornerRadius = 16
         $0.addTarget(self, action: #selector(tapWritingButton), for: .touchUpInside)
         return $0
     }(UIButton())
@@ -77,7 +71,6 @@ class ChipViewController: UIViewController {
         view.addSubview(chipScrollView)
         chipScrollView.addSubview(chipContentView)
         view.addSubview(historyView)
-        view.addSubview(buttonBackgroundView)
         view.addSubview(writingButton)
 
         chipScrollView.anchor(
@@ -103,23 +96,12 @@ class ChipViewController: UIViewController {
             bottom: view.bottomAnchor,
             right: view.safeAreaLayoutGuide.rightAnchor
         )
-        
-        buttonBackgroundView.anchor(
-            left: view.leftAnchor,
-            bottom: view.bottomAnchor,
-            right: view.rightAnchor
-        )
 
         writingButton.anchor(
-            top: buttonBackgroundView.topAnchor,
-            left: view.safeAreaLayoutGuide.leftAnchor,
-            bottom: view.safeAreaLayoutGuide.bottomAnchor,
-            right: view.safeAreaLayoutGuide.rightAnchor,
-            paddingTop: 16,
-            paddingLeft: 16,
-            paddingBottom: 8,
-            paddingRight: 16,
-            height: 50
+            left: view.leftAnchor,
+            bottom: view.bottomAnchor,
+            right: view.rightAnchor,
+            height: 90
         )
     }
 
