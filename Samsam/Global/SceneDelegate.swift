@@ -15,7 +15,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let scene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: scene)
         var navi = UINavigationController(rootViewController: RoomListViewController())
-        if UserDefaults.standard.integer(forKey: "workerID") == 0 {
+        if (UserDefaults.standard.integer(forKey: "workerID") == 0) || (UserDefaults.standard.string(forKey: "number") == nil) {
             navi = UINavigationController(rootViewController: LoginViewController())
         }
         window?.rootViewController = navi

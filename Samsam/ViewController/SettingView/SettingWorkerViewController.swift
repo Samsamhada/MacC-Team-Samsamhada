@@ -20,7 +20,7 @@ class SettingWorkerViewController: UIViewController {
 
     private let tableView = UITableView(frame: .zero, style: .insetGrouped)
     
-    private let data = [["개인 정보 수정"],["고객 센터 문의하기"],["이용 약관","개인정보 처리방침","개발자 정보","버전 정보"],["로그 아웃","회원 탈퇴"]]
+    private let data = [["개인 정보 수정"], ["고객 센터 문의하기"], ["이용 약관", "개인정보 처리방침", "개발자 정보", "버전 정보"], ["로그아웃", "회원탈퇴"]]
 
     // MARK: - LifeCycle
 
@@ -80,7 +80,16 @@ class SettingWorkerViewController: UIViewController {
             }
         }
     }
-    
+
+    private func twoSelectionAlertPresent(title: String = "제목", message: String = "내용", yesString: String = "예", yesAction: ((UIAlertAction) -> Void)? = nil) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let yes = UIAlertAction(title: yesString, style: .destructive, handler: yesAction)
+        let no = UIAlertAction(title: "취소", style: .cancel)
+        alert.addAction(no)
+        alert.addAction(yes)
+        present(alert, animated: true)
+    }
+
     private func logout() {
         UserDefaults.standard.removeObject(forKey: "userIdentifier")
         UserDefaults.standard.removeObject(forKey: "workerID")
@@ -147,17 +156,21 @@ extension SettingWorkerViewController: UITableViewDataSource, UITableViewDelegat
 //            self.navigationController?.pushViewController(VersionViewController(), animated: true)
             print("버전 정보")
         case [3,0]:
-            logout()
+            twoSelectionAlertPresent(title: "로그아웃 하시겠습니까?", message: "앱을 사용하기 위해서는\n다시 로그인하셔야 합니다.", yesString: "로그아웃") { _ in
+                self.logout()
+            }
         case [3,1]:
-            let now = Date()
+            twoSelectionAlertPresent(title: "회원탈퇴 하시겠습니까?", message: "회원님의 모든 정보가 삭제됩니다.\n탈퇴 후에는 복구할 수 없습니다.", yesString: "회원탈퇴") { _ in
+                let now = Date()
 
-            let date = DateFormatter()
-            date.locale = Locale(identifier: "ko-kr")
-            date.timeZone = TimeZone(abbreviation: "KST")
-            date.dateFormat = "yyyy-MM-dd HH:mm:ss.SSS"
-            let myDate = date.string(from: now) + ".withdrawn"
-            modifyWorkerData(workerID: UserDefaults.standard.integer(forKey: "workerID"), WorkerDTO: WorkerDTO(userIdentifier: myDate, name: "", email: "", number: ""))
-            logout()
+                let date = DateFormatter()
+                date.locale = Locale(identifier: "ko-kr")
+                date.timeZone = TimeZone(abbreviation: "KST")
+                date.dateFormat = "yyyy-MM-dd HH:mm:ss.SSS"
+                let myDate = date.string(from: now) + ".withdrawn"
+                self.modifyWorkerData(workerID: UserDefaults.standard.integer(forKey: "workerID"), WorkerDTO: WorkerDTO(userIdentifier: myDate, name: "", email: "", number: ""))
+                self.logout()
+            }
         default:
             break
         }
