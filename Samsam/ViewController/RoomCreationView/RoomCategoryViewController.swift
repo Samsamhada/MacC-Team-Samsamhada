@@ -46,7 +46,7 @@ class RoomCategoryViewController: UIViewController {
     }(UILabel())
 
     private let nextBTN: UIButton = {
-        $0.backgroundColor = AppColor.giwazipBlue
+        $0.backgroundColor = .gray
         $0.setTitle("방 생성하기", for: .normal)
         $0.contentEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 20, right: 0)
         $0.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .bold)
@@ -186,6 +186,10 @@ extension RoomCategoryViewController:  UICollectionViewDelegate, UICollectionVie
             cell?.isSelected = true
         }
         selectedCellArray.append(indexPath.item)
+        
+        if selectedCellArray.count > 0 {
+            nextBTN.backgroundColor = AppColor.giwazipBlue
+        }
 
         return true
     }
@@ -196,6 +200,9 @@ extension RoomCategoryViewController:  UICollectionViewDelegate, UICollectionVie
             cell?.isSelected = false
         }
         selectedCellArray.remove(at: selectedCellArray.firstIndex(of: indexPath.item)!)
+        if selectedCellArray.count == 0 {
+            nextBTN.backgroundColor = .gray
+        }
         return true
     }
 
