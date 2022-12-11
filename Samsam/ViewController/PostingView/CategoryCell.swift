@@ -77,8 +77,8 @@ class CategoryCell: UICollectionViewCell {
 
     private func setupCell() {
         addSubview(categoryImage)
-        categoryImage.addSubview(gradientBackground)
-        categoryImage.addSubview(categoryName)
+        addSubview(gradientBackground)
+        addSubview(categoryName)
         
         categoryImage.anchor(
             top: topAnchor,
