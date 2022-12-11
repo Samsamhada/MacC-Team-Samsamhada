@@ -111,8 +111,8 @@ class RoomCreationViewController: UIViewController{
         $0.setTitle("다음", for: .normal)
         $0.setTitleColor(.white, for: .normal)
         $0.backgroundColor = AppColor.giwazipBlue
+        $0.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .bold)
         $0.contentEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 20, right: 0)
-        $0.backgroundColor = .gray
         $0.isHidden = true
         $0.isEnabled = false
         $0.addTarget(self, action: #selector(tapNextButton), for: .touchUpInside)
@@ -122,6 +122,7 @@ class RoomCreationViewController: UIViewController{
     private lazy var modificationButton: UIButton = {
         $0.setTitle("수정 완료", for: .normal)
         $0.setTitleColor(.white, for: .normal)
+        $0.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .bold)
         $0.contentEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 20, right: 0)
         $0.backgroundColor = .gray
         $0.isHidden = true
