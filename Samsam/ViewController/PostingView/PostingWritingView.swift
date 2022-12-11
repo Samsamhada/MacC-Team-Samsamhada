@@ -107,7 +107,6 @@ class PostingWritingView: UIViewController {
         $0.contentEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 20, right: 0)
         $0.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
         $0.setTitleColor(.white, for: .normal)
-        $0.layer.cornerRadius = 16
         $0.isHidden = true
         $0.addTarget(self, action: #selector(createPostBTN), for: .touchUpInside)
         return $0
@@ -118,7 +117,6 @@ class PostingWritingView: UIViewController {
         $0.setTitle("수정 완료", for: .normal)
         $0.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
         $0.setTitleColor(.white, for: .normal)
-        $0.layer.cornerRadius = 16
         $0.isHidden = true
         $0.addTarget(self, action: #selector(modifyPostBTN), for: .touchUpInside)
         return $0

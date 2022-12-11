@@ -196,7 +196,6 @@
 			isa = PBXGroup;
 			children = (
 				26E3749D28FE95D100997DA7 /* Samsam.entitlements */,
-				26FEC1BA2902D87E006C410B /* CoreData */,
 				98C0D05D28FCE8C300E0E439 /* Global */,
 				431F075B291DEB18004FC4B6 /* Network */,
 				98C0D06128FCE8FA00E0E439 /* ViewController */,
@@ -209,14 +208,6 @@
 				26E3748F28FCDC0100997DA7 /* Info.plist */,
 			);
 			path = Samsam;
-			sourceTree = "<group>";
-		};
-		26FEC1BA2902D87E006C410B /* CoreData */ = {
-			isa = PBXGroup;
-			children = (
-				26FEC1E3290466F2006C410B /* Category.swift */,
-			);
-			path = CoreData;
 			sourceTree = "<group>";
 		};
 		431F075B291DEB18004FC4B6 /* Network */ = {
@@ -381,6 +372,7 @@
 			children = (
 				26E3748128FCDC0000997DA7 /* AppDelegate.swift */,
 				26E3748328FCDC0000997DA7 /* SceneDelegate.swift */,
+				26FEC1E3290466F2006C410B /* Category.swift */,
 				98C0D05E28FCE8D200E0E439 /* Extension */,
 			);
 			path = Global;
