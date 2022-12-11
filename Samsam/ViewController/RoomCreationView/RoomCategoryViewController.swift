@@ -99,9 +99,9 @@ class RoomCategoryViewController: UIViewController {
         categoryView.anchor(
             top: titleText.bottomAnchor,
             left: view.safeAreaLayoutGuide.leftAnchor,
-            bottom: nextBTN.topAnchor,
+            bottom: view.bottomAnchor,
             right: view.safeAreaLayoutGuide.rightAnchor,
-            paddingTop: 20
+            paddingTop: 16
         )
 
         nextBTN.anchor(
@@ -197,12 +197,20 @@ extension RoomCategoryViewController:  UICollectionViewDelegate, UICollectionVie
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let cellWidth =  (view.frame.width - 48)/3
-        let cellHeight = 120
-        return CGSize(width: Int(cellWidth), height: cellHeight)
+        let cellWidth = (view.frame.width - 48)/3
+        let cellHeight = cellWidth * 1.21
+        return CGSize(width: Int(cellWidth), height: Int(cellHeight))
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 8, left: 8, bottom: 16, right: 8)
+        return UIEdgeInsets(top: 0, left: 16, bottom: 80, right: 16)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 12
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 8
     }
 }
