@@ -12,31 +12,27 @@ class RoomListCell: UICollectionViewCell {
     // MARK: - Property
 
     static let identifier = "RoomListCell"
+    
+    let startDate: UILabel = {
+        $0.text = "2022.10.17"
+        $0.font = UIFont.systemFont(ofSize: 16)
+        return $0
+    }(UILabel())
+    
+    let endDate: UILabel = {
+        $0.text = "2022.11.17"
+        $0.font = UIFont.systemFont(ofSize: 16)
+        return $0
+    }(UILabel())
 
     // MARK: - View
-
-    private let cellStack: UIStackView = {
-        $0.axis = .horizontal
-        return $0
-    }(UIStackView())
-
-    let roomStack: UIStackView = {
-        $0.axis = .horizontal
+    
+    private let backgroundUIView: UIView = {
         $0.backgroundColor = .white
         $0.layer.cornerRadius = 16
         return $0
-    }(UIStackView())
-
-    private let leftSpacer: UIView = {
-        $0.setWidth(width: 16)
-        return $0
     }(UIView())
-
-    private let rightSpacer: UIView = {
-        $0.setWidth(width: 16)
-        return $0
-    }(UIView())
-
+    
     private let titleView: UIView = {
         return $0
     }(UIView())
@@ -52,18 +48,6 @@ class RoomListCell: UICollectionViewCell {
         $0.text = ""
         $0.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
         $0.textAlignment = .left
-        return $0
-    }(UILabel())
-    
-    let startDate: UILabel = {
-        $0.text = "2022.10.17"
-        $0.font = UIFont.systemFont(ofSize: 16)
-        return $0
-    }(UILabel())
-    
-    let endDate: UILabel = {
-        $0.text = "2022.11.17"
-        $0.font = UIFont.systemFont(ofSize: 16)
         return $0
     }(UILabel())
     
@@ -87,59 +71,35 @@ class RoomListCell: UICollectionViewCell {
     // MARK: - Method
 
     private func setupCell() {
-        addSubview(cellStack)
-
-        cellStack.addArrangedSubview(roomStack)
-
-        roomStack.addArrangedSubview(leftSpacer)
-        roomStack.addArrangedSubview(titleView)
-        roomStack.addArrangedSubview(arrowImage)
-        roomStack.addArrangedSubview(rightSpacer)
-
+        
+        addSubview(backgroundUIView)
+        backgroundUIView.addSubview(titleView)
         titleView.addSubview(roomTitle)
         titleView.addSubview(chipText)
-
-        cellStack.anchor(
+        backgroundUIView.addSubview(arrowImage)
+        
+        backgroundUIView.anchor(
             top: topAnchor,
             left: leftAnchor,
             bottom: bottomAnchor,
             right: rightAnchor
         )
-
-        roomStack.anchor(
-            top: cellStack.topAnchor,
-            left: cellStack.leftAnchor,
-            bottom: cellStack.bottomAnchor,
-            right: cellStack.rightAnchor
-        )
-
-        leftSpacer.anchor(
-            top: roomStack.topAnchor,
-            left: roomStack.leftAnchor,
-            bottom: roomStack.bottomAnchor,
-            right: titleView.leftAnchor
-        )
         
         titleView.anchor(
-            top: roomStack.topAnchor,
-            left: leftSpacer.rightAnchor,
-            bottom: roomStack.bottomAnchor
+            top: backgroundUIView.topAnchor,
+            left: backgroundUIView.leftAnchor,
+            bottom: backgroundUIView.bottomAnchor,
+            paddingLeft: 16
         )
         
         arrowImage.anchor(
-            top: roomStack.topAnchor,
-            left: titleView.rightAnchor,
-            bottom: roomStack.bottomAnchor,
+            top: backgroundUIView.topAnchor,
+            bottom: backgroundUIView.bottomAnchor,
+            right: backgroundUIView.rightAnchor,
             paddingTop: 36,
             paddingBottom: 36,
+            paddingRight: 16,
             width: 10
-        )
-        
-        rightSpacer.anchor(
-            top: roomStack.topAnchor,
-            left: arrowImage.rightAnchor,
-            bottom: roomStack.bottomAnchor,
-            right: roomStack.rightAnchor
         )
 
         roomTitle.anchor(

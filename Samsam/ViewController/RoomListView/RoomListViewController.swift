@@ -197,8 +197,8 @@ extension RoomListViewController: UICollectionViewDataSource, UICollectionViewDe
 
         let tapRoomListButton = CustomTapGestureRecognizer(target: self, action: #selector(tapRoomListButton))
         
-        cell.roomStack.isUserInteractionEnabled = true
-        cell.roomStack.addGestureRecognizer(tapRoomListButton)
+        cell.isUserInteractionEnabled = true
+        cell.addGestureRecognizer(tapRoomListButton)
         
         let newArray = indexPath.section == 0 ? doingRooms : doneRooms
 
