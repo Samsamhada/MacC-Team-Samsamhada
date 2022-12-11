@@ -19,11 +19,6 @@ enum Category: Int, CaseIterable {
     case nine
     case ten
     case eleven
-    case twelve
-    case thirteen
-    case fourteen
-    case fifteen
-    case sixteen
     
     func categoryName() -> String {
         switch self {
@@ -49,8 +44,6 @@ enum Category: Int, CaseIterable {
             return "다용도실"
         case .eleven:
             return "기타"
-        default:
-            return "삭제예정"
         }
     }
     
@@ -77,8 +70,6 @@ enum Category: Int, CaseIterable {
         case .ten:
             return ImageLiteral.utilityRoom
         case .eleven:
-            return ImageLiteral.etc
-        default:
             return ImageLiteral.etc
         }
     }
