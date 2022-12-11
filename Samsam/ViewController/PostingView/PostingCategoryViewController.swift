@@ -15,9 +15,9 @@ class PostingCategoryViewController: UIViewController {
     var room: Room?
     private var roomAPI: RoomAPI = RoomAPI(apiService: APIService())
     var categoryID: Int = 0
-    
     private var status: [Status]? {
         didSet {
+            status = status!.sorted(by: {$0.category < $1.category})
             categoryView.reloadData()
         }
     }
@@ -128,15 +128,10 @@ extension PostingCategoryViewController: UICollectionViewDelegate, UICollectionV
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CategoryCell.identifier, for: indexPath) as! CategoryCell
-        
-        if status![indexPath.item].category == categoryID {
-            cell.categoryImage.image = UIImage(named: CategoryCell.ImageLiteral.Check)
-        } else {
-            cell.categoryImage.image = UIImage(named: CategoryCell.ImageLiteral.noCheck)
-        }
 
         let category: Category = Category(rawValue: status![indexPath.item].category)!
-        cell.categoryTitle.text = "\(category.categoryName())"
+        cell.categoryImage.image = UIImage(named: category.categoryImage())
+        cell.categoryName.text = "\(category.categoryName())"
         return cell
     }
 
