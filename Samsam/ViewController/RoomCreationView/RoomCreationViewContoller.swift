@@ -114,6 +114,7 @@ class RoomCreationViewController: UIViewController{
         $0.contentEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 20, right: 0)
         $0.backgroundColor = .gray
         $0.isHidden = true
+        $0.isEnabled = false
         $0.addTarget(self, action: #selector(tapNextButton), for: .touchUpInside)
         return $0
     }(UIButton())
