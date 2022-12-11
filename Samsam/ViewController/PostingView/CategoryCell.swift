@@ -39,24 +39,26 @@ class CategoryCell: UICollectionViewCell {
 
     // MARK: - View
 
-    var categoryImage: UIImageView = {
-        $0.image = UIImage(named: ImageLiteral.noCheck)
-        $0.contentMode = .scaleAspectFit
+    let categoryImage: UIImageView = {
+        $0.image = UIImage(named: ImageLiteral.planDrawing)
+        $0.contentMode = .scaleToFill
         return $0
     }(UIImageView())
 
-    let categoryTitle: UILabel = {
+    let gradientBackground: UIView = {
+        $0.backgroundColor = .black
+        $0.layer.opacity = 0.4
+        return $0
+    }(UIView())
+
+    let categoryName: UILabel = {
         $0.text = ""
+        $0.textColor = .white
         $0.textAlignment = .center
-        $0.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
+        $0.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
         $0.numberOfLines = 0
         return $0
     }(UILabel())
-
-    let vStackView: UIStackView = {
-        $0.axis = .vertical
-        return $0
-    }(UIStackView())
 
     // MARK: - Init
 
@@ -72,29 +74,29 @@ class CategoryCell: UICollectionViewCell {
     // MARK: - Method
 
     private func setupCell() {
-        self.addSubview(vStackView)
-
-        vStackView.addArrangedSubview(categoryImage)
-        vStackView.addArrangedSubview(categoryTitle)
-
-        vStackView.anchor(
+        addSubview(categoryImage)
+        addSubview(gradientBackground)
+        addSubview(categoryName)
+        
+        categoryImage.anchor(
             top: topAnchor,
             left: leftAnchor,
             bottom: bottomAnchor,
             right: rightAnchor
         )
 
-        categoryImage.anchor(
-            top: vStackView.topAnchor,
-            left: vStackView.leftAnchor,
-            bottom: categoryTitle.topAnchor,
-            right: vStackView.rightAnchor
+        gradientBackground.anchor(
+            left: categoryImage.leftAnchor,
+            bottom: categoryImage.bottomAnchor,
+            right: categoryImage.rightAnchor,
+            height: 32
         )
 
-        categoryTitle.anchor(
-            left: vStackView.leftAnchor,
-            bottom: vStackView.bottomAnchor,
-            right: vStackView.rightAnchor
+        categoryName.anchor(
+            top: gradientBackground.topAnchor,
+            left: gradientBackground.leftAnchor,
+            bottom: gradientBackground.bottomAnchor,
+            right: gradientBackground.rightAnchor
         )
     }
 }
