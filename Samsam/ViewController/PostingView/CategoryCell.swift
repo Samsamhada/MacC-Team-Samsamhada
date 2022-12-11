@@ -42,6 +42,8 @@ class CategoryCell: UICollectionViewCell {
     let categoryImage: UIImageView = {
         $0.image = UIImage(named: ImageLiteral.planDrawing)
         $0.contentMode = .scaleToFill
+        $0.layer.masksToBounds = true
+        $0.layer.cornerRadius = 8
         return $0
     }(UIImageView())
 
