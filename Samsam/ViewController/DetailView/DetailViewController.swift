@@ -67,9 +67,9 @@ class DetailViewController: UIViewController, UIScrollViewDelegate {
     private let sharingButton: UIButton = {
         $0.backgroundColor = AppColor.giwazipBlue
         $0.setTitle("시공 상황 공유하기", for: .normal)
+        $0.contentEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 20, right: 0)
         $0.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
         $0.setTitleColor(.white, for: .normal)
-        $0.layer.cornerRadius = 16
         return $0
     }(UIButton())
 
@@ -124,13 +124,10 @@ class DetailViewController: UIViewController, UIScrollViewDelegate {
         )
 
         sharingButton.anchor(
-            left: view.safeAreaLayoutGuide.leftAnchor,
-            bottom: view.safeAreaLayoutGuide.bottomAnchor,
-            right: view.safeAreaLayoutGuide.rightAnchor,
-            paddingLeft: 16,
-            paddingBottom: 8,
-            paddingRight: 16,
-            height: 50
+            left: view.leftAnchor,
+            bottom: view.bottomAnchor,
+            right: view.rightAnchor,
+            height: 90
         )
     }
 

@@ -111,7 +111,7 @@ class RoomCreationViewController: UIViewController{
         $0.setTitle("다음", for: .normal)
         $0.setTitleColor(.white, for: .normal)
         $0.backgroundColor = AppColor.giwazipBlue
-        $0.layer.cornerRadius = 16
+        $0.contentEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 20, right: 0)
         $0.backgroundColor = .gray
         $0.isHidden = true
         $0.addTarget(self, action: #selector(tapNextButton), for: .touchUpInside)
@@ -121,7 +121,7 @@ class RoomCreationViewController: UIViewController{
     private lazy var modificationButton: UIButton = {
         $0.setTitle("수정 완료", for: .normal)
         $0.setTitleColor(.white, for: .normal)
-        $0.layer.cornerRadius = 16
+        $0.contentEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 20, right: 0)
         $0.backgroundColor = .gray
         $0.isHidden = true
         $0.addTarget(self, action: #selector(tapModificationButton), for: .touchUpInside)
@@ -161,8 +161,8 @@ class RoomCreationViewController: UIViewController{
         uiView.addSubview(customerTextLimit)
         uiView.addSubview(textUnderLine)
         uiView.addSubview(tableView)
-        uiView.addSubview(nextButton)
-        uiView.addSubview(modificationButton)
+        view.addSubview(nextButton)
+        view.addSubview(modificationButton)
 
         uiView.anchor(
             top: view.safeAreaLayoutGuide.topAnchor,
@@ -216,17 +216,17 @@ class RoomCreationViewController: UIViewController{
         )
 
         nextButton.anchor(
-            left: uiView.leftAnchor,
-            bottom: uiView.bottomAnchor,
-            right: uiView.rightAnchor,
-            height: 50
+            left: view.leftAnchor,
+            bottom: view.keyboardLayoutGuide.bottomAnchor,
+            right: view.rightAnchor,
+            height: 90
         )
 
         modificationButton.anchor(
-            left: uiView.leftAnchor,
-            bottom: uiView.bottomAnchor,
-            right: uiView.rightAnchor,
-            height: 50
+            left: view.safeAreaLayoutGuide.leftAnchor,
+            bottom: view.keyboardLayoutGuide.bottomAnchor,
+            right: view.safeAreaLayoutGuide.rightAnchor,
+            height: 90
         )
     }
 

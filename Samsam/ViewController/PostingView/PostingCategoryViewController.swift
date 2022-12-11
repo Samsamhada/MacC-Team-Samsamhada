@@ -33,9 +33,9 @@ class PostingCategoryViewController: UIViewController {
     private let nextBtn: UIButton = {
         $0.backgroundColor = AppColor.giwazipBlue
         $0.setTitle("다음", for: .normal)
-        $0.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
+        $0.contentEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 20, right: 0)
+        $0.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .bold)
         $0.setTitleColor(.white, for: .normal)
-        $0.layer.cornerRadius = 16
         $0.addTarget(self, action: #selector(tapNextBtn), for: .touchUpInside)
         return $0
     }(UIButton())
@@ -64,11 +64,9 @@ class PostingCategoryViewController: UIViewController {
 
         nextBtn.anchor(
             left: view.safeAreaLayoutGuide.leftAnchor,
-            bottom: view.safeAreaLayoutGuide.bottomAnchor,
+            bottom: view.bottomAnchor,
             right: view.safeAreaLayoutGuide.rightAnchor,
-            paddingLeft: 16,
-            paddingRight: 16,
-            height: 50
+            height: 90
         )
     }
 
