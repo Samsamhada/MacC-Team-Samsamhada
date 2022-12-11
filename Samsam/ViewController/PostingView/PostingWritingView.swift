@@ -16,10 +16,12 @@ class PostingWritingView: UIViewController {
     var postCreation: Bool = true {
         didSet {
             if postCreation {
+                navigationItem.title = "시공 상황 작성"
                 textTitle.text = "작업내용을 작성해주세요"
                 textViewPlaceHolder = "고객을 위해 쉽고 자세하게 설명해주세요."
                 postBTN.isHidden = false
             } else {
+                navigationItem.title = "시공 상황 수정"
                 textTitle.text = "작업내용을 수정해주세요"
                 textViewPlaceHolder = sharingItems[0] as! String
                 textContent.textColor = .black
@@ -202,7 +204,6 @@ class PostingWritingView: UIViewController {
 
     private func setupNavigationTitle() {
         navigationItem.title = "시공 상황 작성"
-        navigationController?.navigationBar.tintColor = .black
         navigationController?.navigationBar.prefersLargeTitles = false
         navigationController?.setNavigationBarHidden(false, animated: false)
     }

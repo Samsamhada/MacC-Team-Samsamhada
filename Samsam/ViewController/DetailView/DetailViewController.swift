@@ -141,6 +141,8 @@ class DetailViewController: UIViewController, UIScrollViewDelegate {
                                                             target: self,
                                                             action: #selector(tapEditButton)
         )
+        let backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
+        navigationItem.backBarButtonItem = backBarButtonItem
     }
 
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
