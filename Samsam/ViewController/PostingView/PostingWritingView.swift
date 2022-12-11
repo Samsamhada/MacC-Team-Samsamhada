@@ -301,7 +301,7 @@ class PostingWritingView: UIViewController {
 
 extension PostingWritingView: UITextViewDelegate {
     func textViewDidBeginEditing(_ textView: UITextView) {
-        if textView.text == textViewPlaceHolder && postCreation {
+        if (textView.text == textViewPlaceHolder) && postCreation {
             textView.text = nil
             textView.textColor = .black
         }
