@@ -10,6 +10,7 @@ import UIKit
 class DetailViewController: UIViewController, UIScrollViewDelegate {
 
     // MARK: - Property
+    
     var postID: Int?
     let screenWidth = UIScreen.main.bounds.width
 
