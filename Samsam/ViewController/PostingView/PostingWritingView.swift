@@ -115,6 +115,7 @@ class PostingWritingView: UIViewController {
     private let modificationBTN: UIButton = {
         $0.backgroundColor = .gray
         $0.setTitle("수정 완료", for: .normal)
+        $0.contentEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 20, right: 0)
         $0.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
         $0.setTitleColor(.white, for: .normal)
         $0.isHidden = true
