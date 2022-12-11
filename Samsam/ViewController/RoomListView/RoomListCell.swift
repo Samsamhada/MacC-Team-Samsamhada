@@ -46,7 +46,7 @@ class RoomListCell: UICollectionViewCell {
 
     let chipText: UILabel = {
         $0.text = ""
-        $0.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
+        $0.font = UIFont.systemFont(ofSize: 16, weight: .regular)
         $0.textAlignment = .left
         return $0
     }(UILabel())
