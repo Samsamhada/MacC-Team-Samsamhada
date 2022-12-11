@@ -7,28 +7,25 @@
 
 import UIKit
 
+enum ImageLiteral {
+    static var planDrawing = "Plan"
+    static var homeEntrance = "HomeEntrance"
+    static var bathroom = "Bathroom"
+    static var masterBedroom = "MasterBedroom"
+    static var bigRoom = "BigRoom"
+    static var smallRoom = "SmallRoom"
+    static var livingRoom = "LivingRoom"
+    static var veranda = "Veranda"
+    static var kitchen = "Kitchen"
+    static var utilityRoom = "UtilityRoom"
+    static var etc = "ETC"
+}
+
 class CategoryCell: UICollectionViewCell {
 
     // MARK: - Property
 
     static let identifier = "categoryCell"
-
-    enum ImageLiteral {
-        static var noCheck = "category1"
-        static var Check = "category2"
-        
-        static var planDrawing = "Plan"
-        static var homeEntrance = "HomeEntrance"
-        static var bathroom = "Bathroom"
-        static var masterBedroom = "MasterBedroom"
-        static var bigRoom = "BigRoom"
-        static var smallRoom = "SmallRoom"
-        static var livingRoom = "LivingRoom"
-        static var veranda = "Veranda"
-        static var kitchen = "Kitchen"
-        static var utilityRoom = "UtilityRoom"
-        static var etc = "ETC"
-    }
 
     override var isSelected: Bool{
         didSet {
