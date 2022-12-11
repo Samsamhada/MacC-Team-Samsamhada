@@ -20,7 +20,7 @@ class SettingWorkerViewController: UIViewController {
 
     private let tableView = UITableView(frame: .zero, style: .insetGrouped)
     
-    private let data = [["개인 정보 수정"],["고객 센터 문의하기"],["이용 약관","개인정보 처리방침","개발자 정보","버전 정보"],["로그 아웃","회원 탈퇴"]]
+    private let data = [["개인 정보 수정"],["고객 센터 문의하기"],["이용 약관","개인정보 처리방침","개발자 정보","버전 정보"],["로그아웃","회원탈퇴"]]
 
     // MARK: - LifeCycle
 
