@@ -75,6 +75,7 @@
 		98366F8D29019A5300E81E27 /* RoomCreationViewContoller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98366F8C29019A5300E81E27 /* RoomCreationViewContoller.swift */; };
 		983679D52933481800668F89 /* PostDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 983679D42933481800668F89 /* PostDTO.swift */; };
 		983679D72933989200668F89 /* PhotoDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 983679D62933989200668F89 /* PhotoDTO.swift */; };
+		983FB0002944CC8700D5A0A1 /* Gradient+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 983FAFFF2944CC8700D5A0A1 /* Gradient+.swift */; };
 		9866F51629189AEE002D3589 /* PhoneNumberStyle+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9866F51529189AEE002D3589 /* PhoneNumberStyle+.swift */; };
 		9866F518291960CE002D3589 /* RoomCreationViewDateFirstCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9866F517291960CE002D3589 /* RoomCreationViewDateFirstCell.swift */; };
 		9866F51A291960E0002D3589 /* RoomCreationViewDateHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9866F519291960E0002D3589 /* RoomCreationViewDateHeader.swift */; };
@@ -168,6 +169,7 @@
 		98366F8C29019A5300E81E27 /* RoomCreationViewContoller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomCreationViewContoller.swift; sourceTree = "<group>"; };
 		983679D42933481800668F89 /* PostDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDTO.swift; sourceTree = "<group>"; };
 		983679D62933989200668F89 /* PhotoDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoDTO.swift; sourceTree = "<group>"; };
+		983FAFFF2944CC8700D5A0A1 /* Gradient+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Gradient+.swift"; sourceTree = "<group>"; };
 		9866F51529189AEE002D3589 /* PhoneNumberStyle+.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PhoneNumberStyle+.swift"; sourceTree = "<group>"; };
 		9866F517291960CE002D3589 /* RoomCreationViewDateFirstCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomCreationViewDateFirstCell.swift; sourceTree = "<group>"; };
 		9866F519291960E0002D3589 /* RoomCreationViewDateHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomCreationViewDateHeader.swift; sourceTree = "<group>"; };
@@ -351,11 +353,11 @@
 		436C4364291A0F6300504171 /* PostingView */ = {
 			isa = PBXGroup;
 			children = (
+				43C2110E28FCFAB500E8F6DD /* PostingCategoryViewController.swift */,
 				43C2111028FCFB3800E8F6DD /* CategoryCell.swift */,
 				4330CE9A2906275D001FC8E7 /* PostingImageCell.swift */,
-				43C2110E28FCFAB500E8F6DD /* PostingCategoryViewController.swift */,
-				43DB5E1B2913733A00BD09BA /* PostingImageButtonCell.swift */,
 				4369690B28FE422100DEA89F /* PostingImageViewController.swift */,
+				43DB5E1B2913733A00BD09BA /* PostingImageButtonCell.swift */,
 				43956D2B28FF9F0100DD996F /* PostingWritingView.swift */,
 			);
 			path = PostingView;
@@ -429,6 +431,7 @@
 				98E1700C2906EFEB00F71D41 /* HideKeyboard+.swift */,
 				98B08A5F290AC8C900401650 /* UIColor+.swift */,
 				9866F51529189AEE002D3589 /* PhoneNumberStyle+.swift */,
+				983FAFFF2944CC8700D5A0A1 /* Gradient+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -653,6 +656,7 @@
 				9866F5212919E2DC002D3589 /* RoomCreationViewWarrantyCell.swift in Sources */,
 				26FEC1B628FFF52D006C410B /* RoomCreationCell.swift in Sources */,
 				43C2110F28FCFAB500E8F6DD /* PostingCategoryViewController.swift in Sources */,
+				983FB0002944CC8700D5A0A1 /* Gradient+.swift in Sources */,
 				438CD52B293ED54D00352193 /* ModificationWorkerViewController.swift in Sources */,
 				26664F73292B95A500C2D4F0 /* StatusDTO.swift in Sources */,
 				26FEC1D92902E6F2006C410B /* CategoryEntity+CoreDataClass.swift in Sources */,
