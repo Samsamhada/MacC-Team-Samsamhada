@@ -18,7 +18,7 @@ class RoomCategoryViewController: UIViewController {
     var warrantyTime: Int = 12
     var selectedCellArray: [Int] = [] {
         didSet {
-            nextBTN.backgroundColor = selectedCellArray.count == 0 ? .gray : AppColor.giwazipBlue
+            nextBTN.backgroundColor = (selectedCellArray.count == 0 ? .gray : AppColor.giwazipBlue)
         }
     }
     let roomAPI: RoomAPI = RoomAPI(apiService: APIService())
