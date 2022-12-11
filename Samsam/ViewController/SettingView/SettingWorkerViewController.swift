@@ -156,7 +156,9 @@ extension SettingWorkerViewController: UITableViewDataSource, UITableViewDelegat
 //            self.navigationController?.pushViewController(VersionViewController(), animated: true)
             print("버전 정보")
         case [3,0]:
-            logout()
+            twoSelectionAlertPresent(title: "로그아웃 하시겠습니까?", message: "앱을 사용하기 위해서는\n다시 로그인하셔야 합니다.", yesString: "로그아웃") { _ in
+                self.logout()
+            }
         case [3,1]:
             let now = Date()
 
