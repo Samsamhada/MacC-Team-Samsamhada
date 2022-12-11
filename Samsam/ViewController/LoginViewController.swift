@@ -17,7 +17,7 @@ class LoginViewController: UIViewController {
     // MARK: - View
     
     private let appLogo: UIImageView = {
-        $0.image = UIImage(named: "AppIcon")
+        $0.image = UIImage(named: "Logo")
         $0.contentMode = .scaleAspectFit
         return $0
     }(UIImageView())
