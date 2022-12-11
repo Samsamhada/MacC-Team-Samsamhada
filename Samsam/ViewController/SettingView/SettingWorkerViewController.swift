@@ -80,7 +80,16 @@ class SettingWorkerViewController: UIViewController {
             }
         }
     }
-    
+
+    private func twoSelectionAlertPresent(title: String = "제목", message: String = "내용", yesString: String = "예", yesAction: ((UIAlertAction) -> Void)? = nil) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let yes = UIAlertAction(title: yesString, style: .destructive, handler: yesAction)
+        let no = UIAlertAction(title: "취소", style: .cancel)
+        alert.addAction(no)
+        alert.addAction(yes)
+        present(alert, animated: true)
+    }
+
     private func logout() {
         UserDefaults.standard.removeObject(forKey: "userIdentifier")
         UserDefaults.standard.removeObject(forKey: "workerID")
