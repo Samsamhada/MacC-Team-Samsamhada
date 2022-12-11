@@ -16,7 +16,11 @@ class RoomCategoryViewController: UIViewController {
     lazy var startDate: String = ""
     lazy var endDate: String = ""
     var warrantyTime: Int = 12
-    var selectedCellArray: [Int] = []
+    var selectedCellArray: [Int] = [] {
+        didSet {
+            nextBTN.backgroundColor = selectedCellArray.count == 0 ? .gray : AppColor.giwazipBlue
+        }
+    }
     let roomAPI: RoomAPI = RoomAPI(apiService: APIService())
     var room: Room? {
         didSet {
@@ -186,11 +190,6 @@ extension RoomCategoryViewController:  UICollectionViewDelegate, UICollectionVie
             cell?.isSelected = true
         }
         selectedCellArray.append(indexPath.item)
-        
-        if selectedCellArray.count > 0 {
-            nextBTN.backgroundColor = AppColor.giwazipBlue
-        }
-
         return true
     }
 
@@ -200,9 +199,6 @@ extension RoomCategoryViewController:  UICollectionViewDelegate, UICollectionVie
             cell?.isSelected = false
         }
         selectedCellArray.remove(at: selectedCellArray.firstIndex(of: indexPath.item)!)
-        if selectedCellArray.count == 0 {
-            nextBTN.backgroundColor = .gray
-        }
         return true
     }
 
