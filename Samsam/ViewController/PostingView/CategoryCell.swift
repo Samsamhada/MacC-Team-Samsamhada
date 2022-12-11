@@ -26,13 +26,13 @@ class CategoryCell: UICollectionViewCell {
     // MARK: - Property
 
     static let identifier = "categoryCell"
-
-    override var isSelected: Bool{
+    
+    override var isSelected: Bool {
         didSet {
             if isSelected {
-                self.categoryImage.image = UIImage(named: ImageLiteral.Check)
+                selectCell(gradientBackground, image: categoryImage)
             } else {
-                self.categoryImage.image = UIImage(named: ImageLiteral.noCheck)
+                deSelectCell(gradientBackground, image: categoryImage)
             }
         }
     }
@@ -98,5 +98,23 @@ class CategoryCell: UICollectionViewCell {
             bottom: gradientBackground.bottomAnchor,
             right: gradientBackground.rightAnchor
         )
+    }
+
+    func selectCell(_ uiView: UIView, image: UIImageView) {
+        UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseInOut, animations: {
+            self.gradientBackground.layer.opacity = 0.7
+            
+            self.gradientBackground.layer.frame = CGRect(x: 0, y: 0, width: self.categoryImage.frame.width, height: self.categoryImage.frame.height)
+            self.categoryName.layer.frame = CGRect(x: 0, y: 0, width: self.categoryImage.frame.width, height: self.categoryImage.frame.height)
+            
+            self.layoutIfNeeded()
+        })
+    }
+
+    func deSelectCell(_ uiView: UIView, image: UIImageView) {
+        UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseInOut, animations: {
+            self.gradientBackground.layer.opacity = 0.4
+            self.layoutIfNeeded()
+        })
     }
 }

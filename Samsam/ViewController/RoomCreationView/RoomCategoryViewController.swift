@@ -169,11 +169,14 @@ extension RoomCategoryViewController:  UICollectionViewDelegate, UICollectionVie
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CategoryCell.identifier, for: indexPath) as! CategoryCell
-        cell.categoryImage.image = UIImage(named: CategoryCell.ImageLiteral.noCheck)
+
+        let imageLiteral = Category(rawValue: indexPath.row)
+        cell.categoryImage.image = UIImage(named: imageLiteral!.categoryImage())
+
         let category: Category = Category(rawValue: indexPath.row)!
-        cell.categoryTitle.text = "\(category.categoryName())"
+        cell.categoryName.text = "\(category.categoryName())"
+
         return cell
     }
 
