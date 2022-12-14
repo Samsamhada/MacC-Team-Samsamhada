@@ -12,6 +12,7 @@ class PostingWritingView: UIViewController {
     // MARK: - Property
     var postID: Int?
     var sharingItems: [Any] = []
+    private var buttonClickCount = 0
     
     var postCreation: Bool = true {
         didSet {
@@ -211,7 +212,10 @@ class PostingWritingView: UIViewController {
 
     @objc func createPostBTN() {
         let postDTO: PostDTO = PostDTO(roomID: room?.roomID ?? 1, category: categoryID, type: 0, description: textContent.text!)
-        createPost(PostDTO: postDTO)
+        if buttonClickCount == 0 {
+            createPost(PostDTO: postDTO)
+            buttonClickCount += 1
+        }
     }
     
     @objc func modifyPostBTN() {

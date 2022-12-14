@@ -11,6 +11,7 @@ class RoomCategoryViewController: UIViewController {
 
     // MARK: - Property
 
+    private var buttonClickCount = 0
     var workerID: Int = 0
     var clientName: String = ""
     lazy var startDate: String = ""
@@ -158,7 +159,10 @@ class RoomCategoryViewController: UIViewController {
     @objc func tapNextBTN() {
         selectedCellArray.sort()
         let roomDTO: RoomDTO = RoomDTO(workerID: workerID, clientName: clientName, startDate: startDate, endDate: endDate, warrantyTime: warrantyTime)
-        createRoom(RoomDTO: roomDTO)
+        if buttonClickCount == 0 {
+            createRoom(RoomDTO: roomDTO)
+            buttonClickCount += 1
+        }
     }
 }
 
