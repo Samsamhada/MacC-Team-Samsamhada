@@ -14,7 +14,12 @@ class PostingCategoryViewController: UIViewController {
     var roomID: Int?
     var room: Room?
     private var roomAPI: RoomAPI = RoomAPI(apiService: APIService())
-    var categoryID: Int = 0
+    var categoryID: Int? {
+        didSet {
+            nextBtn.isEnabled = true
+            nextBtn.backgroundColor = AppColor.giwazipBlue
+        }
+    }
     private var status: [Status]? {
         didSet {
             status = status!.sorted(by: {$0.category < $1.category})
@@ -31,11 +36,12 @@ class PostingCategoryViewController: UIViewController {
         frame: .zero, collectionViewLayout: UICollectionViewFlowLayout()))
 
     private let nextBtn: UIButton = {
-        $0.backgroundColor = AppColor.giwazipBlue
+        $0.backgroundColor = .gray
         $0.setTitle("다음", for: .normal)
         $0.contentEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 20, right: 0)
         $0.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .bold)
         $0.setTitleColor(.white, for: .normal)
+        $0.isEnabled = false
         $0.addTarget(self, action: #selector(tapNextBtn), for: .touchUpInside)
         return $0
     }(UIButton())
@@ -81,7 +87,7 @@ class PostingCategoryViewController: UIViewController {
         categoryView.allowsMultipleSelection = false
         categoryView.register(CategoryCell.self, forCellWithReuseIdentifier: CategoryCell.identifier)
     }
-
+    
     private func setNavigationTitle() {
         navigationItem.leftBarButtonItem = UIBarButtonItem(
             image: UIImage(systemName: "xmark"),
@@ -132,6 +138,7 @@ extension PostingCategoryViewController: UICollectionViewDelegate, UICollectionV
         let category: Category = Category(rawValue: status![indexPath.item].category)!
         cell.categoryImage.image = UIImage(named: category.categoryImage())
         cell.categoryName.text = "\(category.categoryName())"
+
         return cell
     }
 
@@ -140,7 +147,7 @@ extension PostingCategoryViewController: UICollectionViewDelegate, UICollectionV
         collectionView.reloadData()
         return true
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let cellWidth = (view.frame.width - 48)/3
         let cellHeight = cellWidth * 1.21
