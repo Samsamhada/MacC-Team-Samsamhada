@@ -120,6 +120,7 @@ class ChipViewController: UIViewController {
     @objc func tapWritingButton() {
         let postingCategoryViewController = PostingCategoryViewController()
         postingCategoryViewController.room = room
+
         postingCategoryViewController.categoryID = categoryID
 
         let navigationController = UINavigationController(rootViewController: postingCategoryViewController)

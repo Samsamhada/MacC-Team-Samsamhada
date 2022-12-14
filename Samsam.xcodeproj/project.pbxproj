@@ -751,7 +751,7 @@
 				INFOPLIST_KEY_CFBundleDisplayName = "기와집";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
 				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "사진 저장을 위해 라이브러리 접근권한이 필요합니다.";
-				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "게시글에 사진을 업로드하여 게시글을 등록는 기능 사용을 위해 사진 라이브러리 접근권한에 접근하도록 허용합니다.";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "게시글에 사진을 업로드하여 게시글을 등록하는 기능 사용을 위해 사진 라이브러리 접근권한에 접근하도록 허용합니다.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -761,7 +761,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2.1;
+				MARKETING_VERSION = 1.2.4;
 				PRODUCT_BUNDLE_IDENTIFIER = app.samsamhada.giwazip;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -789,7 +789,7 @@
 				INFOPLIST_KEY_CFBundleDisplayName = "기와집";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
 				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "사진 저장을 위해 라이브러리 접근권한이 필요합니다.";
-				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "게시글에 사진을 업로드하여 게시글을 등록는 기능 사용을 위해 사진 라이브러리 접근권한에 접근하도록 허용합니다.";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "게시글에 사진을 업로드하여 게시글을 등록하는 기능 사용을 위해 사진 라이브러리 접근권한에 접근하도록 허용합니다.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -799,7 +799,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2.1;
+				MARKETING_VERSION = 1.2.4;
 				PRODUCT_BUNDLE_IDENTIFIER = app.samsamhada.giwazip;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

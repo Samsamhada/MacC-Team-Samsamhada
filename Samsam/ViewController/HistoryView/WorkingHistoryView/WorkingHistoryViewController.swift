@@ -72,7 +72,6 @@ class WorkingHistoryViewController: UIViewController {
 
     private func attribute() {
         view.backgroundColor = AppColor.backgroundGray
-
         workingHistoryView.delegate = self
         workingHistoryView.dataSource = self
         workingHistoryView.contentInset.bottom = 80
