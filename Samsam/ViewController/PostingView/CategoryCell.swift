@@ -50,6 +50,9 @@ class CategoryCell: UICollectionViewCell {
     let gradientBackground: UIView = {
         $0.backgroundColor = .black
         $0.layer.opacity = 0.4
+        $0.layer.masksToBounds = true
+        $0.layer.cornerRadius = 8
+        $0.underRadius()
         return $0
     }(UIView())
 
@@ -104,10 +107,11 @@ class CategoryCell: UICollectionViewCell {
 
     func selectCell(_ uiView: UIView, image: UIImageView) {
         UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseInOut, animations: {
-            self.gradientBackground.layer.opacity = 0.7
-            
             self.gradientBackground.layer.frame = CGRect(x: 0, y: 0, width: self.categoryImage.frame.width, height: self.categoryImage.frame.height)
             self.categoryName.layer.frame = CGRect(x: 0, y: 0, width: self.categoryImage.frame.width, height: self.categoryImage.frame.height)
+            
+            self.gradientBackground.layer.opacity = 0.7
+            self.gradientBackground.allRadius()
             
             self.layoutIfNeeded()
         })
@@ -116,7 +120,19 @@ class CategoryCell: UICollectionViewCell {
     func deSelectCell(_ uiView: UIView, image: UIImageView) {
         UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseInOut, animations: {
             self.gradientBackground.layer.opacity = 0.4
+            self.gradientBackground.underRadius()
+
             self.layoutIfNeeded()
         })
+    }
+}
+
+
+extension UIView {
+    func underRadius() {
+        self.layer.maskedCorners = CACornerMask(arrayLiteral: .layerMinXMaxYCorner, .layerMaxXMaxYCorner)
+    }
+    func allRadius() {
+        self.layer.maskedCorners = CACornerMask(arrayLiteral: .layerMinXMinYCorner, .layerMaxXMinYCorner, .layerMaxXMaxYCorner, .layerMinXMaxYCorner)
     }
 }
