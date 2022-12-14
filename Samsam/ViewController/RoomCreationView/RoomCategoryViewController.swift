@@ -78,10 +78,6 @@ class RoomCategoryViewController: UIViewController {
 
     private func attribute() {
         view.backgroundColor = AppColor.backgroundGray
-
-        // FIXME: - 카테고리 스크롤 시 선택된 frame배경이 사라지는 문제로, scroll 임시로 false함.
-
-        categoryView.isScrollEnabled = false
         
         setNavigationTitle()
 
@@ -163,13 +159,6 @@ class RoomCategoryViewController: UIViewController {
             createRoom(RoomDTO: roomDTO)
             buttonClickCount += 1
         }
-    }
-}
-
-extension NSMutableAttributedString {
-    func setColorForText(textToFind: String, withColor color: UIColor) {
-        let range = self.mutableString.range(of: textToFind, options: .caseInsensitive)
-        self.addAttribute(NSAttributedString.Key.foregroundColor, value: color, range: range)
     }
 }
 
