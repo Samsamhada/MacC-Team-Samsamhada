@@ -69,8 +69,7 @@ class RoomListViewController: UIViewController {
             top: view.safeAreaLayoutGuide.topAnchor,
             left: view.safeAreaLayoutGuide.leftAnchor,
             bottom: createBTN.topAnchor,
-            right: view.safeAreaLayoutGuide.rightAnchor,
-            paddingBottom: 10
+            right: view.safeAreaLayoutGuide.rightAnchor
         )
         
         createBTN.anchor(
