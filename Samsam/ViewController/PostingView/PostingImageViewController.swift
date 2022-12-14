@@ -26,7 +26,7 @@ class PostingImageViewController: UIViewController {
     // MARK: - View
 
     private var titleText: UILabel = {
-        $0.text = "시공한 사진을 추가해주세요\n(최대 4장까지 가능합니다)"
+        $0.text = "시공한 사진을 추가해주세요\n(최대 5장까지 가능합니다)"
         $0.textAlignment = .center
         $0.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
         $0.textColor = .lightGray
@@ -245,7 +245,7 @@ class PostingImageViewController: UIViewController {
     @objc func uploadPhoto() {
         changeNUM = -1
         var configure = PHPickerConfiguration()
-        configure.selectionLimit = 4 - photoImages.count
+        configure.selectionLimit = 5 - photoImages.count
         configure.selection = .ordered
         configure.filter = .images
         let picker = PHPickerViewController(configuration: configure)
@@ -309,7 +309,7 @@ extension PostingImageViewController: UICollectionViewDataSource, UICollectionVi
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
 
-        if section == 0 && photoImages.count == 4 {
+        if section == 0 && photoImages.count == 5 {
             return 0
         } else if section == 0 {
             return 1
